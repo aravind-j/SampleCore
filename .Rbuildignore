@@ -1,0 +1,11 @@
+^SampleCore\.Rproj$
+^\.Rproj\.user$
+^RoughWork$
+^Release\.R$
+^vignettes$
+^CITATION\.cff$
+^\.github$
+^codemeta\.json$
+^docs$
+^_pkgdown\.yml$
+^vignettes/additional$

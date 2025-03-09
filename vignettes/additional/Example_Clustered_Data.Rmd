@@ -1,0 +1,124 @@
+---
+title: "Example Dataset in `SampleCore`"
+author: "J. Aravind"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    theme: united
+    highlight: textmate
+    toc: TRUE
+link-citations: yes
+csl: frontiers.csl
+bibliography: REFERENCES.bib
+vignette: |
+  %\VignetteIndexEntry{Introduction}
+  %\usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown_notangle}
+---
+
+```{r, echo=FALSE}
+# out_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
+out_type <- "html"
+```
+
+```{r, results='asis', echo=FALSE}
+switch(out_type,
+    html = {cat("<p> ICAR-National Bureau of Plant Genetic Resources, New Delhi.</p>")},
+    latex = cat("\\begin{center}
+ ICAR-National Bureau of Plant Genetic Resources, New Delhi.
+
+\\end{center}" )
+)
+```
+
+\begin{center}
+\vspace{6pt}
+\hrule
+\end{center}
+
+\tableofcontents
+
+# Introduction
+
+The example datasets `cassava_EC` and `cassava_CC` in `EvaluateCore` for demonstrating various functions were generated using the following steps from the source data [@international_institute_of_tropical_agriculture_cassava_2019]. 
+
+# Setup the environment
+
+```{r}
+# Load required packages
+library(EvaluateCore)
+library(cluster)
+library(NbClust)
+```
+
+# Load and prepare data
+
+```{r}
+# Get data from EvaluateCore
+
+data("cassava_EC", package = "EvaluateCore")
+data = cbind(Genotypes = rownames(cassava_EC), cassava_EC)
+quant <- c("NMSR", "TTRN", "TFWSR", "TTRW", "TFWSS", "TTSW", "TTPW", "AVPW",
+           "ARSR", "SRDM")
+qual <- c("CUAL", "LNGS", "PTLC", "DSTA", "LFRT", "LBTEF", "CBTR", "NMLB",
+          "ANGB", "CUAL9M", "LVC9M", "TNPR9M", "PL9M", "STRP", "STRC",
+          "PSTR")
+rownames(data) <- NULL
+
+# Convert qualitative data columns to factor
+data[, qual] <- lapply(data[, qual], as.factor)
+
+# Standardise quantitative data column
+data[, quant] <- lapply(data[, quant], function(x) {
+  scale(x)[, 1]
+})
+```
+
+# Perform the clustering
+
+```{r}
+# Set the seed
+set.seed(123)
+
+# Get the Gower's distance matrix
+data_dist <- daisy(x = data[, c(qual, quant)], metric = "gower")
+
+# Perform Ward's minimum variance clustering
+data_clust <- hclust(d = data_dist, method = "ward.D2")
+
+# Identify optimum number of cluster
+nc_result <- NbClust(diss = data_dist, distance = NULL, 
+                     min.nc = 2, max.nc = 6,
+                     method = "ward.D2",
+                     index = "cindex")
+nc <- nc_result$Best.nc["Number_clusters"]
+
+# Plot dendrogram with nc = 6 clusters
+plot(as.dendrogram(data_clust))
+rect.hclust(data_clust, k = nc)
+
+# Add the group to the original data
+cassava_EC_gp <- cassava_EC
+cassava_EC_gp$Cluster <- as.roman(nc_result$Best.partition)
+cassava_EC_gp$Cluster <- as.factor(as.character(cassava_EC_gp$Cluster))
+
+# View the final data
+str(cassava_EC_gp)
+head(cassava_EC_gp)
+```
+
+# Export the dataset
+
+```{r, eval=FALSE, echo=TRUE}
+
+write.csv(cassava_EC_gp, "cassava_EC_gp.csv", row.names = TRUE)
+
+```
+
+# Session Info
+
+```{r}
+sessionInfo()
+```
+
+# References

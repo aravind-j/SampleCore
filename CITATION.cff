@@ -1,0 +1,36 @@
+# --------------------------------------------
+# CITATION file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# --------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "SampleCore" in publications use:'
+type: software
+license: GPL-2.0-or-later
+title: 'SampleCore: Sampling Strategies for Constructing Core COllections'
+version: 0.0.0.9000
+abstract: Implements several sampling strategies for construction of core collections.
+  These include 1) Stratified sampling based on group size 2) Stratified sampling
+  based on group diversity 3) Sampling based on genetic distance between accessions.
+  See the vignette for more, including full list of citations for the methods implemented.
+authors:
+- family-names: Aravind
+  given-names: J.
+  email: j.aravind@icar.gov.in
+  orcid: https://orcid.org/0000-0002-4791-442X
+- family-names: Roy
+  given-names: Suman
+  email: suman.roy@icar.gov.in
+  orcid: https://orcid.org/0000-0001-5612-8415
+repository-code: https://github.com/aravind-j/SampleCore
+url: https://aravind-j.github.io/SampleCore/
+contact:
+- family-names: Aravind
+  given-names: J.
+  email: j.aravind@icar.gov.in
+  orcid: https://orcid.org/0000-0002-4791-442X
+- family-names: Roy
+  given-names: Suman
+  email: suman.roy@icar.gov.in
+  orcid: https://orcid.org/0000-0001-5612-8415
+

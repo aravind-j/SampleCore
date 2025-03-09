@@ -1,0 +1,9 @@
+.Rproj.user
+RoughWork
+Release.R
+docs
+.Rhistory
+.Rdata
+.httr-oauth
+.DS_Store
+.quarto
