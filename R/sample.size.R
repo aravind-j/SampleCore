@@ -222,6 +222,14 @@ sample.size <- function(data, names, group, dist,
     freq <- sqrt(gpsize) / sum(sqrt(gpsize))
   }
 
+  ## "diversity" ----
+
+  ## "diversity.prob" ----
+
+  ## "diversity.log" ----
+
+  ## "diversity.sqrt" ----
+
   # Choose ceiling or floor ----
 
   if (sample.method != "const") {
