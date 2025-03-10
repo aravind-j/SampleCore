@@ -24,6 +24,8 @@ jobs:
           extra-packages: |
             local::.
             any::EvaluateCore
+            any::NbClust
+            any::cluster
             github::r-lib/pkgdown?reinstall
 
       - name: Deploy package
