@@ -3,7 +3,7 @@ pkgdown: 2.2.0.9000
 pkgdown_sha: c07d935583c90125586821e3b39ed52f16593e42
 articles:
   additional/Example_Clustered_Data: additional/Example_Clustered_Data.html
-last_built: 2025-12-08T17:30Z
+last_built: 2025-12-08T17:37Z
 urls:
   reference: https://aravind-j.github.io/SampleCore/reference
   article: https://aravind-j.github.io/SampleCore/articles
