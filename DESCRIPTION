@@ -27,10 +27,10 @@ Imports: mathjaxr,
     stats,
     utils
 Suggests: cluster,
-    EvaluateCore,
     knitr,
     pander,
     rmarkdown
+Remotes: github::aravind-j/EvaluateCore
 RdMacros: mathjaxr,
     Rdpack
 Copyright: 2024-2025, ICAR-NBPGR

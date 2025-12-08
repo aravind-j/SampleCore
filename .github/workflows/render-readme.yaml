@@ -30,7 +30,6 @@ jobs:
             any::devtools
             any::kableExtra
             any::RCurl
-            any::EvaluateCore
 
       - name: Render README.md using rmarkdown
         run: Rscript -e 'rmarkdown::render("README.Rmd", output_format = "github_document")'

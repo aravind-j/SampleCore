@@ -5,8 +5,7 @@
 
 ## `SampleCore`: Sampling Strategies for Constructing Core Collections
 
-<!-- <img src="https://raw.githubusercontent.com/aravind-j/SampleCore/master/inst/extdata/SampleCore.png" align="right" alt="logo" width="173" height = "200" style = "border: none; float: right;">
--->
+<img src="https://raw.githubusercontent.com/aravind-j/SampleCore/master/inst/extdata/SampleCore.png" align="right" alt="logo" width="173" height = "200" style = "border: none; float: right;">
 
 ###### Version : [0.0.0.9000](https://aravind-j.github.io/SampleCore/); License: [GPL-2\|GPL-3](https://www.r-project.org/Licenses/)
 
@@ -21,22 +20,29 @@ Genetic Resources, New Delhi.
 version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg?logo=R)](https://cran.r-project.org/)
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 <!-- [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version-last-release/SampleCore)](https://cran.r-project.org/package=SampleCore)
 [![Dependencies](https://tinyverse.netlify.app/status/SampleCore)](https://cran.r-project.org/package=SampleCore) -->
+
 <!-- [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/SampleCore?color=green)](https://CRAN.R-project.org/package=SampleCore) -->
+
 <!-- 
 [![develVersion](https://img.shields.io/badge/devel%20version-0.0.0.9000-orange.svg)](https://github.com/aravind-j/SampleCore)
---> [![Github Code
+-->
+
+[![Github Code
 Size](https://img.shields.io/github/languages/code-size/aravind-j/SampleCore.svg)](https://github.com/aravind-j/SampleCore)
+
 <!-- [![R-CMD-check](https://github.com/aravind-j/SampleCore/workflows/R-CMD-check/badge.svg)](https://github.com/aravind-j/SampleCore/actions) -->
+
 [![Project Status:
 WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2025--03--09-yellowgreen.svg)](https://github.com/aravind-j/SampleCore/)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2025--12--08-yellowgreen.svg)](https://github.com/aravind-j/SampleCore/)
 <!-- [![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.zenodo.14889174.svg)](https://doi.org/10.5281/zenodo.14889174) -->
 [![Website -
 pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github.io/SampleCore.svg)](https://aravind-j.github.io/SampleCore/)
-<!-- [![.](https://pro-pulsar-193905.appspot.com/G-B9EKQHWBD9/welcome-page)](https://github.com/aravind-j/google-analytics-beacon) -->
+<!-- [![.](https://pro-pulsar-193905.appspot.com/G-xxxxxxxx/welcome-page)](https://github.com/aravind-j/google-analytics-beacon) -->
 <!-- [![GoatCounter](https://SampleCore-gh.goatcounter.com/count?p=/test)](https://SampleCore.goatcounter.com/)  -->
 <!-- [![packageversion](https://img.shields.io/badge/Package%20version-0.2.3.3-orange.svg)](https://github.com/aravind-j/SampleCore) -->
 <!-- [![GitHub Download Count](https://github-basic-badges.herokuapp.com/downloads/aravind-j/SampleCore/total.svg)] -->
@@ -46,13 +52,13 @@ pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github
 
 ## Description
 
-<!-- Implements several sampling strategies for construction of core collections. These include 1) Stratified sampling based on group size 2) Stratified sampling based on group diversity 3) Sampling based on genetic distance between accessions. See the vignette for more, including full list of citations for the methods implemented. -->
+<!-- Implements several sampling strategies for construction of core      collections. These include 1) Stratified sampling based on group size 2)      Stratified sampling based on group diversity 3) Sampling based on genetic      distance between accessions. See the vignette for more, including full list      of citations for the methods implemented. -->
 
-Implements several sampling strategies for construction of
-corecollections. These include 1) Stratified sampling based on group
-size 2)Stratified sampling based on group diversity 3) Sampling based on
-geneticdistance between accessions. See the vignette for more, including
-full listof citations for the methods implemented.
+Implements several sampling strategies for construction of core
+collections. These include 1) Stratified sampling based on group size 2)
+Stratified sampling based on group diversity 3) Sampling based on
+genetic distance between accessions. See the vignette for more,
+including full list of citations for the methods implemented.
 
 ## Installation
 
@@ -93,6 +99,7 @@ news(package='SampleCore')
 [Documentation website](https://aravind-j.github.io/SampleCore/)
 
 <!--[Zenodo DOI](https://doi.org/10.5281/zenodo.14889174) -->
+
 <!--
 ## CRAN checks
 &#10;
@@ -157,11 +164,13 @@ To cite the methods in the package use:
 citation("SampleCore")
 ```
 
-    Warning in citation("SampleCore"): could not determine year for 'SampleCore' from package DESCRIPTION file
+    Warning in citation("SampleCore"): could not determine year for 'SampleCore' from package
+    DESCRIPTION file
     To cite package 'SampleCore' in publications use:
 
-      Aravind J (????). _SampleCore: Sampling Strategies for Constructing Core COllections_. R package
-      version 0.0.0.9000, <https://github.com/aravind-j/SampleCore>.
+      Aravind J (????). _SampleCore: Sampling Strategies for Constructing Core
+      COllections_. R package version 0.0.0.9000,
+      <https://github.com/aravind-j/SampleCore>.
 
     A BibTeX entry for LaTeX users is
 
