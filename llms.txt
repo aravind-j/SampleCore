@@ -1,0 +1,104 @@
+## `SampleCore`: Sampling Strategies for Constructing Core Collections
+
+![logo](https://raw.githubusercontent.com/aravind-j/SampleCore/master/inst/extdata/SampleCore.png)
+
+###### Version : [0.0.0.9000](https://aravind-j.github.io/SampleCore/); License: [GPL-2\|GPL-3](https://www.r-project.org/Licenses/)
+
+##### Aravind, J. and Suman Roy
+
+Division of Germplasm Conservation, ICAR-National Bureau of Plant
+Genetic Resources, New Delhi.
+
+------------------------------------------------------------------------
+
+[![minimal R
+version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg?logo=R)](https://cran.r-project.org/)
+[![License: GPL
+v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+[![Github Code
+Size](https://img.shields.io/github/languages/code-size/aravind-j/SampleCore.svg)](https://github.com/aravind-j/SampleCore)
+
+[![Project Status:
+WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2025--12--08-yellowgreen.svg)](https://github.com/aravind-j/SampleCore/)
+[![Website -
+pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github.io/SampleCore.svg)](https://aravind-j.github.io/SampleCore/)
+
+------------------------------------------------------------------------
+
+## Description
+
+Implements several sampling strategies for construction of
+corecollections. These include 1) Stratified sampling based on group
+size 2)Stratified sampling based on group diversity 3) Sampling based on
+geneticdistance between accessions. See the vignette for more, including
+full listof citations for the methods implemented.
+
+## Installation
+
+The development version can be installed from github as follows:
+
+``` r
+# Install development version from Github
+devtools::install_github("aravind-j/SampleCore")
+```
+
+## What’s new
+
+To know whats new in this version type:
+
+``` r
+news(package='SampleCore')
+```
+
+## Links
+
+[Github page](https://github.com/aravind-j/SampleCore)
+
+[Documentation website](https://aravind-j.github.io/SampleCore/)
+
+## Citing `SampleCore`
+
+To cite the methods in the package use:
+
+``` r
+citation("SampleCore")
+```
+
+``` R
+To cite package 'SampleCore' in publications use:
+
+  Aravind J, Roy S (2025). _SampleCore: Sampling Strategies for
+  Constructing Core Collections_. R package version 0.0.0.9000,
+  <https://github.com/aravind-j/SampleCore>.
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {SampleCore: Sampling Strategies for Constructing Core Collections},
+    author = {J. Aravind and Suman Roy},
+    year = {2025},
+    note = {R package version 0.0.0.9000},
+    url = {https://github.com/aravind-j/SampleCore},
+  }
+```
+
+# Package index
+
+## All functions
+
+- [`cassava_EC_gp`](https://aravind-j.github.io/SampleCore/reference/cassava_EC_gp.md)
+  : IITA Cassava Germplasm Data - Entire Collection
+- [`diversity.indices()`](https://aravind-j.github.io/SampleCore/reference/diversity.indices.md)
+  : Diversity Indices
+- [`sample.size()`](https://aravind-j.github.io/SampleCore/reference/sample.size.md)
+  : Sample Size Estimation
+
+# Articles
+
+### All vignettes
+
+- [Example Dataset in
+  \`SampleCore\`](https://aravind-j.github.io/SampleCore/articles/additional/Example_Clustered_Data.md):
