@@ -7,7 +7,7 @@ cff-version: 1.2.0
 message: 'To cite package "SampleCore" in publications use:'
 type: software
 license: GPL-2.0-or-later
-title: 'SampleCore: Sampling Strategies for Constructing Core COllections'
+title: 'SampleCore: Sampling Strategies for Constructing Core Collections'
 version: 0.0.0.9000
 abstract: Implements several sampling strategies for construction of core collections.
   These include 1) Stratified sampling based on group size 2) Stratified sampling
@@ -16,21 +16,204 @@ abstract: Implements several sampling strategies for construction of core collec
 authors:
 - family-names: Aravind
   given-names: J.
-  email: j.aravind@icar.gov.in
+  email: j.aravind@icar.org.in
   orcid: https://orcid.org/0000-0002-4791-442X
 - family-names: Roy
   given-names: Suman
-  email: suman.roy@icar.gov.in
+  email: suman.roy@icar.org.in
   orcid: https://orcid.org/0000-0001-5612-8415
 repository-code: https://github.com/aravind-j/SampleCore
 url: https://aravind-j.github.io/SampleCore/
 contact:
 - family-names: Aravind
   given-names: J.
-  email: j.aravind@icar.gov.in
+  email: j.aravind@icar.org.in
   orcid: https://orcid.org/0000-0002-4791-442X
-- family-names: Roy
-  given-names: Suman
-  email: suman.roy@icar.gov.in
-  orcid: https://orcid.org/0000-0001-5612-8415
+keywords:
+- core-collections
+- genebank
+- germplasm
+- pgr
+- plant-genetic-resources
+- r
+references:
+- type: software
+  title: mathjaxr
+  abstract: 'mathjaxr: Using ''Mathjax'' in Rd Files'
+  notes: Imports
+  url: https://github.com/wviechtb/mathjaxr
+  repository: https://CRAN.R-project.org/package=mathjaxr
+  authors:
+  - family-names: Viechtbauer
+    given-names: Wolfgang
+    email: wvb@wvbauer.com
+    orcid: https://orcid.org/0000-0003-3463-4063
+  year: '2026'
+  doi: 10.32614/CRAN.package.mathjaxr
+- type: software
+  title: Rdpack
+  abstract: 'Rdpack: Update and Manipulate Rd Documentation Objects'
+  notes: Imports
+  url: https://geobosh.github.io/Rdpack/
+  repository: https://CRAN.R-project.org/package=Rdpack
+  authors:
+  - family-names: Boshnakov
+    given-names: Georgi N.
+    email: georgi.boshnakov@manchester.ac.uk
+    orcid: https://orcid.org/0000-0003-2839-346X
+  year: '2026'
+  doi: 10.32614/CRAN.package.Rdpack
+- type: software
+  title: stats
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2026'
+- type: software
+  title: utils
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2026'
+- type: software
+  title: cluster
+  abstract: 'cluster: "Finding Groups in Data": Cluster Analysis Extended Rousseeuw
+    et al.'
+  notes: Suggests
+  url: https://svn.r-project.org/R-packages/trunk/cluster/
+  repository: https://CRAN.R-project.org/package=cluster
+  authors:
+  - family-names: Maechler
+    given-names: Martin
+    email: maechler@stat.math.ethz.ch
+    orcid: https://orcid.org/0000-0002-8685-9910
+  - family-names: Rousseeuw
+    given-names: Peter
+    email: peter.rousseeuw@kuleuven.be
+    orcid: https://orcid.org/0000-0002-3807-5353
+  - family-names: Struyf
+    given-names: Anja
+  - family-names: Hubert
+    given-names: Mia
+    email: Mia.Hubert@uia.ua.ac.be
+    orcid: https://orcid.org/0000-0001-6398-4850
+  year: '2026'
+  doi: 10.32614/CRAN.package.cluster
+- type: software
+  title: EvaluateCore
+  abstract: 'EvaluateCore: Quality Evaluation of Core Collections'
+  notes: Suggests
+  url: https://CRAN.R-project.org/package=EvaluateCore
+  repository: https://CRAN.R-project.org/package=EvaluateCore
+  authors:
+  - family-names: Aravind
+    given-names: J.
+    email: j.aravind@icar.org.in
+    orcid: https://orcid.org/0000-0002-4791-442X
+  - family-names: Kaur
+    given-names: Vikender
+    email: vikender.kaur@icar.org.in
+    orcid: https://orcid.org/0000-0001-9698-7329
+  - family-names: Wankhede
+    given-names: Dhammaprakash Pandhari
+    email: d.wankhede@icar.org.in
+    orcid: https://orcid.org/0000-0001-6384-8664
+  - family-names: Nanjundan
+    given-names: Joghee
+    email: j.nanjundan@icar.org.in
+    orcid: https://orcid.org/0000-0001-6254-7341
+  year: '2026'
+  doi: 10.32614/CRAN.package.EvaluateCore
+- type: software
+  title: knitr
+  abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
+  notes: Suggests
+  url: https://yihui.org/knitr/
+  repository: https://CRAN.R-project.org/package=knitr
+  authors:
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  year: '2026'
+  doi: 10.32614/CRAN.package.knitr
+- type: software
+  title: pander
+  abstract: 'pander: An R ''Pandoc'' Writer'
+  notes: Suggests
+  url: https://rapporter.github.io/pander/
+  repository: https://CRAN.R-project.org/package=pander
+  authors:
+  - family-names: Daróczi
+    given-names: Gergely
+    email: daroczig@rapporter.net
+    orcid: https://orcid.org/0000-0003-3149-8537
+  - family-names: Tsegelskyi
+    given-names: Roman
+    email: roman.tsegelskyi@gmail.com
+  year: '2026'
+  doi: 10.32614/CRAN.package.pander
+- type: software
+  title: rmarkdown
+  abstract: 'rmarkdown: Dynamic Documents for R'
+  notes: Suggests
+  url: https://pkgs.rstudio.com/rmarkdown/
+  repository: https://CRAN.R-project.org/package=rmarkdown
+  authors:
+  - family-names: Allaire
+    given-names: JJ
+    email: jj@posit.co
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  - family-names: Dervieux
+    given-names: Christophe
+    email: cderv@posit.co
+    orcid: https://orcid.org/0000-0003-4474-2498
+  - family-names: McPherson
+    given-names: Jonathan
+    email: jonathan@posit.co
+  - family-names: Luraschi
+    given-names: Javier
+  - family-names: Ushey
+    given-names: Kevin
+    email: kevin@posit.co
+  - family-names: Atkins
+    given-names: Aron
+    email: aron@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Cheng
+    given-names: Joe
+    email: joe@posit.co
+  - family-names: Chang
+    given-names: Winston
+    email: winston@posit.co
+  - family-names: Iannone
+    given-names: Richard
+    email: rich@posit.co
+    orcid: https://orcid.org/0000-0003-3925-190X
+  year: '2026'
+  doi: 10.32614/CRAN.package.rmarkdown
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  url: https://www.R-project.org/
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2026'
+  version: '>= 3.5'
 
