@@ -30,11 +30,11 @@ pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github
 
 ## Description
 
-Implements several sampling strategies for construction of
-corecollections. These include 1) Stratified sampling based on group
-size 2)Stratified sampling based on group diversity 3) Sampling based on
-geneticdistance between accessions. See the vignette for more, including
-full listof citations for the methods implemented.
+Implements several sampling strategies for construction of core
+collections. These include 1) Stratified sampling based on group size 2)
+Stratified sampling based on group diversity 3) Sampling based on
+genetic distance between accessions. See the vignette for more,
+including full list of citations for the methods implemented.
 
 ## Installation
 
@@ -68,18 +68,19 @@ citation("SampleCore")
 ```
 
 ``` R
+Warning in citation("SampleCore"): could not determine year for 'SampleCore' from package
+DESCRIPTION file
 To cite package 'SampleCore' in publications use:
 
-  Aravind J, Roy S (2025). _SampleCore: Sampling Strategies for
-  Constructing Core Collections_. R package version 0.0.0.9000,
+  Aravind J (????). _SampleCore: Sampling Strategies for Constructing Core
+  COllections_. R package version 0.0.0.9000,
   <https://github.com/aravind-j/SampleCore>.
 
 A BibTeX entry for LaTeX users is
 
   @Manual{,
-    title = {SampleCore: Sampling Strategies for Constructing Core Collections},
-    author = {J. Aravind and Suman Roy},
-    year = {2025},
+    title = {SampleCore: Sampling Strategies for Constructing Core COllections},
+    author = {J. Aravind},
     note = {R package version 0.0.0.9000},
     url = {https://github.com/aravind-j/SampleCore},
   }

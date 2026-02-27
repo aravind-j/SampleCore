@@ -18,7 +18,7 @@ library(EvaluateCore)
 
     ## 
     ## --------------------------------------------------------------------------------
-    ## Welcome to EvaluateCore version 0.1.3.9000
+    ## Welcome to EvaluateCore version 0.1.4.9000
     ## 
     ## 
     ## # To know whats new in this version type:
@@ -185,7 +185,7 @@ sessionInfo()
 
     ## R version 4.5.2 (2025-10-31)
     ## Platform: aarch64-apple-darwin20
-    ## Running under: macOS Sequoia 15.7.2
+    ## Running under: macOS Sequoia 15.7.4
     ## 
     ## Matrix products: default
     ## BLAS:   /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib 
@@ -201,45 +201,45 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] NbClust_3.0.1           cluster_2.1.8.1         EvaluateCore_0.1.3.9000
+    ## [1] NbClust_3.0.1           cluster_2.1.8.1         EvaluateCore_0.1.4.9000
     ## 
     ## loaded via a namespace (and not attached):
-    ##   [1] mnormt_2.1.1         Rdpack_2.6.4         gridExtra_2.3       
-    ##   [4] permute_0.9-8        rlang_1.1.6          magrittr_2.0.4      
-    ##   [7] compiler_4.5.2       mgcv_1.9-3           reshape2_1.4.5      
-    ##  [10] systemfonts_1.3.1    vctrs_0.6.5          stringr_1.6.0       
-    ##  [13] kSamples_1.2-12      pkgconfig_2.0.3      shape_1.4.6.1       
-    ##  [16] fastmap_1.2.0        backports_1.5.0      rmarkdown_2.30      
-    ##  [19] nloptr_2.2.1         ragg_1.5.0           missMDA_1.20        
-    ##  [22] purrr_1.2.0          xfun_0.54            glmnet_4.1-10       
-    ##  [25] jomo_2.7-6           cachem_1.1.0         jsonlite_2.0.0      
-    ##  [28] flashClust_1.01-2    SuppDists_1.1-9.9    pan_1.9             
-    ##  [31] psych_2.5.6          broom_1.0.11         parallel_4.5.2      
-    ##  [34] R6_2.6.1             stringi_1.8.7        bslib_0.9.0         
-    ##  [37] RColorBrewer_1.1-3   rpart_4.1.24         car_3.1-3           
-    ##  [40] boot_1.3-32          jquerylib_0.1.4      estimability_1.5.1  
-    ##  [43] Rcpp_1.1.0           iterators_1.0.14     knitr_1.50          
-    ##  [46] nnet_7.3-20          Matrix_1.7-4         splines_4.5.2       
-    ##  [49] tidyselect_1.2.1     abind_1.4-8          yaml_2.3.11         
-    ##  [52] vegan_2.7-2          AlgDesign_1.2.1.2    doParallel_1.0.17   
-    ##  [55] ggtext_0.1.2         codetools_0.2-20     plyr_1.8.9          
-    ##  [58] lattice_0.22-7       tibble_3.3.0         S7_0.2.1            
-    ##  [61] evaluate_1.0.5       desc_1.4.3           survival_3.8-3      
-    ##  [64] xml2_1.5.1           pillar_1.11.1        carData_3.0-5       
-    ##  [67] mice_3.18.0          DT_0.34.0            foreach_1.5.2       
-    ##  [70] reformulas_0.4.2     generics_0.1.4       mathjaxr_2.0-0      
-    ##  [73] ggplot2_4.0.1        scales_1.4.0         minqa_1.2.8         
-    ##  [76] xtable_1.8-4         leaps_3.2            glue_1.8.0          
-    ##  [79] emmeans_2.0.0        scatterplot3d_0.3-44 tools_4.5.2         
-    ##  [82] lme4_1.1-38          fs_1.6.6             mvtnorm_1.3-3       
-    ##  [85] grid_4.5.2           tidyr_1.3.1          rbibutils_2.4       
-    ##  [88] nlme_3.1-168         agricolae_1.3-7      Formula_1.2-5       
-    ##  [91] cli_3.6.5            textshaping_1.0.4    dplyr_1.1.4         
-    ##  [94] gtable_0.3.6         ggcorrplot_0.1.4.1   sass_0.4.10         
-    ##  [97] digest_0.6.39        ggrepel_0.9.6        FactoMineR_2.12     
-    ## [100] htmlwidgets_1.6.4    farver_2.1.2         entropy_1.3.2       
-    ## [103] htmltools_0.5.9      pkgdown_2.2.0.9000   lifecycle_1.0.4     
-    ## [106] multcompView_0.1-10  mitml_0.4-5          gridtext_0.1.5      
-    ## [109] MASS_7.3-65
+    ##   [1] mnormt_2.1.2         Rdpack_2.6.6         gridExtra_2.3       
+    ##   [4] permute_0.9-10       rlang_1.1.7          magrittr_2.0.4      
+    ##   [7] otel_0.2.0           compiler_4.5.2       mgcv_1.9-3          
+    ##  [10] reshape2_1.4.5       systemfonts_1.3.1    vctrs_0.7.1         
+    ##  [13] stringr_1.6.0        kSamples_1.2-12      pkgconfig_2.0.3     
+    ##  [16] shape_1.4.6.1        fastmap_1.2.0        backports_1.5.0     
+    ##  [19] rmarkdown_2.30       nloptr_2.2.1         ragg_1.5.0          
+    ##  [22] missMDA_1.21         purrr_1.2.1          xfun_0.56           
+    ##  [25] glmnet_4.1-10        jomo_2.7-6           cachem_1.1.0        
+    ##  [28] jsonlite_2.0.0       flashClust_1.01-2    SuppDists_1.1-9.9   
+    ##  [31] pan_1.9              psych_2.6.1          broom_1.0.12        
+    ##  [34] parallel_4.5.2       R6_2.6.1             stringi_1.8.7       
+    ##  [37] bslib_0.10.0         RColorBrewer_1.1-3   rpart_4.1.24        
+    ##  [40] car_3.1-5            boot_1.3-32          jquerylib_0.1.4     
+    ##  [43] estimability_1.5.1   Rcpp_1.1.1           iterators_1.0.14    
+    ##  [46] knitr_1.51           nnet_7.3-20          Matrix_1.7-4        
+    ##  [49] splines_4.5.2        tidyselect_1.2.1     abind_1.4-8         
+    ##  [52] yaml_2.3.12          vegan_2.7-2          AlgDesign_1.2.1.2   
+    ##  [55] doParallel_1.0.17    ggtext_0.1.2         codetools_0.2-20    
+    ##  [58] plyr_1.8.9           lattice_0.22-7       tibble_3.3.1        
+    ##  [61] S7_0.2.1             evaluate_1.0.5       desc_1.4.3          
+    ##  [64] survival_3.8-3       xml2_1.5.2           pillar_1.11.1       
+    ##  [67] carData_3.0-6        mice_3.19.0          DT_0.34.0           
+    ##  [70] foreach_1.5.2        reformulas_0.4.4     generics_0.1.4      
+    ##  [73] mathjaxr_2.0-0       ggplot2_4.0.2        scales_1.4.0        
+    ##  [76] minqa_1.2.8          xtable_1.8-8         leaps_3.2           
+    ##  [79] glue_1.8.0           emmeans_2.0.1        scatterplot3d_0.3-45
+    ##  [82] tools_4.5.2          lme4_1.1-38          fs_1.6.6            
+    ##  [85] mvtnorm_1.3-3        grid_4.5.2           tidyr_1.3.2         
+    ##  [88] rbibutils_2.4.1      nlme_3.1-168         agricolae_1.3-7     
+    ##  [91] Formula_1.2-5        cli_3.6.5            textshaping_1.0.4   
+    ##  [94] dplyr_1.2.0          gtable_0.3.6         ggcorrplot_0.1.4.1  
+    ##  [97] sass_0.4.10          digest_0.6.39        ggrepel_0.9.7       
+    ## [100] FactoMineR_2.13      htmlwidgets_1.6.4    farver_2.1.2        
+    ## [103] entropy_1.3.2        htmltools_0.5.9      pkgdown_2.2.0.9000  
+    ## [106] lifecycle_1.0.5      multcompView_0.1-11  mitml_0.4-5         
+    ## [109] gridtext_0.1.6       MASS_7.3-65
 
 ## References

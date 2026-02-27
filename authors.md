@@ -15,14 +15,14 @@
 Source:
 [`DESCRIPTION`](https://github.com/aravind-j/SampleCore/blob/master/DESCRIPTION)
 
-Aravind J, Roy S (2025). *SampleCore: Sampling Strategies for
+Aravind J, Roy S (2026). *SampleCore: Sampling Strategies for
 Constructing Core Collections*. R package version 0.0.0.9000,
 <https://github.com/aravind-j/SampleCore>.
 
     @Manual{,
       title = {SampleCore: Sampling Strategies for Constructing Core Collections},
       author = {J. Aravind and Suman Roy},
-      year = {2025},
+      year = {2026},
       note = {R package version 0.0.0.9000},
       url = {https://github.com/aravind-j/SampleCore},
     }
