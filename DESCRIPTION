@@ -3,11 +3,11 @@ Title: Sampling Strategies for Constructing Core Collections
 Version: 0.0.0.9000
 Authors@R: c(
     person(given = "J.", family = "Aravind",
-           email = "j.aravind@icar.gov.in",
+           email = "j.aravind@icar.org.in",
            role = c("aut", "cre"),
 		       comment = c(ORCID = "0000-0002-4791-442X")),
     person(given = "Suman", family = "Roy",
-           email = "suman.roy@icar.gov.in",
+           email = "suman.roy@icar.org.in",
            role = c("aut"),
 		       comment = c(ORCID = "0000-0001-5612-8415")),
 		person("ICAR-NBGPR",
@@ -27,10 +27,10 @@ Imports: mathjaxr,
     stats,
     utils
 Suggests: cluster,
+    EvaluateCore,
     knitr,
     pander,
     rmarkdown
-Remotes: github::aravind-j/EvaluateCore
 RdMacros: mathjaxr,
     Rdpack
 Copyright: 2024-2025, ICAR-NBPGR
