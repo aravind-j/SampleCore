@@ -26,7 +26,7 @@ A data frame with 59 columns: \describe{ \item{CUAL}{Colour of
   hierarchial clustering}}
 }
 \usage{
-cassava_EC_gp
+data(cassava_EC_gp)
 }
 \description{
 An example germplasm characterisation data of a subset of IITA Cassava
