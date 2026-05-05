@@ -10,11 +10,13 @@
 #' @template general-arg
 #' @template qualquant-arg
 #
-checks.evaluate.core <- function(data, names, quantitative = NULL,
-                                 qualitative = NULL,
-                                 method, size, group
-                                 # selected
-                                 ) {
+checks.sample.core <- function(data, names, quantitative = NULL,
+                               qualitative = NULL,
+                               dist.mat = NULL,
+                               method, size, group,
+                               log.base = NULL
+                               # selected
+) {
 
   # Declare nulls ----
 
@@ -24,6 +26,10 @@ checks.evaluate.core <- function(data, names, quantitative = NULL,
 
   if (missing(qualitative)) {
     qualitative <- NULL
+  }
+
+  if (missing(dist.mat)) {
+    dist.mat <- NULL
   }
 
   if (length(c(quantitative, qualitative)) == 1) {
@@ -123,7 +129,7 @@ checks.evaluate.core <- function(data, names, quantitative = NULL,
   }
 
   # check if 'group' column is present in 'data'
-  if (!(group %in% colgroup(data))) {
+  if (!(group %in% colnames(data))) {
     stop(paste('Column ', group,
                ' specified as the "group" column is not present in "data".',
                sep = ""))
@@ -177,10 +183,50 @@ checks.evaluate.core <- function(data, names, quantitative = NULL,
     stop('Duplicated entries exist in "names" column.')
   }
 
+  # Distance matrix ----
+
+  if (!is.null(dist.mat)) {
+
+    # check if 'dist.mat' is a distance matrix
+    if (!inherits(dist.mat, "dist")) {
+      stop('"dist.mat" should be a distance matrix of class "dist".')
+    }
+    dist_labels <- labels(dist.mat) # No dups as it is a distance matrix
+
+    # Check for mismatch between elements of 'data' and 'dist.mat'
+    if (!setequal(data[, names], labels(dist.mat))) {
+      only_in_data <- setdiff(data[, names], dist.mat)
+      only_in_dist <- setdiff(dist.mat, data[, names])
+
+      stop(
+        paste0(
+          'Mismatch between "dist.mat" labels and entries in "names" column.\n',
+          'Only in "data": ', paste(only_in_data, collapse = ', '), '\n',
+          'Only in "dist.mat": ', paste(only_in_dist, collapse = ', ')
+        )
+      )
+    }
+  }
+
   # Size ----
 
   # check if 'size' is a proportion between 0 and 1
   if (size <= 0 || size >= 1) {
     stop('"size" should be a proportion between 0 and 1.')
   }
+
+  # Log base ----
+
+  if (!is.numeric(log.base) || length(log.base) != 1 || is.na(log.base)) {
+    stop('"log.base" must be a single numeric value.')
+  }
+
+  if (log.base <= 0) {
+    stop('"base" must be positive.')
+  }
+
+  if (log.base == 1) {
+    stop('"log.base" of 1 is undefined.')
+  }
+
 }
