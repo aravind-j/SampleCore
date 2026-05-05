@@ -20,7 +20,7 @@ bibentry(header = hd,
 		                       role = "aut")),
          year = year,
          textVersion = paste(
-           "Aravind, J. (",
+           "Aravind, J., Roy, S., and Singh, A. M. (",
            year, ").  SampleCore: Sampling Strategies for Constructing Core Collections. ",
            vers, ", ", "https://aravind-j.github.io/SampleCore/",
            ".", sep=""),
