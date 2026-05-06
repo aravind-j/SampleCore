@@ -25,13 +25,14 @@ Description: Implements several sampling strategies for construction of core
     of citations for the methods implemented.
 License: GPL (>= 2)
 Encoding: UTF-8
-RoxygenNote: 7.3.2
 BuildManual: TRUE
 Imports: DiversityStats,
+    igraph,
     mathjaxr,
     Rdpack,
     stats,
-    utils
+    utils,
+    vegan
 Suggests: cluster,
     EvaluateCore,
     knitr,
@@ -45,3 +46,5 @@ URL: https://github.com/aravind-j/SampleCore
 BugReports: https://github.com/aravind-j/SampleCore/issues
 Depends: 
     R (>= 3.5)
+Config/roxygen2/version: 8.0.0
+RoxygenNote: 7.3.3
