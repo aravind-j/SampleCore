@@ -38,12 +38,12 @@ Size](https://img.shields.io/github/languages/code-size/aravind-j/SampleCore.svg
 [![Project Status:
 WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2026--05--01-yellowgreen.svg)](https://github.com/aravind-j/SampleCore/)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2026--05--06-yellowgreen.svg)](https://github.com/aravind-j/SampleCore/)
 <!-- [![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.zenodo.14889174.svg)](https://doi.org/10.5281/zenodo.14889174) -->
 [![Website -
 pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github.io/SampleCore.svg)](https://aravind-j.github.io/SampleCore/)
 <!-- [![.](https://pro-pulsar-193905.appspot.com/G-xxxxxxxx/welcome-page)](https://github.com/aravind-j/google-analytics-beacon) -->
-<!-- [![GoatCounter](https://SampleCore-gh.goatcounter.com/count?p=/test)](https://SampleCore.goatcounter.com/)  -->
+[![GoatCounter](https://sampledore-gh.goatcounter.com/count?p=/test)](https://sampledore-gh.goatcounter.com/)
 <!-- [![packageversion](https://img.shields.io/badge/Package%20version-0.2.3.3-orange.svg)](https://github.com/aravind-j/SampleCore) -->
 <!-- [![GitHub Download Count](https://github-basic-badges.herokuapp.com/downloads/aravind-j/SampleCore/total.svg)] -->
 <!-- [![Rdoc](http://www.rdocumentation.org/badges/version/SampleCore)](http://www.rdocumentation.org/packages/SampleCore) -->
@@ -164,19 +164,18 @@ To cite the methods in the package use:
 citation("SampleCore")
 ```
 
-    Warning in citation("SampleCore"): could not determine year for 'SampleCore' from package
-    DESCRIPTION file
-    To cite package 'SampleCore' in publications use:
+    To cite the R package 'SampleCore' in publications use:
 
-      Aravind J (????). _SampleCore: Sampling Strategies for Constructing Core
-      COllections_. R package version 0.0.0.9000,
-      <https://github.com/aravind-j/SampleCore>.
+      Aravind, J., Roy, S., and Singh, A. M. ().  SampleCore: Sampling Strategies for Constructing
+      Core Collections. R package version 0.0.0.9000, https://aravind-j.github.io/SampleCore/.
 
     A BibTeX entry for LaTeX users is
 
       @Manual{,
-        title = {SampleCore: Sampling Strategies for Constructing Core COllections},
-        author = {J. Aravind},
-        note = {R package version 0.0.0.9000},
-        url = {https://github.com/aravind-j/SampleCore},
+        title = {SampleCore: Sampling Strategies for Constructing Core Collections},
+        author = {J. Aravind and Suman Roy and Anju Mahendru Singh},
+        note = {R package version 0.0.0.9000 https://aravind-j.github.io/SampleCore/},
       }
+
+    This free and open-source software implements academic research by the authors and co-workers. If
+    you use it, please support the project by citing the package.
