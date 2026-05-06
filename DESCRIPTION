@@ -31,7 +31,6 @@ Imports: DiversityStats,
     mathjaxr,
     Rdpack,
     stats,
-    utils,
     vegan
 Suggests: cluster,
     EvaluateCore,
