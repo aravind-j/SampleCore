@@ -4,7 +4,7 @@
 
 ###### Version : [0.0.0.9000](https://aravind-j.github.io/SampleCore/); License: [GPL-2\|GPL-3](https://www.r-project.org/Licenses/)
 
-##### Aravind, J. and Suman Roy
+##### *Aravind, J., Roy, Suman and Singh, Anju M.*
 
 Division of Germplasm Conservation, ICAR-National Bureau of Plant
 Genetic Resources, New Delhi.
@@ -22,9 +22,10 @@ Size](https://img.shields.io/github/languages/code-size/aravind-j/SampleCore.svg
 [![Project Status:
 WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2025--12--08-yellowgreen.svg)](https://github.com/aravind-j/SampleCore/)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2026--05--06-yellowgreen.svg)](https://github.com/aravind-j/SampleCore/)
 [![Website -
 pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github.io/SampleCore.svg)](https://aravind-j.github.io/SampleCore/)
+[![GoatCounter](https://sampledore-gh.goatcounter.com/count?p=/test)](https://sampledore-gh.goatcounter.com/)
 
 ------------------------------------------------------------------------
 
@@ -41,6 +42,7 @@ including full list of citations for the methods implemented.
 The development version can be installed from github as follows:
 
 ``` r
+
 # Install development version from Github
 devtools::install_github("aravind-j/SampleCore")
 ```
@@ -50,6 +52,7 @@ devtools::install_github("aravind-j/SampleCore")
 To know whats new in this version type:
 
 ``` r
+
 news(package='SampleCore')
 ```
 
@@ -64,24 +67,24 @@ news(package='SampleCore')
 To cite the methods in the package use:
 
 ``` r
+
 citation("SampleCore")
 ```
 
 ``` R
-Warning in citation("SampleCore"): could not determine year for 'SampleCore' from package
-DESCRIPTION file
-To cite package 'SampleCore' in publications use:
+To cite the R package 'SampleCore' in publications use:
 
-  Aravind J (????). _SampleCore: Sampling Strategies for Constructing Core
-  COllections_. R package version 0.0.0.9000,
-  <https://github.com/aravind-j/SampleCore>.
+  Aravind, J., Roy, S., and Singh, A. M. ().  SampleCore: Sampling Strategies for Constructing
+  Core Collections. R package version 0.0.0.9000, https://aravind-j.github.io/SampleCore/.
 
 A BibTeX entry for LaTeX users is
 
   @Manual{,
-    title = {SampleCore: Sampling Strategies for Constructing Core COllections},
-    author = {J. Aravind},
-    note = {R package version 0.0.0.9000},
-    url = {https://github.com/aravind-j/SampleCore},
+    title = {SampleCore: Sampling Strategies for Constructing Core Collections},
+    author = {J. Aravind and Suman Roy and Anju Mahendru Singh},
+    note = {R package version 0.0.0.9000 https://aravind-j.github.io/SampleCore/},
   }
+
+This free and open-source software implements academic research by the authors and co-workers. If
+you use it, please support the project by citing the package.
 ```

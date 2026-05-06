@@ -7,22 +7,24 @@
 
 - **Suman Roy**. Author. [](https://orcid.org/0000-0001-5612-8415)
 
-- **ICAR-NBGPR**. Copyright holder.  
-  www.nbpgr.org.in
+- **Anju Mahendru Singh**. Author.
+  [](https://orcid.org/0000-0001-6958-1630)
+
+- **ICAR-NBGPR**. Copyright holder.
+  [![ROR](https://raw.githubusercontent.com/ror-community/ror-logos/main/ror-icon-rgb.svg)](https://ror.org/https://ror.org/00scbd467)  
+  https://nbpgr.org.in/
 
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/aravind-j/SampleCore/blob/master/DESCRIPTION)
+[`inst/CITATION`](https://github.com/aravind-j/SampleCore/blob/master/inst/CITATION)
 
-Aravind J, Roy S (2026). *SampleCore: Sampling Strategies for
-Constructing Core Collections*. R package version 0.0.0.9000,
-<https://github.com/aravind-j/SampleCore>.
+Aravind, J., Roy, S., and Singh, A. M. (). SampleCore: Sampling
+Strategies for Constructing Core Collections. R package version
+0.0.0.9000, https://aravind-j.github.io/SampleCore/.
 
     @Manual{,
       title = {SampleCore: Sampling Strategies for Constructing Core Collections},
-      author = {J. Aravind and Suman Roy},
-      year = {2026},
-      note = {R package version 0.0.0.9000},
-      url = {https://github.com/aravind-j/SampleCore},
+      author = {J. Aravind and Suman Roy and Anju Mahendru Singh},
+      note = {R package version 0.0.0.9000 https://aravind-j.github.io/SampleCore/},
     }

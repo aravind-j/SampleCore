@@ -6,19 +6,25 @@ ICAR-National Bureau of Plant Genetic Resources, New Delhi.
 
 The example datasets `cassava_EC` and `cassava_CC` in `EvaluateCore` for
 demonstrating various functions were generated using the following steps
-from the source data
-([**international_institute_of_tropical_agriculture_cassava_2019?**](#ref-international_institute_of_tropical_agriculture_cassava_2019)).
+from the source data ([International Institute of Tropical Agriculture
+et al.,
+2019](#ref-international_institute_of_tropical_agriculture_cassava_2019)).
 
 ## Setup the environment
 
 ``` r
+
 # Load required packages
 library(EvaluateCore)
 ```
 
+    ## Registered S3 method overwritten by 'lme4':
+    ##   method           from
+    ##   na.action.merMod car
+
     ## 
     ## --------------------------------------------------------------------------------
-    ## Welcome to EvaluateCore version 0.1.4.9000
+    ## Welcome to EvaluateCore version 0.1.5.900
     ## 
     ## 
     ## # To know whats new in this version type:
@@ -33,6 +39,7 @@ library(EvaluateCore)
     ## --------------------------------------------------------------------------------
 
 ``` r
+
 library(cluster)
 library(NbClust)
 ```
@@ -40,6 +47,7 @@ library(NbClust)
 ## Load and prepare data
 
 ``` r
+
 # Get data from EvaluateCore
 
 data("cassava_EC", package = "EvaluateCore")
@@ -63,6 +71,7 @@ data[, quant] <- lapply(data[, quant], function(x) {
 ## Perform the clustering
 
 ``` r
+
 # Set the seed
 set.seed(123)
 
@@ -83,6 +92,7 @@ nc_result <- NbClust(diss = data_dist, distance = NULL,
     ##  Only frey, mcclain, cindex, sihouette and dunn can be computed. To compute the other indices, data matrix is needed
 
 ``` r
+
 nc <- nc_result$Best.nc["Number_clusters"]
 
 # Plot dendrogram with nc = 6 clusters
@@ -93,6 +103,7 @@ rect.hclust(data_clust, k = nc)
 ![](Example_Clustered_Data_files/figure-html/unnamed-chunk-5-1.png)
 
 ``` r
+
 # Add the group to the original data
 cassava_EC_gp <- cassava_EC
 cassava_EC_gp$Cluster <- as.roman(nc_result$Best.partition)
@@ -132,6 +143,7 @@ str(cassava_EC_gp)
     ##  $ Cluster: Factor w/ 6 levels "I","II","III",..: 1 2 3 3 4 4 3 3 2 1 ...
 
 ``` r
+
 head(cassava_EC_gp)
 ```
 
@@ -174,22 +186,24 @@ head(cassava_EC_gp)
 ## Export the dataset
 
 ``` r
+
 write.csv(cassava_EC_gp, "cassava_EC_gp.csv", row.names = TRUE)
 ```
 
 ## Session Info
 
 ``` r
+
 sessionInfo()
 ```
 
-    ## R version 4.5.2 (2025-10-31)
-    ## Platform: aarch64-apple-darwin20
+    ## R version 4.6.0 (2026-04-24)
+    ## Platform: aarch64-apple-darwin23
     ## Running under: macOS Sequoia 15.7.4
     ## 
     ## Matrix products: default
-    ## BLAS:   /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib 
-    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
+    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
     ## 
     ## locale:
     ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -201,45 +215,51 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] NbClust_3.0.1           cluster_2.1.8.1         EvaluateCore_0.1.4.9000
+    ## [1] NbClust_3.0.1          cluster_2.1.8.2        EvaluateCore_0.1.5.900
     ## 
     ## loaded via a namespace (and not attached):
     ##   [1] mnormt_2.1.2         Rdpack_2.6.6         gridExtra_2.3       
-    ##   [4] permute_0.9-10       rlang_1.1.7          magrittr_2.0.4      
-    ##   [7] otel_0.2.0           compiler_4.5.2       mgcv_1.9-3          
-    ##  [10] reshape2_1.4.5       systemfonts_1.3.1    vctrs_0.7.1         
+    ##   [4] permute_0.9-10       rlang_1.2.0          magrittr_2.0.5      
+    ##   [7] otel_0.2.0           compiler_4.6.0       mgcv_1.9-4          
+    ##  [10] reshape2_1.4.5       systemfonts_1.3.2    vctrs_0.7.3         
     ##  [13] stringr_1.6.0        kSamples_1.2-12      pkgconfig_2.0.3     
-    ##  [16] shape_1.4.6.1        fastmap_1.2.0        backports_1.5.0     
-    ##  [19] rmarkdown_2.30       nloptr_2.2.1         ragg_1.5.0          
-    ##  [22] missMDA_1.21         purrr_1.2.1          xfun_0.56           
-    ##  [25] glmnet_4.1-10        jomo_2.7-6           cachem_1.1.0        
-    ##  [28] jsonlite_2.0.0       flashClust_1.01-2    SuppDists_1.1-9.9   
-    ##  [31] pan_1.9              psych_2.6.1          broom_1.0.12        
-    ##  [34] parallel_4.5.2       R6_2.6.1             stringi_1.8.7       
-    ##  [37] bslib_0.10.0         RColorBrewer_1.1-3   rpart_4.1.24        
+    ##  [16] shape_1.4.6.1        fastmap_1.2.0        backports_1.5.1     
+    ##  [19] rmarkdown_2.31       nloptr_2.2.1         ragg_1.5.2          
+    ##  [22] missMDA_1.21         purrr_1.2.2          xfun_0.57           
+    ##  [25] glmnet_5.0           jomo_2.7-6           cachem_1.1.0        
+    ##  [28] jsonlite_2.0.0       flashClust_1.1-4     SuppDists_1.1-9.9   
+    ##  [31] pan_1.9              psych_2.6.3          broom_1.0.12        
+    ##  [34] parallel_4.6.0       R6_2.6.1             stringi_1.8.7       
+    ##  [37] bslib_0.10.0         RColorBrewer_1.1-3   rpart_4.1.27        
     ##  [40] car_3.1-5            boot_1.3-32          jquerylib_0.1.4     
-    ##  [43] estimability_1.5.1   Rcpp_1.1.1           iterators_1.0.14    
-    ##  [46] knitr_1.51           nnet_7.3-20          Matrix_1.7-4        
-    ##  [49] splines_4.5.2        tidyselect_1.2.1     abind_1.4-8         
-    ##  [52] yaml_2.3.12          vegan_2.7-2          AlgDesign_1.2.1.2   
+    ##  [43] estimability_1.5.1   Rcpp_1.1.1-1.1       iterators_1.0.14    
+    ##  [46] knitr_1.51           nnet_7.3-20          Matrix_1.7-5        
+    ##  [49] splines_4.6.0        tidyselect_1.2.1     abind_1.4-8         
+    ##  [52] yaml_2.3.12          vegan_2.7-3          AlgDesign_1.2.1.2   
     ##  [55] doParallel_1.0.17    ggtext_0.1.2         codetools_0.2-20    
-    ##  [58] plyr_1.8.9           lattice_0.22-7       tibble_3.3.1        
-    ##  [61] S7_0.2.1             evaluate_1.0.5       desc_1.4.3          
-    ##  [64] survival_3.8-3       xml2_1.5.2           pillar_1.11.1       
+    ##  [58] plyr_1.8.9           lattice_0.22-9       tibble_3.3.1        
+    ##  [61] S7_0.2.2             evaluate_1.0.5       desc_1.4.3          
+    ##  [64] survival_3.8-6       xml2_1.5.2           pillar_1.11.1       
     ##  [67] carData_3.0-6        mice_3.19.0          DT_0.34.0           
     ##  [70] foreach_1.5.2        reformulas_0.4.4     generics_0.1.4      
-    ##  [73] mathjaxr_2.0-0       ggplot2_4.0.2        scales_1.4.0        
-    ##  [76] minqa_1.2.8          xtable_1.8-8         leaps_3.2           
-    ##  [79] glue_1.8.0           emmeans_2.0.1        scatterplot3d_0.3-45
-    ##  [82] tools_4.5.2          lme4_1.1-38          fs_1.6.6            
-    ##  [85] mvtnorm_1.3-3        grid_4.5.2           tidyr_1.3.2         
-    ##  [88] rbibutils_2.4.1      nlme_3.1-168         agricolae_1.3-7     
-    ##  [91] Formula_1.2-5        cli_3.6.5            textshaping_1.0.4   
-    ##  [94] dplyr_1.2.0          gtable_0.3.6         ggcorrplot_0.1.4.1  
-    ##  [97] sass_0.4.10          digest_0.6.39        ggrepel_0.9.7       
-    ## [100] FactoMineR_2.13      htmlwidgets_1.6.4    farver_2.1.2        
-    ## [103] entropy_1.3.2        htmltools_0.5.9      pkgdown_2.2.0.9000  
-    ## [106] lifecycle_1.0.5      multcompView_0.1-11  mitml_0.4-5         
-    ## [109] gridtext_0.1.6       MASS_7.3-65
+    ##  [73] mathjaxr_2.0-0       ggplot2_4.0.3        scales_1.4.0        
+    ##  [76] minqa_1.2.8          leaps_3.2            glue_1.8.1          
+    ##  [79] emmeans_2.0.3        scatterplot3d_0.3-45 tools_4.6.0         
+    ##  [82] lme4_2.0-1           fs_2.1.0             mvtnorm_1.3-7       
+    ##  [85] grid_4.6.0           tidyr_1.3.2          rbibutils_2.4.1     
+    ##  [88] nlme_3.1-169         agricolae_1.3-7      Formula_1.2-5       
+    ##  [91] cli_3.6.6            textshaping_1.0.5    dplyr_1.2.1         
+    ##  [94] gtable_0.3.6         ggcorrplot_0.1.4.1   sass_0.4.10         
+    ##  [97] digest_0.6.39        ggrepel_0.9.8        FactoMineR_2.14     
+    ## [100] htmlwidgets_1.6.4    farver_2.1.2         entropy_1.3.2       
+    ## [103] htmltools_0.5.9      pkgdown_2.2.0.9000   lifecycle_1.0.5     
+    ## [106] multcompView_0.1-11  mitml_0.4-5          gridtext_0.1.6      
+    ## [109] MASS_7.3-65
 
 ## References
+
+International Institute of Tropical Agriculture, Benjamin, F., and
+Marimagne, T. (2019). Cassava morphological characterization. Version
+2018.1. Available at:
+<https://www.genesys-pgr.org/datasets/929a273d-7882-43eb-8b1a-86032cbeb892>
+\[Accessed June 7, 2022\].

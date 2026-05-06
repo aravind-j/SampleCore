@@ -5,14 +5,16 @@ Not exported. Strictly internal
 ## Usage
 
 ``` r
-checks.evaluate.core(
+checks.sample.core(
   data,
   names,
   quantitative = NULL,
   qualitative = NULL,
+  dist.mat = NULL,
   method,
   size,
-  group
+  group,
+  log.base = NULL
 )
 ```
 
