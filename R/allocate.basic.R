@@ -15,10 +15,10 @@
 #' These are different methods which estimate the number of entries only on the
 #' basis of total number of accessions in each cluster/group.
 #'
-#' \insertCite{brown_Core_1989;textual}{SampleCore} proposed the constant (C),
+#' \insertCite{brown_core_1989;textual}{SampleCore} proposed the constant (C),
 #' proportional (P) and logarithmic (L) methods and later a similar square root
 #' method was proposed by
-#' \insertCite{huaman_Selecting_1999;textual}{SampleCore}.
+#' \insertCite{huaman_selecting_1999;textual}{SampleCore}.
 #'
 #'   \subsection{Constant method}{From an entire collection of size \mjseqn{N},
 #'   to construct a core set of sample size \mjseqn{n}, the number of entries to
