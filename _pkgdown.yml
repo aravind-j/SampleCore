@@ -38,6 +38,14 @@ navbar:
       icon: fa-code
       text: Reference
       href: reference/index.html
+    articles:
+      icon: far fa-file
+      text: Articles
+      menu:
+        - text: Additional
+        - text: ——–
+        - text: Example Clustered Data
+          href: articles/additional/Example_Clustered_Data.html
     news:
       icon: far fa-newspaper
       text: News
@@ -48,3 +56,16 @@ navbar:
       href: https://github.com/aravind-j/SampleCore
 search:
   exclude: news/index.html
+
+reference:
+    - title: Allocation Methods
+      contents:
+         - '`allocate.basic`'
+         - '`allocate.diversity`'
+         - '`allocate.distance`'
+
+    - title: Datasets
+      contents:
+          - '`cassava_EC_gp`'
+
+
