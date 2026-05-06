@@ -27,10 +27,13 @@
 #'
 #' Further details on how the example dataset was built from the original data
 #' is available
-#' \href{https://aravind-j.github.io/EvaluateCore/articles/additional/Example\%20Core\%20Data.html}{online}.
+#' \href{https://aravind-j.github.io/EvaluateCore/articles/additional/Example_Core_Data.html}{online}.
 #' The details of how the clusters were identified are also available
-#' \href{https://aravind-j.github.io/SampleCore/articles/additional/Example\%20Core\%20Data.html}{online}.
+#' \href{https://aravind-j.github.io/SampleCore/articles/additional/Example_Clustered_Data.html}{online}.
 #'
+#' @name cassava_EC_gp
+#' @usage data(cassava_EC_gp)
+#' @keywords datasets
 #' @format A data frame with 59 columns: \describe{ \item{CUAL}{Colour of
 #'   unexpanded apical leaves} \item{LNGS}{Length of stipules}
 #'   \item{PTLC}{Petiole colour} \item{DSTA}{Distribution of anthocyanin}
@@ -77,4 +80,4 @@
 #'                         xlab = names(cassava_EC_gp[, quant])[i],
 #'                         main = ""))
 #'
-"cassava_EC_gp"
+NULL
