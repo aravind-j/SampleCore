@@ -16,11 +16,11 @@
 #'   The number of entries to be chosen from each cluster is estimated either on
 #'   the basis of diversity of accessions within that cluster/group alone or in
 #'   combination with the size of the cluster/group (See
-#'   \strong{\code{Methods}}).
+#'   \strong{Methods}).
 #'
 #'   The within-cluster/group diversity is estimated as several metrics from the
 #'   within cluster/group genetic distances between accessions (See
-#'   \strong{\code{Metrics}}).
+#'   \strong{Metrics}).
 #'
 #'   \insertCite{franco_sampling_2005;textual}{SampleCore} proposed a method
 #'   based on mean Gower's distance \insertCite{gower_general_1971}{SampleCore}
@@ -112,9 +112,14 @@
 #'
 #' @template general-arg
 #' @template log-arg
+#' @template dist-arg
 #' @param method The allocation method. Either \code{"dist"} for constant or
 #'   \code{"dist.prop"} for proportional or \code{"dist.log"} for logarithmic or
-#'   \code{"dist.sqrt"} for square root allocation.
+#'   \code{"dist.sqrt"} for square root allocation. See \strong{Methods}.
+#' @param metric The metric to be computed from the distance matrix. Either
+#'   \code{"mean"}, \code{"median"}, \code{"max"}, \code{"range"},
+#'   \code{"mnnd"}, \code{"mdc"}, \code{"mdm"}, \code{"mstl"}, or
+#'   \code{"nclust"}. See \strong{Metrics}.
 #' @param clust.fun A function to generate clusters from a distance matrix and
 #'   return the number of clusters.
 #'
@@ -122,6 +127,7 @@
 #'
 #' @importFrom vegan betadisper
 #' @importFrom igraph E graph_from_adjacency_matrix mst
+#' @importFrom stats as.dist setNames median
 #' @export
 #'
 #' @references
@@ -129,6 +135,7 @@
 #' \insertAllCited
 #'
 #' @examples
+#'
 allocate.distance <- function(data, names, group,
                               dist.mat,
                               method = c("dist", "dist.prop",

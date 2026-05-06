@@ -27,9 +27,17 @@ trait/character data.}
 \item{group}{Name of column with the accession group/cluster names as a
 character string.}
 
+\item{dist.mat}{A precomputed distance matrix of distance measures between the
+accessions in \code{data}.}
+
 \item{method}{The allocation method. Either \code{"dist"} for constant or
 \code{"dist.prop"} for proportional or \code{"dist.log"} for logarithmic or
-\code{"dist.sqrt"} for square root allocation.}
+\code{"dist.sqrt"} for square root allocation. See \strong{Methods}.}
+
+\item{metric}{The metric to be computed from the distance matrix. Either
+\code{"mean"}, \code{"median"}, \code{"max"}, \code{"range"},
+\code{"mnnd"}, \code{"mdc"}, \code{"mdm"}, \code{"mstl"}, or
+\code{"nclust"}. See \strong{Metrics}.}
 
 \item{clust.fun}{A function to generate clusters from a distance matrix and
 return the number of clusters.}
@@ -56,11 +64,11 @@ strategies are implemented. \loadmathjax
   The number of entries to be chosen from each cluster is estimated either on
   the basis of diversity of accessions within that cluster/group alone or in
   combination with the size of the cluster/group (See
-  \strong{\code{Methods}}).
+  \strong{Methods}).
 
   The within-cluster/group diversity is estimated as several metrics from the
   within cluster/group genetic distances between accessions (See
-  \strong{\code{Metrics}}).
+  \strong{Metrics}).
 
   \insertCite{franco_sampling_2005;textual}{SampleCore} proposed a method
   based on mean Gower's distance \insertCite{gower_general_1971}{SampleCore}
