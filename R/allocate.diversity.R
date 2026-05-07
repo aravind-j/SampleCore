@@ -1,7 +1,7 @@
-#' Allocation of Accessions on the Basis of Within Cluster/Group Diversity Index
-#' Estimates
+#' Allocation of Entries to be Selected from Clusters/Groups based on Diversity
+#' Index Estimates for Core Collection Development
 #'
-#' Estimate the number of accessions to be allocated from each cluster/group in
+#' Estimate the number of entries to be allocated from each cluster/group in
 #' the entire collection to construct a core collection on the basis of
 #' different metrics computed from within cluster/group diversity index
 #' estimates. The following strategies are implemented. \loadmathjax
@@ -14,7 +14,7 @@
 #' @section Details:
 #'
 #'   The number of entries to be chosen from each cluster is estimated either on
-#'   the basis of diversity of accessions within that cluster/group alone or in
+#'   the basis of diversity of entries within that cluster/group alone or in
 #'   combination with the size of the cluster/group (See
 #'   \strong{\code{Methods}}).
 #'
@@ -47,7 +47,7 @@
 #' @template divmethods-section
 #'
 #' @template general-arg
-#' @template log-arg
+#' @template size-arg
 #' @template qualquant-arg
 #' @param method The allocation method. Either \code{"div"} for constant or
 #'   \code{"div.prop"} for proportional or \code{"div.log"} for logarithmic or

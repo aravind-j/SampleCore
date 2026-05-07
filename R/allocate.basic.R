@@ -1,19 +1,19 @@
-#' Allocation of Accessions on the Basis of Cluster/Group Size
+#' Allocation of Entries to be Selected from Clusters/Groups based on Size for
+#' Core Collection Development
 #'
-#' Estimate the number of accessions to be allocated from each cluster/group in
-#' the entire collection to construct a core collection on the basis of
+#' Estimate the number of entries to be allocated from each cluster/group in the
+#' entire collection to construct a core collection on the basis of
 #' cluster/group size. The following strategies are implemented. \loadmathjax
 #' \itemize{
 #' \item{Constant}
 #' \item{Proportional}
 #' \item{Logarithmic}
 #' \item{Square root}}
-#'
 #' The different methods to determine the number of entries from each group or
 #' clusters implemented in \code{allocate.basic} are as follows.
 #'
 #' These are different methods which estimate the number of entries only on the
-#' basis of total number of accessions in each cluster/group.
+#' basis of total number of entries in each cluster/group.
 #'
 #' \insertCite{brown_core_1989;textual}{SampleCore} proposed the constant (C),
 #' proportional (P) and logarithmic (L) methods and later a similar square root
@@ -57,7 +57,7 @@
 #'   }
 #'
 #' @template general-arg
-#' @template log-arg
+#' @template size-arg
 #' @param method The allocation method. Either \code{"const"} for constant or
 #'   \code{"prop"} for proportional or \code{"log"} for logarithmic or
 #'   \code{"sqrt"} for square root allocation.

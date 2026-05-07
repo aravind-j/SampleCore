@@ -2,8 +2,8 @@
 % Please edit documentation in R/allocate.diversity.R
 \name{allocate.diversity}
 \alias{allocate.diversity}
-\title{Allocation of Accessions on the Basis of Within Cluster/Group Diversity Index
-Estimates}
+\title{Allocation of Entries to be Selected from Clusters/Groups based on Diversity
+Index Estimates for Core Collection Development}
 \usage{
 allocate.diversity(
   data,
@@ -49,16 +49,13 @@ diversity index. Default is \code{exp(1)}.}
 \item{div.fun}{A function to estimate diversity index from a factor vector of
 qualitative trait data.}
 
-\item{log.base}{The logarithm base to be used for logarithmic method of
-sampling. Default is \code{exp(1)}.}
-
 \item{metric}{The metric to be computed from the diversity index. Either
 \code{"pooled"} or \code{"mean"}.}
 
 \item{size}{The desired core set size proportion.}
 }
 \description{
-Estimate the number of accessions to be allocated from each cluster/group in
+Estimate the number of entries to be allocated from each cluster/group in
 the entire collection to construct a core collection on the basis of
 different metrics computed from within cluster/group diversity index
 estimates. The following strategies are implemented. \loadmathjax
@@ -72,7 +69,7 @@ estimates. The following strategies are implemented. \loadmathjax
 
 
   The number of entries to be chosen from each cluster is estimated either on
-  the basis of diversity of accessions within that cluster/group alone or in
+  the basis of diversity of entries within that cluster/group alone or in
   combination with the size of the cluster/group (See
   \strong{\code{Methods}}).
 

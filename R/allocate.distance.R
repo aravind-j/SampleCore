@@ -1,7 +1,7 @@
-#' Allocation of Accessions on the Basis of Within Cluster/Group Distance-based
-#' Diversity
+#' Allocation of Entries to be Selected from Clusters/Groups based on
+#' Distance-based Diversity Metrics for Core Collection Development
 #'
-#' Estimate the number of accessions to be allocated from each cluster/group in
+#' Estimate the number of entries to be allocated from each cluster/group in
 #' the entire collection to construct a core collection on the basis of
 #' different metrics computed from within cluster/group distances. The following
 #' strategies are implemented. \loadmathjax
@@ -14,12 +14,11 @@
 #' @section Details:
 #'
 #'   The number of entries to be chosen from each cluster is estimated either on
-#'   the basis of diversity of accessions within that cluster/group alone or in
-#'   combination with the size of the cluster/group (See
-#'   \strong{Methods}).
+#'   the basis of diversity of entries within that cluster/group alone or in
+#'   combination with the size of the cluster/group (See \strong{Methods}).
 #'
 #'   The within-cluster/group diversity is estimated as several metrics from the
-#'   within cluster/group genetic distances between accessions (See
+#'   within cluster/group genetic distances between entries (See
 #'   \strong{Metrics}).
 #'
 #'   \insertCite{franco_sampling_2005;textual}{SampleCore} proposed a method
@@ -38,15 +37,15 @@
 #' @section Metrics:
 #'
 #'   \subsection{Summary/Decriptive statistics}{These include mean, median,
-#'   maximum and range of genetic distances between accessions in a cluster.}
+#'   maximum and range of genetic distances between entries in a cluster.}
 #'
 #'   \subsection{Mean nearest-neighbour distance (\mjseqn{MNND})}{It is the
-#'   average, across all accessions, of the distance to each accession’s
-#'   closest other accession (\mjseqn{d_{g_{min}}}), based on a genetic given
+#'   average, across all entries, of the distance to each entry’s
+#'   closest other entry (\mjseqn{d_{g_{min}}}), based on a genetic given
 #'   distance matrix \insertCite{clark_distance_1954}{SampleCore}.
 #'
-#'   For each accession, the nearest-neighbour distance (\mjseqn{d_{g_{min}}})
-#'   is the smallest non-zero distance with any other accession.
+#'   For each entry, the nearest-neighbour distance (\mjseqn{d_{g_{min}}})
+#'   is the smallest non-zero distance with any other entry.
 #'
 #'   \mjsdeqn{d_{g_{min}} = \min_{h \ne g} d_{gh}}
 #'
@@ -55,7 +54,7 @@
 #'
 #'   \mjsdeqn{\textrm{MNND} = \frac{1}{G} \sum_{g=1}^{G} d_g}
 #'
-#'   Where, (\mjseqn{g}) is the index of an accession in a genetic distance
+#'   Where, (\mjseqn{g}) is the index of an entry in a genetic distance
 #'   matrix, \mjseqn{h} is the index of all other genotypes and \mjseqn{G} is
 #'   the total number of genotypes in a cluster/group.
 #'
@@ -63,15 +62,15 @@
 #'
 #'   \subsection{Minimum spanning tree length (\mjseqn{MSTL})}{It is defined as
 #'   the sum of edge weights in the minimum spanning tree constructed from the
-#'   genetic distance matrix of accessions within a cluster/group.  A minimum
-#'   spanning tree (MST) connects all accessions such that the total distance
+#'   genetic distance matrix of entries within a cluster/group.  A minimum
+#'   spanning tree (MST) connects all entries such that the total distance
 #'   is minimized and no cycles are formed. It represents the most efficient
-#'   way to connect all accessions based on pairwise genetic distances
+#'   way to connect all entries based on pairwise genetic distances
 #'   \insertCite{gower_minimum_1969}{SampleCore}.
 #'
-#'   For genetic distance \mjseqn{d_{gh}} between accessions \mjseqn{g} and
+#'   For genetic distance \mjseqn{d_{gh}} between entries \mjseqn{g} and
 #'   \mjseqn{h}, the MST is a subset of edges that connects all
-#'   \mjseqn{G} accessions with exactly \mjseqn{G - 1} edges and minimum total
+#'   \mjseqn{G} entries with exactly \mjseqn{G - 1} edges and minimum total
 #'   weight. The MST length (\mjseqn{MSTL}) can then be computed as:
 #'
 #'   \mjsdeqn{\textrm{MSTL} = \sum_{(g,h) \in \mathcal{T}} d_{gh}}
@@ -81,18 +80,18 @@
 #'   }
 #'
 #'   \subsection{Mean distance to centroid and median (\mjseqn{MDC},
-#'   \mjseqn{MDM})}{These quantify the average dispersion of accessions within a
+#'   \mjseqn{MDM})}{These quantify the average dispersion of entries within a
 #'   cluster/group relative to a central point in multivariate space derived
 #'   from the genetic distance matrix.
 #'
-#'   The centroid represents the multivariate mean position of all accessions
+#'   The centroid represents the multivariate mean position of all entries
 #'   in a cluster
 #'   \insertCite{sokal_principles_1963,sneath_numerical_1973}{SampleCore}.,
 #'   whereas the median (spatial median) provides a robust central location
 #'   that is less influenced by extreme values
 #'   \insertCite{bradley_constrained_1999}{SampleCore}.
 #'
-#'   For \mjseqn{d_{gC}} and \mjseqn{d_{gM}} distances of accession
+#'   For \mjseqn{d_{gC}} and \mjseqn{d_{gM}} distances of entry
 #'   \mjseqn{g} from the centroid \mjseqn{C} and median \mjseqn{M},
 #'   respectively. These measures are computed as:
 #'
@@ -100,7 +99,7 @@
 #'
 #'   \mjsdeqn{\textrm{MDM} = \frac{1}{G} \sum_{g=1}^{G} d_{gM}}
 #'
-#'   Where \mjseqn{G} is the total number of accessions in the cluster/group.
+#'   Where \mjseqn{G} is the total number of entries in the cluster/group.
 #'
 #'   }
 #'
@@ -280,7 +279,7 @@ allocate.distance <- function(data, names, group,
 
   ## Diwan et al., 1994 (No. of clusters )----
   if (metric == nclust) {
-    # Handle groups with only 1 accession (cannot cluster)
+    # Handle groups with only 1 entry (cannot cluster)
     if (length(idx) == 1) {
       return(1)
     }
