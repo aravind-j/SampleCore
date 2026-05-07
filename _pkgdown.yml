@@ -80,6 +80,10 @@ reference:
          - '`allocate.diversity`'
          - '`allocate.distance`'
 
+    - title: Selection Methods
+      contents:
+         - '`selection.random`'
+
     - title: Datasets
       contents:
           - '`cassava_EC_gp`'
