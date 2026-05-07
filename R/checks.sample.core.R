@@ -11,6 +11,8 @@
 #' @template qualquant-arg
 #' @template dist-arg
 #' @template log-arg
+#' @template sel-arg
+#' @template size-arg
 #
 checks.sample.core <- function(data, names,
                                size, group,
@@ -18,6 +20,7 @@ checks.sample.core <- function(data, names,
                                qualitative = NULL,
                                dist.mat = NULL,
                                log.base = NULL,
+                               alloc,
                                always.selected = NULL,
                                mode = C("alloc", "sel")) {
 
@@ -196,10 +199,14 @@ checks.sample.core <- function(data, names,
     }
     dist_labels <- labels(dist.mat) # No dups as it is a distance matrix
 
+    if (is.null(dist_labels)) {
+      stop('Labels are missing in "dist.mat".')
+    }
+
     # Check for mismatch between elements of 'data' and 'dist.mat'
     if (!setequal(data[, names], labels(dist.mat))) {
-      only_in_data <- setdiff(data[, names], dist.mat)
-      only_in_dist <- setdiff(dist.mat, data[, names])
+      only_in_data <- setdiff(data[, names], labels(dist.mat))
+      only_in_dist <- setdiff(labels(dist.mat), data[, names])
 
       stop(
         paste0(
@@ -249,7 +256,7 @@ checks.sample.core <- function(data, names,
     # check if always.selected is present in the entire set
     if (any(!(always.selected %in% data[, names]))) {
       alsel_miss <- always.selected[!(always.selected %in% data[, names])]
-      stop(paste('The following accession(s) specified in "always.selected" ',
+      stop(paste('The following entry/entries specified in "always.selected" ',
                  'are not present in "data":\n',
                  paste(alsel_miss, collapse = ", "),
                  sep = ""))

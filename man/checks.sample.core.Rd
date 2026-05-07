@@ -13,6 +13,7 @@ checks.sample.core(
   qualitative = NULL,
   dist.mat = NULL,
   log.base = NULL,
+  alloc,
   always.selected = NULL,
   mode = C("alloc", "sel")
 )
@@ -40,6 +41,14 @@ accessions in \code{data}.}
 
 \item{log.base}{The logarithm base to be used for logarithmic method of
 sampling. Default is \code{exp(1)}.}
+
+\item{alloc}{A named numeric vector specifying the number of entries to be
+selected. Names should correspond to the levels of the "\code{"group"}
+column, and values indicate the number of elements to be selected from each
+level.}
+
+\item{always.selected}{Names of entries to be always included in the core
+set as a character vector.}
 }
 \description{
 Not exported. Strictly internal
