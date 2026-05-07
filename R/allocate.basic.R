@@ -154,7 +154,7 @@ allocate.basic <- function(data,
   ## "log" ----
   if (method == "log") {
     log_gpsize <- log(gpsize, base = log.base)
-    freq <- log(log_gpsize) / sum(log_gpsize)
+    freq <- log_gpsize / sum(log_gpsize)
   }
 
   ## "sqrt" ----
