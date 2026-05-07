@@ -9,14 +9,17 @@
 #'
 #' @template general-arg
 #' @template qualquant-arg
+#' @template dist-arg
+#' @template log-arg
 #
-checks.sample.core <- function(data, names, quantitative = NULL,
+checks.sample.core <- function(data, names,
+                               size, group,
+                               quantitative = NULL,
                                qualitative = NULL,
                                dist.mat = NULL,
-                               method, size, group,
-                               log.base = NULL
-                               # selected
-) {
+                               log.base = NULL,
+                               always.selected = NULL,
+                               mode = C("alloc", "sel")) {
 
   # Declare nulls ----
 
@@ -80,7 +83,7 @@ checks.sample.core <- function(data, names, quantitative = NULL,
   }
 
   # check if 'size' argument is numeric vector of unit length
-  if (!is.null(size)) {
+  if (mode == "alloc") {
     if (!(is.numeric(size) && length(size) == 1)) {
       stop('"size" should be a numeric vector of unit length.')
     }
@@ -211,22 +214,83 @@ checks.sample.core <- function(data, names, quantitative = NULL,
   # Size ----
 
   # check if 'size' is a proportion between 0 and 1
-  if (size <= 0 || size >= 1) {
-    stop('"size" should be a proportion between 0 and 1.')
+  if (mode == "alloc") {
+    if (size <= 0 || size >= 1) {
+      stop('"size" should be a proportion between 0 and 1.')
+    }
   }
 
   # Log base ----
 
-  if (!is.numeric(log.base) || length(log.base) != 1 || is.na(log.base)) {
-    stop('"log.base" must be a single numeric value.')
+  if (!is.null(log.base)) {
+
+    if (!is.numeric(log.base) || length(log.base) != 1 || is.na(log.base)) {
+      stop('"log.base" must be a single numeric value.')
+    }
+
+    if (log.base <= 0) {
+      stop('"base" must be positive.')
+    }
+
+    if (log.base == 1) {
+      stop('"log.base" of 1 is undefined.')
+    }
+
   }
 
-  if (log.base <= 0) {
-    stop('"base" must be positive.')
+  # Always selected ----
+
+  if (mode == "sel" & !is.null(always.selected)) {
+    # check if 'always.selected' is a character vector
+    if (!is.character(always.selected)) {
+      stop('"always.selected" should be a character vector.')
+    }
+
+    # check if always.selected is present in the entire set
+    if (any(!(always.selected %in% data[, names]))) {
+      alsel_miss <- always.selected[!(always.selected %in% data[, names])]
+      stop(paste('The following accession(s) specified in "always.selected" ',
+                 'are not present in "data":\n',
+                 paste(alsel_miss, collapse = ", "),
+                 sep = ""))
+    }
   }
 
-  if (log.base == 1) {
-    stop('"log.base" of 1 is undefined.')
+  # Allocation vector ----
+
+  if (mode == "sel") {
+
+    nm <- names(alloc)
+    lv <- levels(data[, group])
+
+    if (!setequal(nm, lv)) {
+
+      only_in_alloc <- setdiff(nm, lv)
+      only_in_group <- setdiff(lv, nm)
+
+      msg <- paste0(
+        'Mismatch between "alloc" names and levels of "group" column in data.\n\n',
+        if (length(only_in_alloc) > 0)
+          paste0(
+            'Present in "alloc" but not in "group" column levels: ',
+            paste(shQuote(only_in_alloc), collapse = ', '),
+            '\n'
+          ) else '',
+        if (length(only_in_group) > 0)
+          paste0(
+            'Present in "group" column levels but not in "alloc": ',
+            paste(shQuote(only_in_group), collapse = ', '),
+            '\n'
+          ) else ''
+      )
+
+      stop(msg, call. = FALSE)
+
+    }
   }
 
 }
+
+
+
+

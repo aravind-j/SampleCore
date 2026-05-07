@@ -7,13 +7,14 @@
 checks.sample.core(
   data,
   names,
+  size,
+  group,
   quantitative = NULL,
   qualitative = NULL,
   dist.mat = NULL,
-  method,
-  size,
-  group,
-  log.base = NULL
+  log.base = NULL,
+  always.selected = NULL,
+  mode = C("alloc", "sel")
 )
 }
 \arguments{
@@ -23,16 +24,22 @@ trait/character data.}
 
 \item{names}{Name of column with the accession names as a character string.}
 
+\item{size}{The desired core set size proportion.}
+
+\item{group}{Name of column with the accession group/cluster names as a
+character string.}
+
 \item{quantitative}{Name of columns with the quantitative traits as a
 character vector.}
 
 \item{qualitative}{Name of columns with the qualitative traits as a character
 vector.}
 
-\item{size}{The desired core set size proportion.}
+\item{dist.mat}{A precomputed distance matrix of distance measures between the
+accessions in \code{data}.}
 
-\item{group}{Name of column with the accession group/cluster names as a
-character string.}
+\item{log.base}{The logarithm base to be used for logarithmic method of
+sampling. Default is \code{exp(1)}.}
 }
 \description{
 Not exported. Strictly internal

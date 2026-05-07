@@ -154,7 +154,8 @@ allocate.distance <- function(data, names, group,
                      dist.mat = dist.mat,
                      quantitative = NULL,
                      qualitative = NULL,
-                     log.base = log.base)
+                     log.base = log.base,
+                     mode = "alloc")
 
   method <- match.arg(method)
   metric <- match.arg(metric)

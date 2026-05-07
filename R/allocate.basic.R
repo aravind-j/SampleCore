@@ -86,7 +86,8 @@ allocate.basic <- function(data,
                      dist.mat = NULL,
                      quantitative = NULL,
                      qualitative = NULL,
-                     log.base = log.base)
+                     log.base = log.base,
+                     mode = "alloc")
 
   method <- match.arg(method)
 
