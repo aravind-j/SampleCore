@@ -8,13 +8,14 @@ Not exported. Strictly internal
 checks.sample.core(
   data,
   names,
+  size,
+  group,
   quantitative = NULL,
   qualitative = NULL,
   dist.mat = NULL,
-  method,
-  size,
-  group,
-  log.base = NULL
+  log.base = NULL,
+  always.selected = NULL,
+  mode = C("alloc", "sel")
 )
 ```
 
@@ -30,14 +31,6 @@ checks.sample.core(
 
   Name of column with the accession names as a character string.
 
-- quantitative:
-
-  Name of columns with the quantitative traits as a character vector.
-
-- qualitative:
-
-  Name of columns with the qualitative traits as a character vector.
-
 - size:
 
   The desired core set size proportion.
@@ -46,3 +39,21 @@ checks.sample.core(
 
   Name of column with the accession group/cluster names as a character
   string.
+
+- quantitative:
+
+  Name of columns with the quantitative traits as a character vector.
+
+- qualitative:
+
+  Name of columns with the qualitative traits as a character vector.
+
+- dist.mat:
+
+  A precomputed distance matrix of distance measures between the
+  accessions in `data`.
+
+- log.base:
+
+  The logarithm base to be used for logarithmic method of sampling.
+  Default is `exp(1)`.
