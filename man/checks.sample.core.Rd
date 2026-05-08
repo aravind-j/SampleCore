@@ -15,7 +15,7 @@ checks.sample.core(
   log.base = NULL,
   alloc,
   always.selected = NULL,
-  mode = C("alloc", "sel")
+  mode = c("alloc", "sel")
 )
 }
 \arguments{
@@ -47,7 +47,7 @@ selected. Names should correspond to the levels of the "\code{"group"}
 column, and values indicate the number of elements to be selected from each
 level.}
 
-\item{always.selected}{Names of entries to be always included in the core
+\item{always.selected}{Names of accessions to be always included in the core
 set as a character vector.}
 }
 \description{

@@ -22,7 +22,7 @@ checks.sample.core <- function(data, names,
                                log.base = NULL,
                                alloc,
                                always.selected = NULL,
-                               mode = C("alloc", "sel")) {
+                               mode = c("alloc", "sel")) {
 
   # Declare nulls ----
 
