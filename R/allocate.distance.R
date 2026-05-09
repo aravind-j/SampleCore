@@ -18,7 +18,7 @@
 #'   combination with the size of the cluster/group (See \strong{Methods}).
 #'
 #'   The within-cluster/group diversity is estimated as several metrics from the
-#'   within cluster/group genetic distances between entries (See
+#'   within cluster/group genetic distances between accessions (See
 #'   \strong{Metrics}).
 #'
 #'   \insertCite{franco_sampling_2005;textual}{SampleCore} proposed a method
