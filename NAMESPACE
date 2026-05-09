@@ -3,6 +3,7 @@
 export(allocate.basic)
 export(allocate.distance)
 export(allocate.diversity)
+export(select.distance)
 export(select.random)
 import(mathjaxr)
 importFrom(DiversityStats,mcintosh_diversity)
