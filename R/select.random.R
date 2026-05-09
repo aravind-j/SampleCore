@@ -1,6 +1,7 @@
 #' Selection of Entries from Clusters/Groups by Random Sampling
 #'
-#' Select entries from cluster/group based on allocation specified.
+#' Select entries from cluster/groups in the entire collection by random
+#' sampling according to allocation specified.
 #'
 #' For each cluster/group entries are selected randomly according to the
 #' allocation provided. Entries listed as \code{always.selected} are mandatorily
@@ -13,7 +14,7 @@
 #' @template sel-arg
 #'
 #' @returns A named list where each element contains the selected entry
-#'   identifiers for a group.
+#'   identifiers for a cluster/group.
 #' @export
 #'
 #' @examples
@@ -49,8 +50,8 @@ select.random <- function(data, names, group, alloc, always.selected) {
         warning(
           sprintf(
             paste0('Group %s: "alloc" (%d) is smaller than number of ',
-            '"always.selected" values (%d). ',
-            'Taking only "always.selected" values.'),
+                   '"always.selected" values (%d). ',
+                   'Taking only "always.selected" values.'),
             g, requested_n, length(fixed_accns)
           ),
           call. = FALSE
@@ -65,9 +66,9 @@ select.random <- function(data, names, group, alloc, always.selected) {
 
           warning(
             sprintf(
-              'Group %s has only %d additional accessions but "alloc" ',
-              'requires %d additional entries. ',
-              'Taking all available accessions.',
+              paste0('Group %s has only %d additional accessions but "alloc" ',
+                     'requires %d additional entries. ',
+                     'Taking all available accessions.'),
               g, avail_rem, n_rem
             ),
             call. = FALSE
