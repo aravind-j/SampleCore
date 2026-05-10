@@ -14,7 +14,7 @@ select.distance(
   method = c("mean.medoid", "median.medoid", "nearest.centroid", "nearest.median",
     "mean.peripheral", "median.peripheral", "eccentricity", "farness.centrality",
     "kennard.stone", "duplex", "honigs", "farthest.point", "nearest.neighbour", "naes",
-    "optim.medoid", "hclust.random", "hclust.medoid", "inv.tocher"),
+    "optim.medoid", "hclust.random", "hclust.medoid"),
   hclust.method = c("average", "single", "complete", "ward.D", "mcquitty", "median",
     "centroid", "ward.D2")
 )
@@ -37,12 +37,18 @@ level.}
 \item{always.selected}{Names of accessions to be always included in the core
 set as a character vector.}
 
-\item{method}{The metric to be computed from within cluster/group genetic
-distances for selection of individuals from entire collection.}
+\item{method}{The method for sampling accessions from each cluster/group.
+Either \code{"mean.medoid"}, \code{"median.medoid"},
+\code{"nearest.centroid"}, \code{"nearest.median"},
+\code{"mean.peripheral"}, \code{"median.peripheral"},
+\code{"eccentricity"}, \code{"farness.centrality"}, \code{"kennard.stone"},
+\code{"duplex"}, \code{"honigs"}, \code{"farthest.point"},
+\code{"nearest.neighbour"}, \code{"naes"}, \code{"optim.medoid"},
+\code{"hclust.random"} or \code{"hclust.medoid"}. See \strong{Methods}.}
 
 \item{hclust.method}{The hierarchical clustering method to be used. Either
 \code{"ward.D"}, \code{"ward.D2"}, \code{"single"}, \code{"complete"},
-"\code{average"} (= UPGMA), \code{"mcquitty"} (= WPGMA), \code{"median"} (=
+\code{"average"} (= UPGMA), \code{"mcquitty"} (= WPGMA), \code{"median"} (=
 WPGMC) or \code{"centroid"} (= UPGMC).}
 }
 \value{
@@ -51,58 +57,12 @@ A named list where each element contains the selected entry
 }
 \description{
 Select entries from cluster/groups in the entire collection by genetic
-distance based sampling according to allocation specified.
+distance based sampling according to allocation specified. \loadmathjax
 }
 \details{
-For each cluster/group, entries are selected on the basis of several metrics
-estimated from the within cluster/group genetic distances between accessions
-according to the allocation provided.
-
-\subsection{Centrality Based Methods}{
-
-  \subsection{Mean Medoid}{medoid-like representatives of the dataset as accessions with smallest average distance to all others}
-
-  \subsection{Median Medoid}{.... smallest average distance.... Less influenced by outliers }
-
-  \subsection{Nearest to centroid}{}
-
-  \subsection{Nearest to median}{}
-
-}
-
-\subsection{Peripheral/Extremity Based Methods}{
-
-  \subsection{Mean Peripheral}{}
-
-  \subsection{Median Peripheral}{}
-
-  \subsection{Eccentricity}{}
-
-  \subsection{Farness Centrality}{}
-
-}
-
-\subsection{Space-Filling/Coverage Methods}{
-
-  \subsection{Kennard-Stone Algorithm}{}
-
-  \subsection{DUPLEX Algorithm}{}
-
-  \subsection{Farness centrality}{}
-
-  \subsection{Honigs Algorithm}{}
-
-  \subsection{Max-Min/Farthest-Point Sampling}{}
-
-}
-
-\subsection{Density Based Methods}{}
-
-\subsection{Cluster Based Methods}{
-
-  \subsection{PAM}{}
-
-}
+For each cluster/group, entries are selected by several methods from
+within-cluster/group genetic distances between accessions according to the
+allocation provided (See \strong{Methods}).
 
 Entries listed as \code{always.selected} are mandatorily included in the
 selection. Warnings are issued if requested allocation is smaller than the
@@ -110,3 +70,294 @@ number of always-selected entries in a cluster/group and/or when the
 cluster/group does not contain enough remaining entries to fulfill the
 allocation.
 }
+\section{Methods}{
+
+
+\subsection{Centrality Based Methods}{
+
+  Selects accessions that are most representative/closest to the
+  cluster/group center.
+
+  \subsection{Medoid-like Representative Sampling by Minimal Mean
+  Distance}{Selects medoid-like representatives as accessions with the
+  smallest average distance to all others within the group.
+
+  For each accession \mjseqn{g}, the mean distance to all other accessions
+  \mjseqn{h} is computed as:
+
+  \mjsdeqn{\bar{d}_g = \frac{1}{G} \sum_{h=1}^{G} d_{gh}}
+
+  Accessions are ranked by \mjseqn{\bar{d}_g} in ascending order and the top
+  \mjseqn{n} are selected.
+
+  }
+
+  \subsection{Medoid-like Representative Sampling by Minimal Median
+  Distance}{
+
+  Selects medoid-like representatives as accessions with the smallest median
+  distance to all others within the group. This method is less influenced by
+  outliers.
+
+  For each accession \mjseqn{g}, the median distance to all other accessions
+  \mjseqn{h} is computed as:
+
+  \mjsdeqn{\tilde{d}_g = \text{median}_{h=1,\dots,G}(d_{gh})}
+
+  Accessions are ranked by \mjseqn{\tilde{d}_g} in ascending order and the
+  top \mjseqn{n} are selected.
+
+  }
+
+  \subsection{Representative Sampling by Proximity to Group
+  Centroid}{Selects accessions closest to the group centroid in principal
+  coordinate space, computed via multivariate dispersion analysis using
+  \code{\link[vegan]{betadisper}}.
+
+  The distance of each accession \mjseqn{g} to the group centroid \mjseqn{C}
+  in PCoA space is:
+
+  \mjsdeqn{\delta_g = \| \mathbf{p}_g - \mathbf{c} \|}
+
+  Where \mjseqn{\mathbf{p}_g} is the PCoA coordinate vector of accession
+  \mjseqn{g} and \mjseqn{\mathbf{c}} is the group centroid. Accessions are
+  ranked by \mjseqn{\delta_g} in ascending order and the top \mjseqn{n} are
+  selected.
+
+  }
+
+  \subsection{Representative Sampling by Proximity to Group Spatial Median}{
+  Selects accessions closest to the group spatial median in principal
+  coordinate space, computed via multivariate dispersion analysis using
+  \code{\link[vegan]{betadisper}}.
+
+  The distance of each accession \mjseqn{g} to the group spatial median
+  \mjseqn{M} is:
+
+  \mjsdeqn{\delta_g^* = \| \mathbf{p}_g - \mathbf{m} \|}
+
+  where \mjseqn{\mathbf{m}} is the spatial median of the group in PCoA
+  space. Accessions are ranked by \mjseqn{\delta_g^*} in ascending order and
+  the top \mjseqn{n} are selected.
+
+  }
+
+}
+
+\subsection{Peripheral/Extremity Based Methods}{
+
+  Selects accessions that are most dissimilar from the rest in a
+  cluster/group i.e. the accessions which are in the boundary or outliers.
+
+  \subsection{Peripheral Sampling by Maximal Mean Distance}{Selects the most
+  peripheral accessions as those with the largest average distance to all
+  others within the group.
+
+  \mjsdeqn{\bar{d}_g = \frac{1}{G} \sum_{h=1}^{G} d_{gh}}
+
+  Accessions are ranked by \mjseqn{\bar{d}_g} in descending order and the
+  top \mjseqn{n} are selected.
+
+  }
+
+  \subsection{Peripheral Sampling by Maximal Median Distance}{Selects the
+  most peripheral accessions as those with the largest median distance to
+  all others within the group.
+
+  \mjsdeqn{\tilde{d}_g = \text{median}_{h=1,\dots,G}(d_{gh})}
+
+  Accessions are ranked by \mjseqn{\tilde{d}_g} in descending order and the
+  top \mjseqn{n} are selected.
+
+  }
+
+  \subsection{Peripheral Sampling by Maximal Eccentricity}{Selects
+  accessions with the largest eccentricity — the maximum distance to any
+  other accession in the group.
+
+  \mjsdeqn{e_g = \max_{h=1,\dots,G} d_{gh}}
+
+  Accessions are ranked by \mjseqn{e_g} in descending order and the top
+  \mjseqn{n} are selected. Eccentricity captures the worst-case
+  dissimilarity of an accession rather than its average behaviour.
+
+  }
+
+  \subsection{Peripheral Sampling by Maximal Farness Centrality}{Selects
+  accessions with the greatest total distance to all others, i.e. those most
+  remote from the rest of the group.
+
+  \mjsdeqn{f_g = \sum_{h=1}^{G} d_{gh}}
+
+  Accessions are ranked by \mjseqn{f_g} in descending order and the top
+  \mjseqn{n} are selected. Farness centrality is proportional to
+  \mjseqn{\bar{d}_g} and differs from \code{mean.peripheral} only in that it
+  uses the raw sum rather than the mean, producing identical rankings.
+
+  }
+
+}
+
+\subsection{Space-Filling/Coverage Methods}{
+
+  Select accessions that are spread maximally across the feature space in a
+  cluster/group i.e. diversity sampling.
+
+  \subsection{Space-Filling Sampling via the Kennard-Stone
+  Algorithm}{Selects \mjseqn{n} accessions that maximally and uniformly
+  cover the distance space via the Kennard-Stone algorithm (See
+  \code{\link[prospectr]{kenStone}}).
+
+  Starting from the pair of accessions with the largest pairwise distance:
+
+  \mjsdeqn{\lbrace g_1, g_2 \rbrace = \underset{g,h}{\arg\max}\, d_{gh}}
+
+  each subsequent accession \mjseqn{g_k} is selected by maximising its
+  minimum distance to the already-selected set \mjseqn{S}:
+
+  \mjsdeqn{g_k = \underset{g \notin S}{\arg\max} \min_{s \in S} d_{gs}}
+
+  This greedy procedure ensures even space coverage without relying on
+  cluster structure.
+
+  }
+
+  \subsection{Space-Filling Sampling via the DUPLEX Algorithm}{Extends the
+  Kennard-Stone algorithm to simultaneously construct a model set and a test
+  set with similar distributions (\link[prospectr]{duplex}). Accessions are
+  selected using Mahalanobis distance:
+
+  \mjsdeqn{d_M(g, h) = \sqrt{(\mathbf{x}_g - \mathbf{x}_h)^\top \Sigma^{-1}
+  (\mathbf{x}_g - \mathbf{x}_h)}}
+
+  where \mjseqn{\Sigma} is the covariance matrix. At each step, the pair
+  maximising \mjseqn{d_M} is split alternately between model and test sets,
+  ensuring both sets span the full feature space.
+
+  }
+
+  \subsection{Space-Filling Sampling via the Honigs Algorithm}{Selects
+  \mjseqn{n} accessions sequentially by maximising dissimilarity to the
+  already-selected set (\link[prospectr]{honigs})
+
+  At each step \mjseqn{k}, the accession \mjseqn{g_k} maximising total
+  distance to all previously selected accessions \mjseqn{S} is chosen:
+
+  \mjsdeqn{g_k = \underset{g \notin S}{\arg\max} \sum_{s \in S} d_{gs}}
+
+  This favours accessions that are collectively most dissimilar to the
+  current selection, producing broad coverage of the distance space.
+
+  }.
+
+  \subsection{Space-Filling Sampling via Farthest-Point (Max-Min)
+  Algorithm}{Selects \mjseqn{n} accessions by iteratively maximising the
+  minimum distance to the current selected set — also known as the
+  max-min or farthest-point sampling algorithm.
+
+  \mjsdeqn{g_k = \underset{g \notin S}{\arg\max} \min_{s \in S} d_{gs}}
+
+  This is equivalent to Kennard-Stone but without the symmetric
+  initialisation step. It provides a deterministic, greedy approximation to
+  the \mjseqn{k}-centre problem:
+
+  \mjsdeqn{\min_{S \subset G,\, |S|=n} \max_{g \in G} \min_{s \in S} d_{gs}}
+
+  }
+
+}
+
+\subsection{Density Based Methods}{
+
+  Select points based on local neighbourhood density.
+
+  \subsection{Density-Based Sampling by Minimal Nearest-Neighbour
+  Distance}{Selects accessions residing in the densest regions of the
+  distance space, identified as those with the smallest nearest-neighbour
+  distance.
+
+  For each accession \mjseqn{g}, the nearest-neighbour distance is:
+
+  \mjsdeqn{\text{nn}_g = \min_{h \neq g} d_{gh}}
+
+  Accessions are ranked by \mjseqn{\text{nn}_g} in ascending order and the
+  top \mjseqn{n} are selected. Small \mjseqn{\text{nn}_g} indicates that
+  \mjseqn{g} resides in a dense cluster; this method preferentially samples
+  from high-density regions.
+
+  }
+
+}
+
+\subsection{Cluster Based Methods}{
+
+  These methods partition the cluster/group space into sub-clusters/groups,
+  then samples from each one.
+
+  \subsection{Globally Optimal Medoid Sampling via Partitioning Around
+  Medoids (PAM)}{
+
+  Selects a set of \mjseqn{n} medoids that jointly minimise the total
+  distance of every accession to its nearest medoid, via
+  \code{\link[cluster]{pam}}.
+
+  The objective function minimised is:
+
+  \mjsdeqn{\min_{S \subset G,\, |S|=n} \sum_{g=1}^{G} \min_{s \in S} d_{gs}}
+
+  Unlike \code{"mean.medoid"}, medoids are co-optimised as a set, ensuring
+  they collectively represent the full distribution of the group rather than
+  independently scoring each accession.
+
+  }
+
+  \subsection{Cluster-Based Sampling via K-means (Naes Method)}{Partitions
+  accessions into \mjseqn{n} clusters via k-means applied to the distance
+  matrix (See \code{\link[prospectr]{naes}}), then selects the accession
+  closest to each cluster centre as the representative.
+
+  The k-means objective minimised is:
+
+  \mjsdeqn{\min \sum_{k=1}^{n} \sum_{g \in C_k} d_{g, \mu_k}^2}
+
+  where \mjseqn{C_k} is the \mjseqn{k}-th cluster and \mjseqn{\mu_k} is its
+  centre. One representative per cluster is returned, ensuring broad,
+  partition-aware coverage.
+
+  }
+
+  \subsection{Cluster-Based Sampling via Hierarchical Clustering with
+  Random Selection}{Partitions accessions into \mjseqn{n} clusters by
+  cutting a hierarchical clustering dendrogram at height \mjseqn{k = n},
+  then randomly samples one accession from each cluster.
+
+  The dendrogram is built by agglomerative hierarchical clustering using the
+  linkage criterion specified by \code{\link[stats]{hclust.method}}. For
+  clusters \mjseqn{C_1, \dots, C_n}, one accession is drawn uniformly at
+  random from each:
+
+  \mjsdeqn{g_k \sim \text{Uniform}(C_k), \quad k = 1, \dots, n}
+
+  This introduces stochasticity within a structured partition, balancing
+  coverage with randomness.
+
+  }
+
+  \subsection{Cluster-Based Sampling via Hierarchical Clustering with Medoid
+  Selection}{Partitions accessions into \mjseqn{n} clusters by cutting a
+  hierarchical clustering dendrogram at height \mjseqn{k = n}, then selects
+  the within-cluster medoid as the representative of each cluster.
+
+  For each cluster \mjseqn{C_k}, the medoid is the accession minimising
+  total within-cluster distance:
+
+  \mjsdeqn{g_k^* = \underset{g \in C_k}{\arg\min} \sum_{h \in C_k} d_{gh}}
+
+  This combines the structured partitioning of hierarchical clustering with
+  deterministic, centrality-based representative selection.
+
+  }
+
+}
+}
+

@@ -1,57 +1,11 @@
 #' Selection of Entries from Clusters/Groups on the basis of Genetic Distances
 #'
 #' Select entries from cluster/groups in the entire collection by genetic
-#' distance based sampling according to allocation specified.
+#' distance based sampling according to allocation specified. \loadmathjax
 #'
-#' For each cluster/group, entries are selected on the basis of several metrics
-#' estimated from the within cluster/group genetic distances between accessions
-#' according to the allocation provided.
-#'
-#' \subsection{Centrality Based Methods}{
-#'
-#'   \subsection{Mean Medoid}{medoid-like representatives of the dataset as accessions with smallest average distance to all others}
-#'
-#'   \subsection{Median Medoid}{.... smallest average distance.... Less influenced by outliers }
-#'
-#'   \subsection{Nearest to centroid}{}
-#'
-#'   \subsection{Nearest to median}{}
-#'
-#' }
-#'
-#' \subsection{Peripheral/Extremity Based Methods}{
-#'
-#'   \subsection{Mean Peripheral}{}
-#'
-#'   \subsection{Median Peripheral}{}
-#'
-#'   \subsection{Eccentricity}{}
-#'
-#'   \subsection{Farness Centrality}{}
-#'
-#' }
-#'
-#' \subsection{Space-Filling/Coverage Methods}{
-#'
-#'   \subsection{Kennard-Stone Algorithm}{}
-#'
-#'   \subsection{DUPLEX Algorithm}{}
-#'
-#'   \subsection{Farness centrality}{}
-#'
-#'   \subsection{Honigs Algorithm}{}
-#'
-#'   \subsection{Max-Min/Farthest-Point Sampling}{}
-#'
-#' }
-#'
-#' \subsection{Density Based Methods}{}
-#'
-#' \subsection{Cluster Based Methods}{
-#'
-#'   \subsection{PAM}{}
-#'
-#' }
+#' For each cluster/group, entries are selected by several methods from
+#' within-cluster/group genetic distances between accessions according to the
+#' allocation provided (See \strong{Methods}).
 #'
 #' Entries listed as \code{always.selected} are mandatorily included in the
 #' selection. Warnings are issued if requested allocation is smaller than the
@@ -59,12 +13,317 @@
 #' cluster/group does not contain enough remaining entries to fulfill the
 #' allocation.
 #'
+#' @section Methods:
+#'
+#' \subsection{Centrality Based Methods}{
+#'
+#'   Selects accessions that are most representative/closest to the
+#'   cluster/group center.
+#'
+#'   \subsection{Medoid-like Representative Sampling by Minimal Mean
+#'   Distance}{Selects medoid-like representatives as accessions with the
+#'   smallest average distance to all others within the group.
+#'
+#'   For each accession \mjseqn{g}, the mean distance to all other accessions
+#'   \mjseqn{h} is computed as:
+#'
+#'   \mjsdeqn{\bar{d}_g = \frac{1}{G} \sum_{h=1}^{G} d_{gh}}
+#'
+#'   Accessions are ranked by \mjseqn{\bar{d}_g} in ascending order and the top
+#'   \mjseqn{n} are selected.
+#'
+#'   }
+#'
+#'   \subsection{Medoid-like Representative Sampling by Minimal Median
+#'   Distance}{
+#'
+#'   Selects medoid-like representatives as accessions with the smallest median
+#'   distance to all others within the group. This method is less influenced by
+#'   outliers.
+#'
+#'   For each accession \mjseqn{g}, the median distance to all other accessions
+#'   \mjseqn{h} is computed as:
+#'
+#'   \mjsdeqn{\tilde{d}_g = \text{median}_{h=1,\dots,G}(d_{gh})}
+#'
+#'   Accessions are ranked by \mjseqn{\tilde{d}_g} in ascending order and the
+#'   top \mjseqn{n} are selected.
+#'
+#'   }
+#'
+#'   \subsection{Representative Sampling by Proximity to Group
+#'   Centroid}{Selects accessions closest to the group centroid in principal
+#'   coordinate space, computed via multivariate dispersion analysis using
+#'   \code{\link[vegan]{betadisper}}.
+#'
+#'   The distance of each accession \mjseqn{g} to the group centroid \mjseqn{C}
+#'   in PCoA space is:
+#'
+#'   \mjsdeqn{\delta_g = \| \mathbf{p}_g - \mathbf{c} \|}
+#'
+#'   Where \mjseqn{\mathbf{p}_g} is the PCoA coordinate vector of accession
+#'   \mjseqn{g} and \mjseqn{\mathbf{c}} is the group centroid. Accessions are
+#'   ranked by \mjseqn{\delta_g} in ascending order and the top \mjseqn{n} are
+#'   selected.
+#'
+#'   }
+#'
+#'   \subsection{Representative Sampling by Proximity to Group Spatial Median}{
+#'   Selects accessions closest to the group spatial median in principal
+#'   coordinate space, computed via multivariate dispersion analysis using
+#'   \code{\link[vegan]{betadisper}}.
+#'
+#'   The distance of each accession \mjseqn{g} to the group spatial median
+#'   \mjseqn{M} is:
+#'
+#'   \mjsdeqn{\delta_g^* = \| \mathbf{p}_g - \mathbf{m} \|}
+#'
+#'   where \mjseqn{\mathbf{m}} is the spatial median of the group in PCoA
+#'   space. Accessions are ranked by \mjseqn{\delta_g^*} in ascending order and
+#'   the top \mjseqn{n} are selected.
+#'
+#'   }
+#'
+#' }
+#'
+#' \subsection{Peripheral/Extremity Based Methods}{
+#'
+#'   Selects accessions that are most dissimilar from the rest in a
+#'   cluster/group i.e. the accessions which are in the boundary or outliers.
+#'
+#'   \subsection{Peripheral Sampling by Maximal Mean Distance}{Selects the most
+#'   peripheral accessions as those with the largest average distance to all
+#'   others within the group.
+#'
+#'   \mjsdeqn{\bar{d}_g = \frac{1}{G} \sum_{h=1}^{G} d_{gh}}
+#'
+#'   Accessions are ranked by \mjseqn{\bar{d}_g} in descending order and the
+#'   top \mjseqn{n} are selected.
+#'
+#'   }
+#'
+#'   \subsection{Peripheral Sampling by Maximal Median Distance}{Selects the
+#'   most peripheral accessions as those with the largest median distance to
+#'   all others within the group.
+#'
+#'   \mjsdeqn{\tilde{d}_g = \text{median}_{h=1,\dots,G}(d_{gh})}
+#'
+#'   Accessions are ranked by \mjseqn{\tilde{d}_g} in descending order and the
+#'   top \mjseqn{n} are selected.
+#'
+#'   }
+#'
+#'   \subsection{Peripheral Sampling by Maximal Eccentricity}{Selects
+#'   accessions with the largest eccentricity — the maximum distance to any
+#'   other accession in the group.
+#'
+#'   \mjsdeqn{e_g = \max_{h=1,\dots,G} d_{gh}}
+#'
+#'   Accessions are ranked by \mjseqn{e_g} in descending order and the top
+#'   \mjseqn{n} are selected. Eccentricity captures the worst-case
+#'   dissimilarity of an accession rather than its average behaviour.
+#'
+#'   }
+#'
+#'   \subsection{Peripheral Sampling by Maximal Farness Centrality}{Selects
+#'   accessions with the greatest total distance to all others, i.e. those most
+#'   remote from the rest of the group.
+#'
+#'   \mjsdeqn{f_g = \sum_{h=1}^{G} d_{gh}}
+#'
+#'   Accessions are ranked by \mjseqn{f_g} in descending order and the top
+#'   \mjseqn{n} are selected. Farness centrality is proportional to
+#'   \mjseqn{\bar{d}_g} and differs from \code{mean.peripheral} only in that it
+#'   uses the raw sum rather than the mean, producing identical rankings.
+#'
+#'   }
+#'
+#' }
+#'
+#' \subsection{Space-Filling/Coverage Methods}{
+#'
+#'   Select accessions that are spread maximally across the feature space in a
+#'   cluster/group i.e. diversity sampling.
+#'
+#'   \subsection{Space-Filling Sampling via the Kennard-Stone
+#'   Algorithm}{Selects \mjseqn{n} accessions that maximally and uniformly
+#'   cover the distance space via the Kennard-Stone algorithm (See
+#'   \code{\link[prospectr]{kenStone}}).
+#'
+#'   Starting from the pair of accessions with the largest pairwise distance:
+#'
+#'   \mjsdeqn{\lbrace g_1, g_2 \rbrace = \underset{g,h}{\arg\max}\, d_{gh}}
+#'
+#'   each subsequent accession \mjseqn{g_k} is selected by maximising its
+#'   minimum distance to the already-selected set \mjseqn{S}:
+#'
+#'   \mjsdeqn{g_k = \underset{g \notin S}{\arg\max} \min_{s \in S} d_{gs}}
+#'
+#'   This greedy procedure ensures even space coverage without relying on
+#'   cluster structure.
+#'
+#'   }
+#'
+#'   \subsection{Space-Filling Sampling via the DUPLEX Algorithm}{Extends the
+#'   Kennard-Stone algorithm to simultaneously construct a model set and a test
+#'   set with similar distributions (\link[prospectr]{duplex}). Accessions are
+#'   selected using Mahalanobis distance:
+#'
+#'   \mjsdeqn{d_M(g, h) = \sqrt{(\mathbf{x}_g - \mathbf{x}_h)^\top \Sigma^{-1}
+#'   (\mathbf{x}_g - \mathbf{x}_h)}}
+#'
+#'   where \mjseqn{\Sigma} is the covariance matrix. At each step, the pair
+#'   maximising \mjseqn{d_M} is split alternately between model and test sets,
+#'   ensuring both sets span the full feature space.
+#'
+#'   }
+#'
+#'   \subsection{Space-Filling Sampling via the Honigs Algorithm}{Selects
+#'   \mjseqn{n} accessions sequentially by maximising dissimilarity to the
+#'   already-selected set (\link[prospectr]{honigs})
+#'
+#'   At each step \mjseqn{k}, the accession \mjseqn{g_k} maximising total
+#'   distance to all previously selected accessions \mjseqn{S} is chosen:
+#'
+#'   \mjsdeqn{g_k = \underset{g \notin S}{\arg\max} \sum_{s \in S} d_{gs}}
+#'
+#'   This favours accessions that are collectively most dissimilar to the
+#'   current selection, producing broad coverage of the distance space.
+#'
+#'   }.
+#'
+#'   \subsection{Space-Filling Sampling via Farthest-Point (Max-Min)
+#'   Algorithm}{Selects \mjseqn{n} accessions by iteratively maximising the
+#'   minimum distance to the current selected set — also known as the
+#'   max-min or farthest-point sampling algorithm.
+#'
+#'   \mjsdeqn{g_k = \underset{g \notin S}{\arg\max} \min_{s \in S} d_{gs}}
+#'
+#'   This is equivalent to Kennard-Stone but without the symmetric
+#'   initialisation step. It provides a deterministic, greedy approximation to
+#'   the \mjseqn{k}-centre problem:
+#'
+#'   \mjsdeqn{\min_{S \subset G,\, |S|=n} \max_{g \in G} \min_{s \in S} d_{gs}}
+#'
+#'   }
+#'
+#' }
+#'
+#' \subsection{Density Based Methods}{
+#'
+#'   Select points based on local neighbourhood density.
+#'
+#'   \subsection{Density-Based Sampling by Minimal Nearest-Neighbour
+#'   Distance}{Selects accessions residing in the densest regions of the
+#'   distance space, identified as those with the smallest nearest-neighbour
+#'   distance.
+#'
+#'   For each accession \mjseqn{g}, the nearest-neighbour distance is:
+#'
+#'   \mjsdeqn{\text{nn}_g = \min_{h \neq g} d_{gh}}
+#'
+#'   Accessions are ranked by \mjseqn{\text{nn}_g} in ascending order and the
+#'   top \mjseqn{n} are selected. Small \mjseqn{\text{nn}_g} indicates that
+#'   \mjseqn{g} resides in a dense cluster; this method preferentially samples
+#'   from high-density regions.
+#'
+#'   }
+#'
+#' }
+#'
+#' \subsection{Cluster Based Methods}{
+#'
+#'   These methods partition the cluster/group space into sub-clusters/groups,
+#'   then samples from each one.
+#'
+#'   \subsection{Globally Optimal Medoid Sampling via Partitioning Around
+#'   Medoids (PAM)}{
+#'
+#'   Selects a set of \mjseqn{n} medoids that jointly minimise the total
+#'   distance of every accession to its nearest medoid, via
+#'   \code{\link[cluster]{pam}}.
+#'
+#'   The objective function minimised is:
+#'
+#'   \mjsdeqn{\min_{S \subset G,\, |S|=n} \sum_{g=1}^{G} \min_{s \in S} d_{gs}}
+#'
+#'   Unlike \code{"mean.medoid"}, medoids are co-optimised as a set, ensuring
+#'   they collectively represent the full distribution of the group rather than
+#'   independently scoring each accession.
+#'
+#'   }
+#'
+#'   \subsection{Cluster-Based Sampling via K-means (Naes Method)}{Partitions
+#'   accessions into \mjseqn{n} clusters via k-means applied to the distance
+#'   matrix (See \code{\link[prospectr]{naes}}), then selects the accession
+#'   closest to each cluster centre as the representative.
+#'
+#'   The k-means objective minimised is:
+#'
+#'   \mjsdeqn{\min \sum_{k=1}^{n} \sum_{g \in C_k} d_{g, \mu_k}^2}
+#'
+#'   where \mjseqn{C_k} is the \mjseqn{k}-th cluster and \mjseqn{\mu_k} is its
+#'   centre. One representative per cluster is returned, ensuring broad,
+#'   partition-aware coverage.
+#'
+#'   }
+#'
+#'   \subsection{Cluster-Based Sampling via Hierarchical Clustering with
+#'   Random Selection}{Partitions accessions into \mjseqn{n} clusters by
+#'   cutting a hierarchical clustering dendrogram at height \mjseqn{k = n},
+#'   then randomly samples one accession from each cluster.
+#'
+#'   The dendrogram is built by agglomerative hierarchical clustering using the
+#'   linkage criterion specified by \code{\link[stats]{hclust.method}}. For
+#'   clusters \mjseqn{C_1, \dots, C_n}, one accession is drawn uniformly at
+#'   random from each:
+#'
+#'   \mjsdeqn{g_k \sim \text{Uniform}(C_k), \quad k = 1, \dots, n}
+#'
+#'   This introduces stochasticity within a structured partition, balancing
+#'   coverage with randomness.
+#'
+#'   }
+#'
+#'   \subsection{Cluster-Based Sampling via Hierarchical Clustering with Medoid
+#'   Selection}{Partitions accessions into \mjseqn{n} clusters by cutting a
+#'   hierarchical clustering dendrogram at height \mjseqn{k = n}, then selects
+#'   the within-cluster medoid as the representative of each cluster.
+#'
+#'   For each cluster \mjseqn{C_k}, the medoid is the accession minimising
+#'   total within-cluster distance:
+#'
+#'   \mjsdeqn{g_k^* = \underset{g \in C_k}{\arg\min} \sum_{h \in C_k} d_{gh}}
+#'
+#'   This combines the structured partitioning of hierarchical clustering with
+#'   deterministic, centrality-based representative selection.
+#'
+#'   }
+#'
+#' }
+#'
 #' @template general-arg
 #' @template sel-arg
 #' @template seldist-arg
+#' @param method The method for sampling accessions from each cluster/group.
+#'   Either \code{"mean.medoid"}, \code{"median.medoid"},
+#'   \code{"nearest.centroid"}, \code{"nearest.median"},
+#'   \code{"mean.peripheral"}, \code{"median.peripheral"},
+#'   \code{"eccentricity"}, \code{"farness.centrality"}, \code{"kennard.stone"},
+#'   \code{"duplex"}, \code{"honigs"}, \code{"farthest.point"},
+#'   \code{"nearest.neighbour"}, \code{"naes"}, \code{"optim.medoid"},
+#'   \code{"hclust.random"} or \code{"hclust.medoid"}. See \strong{Methods}.
 #'
 #' @returns A named list where each element contains the selected entry
 #'   identifiers for a cluster/group.
+#'
+#' @importFrom cluster pam
+#' @importFrom grDevices n2mfrow
+#' @importFrom MASS isoMDS
+#' @importFrom prospectr duplex honigs kenStone naes
+#' @importFrom stats cmdscale hclust
+#' @importFrom vegan betadisper
+#'
 #' @export
 #'
 #' @examples
@@ -78,13 +337,14 @@ select.distance <- function(data, names, group, alloc,
                                        "farthest.point",
                                        "nearest.neighbour",
                                        "naes", "optim.medoid",
-                                       "hclust.random", "hclust.medoid",
-                                       "inv.tocher"),
+                                       "hclust.random", "hclust.medoid"),
                             hclust.method = c("average", "single",
                                               "complete",
                                               "ward.D", "mcquitty",
                                               "median", "centroid",
                                               "ward.D2")) {
+
+  SampleCore.debug <- getOption("SampleCore.debug", default = FALSE)
 
   method <- match.arg(method)
 
@@ -119,6 +379,10 @@ select.distance <- function(data, names, group, alloc,
     bdout <- vegan::betadisper(d = dist.mat, group = data[, group],
                                type = "median", sqrt.dist = TRUE)
     dist_to_median <- split(bdout$distances, bdout$group)
+  }
+
+  if (SampleCore.debug) {
+    par(mfrow = n2mfrow(length(alloc)))
   }
 
   out <-
@@ -159,22 +423,15 @@ select.distance <- function(data, names, group, alloc,
         avg_dist <- rowMeans(as.matrix(sub_d))
         med_dist <- apply(as.matrix(sub_d), 1, median)
 
-        if (method %in% c("mean.centroid", "median.centroid")) {
-          is_group <- bdout$group == g
-          group_distances <- bdout$distances[is_group]
-
-          group_distances[names(group_distances) %in% rem_accns]
-        }
-
         avail_rem <- length(rem_accns)
 
         if (avail_rem < n_rem) {
 
           warning(
             sprintf(
-              'Group %s has only %d additional accessions but "alloc" ',
-              'requires %d additional entries. ',
-              'Taking all available accessions.',
+              paste0('Group %s has only %d additional accessions but ',
+                     '"alloc" requires %d additional entries. ',
+                     'Taking all available accessions.'),
               g, avail_rem, n_rem
             ),
             call. = FALSE
@@ -183,149 +440,167 @@ select.distance <- function(data, names, group, alloc,
           n_rem <- avail_rem
         }
 
-        # Centrality Based ----
-
-        ## Mean medoid ----
-        if (method == "mean.medoid") {
+        if (n_rem == 1) {
+          sampled_accns <- rem_accns[which.min(avg_dist)]
+        } else if (avail_rem < 3 && method %in% c("kennard.stone", "duplex",
+                                                  "honigs", "naes")) {
+          warning(
+            sprintf(
+              paste0('Group %s: method "%s" requires at least 3 accessions ',
+                     'but only %d available. Falling back to "mean.medoid".'),
+              g, method, avail_rem
+            ),
+            call. = FALSE
+          )
           center_idx <- order(avg_dist)[1:n_rem]
           sampled_accns <- rem_accns[center_idx]
+
+        } else { # Method dispatch
+
+          # Centrality Based ----
+
+          ## Mean medoid ----
+          if (method == "mean.medoid") {
+            center_idx <- order(avg_dist)[1:n_rem]
+            sampled_accns <- rem_accns[center_idx]
+          }
+
+          ## Median medoid ----
+          if (method == "median.medoid") {
+            center_idx2 <- order(med_dist)[1:n_rem]
+            sampled_accns <- rem_accns[center_idx2]
+          }
+
+          ## Nearest to centroid ----
+          if (method == "nearest.centroid") {
+            dist_to_centroid_rem <- dist_to_centroid[[g]][rem_accns]
+            center_idx3 <- order(dist_to_centroid_rem)[1:n_rem]
+            sampled_accns <- names(dist_to_centroid[[g]])[center_idx3]
+          }
+
+          ## Nearest to centroid ----
+          if (method == "nearest.median") {
+            dist_to_median_rem <- dist_to_median[[g]][rem_accns]
+            center_idx4 <- order(dist_to_median_rem)[1:n_rem]
+            sampled_accns <- names(dist_to_median[[g]])[center_idx4]
+          }
+
+          # Peripheral / Extremity-Based ----
+
+          ## Mean peripheral -----
+          if (method == "mean.peripheral") {
+            extreme_idx <- order(avg_dist, decreasing = TRUE)[1:n_rem]
+            sampled_accns <- rem_accns[extreme_idx]
+          }
+
+          ## Median peripheral ----
+          if (method == "median.peripheral") {
+            extreme_idx2 <- order(med_dist, decreasing = TRUE)[1:n_rem]
+            sampled_accns <- rem_accns[extreme_idx2]
+          }
+
+          ## Eccentricity ----
+          if (method == "eccentricity") {
+            ecc <- apply(as.matrix(sub_d), 1, max)
+            ecc_idx <- order(ecc, decreasing = TRUE)[1:n_rem]
+            sampled_accns <- rem_accns[ecc_idx]
+          }
+
+          ## Farness Centrality ----
+          if (method == "farness.centrality") {
+            far <- apply(as.matrix(sub_d), 1, sum)
+            far_idx <- order(far, decreasing = TRUE)[1:n_rem]
+            sampled_accns <- rem_accns[far_idx]
+          }
+
+          # Space-Filling / Coverage Methods ----
+
+          ## Kennard-Stone algorithm ----
+          if (method == "kennard.stone") {
+            kens_res <- prospectr::kenStone(sub_d, k = n_rem)
+            sampled_accns <- rem_accns[kens_res$model]
+          }
+
+          ## DUPLEX algorithm ----
+          if (method == "duplex") {
+            dupl_res <- prospectr::duplex(sub_d, k = n_rem, metric = "mahal")
+            sampled_accns <- rem_accns[dupl_res$model]
+          }
+
+          ## Honigs algorithm ----
+          if (method == "honigs") {
+            ho_res <- prospectr::honigs(sub_d, k = n_rem)
+            sampled_accns <- rem_accns[ho_res$model]
+          }
+
+          ## Max-min / Farthest-point sampling ----
+          if (method == "farthest.point") {
+            farpoint_idx <- farthest_sampling(d = sub_d, n_select = n_rem)
+            sampled_accns <- rem_accns[farpoint_idx]
+          }
+
+          # Density Based Methods ----
+
+          ## Nearest-neighbour (NN) ----
+          if (method == "nearest.neighbour") {
+            nn <- apply(as.matrix(sub_d) + diag(Inf, nrow(sub_d)), 1, min)
+            nn_idx <- order(nn)[1:n_rem]
+            sampled_accns <- rem_accns[nn_idx]
+          }
+
+          # Cluster-Based Methods ----
+
+          ## Partitioning around medoids ---
+          if (method == "optim.medoid") {
+            pam_res <- cluster::pam(sub_d, k = n_rem, diss = TRUE)
+            sampled_accns <- pam_res$medoids
+          }
+
+          ## K-means sampling (Naes Method) ----
+          if (method == "naes") {
+            kms_res <- prospectr::naes(sub_d, k = n_rem)
+            sampled_accns <- rem_accns[kms_res$model]
+          }
+
+          ## Hierarchical Clustering with random selection ----
+          if (method %in% c("hclust.random", "hclust.medoid")) {
+            tree_out <- hclust(as.dist(sub_d), method = hclust.method)
+            k_out <- cutree(tree_out, k = n_rem)
+            k_out_list <- split(names(k_out), k_out)
+          }
+
+          if (method == "hclust.random") {
+            sampled_accns <- sapply(k_out_list,
+                                    function(x) {
+                                      sample(x, 1)
+                                    })
+            sampled_accns <- unname(sampled_accns)
+          }
+
+          ## Hierarchical Clustering and medoids ----
+          if (method == "hclust.medoid") {
+            sampled_accns <- sapply(k_out_list, function(members) {
+              # cluster submatrix
+              k_d <- dmat[members, members, drop = FALSE]
+              # total within-cluster distance
+              tot_dist <- rowSums(k_d)
+              # medoid
+              names(which.min(tot_dist))
+            })
+            sampled_accns <- unname(sampled_accns)
+          }
         }
-
-        ## Median medoid ----
-        if (method == "median.medoid") {
-          center_idx2 <- order(med_dist)[1:n_rem]
-          sampled_accns <- rem_accns[center_idx2]
-        }
-
-        ## Nearest to centroid ----
-        if (method == "nearest.centroid") {
-          dist_to_centroid_rem <- dist_to_centroid[[g]][rem_accns]
-          center_idx3 <- order(dist_to_centroid_rem)[1:n_rem]
-          sampled_accns <- names(dist_to_centroid[[g]])[center_idx3]
-        }
-
-        ## Nearest to centroid ----
-        if (method == "nearest.median") {
-          dist_to_median_rem <- dist_to_median[[g]][rem_accns]
-          center_idx4 <- order(dist_to_median_rem)[1:n_rem]
-          sampled_accns <- names(dist_to_median[[g]])[center_idx4]
-        }
-
-        # Peripheral / Extremity-Based ----
-
-        ## Mean peripheral -----
-        if (method == "mean.peripheral") {
-          extreme_idx <- order(avg_dist, decreasing = TRUE)[1:n_rem]
-          sampled_accns <- rem_accns[extreme_idx]
-        }
-
-        ## Median peripheral ----
-        if (method == "median.peripheral") {
-          extreme_idx2 <- order(med_dist, decreasing = TRUE)[1:n_rem]
-          sampled_accns <- rem_accns[extreme_idx2]
-        }
-
-        ## Eccentricity ----
-        if (method == "eccentricity") {
-          ecc <- apply(as.matrix(sub_d), 1, max)
-          ecc_idx <- order(ecc, decreasing = TRUE)[1:n_rem]
-          sampled_accns <- rem_accns[ecc_idx]
-        }
-
-        ## Farness Centrality ----
-        if (method == "farness.centrality") {
-          far <- apply(as.matrix(sub_d), 1, sum)
-          far_idx <- order(far, decreasing = TRUE)[1:n_rem]
-          sampled_accns <- rem_accns[far_idx]
-        }
-
-        # Space-Filling / Coverage Methods ----
-
-        ## Kennard-Stone algorithm ----
-        if (method == "kennard.stone") {
-          kens_res <- prospectr::kenStone(sub_d, k = n_rem)
-          sampled_accns <- rem_accns[kens_res$model]
-        }
-
-        ## DUPLEX algorithm ----
-        if (method == "duplex") {
-          dupl_res <- prospectr::duplex(sub_d, k = n_rem, metric = "mahal")
-          sampled_accns <- rem_accns[dupl_res$model]
-        }
-
-        ## Honigs algorithm ----
-        if (method == "honigs") {
-          ho_res <- prospectr::honigs(sub_d, k = n_rem)
-          sampled_accns <- rem_accns[ho_res$model]
-        }
-
-        ## Max-min / farthest-point sampling ----
-        if (method == "farthest.point") {
-          farpoint_idx <- farthest_sampling(d = sub_d, n_select = n_rem)
-          sampled_accns <- rem_accns[farpoint_idx]
-        }
-
-        # Density Based Methods ----
-
-        ## Nearest-neighbour (NN) ----
-        if (method == "nearest.neighbour") {
-          nn <- apply(as.matrix(sub_d) + diag(Inf, nrow(sub_d)), 1, min)
-          nn_idx <- order(nn)[1:n_rem]
-          sampled_accns <- rem_accns[nn_idx]
-        }
-
-        # Cluster-Based Methods ----
-
-        ## Partitioning around medoids ---
-        if (method == "optim.medoid") {
-          pam_res <- cluster::pam(sub_d, k = n_rem, diss = TRUE)
-          sampled_accns <- pam_res$medoids
-        }
-
-        ## K-means sampling (Naes Method) ----
-        if (method == "naes") {
-          kms_res <- prospectr::naes(sub_d, k = n_rem)
-          sampled_accns <- rem_accns[kms_res$model]
-        }
-
-        ## Hierarchical Clustering with random selection ----
-        if (method %in% c("hclust.random", "hclust.medoid")) {
-          tree_out <- hclust(as.dist(sub_d), method = "average")
-          k_out <- cutree(tree_out, k = n_rem)
-          k_out_list <- split(names(k_out), k_out)
-        }
-
-        if (method == "hclust.random") {
-          sampled_accns <- sapply(k_out_list,
-                                  function(x) {
-                                    sample(x, 1)
-                                  })
-          sampled_accns <- unname(sampled_accns)
-        }
-
-        ## Hierarchical Clustering and medoids ----
-        if (method == "hclust.medoid") {
-          sampled_accns <- sapply(k_out_list, function(members) {
-            # cluster submatrix
-            k_d <- dmat[members, members, drop = FALSE]
-            # total within-cluster distance
-            tot_dist <- rowSums(k_d)
-            # medoid
-            names(which.min(tot_dist))
-          })
-          sampled_accns <- unname(sampled_accns)
-        }
-
-        ## Inverse Tocher ----
-        if (method == "inv.tocher") {
-          invtoch_idx <- inverse_tocher(sub_d, n_rem)
-          sampled_accns <- rem_accns[invtoch_idx]
-        }
-
       }
 
-      if (g == gp_memb[1]) {
-        plot_dist(d = sub_d, method = "isomds", highlight = sampled_accns)
+      if (SampleCore.debug) {
+        main_title <- paste("Cluster:", g)
+        if (n_rem < 0) {
+          plot(NULL, xlim=c(0, 1), ylim=c(0, 1), xlab="X", ylab="Y")
+          title(main = paste(main_title, "(skipped - alloc < fixed)"))
+        } else {
+          plot_dist(d = sub_d, method = "isomds", highlight = sampled_accns)
+          title(main = main_title)
+        }
       }
 
       return(c(sampled_accns, fixed_accns))
@@ -337,8 +612,9 @@ select.distance <- function(data, names, group, alloc,
   return(out)
 }
 
-
-farthest_sampling <- function(d, n_select, start = 1) {
+## Max-min / Farthest-point sampling function ----
+farthest_sampling <- function(d, n_select,
+                              start = sample(nrow(d), 1)) {
 
   d <- as.matrix(d)
 
@@ -361,34 +637,12 @@ farthest_sampling <- function(d, n_select, start = 1) {
 }
 
 
-inverse_tocher <- function(d, n_select) {
-
-  d <- as.matrix(d)
-  n <- nrow(d)
-
-  # most distant pair
-  idx <- which(d == max(d), arr.ind = TRUE)[1, ]
-  selected <- unique(idx)
-
-  while(length(selected) < n_select) {
-
-    remaining <- setdiff(1:n, selected)
-
-    avgd <- sapply(remaining, function(i) {
-      mean(d[i, selected])
-    })
-
-    next_idx <- remaining[which.max(avgd)]
-
-    selected <- c(selected, next_idx)
-  }
-
-  selected
-}
-
-
-plot_dist <- function(d, method = c("cmds", "isomds", "tsne"),
+plot_dist <- function(d, method = c("cmds", "isomds"),
                       highlight) {
+
+  if (method == "isomds" && nrow(as.matrix(d)) < 3) {
+    method <- "cmds"  # fallback to classical MDS
+  }
 
   # Classical MDS
   if (method == "cmds") {
@@ -402,12 +656,13 @@ plot_dist <- function(d, method = c("cmds", "isomds", "tsne"),
     fit <- fit$points
   }
 
-  # t-SNE
-  if (method == "tsne") {
-    fit <- Rtsne::Rtsne(as.matrix(d), is_distance = TRUE)
-    fit <- fit$Y
-    rownames(fit) <- labels(d)[[1]]
-  }
+  # "tsne"
+  # # t-SNE
+  # if (method == "tsne") {
+  #   fit <- Rtsne::Rtsne(as.matrix(d), is_distance = TRUE)
+  #   fit <- fit$Y
+  #   rownames(fit) <- labels(d)[[1]]
+  # }
 
   fit <- data.frame(fit)
 
