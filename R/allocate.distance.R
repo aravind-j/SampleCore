@@ -111,6 +111,7 @@
 #'
 #' @template general-arg
 #' @template log-arg
+#' @template size-arg
 #' @template dist-arg
 #' @param method The allocation method. Either \code{"dist"} for constant or
 #'   \code{"dist.prop"} for proportional or \code{"dist.log"} for logarithmic or

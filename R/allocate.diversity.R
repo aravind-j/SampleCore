@@ -48,6 +48,7 @@
 #'
 #' @template general-arg
 #' @template size-arg
+#' @template log-arg
 #' @template qualquant-arg
 #' @param method The allocation method. Either \code{"div"} for constant or
 #'   \code{"div.prop"} for proportional or \code{"div.log"} for logarithmic or

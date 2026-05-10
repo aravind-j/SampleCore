@@ -49,6 +49,9 @@ diversity index. Default is \code{exp(1)}.}
 \item{div.fun}{A function to estimate diversity index from a factor vector of
 qualitative trait data.}
 
+\item{log.base}{The logarithm base to be used for logarithmic method of
+sampling. Default is \code{exp(1)}.}
+
 \item{metric}{The metric to be computed from the diversity index. Either
 \code{"pooled"} or \code{"mean"}.}
 

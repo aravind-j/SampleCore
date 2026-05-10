@@ -28,6 +28,9 @@ character string.}
 \code{"prop"} for proportional or \code{"log"} for logarithmic or
 \code{"sqrt"} for square root allocation.}
 
+\item{log.base}{The logarithm base to be used for logarithmic method of
+sampling. Default is \code{exp(1)}.}
+
 \item{size}{The desired core set size proportion.}
 }
 \description{

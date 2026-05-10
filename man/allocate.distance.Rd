@@ -44,6 +44,8 @@ return the number of clusters.}
 
 \item{log.base}{The logarithm base to be used for logarithmic method of
 sampling. Default is \code{exp(1)}.}
+
+\item{size}{The desired core set size proportion.}
 }
 \description{
 Estimate the number of entries to be allocated from each cluster/group in

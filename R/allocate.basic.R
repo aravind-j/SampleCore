@@ -58,6 +58,7 @@
 #'
 #' @template general-arg
 #' @template size-arg
+#' @template log-arg
 #' @param method The allocation method. Either \code{"const"} for constant or
 #'   \code{"prop"} for proportional or \code{"log"} for logarithmic or
 #'   \code{"sqrt"} for square root allocation.
