@@ -22,10 +22,10 @@ Size](https://img.shields.io/github/languages/code-size/aravind-j/SampleCore.svg
 [![Project Status:
 WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2026--05--07-yellowgreen.svg)](https://github.com/aravind-j/SampleCore/)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2026--05--08-yellowgreen.svg)](https://github.com/aravind-j/SampleCore/)
 [![Website -
 pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github.io/SampleCore.svg)](https://aravind-j.github.io/SampleCore/)
-[![GoatCounter](https://sampledore-gh.goatcounter.com/count?p=/test)](https://sampledore-gh.goatcounter.com/)
+[![GoatCounter](https://samplecore-gh.goatcounter.com/count?p=/test)](https://samplecore-gh.goatcounter.com/)
 
 ------------------------------------------------------------------------
 
@@ -74,9 +74,8 @@ citation("SampleCore")
 ``` R
 To cite the R package 'SampleCore' in publications use:
 
-  Aravind, J., Roy, S., and Singh, A. M. ().  SampleCore: Sampling
-  Strategies for Constructing Core Collections. R package version
-  0.0.0.9000, https://aravind-j.github.io/SampleCore/.
+  Aravind, J., Roy, S., and Singh, A. M. ().  SampleCore: Sampling Strategies for Constructing Core
+  Collections. R package version 0.0.0.9000, https://aravind-j.github.io/SampleCore/.
 
 A BibTeX entry for LaTeX users is
 
@@ -86,9 +85,8 @@ A BibTeX entry for LaTeX users is
     note = {R package version 0.0.0.9000 https://aravind-j.github.io/SampleCore/},
   }
 
-This free and open-source software implements academic research by the
-authors and co-workers. If you use it, please support the project by
-citing the package.
+This free and open-source software implements academic research by the authors and co-workers. If you use
+it, please support the project by citing the package.
 ```
 
 # Package index
@@ -96,13 +94,22 @@ citing the package.
 ## Allocation Methods
 
 - [`allocate.basic()`](https://aravind-j.github.io/SampleCore/reference/allocate.basic.md)
-  : Allocation of Accessions on the Basis of Cluster/Group Size
+  : Allocation of Entries to be Selected from Clusters/Groups based on
+  Size for Core Collection Development
 - [`allocate.diversity()`](https://aravind-j.github.io/SampleCore/reference/allocate.diversity.md)
-  : Allocation of Accessions on the Basis of Within Cluster/Group
-  Diversity Index Estimates
+  : Allocation of Entries to be Selected from Clusters/Groups based on
+  Diversity Index Estimates for Core Collection Development
 - [`allocate.distance()`](https://aravind-j.github.io/SampleCore/reference/allocate.distance.md)
-  : Allocation of Accessions on the Basis of Within Cluster/Group
-  Distance-based Diversity
+  : Allocation of Entries to be Selected from Clusters/Groups based on
+  Distance-based Diversity Metrics for Core Collection Development
+
+## Selection Methods
+
+- [`select.random()`](https://aravind-j.github.io/SampleCore/reference/select.random.md)
+  : Selection of Entries from Clusters/Groups by Random Sampling
+- [`select.distance()`](https://aravind-j.github.io/SampleCore/reference/select.distance.md)
+  : Selection of Entries from Clusters/Groups on the basis of Genetic
+  Distances
 
 ## Datasets
 

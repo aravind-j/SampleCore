@@ -1,9 +1,8 @@
-# Allocation of Accessions on the Basis of Cluster/Group Size
+# Allocation of Entries to be Selected from Clusters/Groups based on Size for Core Collection Development
 
-Estimate the number of accessions to be allocated from each
-cluster/group in the entire collection to construct a core collection on
-the basis of cluster/group size. The following strategies are
-implemented.
+Estimate the number of entries to be allocated from each cluster/group
+in the entire collection to construct a core collection on the basis of
+cluster/group size. The following strategies are implemented.
 
 - Constant
 
@@ -12,6 +11,9 @@ implemented.
 - Logarithmic
 
 - Square root
+
+The different methods to determine the number of entries from each group
+or clusters implemented in `allocate.basic` are as follows.
 
 ## Usage
 
@@ -60,11 +62,8 @@ allocate.basic(
 
 ## Details
 
-The different methods to determine the number of entries from each group
-or clusters implemented in `allocate.basic` are as follows.
-
 These are different methods which estimate the number of entries only on
-the basis of total number of accessions in each cluster/group.
+the basis of total number of entries in each cluster/group.
 
 Brown (1989) proposed the constant (C), proportional (P) and logarithmic
 (L) methods and later a similar square root method was proposed by

@@ -1,9 +1,9 @@
-# Allocation of Accessions on the Basis of Within Cluster/Group Diversity Index Estimates
+# Allocation of Entries to be Selected from Clusters/Groups based on Diversity Index Estimates for Core Collection Development
 
-Estimate the number of accessions to be allocated from each
-cluster/group in the entire collection to construct a core collection on
-the basis of different metrics computed from within cluster/group
-diversity index estimates. The following strategies are implemented.
+Estimate the number of entries to be allocated from each cluster/group
+in the entire collection to construct a core collection on the basis of
+different metrics computed from within cluster/group diversity index
+estimates. The following strategies are implemented.
 
 - Diversity
 
@@ -95,9 +95,8 @@ allocate.diversity(
 ## Details
 
 The number of entries to be chosen from each cluster is estimated either
-on the basis of diversity of accessions within that cluster/group alone
-or in combination with the size of the cluster/group (See
-**`Methods`**).
+on the basis of diversity of entries within that cluster/group alone or
+in combination with the size of the cluster/group (See **`Methods`**).
 
 There are several methods proposed on the basis of diversity indices
 such as genetic multiplicity (G) dependent method based on the range of

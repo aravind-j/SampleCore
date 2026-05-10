@@ -1,9 +1,9 @@
-# Allocation of Accessions on the Basis of Within Cluster/Group Distance-based Diversity
+# Allocation of Entries to be Selected from Clusters/Groups based on Distance-based Diversity Metrics for Core Collection Development
 
-Estimate the number of accessions to be allocated from each
-cluster/group in the entire collection to construct a core collection on
-the basis of different metrics computed from within cluster/group
-distances. The following strategies are implemented.
+Estimate the number of entries to be allocated from each cluster/group
+in the entire collection to construct a core collection on the basis of
+different metrics computed from within cluster/group distances. The
+following strategies are implemented.
 
 - Diversity (Distance based)
 
@@ -80,8 +80,8 @@ allocate.distance(
 ## Details
 
 The number of entries to be chosen from each cluster is estimated either
-on the basis of diversity of accessions within that cluster/group alone
-or in combination with the size of the cluster/group (See **Methods**).
+on the basis of diversity of entries within that cluster/group alone or
+in combination with the size of the cluster/group (See **Methods**).
 
 The within-cluster/group diversity is estimated as several metrics from
 the within cluster/group genetic distances between accessions (See
@@ -139,16 +139,16 @@ of the cluster/group size (\\N\_{i}\\).
 ### Summary/Decriptive statistics
 
 These include mean, median, maximum and range of genetic distances
-between accessions in a cluster.
+between entries in a cluster.
 
 ### Mean nearest-neighbour distance (\\MNND\\)
 
-It is the average, across all accessions, of the distance to each
-accession’s closest other accession (\\d\_{g\_{min}}\\), based on a
-genetic given distance matrix (Clark and Evans 1954) .
+It is the average, across all entries, of the distance to each entry’s
+closest other entry (\\d\_{g\_{min}}\\), based on a genetic given
+distance matrix (Clark and Evans 1954) .
 
-For each accession, the nearest-neighbour distance (\\d\_{g\_{min}}\\)
-is the smallest non-zero distance with any other accession.
+For each entry, the nearest-neighbour distance (\\d\_{g\_{min}}\\) is
+the smallest non-zero distance with any other entry.
 
 \\d\_{g\_{min}} = \min\_{h \ne g} d\_{gh}\\
 
@@ -156,21 +156,21 @@ The Mean nearest-neighbour distance (\\MNND\\) can then be computed as:
 
 \\\textrm{MNND} = \frac{1}{G} \sum\_{g=1}^{G} d_g\\
 
-Where, (\\g\\) is the index of an accession in a genetic distance
-matrix, \\h\\ is the index of all other genotypes and \\G\\ is the total
-number of genotypes in a cluster/group.
+Where, (\\g\\) is the index of an entry in a genetic distance matrix,
+\\h\\ is the index of all other genotypes and \\G\\ is the total number
+of genotypes in a cluster/group.
 
 ### Minimum spanning tree length (\\MSTL\\)
 
 It is defined as the sum of edge weights in the minimum spanning tree
-constructed from the genetic distance matrix of accessions within a
-cluster/group. A minimum spanning tree (MST) connects all accessions
-such that the total distance is minimized and no cycles are formed. It
-represents the most efficient way to connect all accessions based on
+constructed from the genetic distance matrix of entries within a
+cluster/group. A minimum spanning tree (MST) connects all entries such
+that the total distance is minimized and no cycles are formed. It
+represents the most efficient way to connect all entries based on
 pairwise genetic distances (Gower and Ross 1969) .
 
-For genetic distance \\d\_{gh}\\ between accessions \\g\\ and \\h\\, the
-MST is a subset of edges that connects all \\G\\ accessions with exactly
+For genetic distance \\d\_{gh}\\ between entries \\g\\ and \\h\\, the
+MST is a subset of edges that connects all \\G\\ entries with exactly
 \\G - 1\\ edges and minimum total weight. The MST length (\\MSTL\\) can
 then be computed as:
 
@@ -180,16 +180,16 @@ Where \\\mathcal{T}\\ denotes the set of edges in the MST.
 
 ### Mean distance to centroid and median (\\MDC\\, \\MDM\\)
 
-These quantify the average dispersion of accessions within a
-cluster/group relative to a central point in multivariate space derived
-from the genetic distance matrix.
+These quantify the average dispersion of entries within a cluster/group
+relative to a central point in multivariate space derived from the
+genetic distance matrix.
 
-The centroid represents the multivariate mean position of all accessions
-in a cluster (Sokal and Sneath 1963; Sneath and Sokal 1973) ., whereas
-the median (spatial median) provides a robust central location that is
-less influenced by extreme values (Bradley et al. 1999) .
+The centroid represents the multivariate mean position of all entries in
+a cluster (Sokal and Sneath 1963; Sneath and Sokal 1973) ., whereas the
+median (spatial median) provides a robust central location that is less
+influenced by extreme values (Bradley et al. 1999) .
 
-For \\d\_{gC}\\ and \\d\_{gM}\\ distances of accession \\g\\ from the
+For \\d\_{gC}\\ and \\d\_{gM}\\ distances of entry \\g\\ from the
 centroid \\C\\ and median \\M\\, respectively. These measures are
 computed as:
 
@@ -197,7 +197,7 @@ computed as:
 
 \\\textrm{MDM} = \frac{1}{G} \sum\_{g=1}^{G} d\_{gM}\\
 
-Where \\G\\ is the total number of accessions in the cluster/group.
+Where \\G\\ is the total number of entries in the cluster/group.
 
 ### Number of clusters
 

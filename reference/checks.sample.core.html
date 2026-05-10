@@ -67,8 +67,9 @@
 <span>  qualitative <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dist.mat <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  log.base <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">alloc</span>,</span>
 <span>  always.selected <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/zC.html" class="external-link">C</a></span><span class="op">(</span><span class="st">"alloc"</span>, <span class="st">"sel"</span><span class="op">)</span></span>
+<span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"alloc"</span>, <span class="st">"sel"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -113,6 +114,18 @@ accessions in <code>data</code>.</p></dd>
 <dt id="arg-log-base">log.base<a class="anchor" aria-label="anchor" href="#arg-log-base"></a></dt>
 <dd><p>The logarithm base to be used for logarithmic method of
 sampling. Default is <code>exp(1)</code>.</p></dd>
+
+
+<dt id="arg-alloc">alloc<a class="anchor" aria-label="anchor" href="#arg-alloc"></a></dt>
+<dd><p>A named numeric vector specifying the number of entries to be
+selected. Names should correspond to the levels of the "<code>"group"</code>
+column, and values indicate the number of elements to be selected from each
+level.</p></dd>
+
+
+<dt id="arg-always-selected">always.selected<a class="anchor" aria-label="anchor" href="#arg-always-selected"></a></dt>
+<dd><p>Names of accessions to be always included in the core
+set as a character vector.</p></dd>
 
 </dl></div>
 
