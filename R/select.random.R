@@ -4,7 +4,7 @@
 #' sampling according to allocation specified.
 #'
 #' For each cluster/group entries are selected randomly according to the
-#' allocation provided \insertCite{brown_Core_1989;
+#' allocation provided \insertCite{brown_core_1989;
 #' van_hintum_core_2000}{SampleCore}. Entries listed as \code{always.selected}
 #' are mandatorily included in the selection. Warnings are issued if requested
 #' allocation is smaller than the number of always-selected entries in a
