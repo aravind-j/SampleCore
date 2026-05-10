@@ -100,7 +100,8 @@ cluster/group center.
 #### Medoid-like Representative Sampling by Minimal Mean Distance
 
 Selects medoid-like representatives as accessions with the smallest
-average distance to all others within the group.
+average distance to all others within the group (Kaufman and Rousseeuw
+1987; Kaufman and Rousseeuw 1990) .
 
 For each accession \\g\\, the mean distance to all other accessions
 \\h\\ is computed as:
@@ -114,7 +115,8 @@ Accessions are ranked by \\\bar{d}\_g\\ in ascending order and the top
 
 Selects medoid-like representatives as accessions with the smallest
 median distance to all others within the group. This method is less
-influenced by outliers.
+influenced by outliers (Kaufman and Rousseeuw 1987; Kaufman and
+Rousseeuw 1990) .
 
 For each accession \\g\\, the median distance to all other accessions
 \\h\\ is computed as:
@@ -128,7 +130,8 @@ Accessions are ranked by \\\tilde{d}\_g\\ in ascending order and the top
 
 Selects accessions closest to the group centroid in principal coordinate
 space, computed via multivariate dispersion analysis using
-[`betadisper`](https://vegandevs.github.io/vegan/reference/betadisper.html).
+[`betadisper`](https://vegandevs.github.io/vegan/reference/betadisper.html)
+(Anderson 2006; Anderson et al. 2006) .
 
 The distance of each accession \\g\\ to the group centroid \\C\\ in PCoA
 space is:
@@ -143,7 +146,8 @@ and \\\mathbf{c}\\ is the group centroid. Accessions are ranked by
 
 Selects accessions closest to the group spatial median in principal
 coordinate space, computed via multivariate dispersion analysis using
-[`betadisper`](https://vegandevs.github.io/vegan/reference/betadisper.html).
+[`betadisper`](https://vegandevs.github.io/vegan/reference/betadisper.html)
+(O'Neill and Mathews 2000) .
 
 The distance of each accession \\g\\ to the group spatial median \\M\\
 is:
@@ -162,7 +166,8 @@ cluster/group i.e. the accessions which are in the boundary or outliers.
 #### Peripheral Sampling by Maximal Mean Distance
 
 Selects the most peripheral accessions as those with the largest average
-distance to all others within the group.
+distance to all others within the group (Kaufman and Rousseeuw 1987;
+Kaufman and Rousseeuw 1990) .
 
 \\\bar{d}\_g = \frac{1}{G} \sum\_{h=1}^{G} d\_{gh}\\
 
@@ -172,7 +177,8 @@ Accessions are ranked by \\\bar{d}\_g\\ in descending order and the top
 #### Peripheral Sampling by Maximal Median Distance
 
 Selects the most peripheral accessions as those with the largest median
-distance to all others within the group.
+distance to all others within the group (Kaufman and Rousseeuw 1987;
+Kaufman and Rousseeuw 1990) .
 
 \\\tilde{d}\_g = \text{median}\_{h=1,\dots,G}(d\_{gh})\\
 
@@ -182,7 +188,7 @@ top \\n\\ are selected.
 #### Peripheral Sampling by Maximal Eccentricity
 
 Selects accessions with the largest eccentricity — the maximum distance
-to any other accession in the group.
+to any other accession in the group (Hage and Harary 1995) .
 
 \\e_g = \max\_{h=1,\dots,G} d\_{gh}\\
 
@@ -193,7 +199,7 @@ accession rather than its average behaviour.
 #### Peripheral Sampling by Maximal Farness Centrality
 
 Selects accessions with the greatest total distance to all others, i.e.
-those most remote from the rest of the group.
+those most remote from the rest of the group (Sabidussi 1966) .
 
 \\f_g = \sum\_{h=1}^{G} d\_{gh}\\
 
@@ -210,7 +216,7 @@ a cluster/group i.e. diversity sampling.
 #### Space-Filling Sampling via the Kennard-Stone Algorithm
 
 Selects \\n\\ accessions that maximally and uniformly cover the distance
-space via the Kennard-Stone algorithm (See
+space via the Kennard-Stone algorithm (Kennard and Stone 1969) (See
 [`kenStone`](https://rdrr.io/pkg/prospectr/man/kenStone.html)).
 
 Starting from the pair of accessions with the largest pairwise distance:
@@ -228,9 +234,9 @@ cluster structure.
 #### Space-Filling Sampling via the DUPLEX Algorithm
 
 Extends the Kennard-Stone algorithm to simultaneously construct a model
-set and a test set with similar distributions
-([duplex](https://rdrr.io/pkg/prospectr/man/duplex.html)). Accessions
-are selected using Mahalanobis distance:
+set and a test set with similar distributions (Kennard and Stone 1969;
+Snee 1977) ([duplex](https://rdrr.io/pkg/prospectr/man/duplex.html)).
+Accessions are selected using Mahalanobis distance:
 
 \\d_M(g, h) = \sqrt{(\mathbf{x}\_g - \mathbf{x}\_h)^\top \Sigma^{-1}
 (\mathbf{x}\_g - \mathbf{x}\_h)}\\
@@ -242,7 +248,7 @@ ensuring both sets span the full feature space.
 #### Space-Filling Sampling via the Honigs Algorithm
 
 Selects \\n\\ accessions sequentially by maximising dissimilarity to the
-already-selected set
+already-selected set (Honigs et al. 1985)
 ([honigs](https://rdrr.io/pkg/prospectr/man/honigs.html))
 
 At each step \\k\\, the accession \\g_k\\ maximising total distance to
@@ -259,7 +265,8 @@ current selection, producing broad coverage of the distance space.
 
 Selects \\n\\ accessions by iteratively maximising the minimum distance
 to the current selected set — also known as the max-min or
-farthest-point sampling algorithm.
+farthest-point sampling algorithm (Gonzalez 1985; Dyer and Frieze 1985;
+Hochbaum and Shmoys 1985) .
 
 \\g_k = \underset{g \notin S}{\arg\max} \min\_{s \in S} d\_{gs}\\
 
@@ -277,7 +284,8 @@ Select points based on local neighbourhood density.
 #### Density-Based Sampling by Minimal Nearest-Neighbour Distance
 
 Selects accessions residing in the densest regions of the distance
-space, identified as those with the smallest nearest-neighbour distance.
+space, identified as those with the smallest nearest-neighbour distance
+(Cover and Hart 1967; Fix and Hodges 1989) .
 
 For each accession \\g\\, the nearest-neighbour distance is:
 
@@ -313,7 +321,8 @@ independently scoring each accession.
 Partitions accessions into \\n\\ clusters via k-means applied to the
 distance matrix (See
 [`naes`](https://rdrr.io/pkg/prospectr/man/naes.html)), then selects the
-accession closest to each cluster centre as the representative.
+accession closest to each cluster centre as the representative (Naes
+1987; Naes et al. 2017) .
 
 The k-means objective minimised is:
 
@@ -327,7 +336,7 @@ coverage.
 
 Partitions accessions into \\n\\ clusters by cutting a hierarchical
 clustering dendrogram at height \\k = n\\, then randomly samples one
-accession from each cluster.
+accession from each cluster (Ward 1963; Li et al. 2002) .
 
 The dendrogram is built by agglomerative hierarchical clustering using
 the linkage criterion specified by
@@ -343,7 +352,8 @@ coverage with randomness.
 
 Partitions accessions into \\n\\ clusters by cutting a hierarchical
 clustering dendrogram at height \\k = n\\, then selects the
-within-cluster medoid as the representative of each cluster.
+within-cluster medoid as the representative of each cluster (Kaufman and
+Rousseeuw 1987; Ward 1963) .
 
 For each cluster \\C_k\\, the medoid is the accession minimising total
 within-cluster distance:

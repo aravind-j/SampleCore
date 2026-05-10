@@ -212,6 +212,6 @@ number v. 2 in The Mathematical Theory of Communication. University of
 Illinois Press.  
   
 Yonezawa K, Nomura T, Morishima H (1995). “Sampling strategies for use
-in stratified germplasm collections.” In Hodkin T, Brown ADH, Hintum
-TJLv, Morales EAV (eds.), *Core Collections of Plant Genetic Resources*,
+in stratified germplasm collections.” In Hodkin T, Brown ADH, van Hintum
+TJL, Morales EAV (eds.), *Core Collections of Plant Genetic Resources*,
 35–53. John Wiley & Sons, New York. ISBN 0-471-95545-0.

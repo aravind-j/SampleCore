@@ -162,7 +162,9 @@ allocation.</p>
 <h4 id="medoid-like-representative-sampling-by-minimal-mean-distance">Medoid-like Representative Sampling by Minimal Mean
   Distance<a class="anchor" aria-label="anchor" href="#medoid-like-representative-sampling-by-minimal-mean-distance"></a></h4>
 <p>Selects medoid-like representatives as accessions with the
-  smallest average distance to all others within the group.</p>
+  smallest average distance to all others within the group
+  (Kaufman and Rousseeuw 1987; Kaufman and Rousseeuw 1990)
+.</p>
 <p>For each accession <em></em>\(g\), the mean distance to all other accessions
   <em></em>\(h\) is computed as:</p>
 <p>\[\bar{d}_g = \frac{1}{G} \sum_{h=1}^{G} d_{gh}\]</p>
@@ -178,7 +180,9 @@ allocation.</p>
 
 <p>Selects medoid-like representatives as accessions with the smallest median
   distance to all others within the group. This method is less influenced by
-  outliers.</p>
+  outliers
+  (Kaufman and Rousseeuw 1987; Kaufman and Rousseeuw 1990)
+.</p>
 <p>For each accession <em></em>\(g\), the median distance to all other accessions
   <em></em>\(h\) is computed as:</p>
 <p>\[\tilde{d}_g = \text{median}_{h=1,\dots,G}(d_{gh})\]</p>
@@ -192,7 +196,9 @@ allocation.</p>
   Centroid<a class="anchor" aria-label="anchor" href="#representative-sampling-by-proximity-to-group-centroid"></a></h4>
 <p>Selects accessions closest to the group centroid in principal
   coordinate space, computed via multivariate dispersion analysis using
-  <code><a href="https://vegandevs.github.io/vegan/reference/betadisper.html" class="external-link">betadisper</a></code>.</p>
+  <code><a href="https://vegandevs.github.io/vegan/reference/betadisper.html" class="external-link">betadisper</a></code>
+  (Anderson 2006; Anderson et al. 2006)
+.</p>
 <p>The distance of each accession <em></em>\(g\) to the group centroid <em></em>\(C\)
   in PCoA space is:</p>
 <p>\[\delta_g = \| \mathbf{p}_g - \mathbf{c} \|\]</p>
@@ -207,7 +213,9 @@ allocation.</p>
 <h4 id="representative-sampling-by-proximity-to-group-spatial-median">Representative Sampling by Proximity to Group Spatial Median<a class="anchor" aria-label="anchor" href="#representative-sampling-by-proximity-to-group-spatial-median"></a></h4>
 <p>Selects accessions closest to the group spatial median in principal
   coordinate space, computed via multivariate dispersion analysis using
-  <code><a href="https://vegandevs.github.io/vegan/reference/betadisper.html" class="external-link">betadisper</a></code>.</p>
+  <code><a href="https://vegandevs.github.io/vegan/reference/betadisper.html" class="external-link">betadisper</a></code>
+  (O'Neill and Mathews 2000)
+.</p>
 <p>The distance of each accession <em></em>\(g\) to the group spatial median
   <em></em>\(M\) is:</p>
 <p>\[\delta_g^* = \| \mathbf{p}_g - \mathbf{m} \|\]</p>
@@ -230,7 +238,9 @@ allocation.</p>
 <h4 id="peripheral-sampling-by-maximal-mean-distance">Peripheral Sampling by Maximal Mean Distance<a class="anchor" aria-label="anchor" href="#peripheral-sampling-by-maximal-mean-distance"></a></h4>
 <p>Selects the most
   peripheral accessions as those with the largest average distance to all
-  others within the group.</p>
+  others within the group
+  (Kaufman and Rousseeuw 1987; Kaufman and Rousseeuw 1990)
+.</p>
 <p>\[\bar{d}_g = \frac{1}{G} \sum_{h=1}^{G} d_{gh}\]</p>
 <p>Accessions are ranked by <em></em>\(\bar{d}_g\) in descending order and the
   top <em></em>\(n\) are selected.</p>
@@ -241,7 +251,9 @@ allocation.</p>
 <h4 id="peripheral-sampling-by-maximal-median-distance">Peripheral Sampling by Maximal Median Distance<a class="anchor" aria-label="anchor" href="#peripheral-sampling-by-maximal-median-distance"></a></h4>
 <p>Selects the
   most peripheral accessions as those with the largest median distance to
-  all others within the group.</p>
+  all others within the group
+  (Kaufman and Rousseeuw 1987; Kaufman and Rousseeuw 1990)
+.</p>
 <p>\[\tilde{d}_g = \text{median}_{h=1,\dots,G}(d_{gh})\]</p>
 <p>Accessions are ranked by <em></em>\(\tilde{d}_g\) in descending order and the
   top <em></em>\(n\) are selected.</p>
@@ -252,7 +264,9 @@ allocation.</p>
 <h4 id="peripheral-sampling-by-maximal-eccentricity">Peripheral Sampling by Maximal Eccentricity<a class="anchor" aria-label="anchor" href="#peripheral-sampling-by-maximal-eccentricity"></a></h4>
 <p>Selects
   accessions with the largest eccentricity — the maximum distance to any
-  other accession in the group.</p>
+  other accession in the group
+  (Hage and Harary 1995)
+.</p>
 <p>\[e_g = \max_{h=1,\dots,G} d_{gh}\]</p>
 <p>Accessions are ranked by <em></em>\(e_g\) in descending order and the top
   <em></em>\(n\) are selected. Eccentricity captures the worst-case
@@ -264,7 +278,9 @@ allocation.</p>
 <h4 id="peripheral-sampling-by-maximal-farness-centrality">Peripheral Sampling by Maximal Farness Centrality<a class="anchor" aria-label="anchor" href="#peripheral-sampling-by-maximal-farness-centrality"></a></h4>
 <p>Selects
   accessions with the greatest total distance to all others, i.e. those most
-  remote from the rest of the group.</p>
+  remote from the rest of the group
+  (Sabidussi 1966)
+.</p>
 <p>\[f_g = \sum_{h=1}^{G} d_{gh}\]</p>
 <p>Accessions are ranked by <em></em>\(f_g\) in descending order and the top
   <em></em>\(n\) are selected. Farness centrality is proportional to
@@ -286,7 +302,9 @@ allocation.</p>
 <h4 id="space-filling-sampling-via-the-kennard-stone-algorithm">Space-Filling Sampling via the Kennard-Stone
   Algorithm<a class="anchor" aria-label="anchor" href="#space-filling-sampling-via-the-kennard-stone-algorithm"></a></h4>
 <p>Selects <em></em>\(n\) accessions that maximally and uniformly
-  cover the distance space via the Kennard-Stone algorithm (See
+  cover the distance space via the Kennard-Stone algorithm
+  (Kennard and Stone 1969)
+ (See
   <code><a href="https://rdrr.io/pkg/prospectr/man/kenStone.html" class="external-link">kenStone</a></code>).</p>
 <p>Starting from the pair of accessions with the largest pairwise distance:</p>
 <p>\[\lbrace g_1, g_2 \rbrace = \underset{g,h}{\arg\max}\, d_{gh}\]</p>
@@ -302,8 +320,11 @@ allocation.</p>
 <h4 id="space-filling-sampling-via-the-duplex-algorithm">Space-Filling Sampling via the DUPLEX Algorithm<a class="anchor" aria-label="anchor" href="#space-filling-sampling-via-the-duplex-algorithm"></a></h4>
 <p>Extends the
   Kennard-Stone algorithm to simultaneously construct a model set and a test
-  set with similar distributions (<a href="https://rdrr.io/pkg/prospectr/man/duplex.html" class="external-link">duplex</a>). Accessions are
-  selected using Mahalanobis distance:</p>
+  set with similar distributions
+  (Kennard and Stone 1969; Snee 1977)
+
+  (<a href="https://rdrr.io/pkg/prospectr/man/duplex.html" class="external-link">duplex</a>). Accessions are selected using Mahalanobis
+  distance:</p>
 <p>\[d_M(g, h) = \sqrt{(\mathbf{x}_g - \mathbf{x}_h)^\top \Sigma^{-1}
   (\mathbf{x}_g - \mathbf{x}_h)}\]</p>
 <p>where <em></em>\(\Sigma\) is the covariance matrix. At each step, the pair
@@ -316,7 +337,9 @@ allocation.</p>
 <h4 id="space-filling-sampling-via-the-honigs-algorithm">Space-Filling Sampling via the Honigs Algorithm<a class="anchor" aria-label="anchor" href="#space-filling-sampling-via-the-honigs-algorithm"></a></h4>
 <p>Selects
   <em></em>\(n\) accessions sequentially by maximising dissimilarity to the
-  already-selected set (<a href="https://rdrr.io/pkg/prospectr/man/honigs.html" class="external-link">honigs</a>)</p>
+  already-selected set (Honigs et al. 1985)
+
+  (<a href="https://rdrr.io/pkg/prospectr/man/honigs.html" class="external-link">honigs</a>)</p>
 <p>At each step <em></em>\(k\), the accession <em></em>\(g_k\) maximising total
   distance to all previously selected accessions <em></em>\(S\) is chosen:</p>
 <p>\[g_k = \underset{g \notin S}{\arg\max} \sum_{s \in S} d_{gs}\]</p>
@@ -329,7 +352,9 @@ allocation.</p>
   Algorithm<a class="anchor" aria-label="anchor" href="#space-filling-sampling-via-farthest-point-max-min-algorithm"></a></h4>
 <p>Selects <em></em>\(n\) accessions by iteratively maximising the
   minimum distance to the current selected set — also known as the
-  max-min or farthest-point sampling algorithm.</p>
+  max-min or farthest-point sampling algorithm
+  (Gonzalez 1985; Dyer and Frieze 1985; Hochbaum and Shmoys 1985)
+.</p>
 <p>\[g_k = \underset{g \notin S}{\arg\max} \min_{s \in S} d_{gs}\]</p>
 <p>This is equivalent to Kennard-Stone but without the symmetric
   initialisation step. It provides a deterministic, greedy approximation to
@@ -351,7 +376,9 @@ allocation.</p>
   Distance<a class="anchor" aria-label="anchor" href="#density-based-sampling-by-minimal-nearest-neighbour-distance"></a></h4>
 <p>Selects accessions residing in the densest regions of the
   distance space, identified as those with the smallest nearest-neighbour
-  distance.</p>
+  distance
+  (Cover and Hart 1967; Fix and Hodges 1989)
+.</p>
 <p>For each accession <em></em>\(g\), the nearest-neighbour distance is:</p>
 <p>\[\text{nn}_g = \min_{h \neq g} d_{gh}\]</p>
 <p>Accessions are ranked by <em></em>\(\text{nn}_g\) in ascending order and the
@@ -391,7 +418,9 @@ allocation.</p>
 <p>Partitions
   accessions into <em></em>\(n\) clusters via k-means applied to the distance
   matrix (See <code><a href="https://rdrr.io/pkg/prospectr/man/naes.html" class="external-link">naes</a></code>), then selects the accession
-  closest to each cluster centre as the representative.</p>
+  closest to each cluster centre as the representative
+  (Naes 1987; Naes et al. 2017)
+.</p>
 <p>The k-means objective minimised is:</p>
 <p>\[\min \sum_{k=1}^{n} \sum_{g \in C_k} d_{g, \mu_k}^2\]</p>
 <p>where <em></em>\(C_k\) is the <em></em>\(k\)-th cluster and <em></em>\(\mu_k\) is its
@@ -405,7 +434,9 @@ allocation.</p>
   Random Selection<a class="anchor" aria-label="anchor" href="#cluster-based-sampling-via-hierarchical-clustering-with-random-selection"></a></h4>
 <p>Partitions accessions into <em></em>\(n\) clusters by
   cutting a hierarchical clustering dendrogram at height <em></em>\(k = n\),
-  then randomly samples one accession from each cluster.</p>
+  then randomly samples one accession from each cluster
+  (Ward 1963; Li et al. 2002)
+.</p>
 <p>The dendrogram is built by agglomerative hierarchical clustering using the
   linkage criterion specified by <code><a href="https://rdrr.io/r/stats/hclust.html" class="external-link">hclust</a></code>. For
   clusters <em></em>\(C_1, \dots, C_n\), one accession is drawn uniformly at
@@ -421,7 +452,9 @@ allocation.</p>
   Selection<a class="anchor" aria-label="anchor" href="#cluster-based-sampling-via-hierarchical-clustering-with-medoid-selection"></a></h4>
 <p>Partitions accessions into <em></em>\(n\) clusters by cutting a
   hierarchical clustering dendrogram at height <em></em>\(k = n\), then selects
-  the within-cluster medoid as the representative of each cluster.</p>
+  the within-cluster medoid as the representative of each cluster
+  (Kaufman and Rousseeuw 1987; Ward 1963)
+.</p>
 <p>For each cluster <em></em>\(C_k\), the medoid is the accession minimising
   total within-cluster distance:</p>
 <p>\[g_k^* = \underset{g \in C_k}{\arg\min} \sum_{h \in C_k} d_{gh}\]</p>
