@@ -164,7 +164,7 @@ allocate.diversity <- function(data, names, group,
           out <- DiversityStats::mcintosh_diversity(trt_x)
         }
 
-        ## Custom with div.fun
+        ## Custom with div.fun ----
         if (!is.null(div.fun)) {
           out <- div.fun(trt_x)
         }
