@@ -26,14 +26,16 @@ Description: Implements several sampling strategies for construction of core
 License: GPL (>= 2)
 Encoding: UTF-8
 BuildManual: TRUE
-Imports: DiversityStats,
+Imports: cluster,
+    DiversityStats,
     igraph,
+    MASS,
     mathjaxr,
+    prospectr,
     Rdpack,
     stats,
     vegan
-Suggests: cluster,
-    EvaluateCore,
+Suggests: EvaluateCore,
     knitr,
     pander,
     rmarkdown

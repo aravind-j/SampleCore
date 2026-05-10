@@ -274,7 +274,7 @@
 #'   then randomly samples one accession from each cluster.
 #'
 #'   The dendrogram is built by agglomerative hierarchical clustering using the
-#'   linkage criterion specified by \code{\link[stats]{hclust.method}}. For
+#'   linkage criterion specified by \code{\link[stats]{hclust}}. For
 #'   clusters \mjseqn{C_1, \dots, C_n}, one accession is drawn uniformly at
 #'   random from each:
 #'
@@ -304,6 +304,7 @@
 #'
 #' @template general-arg
 #' @template sel-arg
+#' @template dist-arg
 #' @template seldist-arg
 #' @param method The method for sampling accessions from each cluster/group.
 #'   Either \code{"mean.medoid"}, \code{"median.medoid"},
@@ -318,10 +319,11 @@
 #'   identifiers for a cluster/group.
 #'
 #' @importFrom cluster pam
+#' @importFrom graphics par title
 #' @importFrom grDevices n2mfrow
 #' @importFrom MASS isoMDS
 #' @importFrom prospectr duplex honigs kenStone naes
-#' @importFrom stats cmdscale hclust
+#' @importFrom stats cmdscale cutree hclust
 #' @importFrom vegan betadisper
 #'
 #' @export

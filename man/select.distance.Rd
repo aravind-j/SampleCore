@@ -34,6 +34,9 @@ selected. Names should correspond to the levels of the "\code{"group"}
 column, and values indicate the number of elements to be selected from each
 level.}
 
+\item{dist.mat}{A precomputed distance matrix of distance measures between the
+accessions in \code{data}.}
+
 \item{always.selected}{Names of accessions to be always included in the core
 set as a character vector.}
 
@@ -332,7 +335,7 @@ allocation.
   then randomly samples one accession from each cluster.
 
   The dendrogram is built by agglomerative hierarchical clustering using the
-  linkage criterion specified by \code{\link[stats]{hclust.method}}. For
+  linkage criterion specified by \code{\link[stats]{hclust}}. For
   clusters \mjseqn{C_1, \dots, C_n}, one accession is drawn uniformly at
   random from each:
 
