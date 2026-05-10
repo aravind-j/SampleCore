@@ -22,7 +22,8 @@
 #'
 #'   \subsection{Medoid-like Representative Sampling by Minimal Mean
 #'   Distance}{Selects medoid-like representatives as accessions with the
-#'   smallest average distance to all others within the group.
+#'   smallest average distance to all others within the group
+#'   \insertCite{kaufman_clustering_1987,kaufman_finding_1990}{SampleCore}.
 #'
 #'   For each accession \mjseqn{g}, the mean distance to all other accessions
 #'   \mjseqn{h} is computed as:
@@ -39,7 +40,8 @@
 #'
 #'   Selects medoid-like representatives as accessions with the smallest median
 #'   distance to all others within the group. This method is less influenced by
-#'   outliers.
+#'   outliers
+#'   \insertCite{kaufman_clustering_1987,kaufman_finding_1990}{SampleCore}.
 #'
 #'   For each accession \mjseqn{g}, the median distance to all other accessions
 #'   \mjseqn{h} is computed as:
@@ -54,7 +56,8 @@
 #'   \subsection{Representative Sampling by Proximity to Group
 #'   Centroid}{Selects accessions closest to the group centroid in principal
 #'   coordinate space, computed via multivariate dispersion analysis using
-#'   \code{\link[vegan]{betadisper}}.
+#'   \code{\link[vegan]{betadisper}}
+#'   \insertCite{anderson_distance-based_2006,anderson_multivariate_2006}{SampleCore}.
 #'
 #'   The distance of each accession \mjseqn{g} to the group centroid \mjseqn{C}
 #'   in PCoA space is:
@@ -71,7 +74,8 @@
 #'   \subsection{Representative Sampling by Proximity to Group Spatial Median}{
 #'   Selects accessions closest to the group spatial median in principal
 #'   coordinate space, computed via multivariate dispersion analysis using
-#'   \code{\link[vegan]{betadisper}}.
+#'   \code{\link[vegan]{betadisper}}
+#'   \insertCite{oneill_theory_2000}{SampleCore}.
 #'
 #'   The distance of each accession \mjseqn{g} to the group spatial median
 #'   \mjseqn{M} is:
@@ -93,7 +97,8 @@
 #'
 #'   \subsection{Peripheral Sampling by Maximal Mean Distance}{Selects the most
 #'   peripheral accessions as those with the largest average distance to all
-#'   others within the group.
+#'   others within the group
+#'   \insertCite{kaufman_clustering_1987,kaufman_finding_1990}{SampleCore}.
 #'
 #'   \mjsdeqn{\bar{d}_g = \frac{1}{G} \sum_{h=1}^{G} d_{gh}}
 #'
@@ -104,7 +109,8 @@
 #'
 #'   \subsection{Peripheral Sampling by Maximal Median Distance}{Selects the
 #'   most peripheral accessions as those with the largest median distance to
-#'   all others within the group.
+#'   all others within the group
+#'   \insertCite{kaufman_clustering_1987,kaufman_finding_1990}{SampleCore}.
 #'
 #'   \mjsdeqn{\tilde{d}_g = \text{median}_{h=1,\dots,G}(d_{gh})}
 #'
@@ -115,7 +121,8 @@
 #'
 #'   \subsection{Peripheral Sampling by Maximal Eccentricity}{Selects
 #'   accessions with the largest eccentricity — the maximum distance to any
-#'   other accession in the group.
+#'   other accession in the group
+#'   \insertCite{hage_eccentricity_1995}{SampleCore}.
 #'
 #'   \mjsdeqn{e_g = \max_{h=1,\dots,G} d_{gh}}
 #'
@@ -127,7 +134,8 @@
 #'
 #'   \subsection{Peripheral Sampling by Maximal Farness Centrality}{Selects
 #'   accessions with the greatest total distance to all others, i.e. those most
-#'   remote from the rest of the group.
+#'   remote from the rest of the group
+#'   \insertCite{sabidussi_centrality_1966}{SampleCore}.
 #'
 #'   \mjsdeqn{f_g = \sum_{h=1}^{G} d_{gh}}
 #'
@@ -147,7 +155,8 @@
 #'
 #'   \subsection{Space-Filling Sampling via the Kennard-Stone
 #'   Algorithm}{Selects \mjseqn{n} accessions that maximally and uniformly
-#'   cover the distance space via the Kennard-Stone algorithm (See
+#'   cover the distance space via the Kennard-Stone algorithm
+#'   \insertCite{kennard_computer_1969}{SampleCore} (See
 #'   \code{\link[prospectr]{kenStone}}).
 #'
 #'   Starting from the pair of accessions with the largest pairwise distance:
@@ -166,8 +175,10 @@
 #'
 #'   \subsection{Space-Filling Sampling via the DUPLEX Algorithm}{Extends the
 #'   Kennard-Stone algorithm to simultaneously construct a model set and a test
-#'   set with similar distributions (\link[prospectr]{duplex}). Accessions are
-#'   selected using Mahalanobis distance:
+#'   set with similar distributions
+#'   \insertCite{kennard_computer_1969,snee_validation_1977}{SampleCore}
+#'   (\link[prospectr]{duplex}). Accessions are selected using Mahalanobis
+#'   distance:
 #'
 #'   \mjsdeqn{d_M(g, h) = \sqrt{(\mathbf{x}_g - \mathbf{x}_h)^\top \Sigma^{-1}
 #'   (\mathbf{x}_g - \mathbf{x}_h)}}
@@ -180,7 +191,8 @@
 #'
 #'   \subsection{Space-Filling Sampling via the Honigs Algorithm}{Selects
 #'   \mjseqn{n} accessions sequentially by maximising dissimilarity to the
-#'   already-selected set (\link[prospectr]{honigs})
+#'   already-selected set \insertCite{honigs_unique-sample_1985}{SampleCore}
+#'   (\link[prospectr]{honigs})
 #'
 #'   At each step \mjseqn{k}, the accession \mjseqn{g_k} maximising total
 #'   distance to all previously selected accessions \mjseqn{S} is chosen:
@@ -195,7 +207,8 @@
 #'   \subsection{Space-Filling Sampling via Farthest-Point (Max-Min)
 #'   Algorithm}{Selects \mjseqn{n} accessions by iteratively maximising the
 #'   minimum distance to the current selected set — also known as the
-#'   max-min or farthest-point sampling algorithm.
+#'   max-min or farthest-point sampling algorithm
+#'   \insertCite{gonzalez_clustering_1985,dyer_simple_1985,hochbaum_best_1985}{SampleCore}.
 #'
 #'   \mjsdeqn{g_k = \underset{g \notin S}{\arg\max} \min_{s \in S} d_{gs}}
 #'
@@ -216,7 +229,8 @@
 #'   \subsection{Density-Based Sampling by Minimal Nearest-Neighbour
 #'   Distance}{Selects accessions residing in the densest regions of the
 #'   distance space, identified as those with the smallest nearest-neighbour
-#'   distance.
+#'   distance
+#'   \insertCite{cover_nearest_1967,fix_discriminatory_1989}{SampleCore}.
 #'
 #'   For each accession \mjseqn{g}, the nearest-neighbour distance is:
 #'
@@ -256,7 +270,8 @@
 #'   \subsection{Cluster-Based Sampling via K-means (Naes Method)}{Partitions
 #'   accessions into \mjseqn{n} clusters via k-means applied to the distance
 #'   matrix (See \code{\link[prospectr]{naes}}), then selects the accession
-#'   closest to each cluster centre as the representative.
+#'   closest to each cluster centre as the representative
+#'   \insertCite{naes_design_1987,naes_user-friendly_2017}{SampleCore}.
 #'
 #'   The k-means objective minimised is:
 #'
@@ -271,7 +286,8 @@
 #'   \subsection{Cluster-Based Sampling via Hierarchical Clustering with
 #'   Random Selection}{Partitions accessions into \mjseqn{n} clusters by
 #'   cutting a hierarchical clustering dendrogram at height \mjseqn{k = n},
-#'   then randomly samples one accession from each cluster.
+#'   then randomly samples one accession from each cluster
+#'   \insertCite{ward_Hierarchical_1963,li_studies_2002}{SampleCore}.
 #'
 #'   The dendrogram is built by agglomerative hierarchical clustering using the
 #'   linkage criterion specified by \code{\link[stats]{hclust}}. For
@@ -288,7 +304,8 @@
 #'   \subsection{Cluster-Based Sampling via Hierarchical Clustering with Medoid
 #'   Selection}{Partitions accessions into \mjseqn{n} clusters by cutting a
 #'   hierarchical clustering dendrogram at height \mjseqn{k = n}, then selects
-#'   the within-cluster medoid as the representative of each cluster.
+#'   the within-cluster medoid as the representative of each cluster
+#'   \insertCite{kaufman_clustering_1987,ward_Hierarchical_1963}{SampleCore}.
 #'
 #'   For each cluster \mjseqn{C_k}, the medoid is the accession minimising
 #'   total within-cluster distance:
