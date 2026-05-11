@@ -345,6 +345,10 @@
 #'
 #' @export
 #'
+#' @references
+#'
+#' \insertAllCited
+#'
 #' @examples
 select.distance <- function(data, names, group, alloc,
                             dist.mat, always.selected,
@@ -433,7 +437,6 @@ select.distance <- function(data, names, group, alloc,
         sampled_accns <- fixed_accns
 
       } else {
-
 
         idx <- which(labels(dist.mat) %in% rem_accns)
 
