@@ -18,11 +18,15 @@ Authors@R: c(
            role = c("cph"),
 		       comment = c(ROR = "https://ror.org/00scbd467",
 		                   url = "https://nbpgr.org.in/")))
-Description: Implements several sampling strategies for construction of core 
-    collections. These include 1) Stratified sampling based on group size 2) 
-    Stratified sampling based on group diversity 3) Sampling based on genetic 
-    distance between accessions. See the vignette for more, including full list 
-    of citations for the methods implemented.
+Description: Implements multiple allocation and selection strategies of 
+    sampling to construct core collections primarily from clustered or grouped 
+    germplasm collection data. Provides methods for allocating entries to 
+    clusters/groups based on group sizes, group-wise distance-based diversity 
+    metrics, and group-wise diversity index estimates. Includes procedures for 
+    selecting entries within clusters/groups through random sampling, genetic 
+    distance-based approaches, and optimized diversity metric–based selection 
+    methods. See the package documentation for more, including full list of 
+    references for the methods implemented.
 License: GPL (>= 2)
 Encoding: UTF-8
 BuildManual: TRUE
