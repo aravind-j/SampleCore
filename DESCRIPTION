@@ -39,7 +39,10 @@ Imports: cluster,
     Rdpack,
     stats,
     vegan
-Suggests: EvaluateCore,
+Suggests: biotools,
+    dbscan,
+    EvaluateCore,
+    fastcluster,
     knitr,
     pander,
     rmarkdown

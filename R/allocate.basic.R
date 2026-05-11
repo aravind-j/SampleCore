@@ -74,6 +74,39 @@
 #' \insertAllCited
 #'
 #' @examples
+#' # Get data
+#' data("cassava_EC_gp")
+#' data <- cbind(genotypes = rownames(cassava_EC_gp), cassava_EC_gp)
+#' row.names(data) <- NULL
+#'
+#' # Constant allocation
+#' const_out <-
+#'   allocate.basic(data = data, names = "genotypes",
+#'                  group = "Cluster", method = "const",
+#'                  size = 0.2)
+#' const_out
+#'
+#' # Proportional allocation
+#' prop_out <-
+#'   allocate.basic(data = data, names = "genotypes",
+#'                  group = "Cluster", method = "prop",
+#'                  size = 0.2)
+#' prop_out
+#'
+#' # Logarithmic allocation
+#' log_out <-
+#'   allocate.basic(data = data, names = "genotypes",
+#'                  group = "Cluster", method = "log",
+#'                  size = 0.2)
+#' log_out
+#'
+#' # Square root allocation
+#' sqrt_out <-
+#'   allocate.basic(data = data, names = "genotypes",
+#'                  group = "Cluster", method = "sqrt",
+#'                  size = 0.2)
+#' sqrt_out
+#'
 allocate.basic <- function(data,
                            names, group,
                            method = c("const", "prop", "log", "sqrt"),

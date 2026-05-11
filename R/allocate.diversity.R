@@ -65,6 +65,268 @@
 #' \insertAllCited
 #'
 #' @examples
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' # Prepare example data
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' # Get data
+#' data("cassava_EC_gp")
+#' data <- cbind(genotypes = rownames(cassava_EC_gp), cassava_EC_gp)
+#' row.names(data) <- NULL
+#'
+#' # Column names of traits
+#' quant <- c("NMSR", "TTRN", "TFWSR", "TTRW", "TFWSS", "TTSW", "TTPW",
+#'            "AVPW", "ARSR", "SRDM")
+#' qual <- c("CUAL", "LNGS", "PTLC", "DSTA", "LFRT", "LBTEF", "CBTR", "NMLB",
+#'           "ANGB", "CUAL9M", "LVC9M", "TNPR9M", "PL9M", "STRP", "STRC",
+#'           "PSTR")
+#'
+#' # Convert qualitative data columns to factor
+#' data[, qual] <- lapply(data[, qual], as.factor)
+#'
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' # Diversity allocation
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' ## Shannon-Weaver Diversity Index
+#' dist_out_shannon1 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                     group = "Cluster",
+#'                     qualitative = qual, quantitative = quant,
+#'                     method = "div",
+#'                     div.index = "shannon", metric = "pooled",
+#'                     size = 0.2)
+#' dist_out_shannon1
+#'
+#' dist_out_shannon2 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div",
+#'                      div.index = "shannon", metric = "mean",
+#'                      size = 0.2)
+#' dist_out_shannon2
+#'
+#' ##  Gini-Simpson Index
+#' dist_out_simpson1 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div",
+#'                      div.index = "simpson", metric = "pooled",
+#'                      size = 0.2)
+#' dist_out_simpson1
+#'
+#' dist_out_simpson2 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div",
+#'                      div.index = "simpson", metric = "mean",
+#'                      size = 0.2)
+#' dist_out_simpson2
+#'
+#' ## McIntosh Diversity Index
+#' dist_out_mcintosh1 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div",
+#'                      div.index = "mcintosh", metric = "pooled",
+#'                      size = 0.2)
+#' dist_out_mcintosh1
+#'
+#' dist_out_mcintosh2 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div",
+#'                      div.index = "mcintosh", metric = "mean",
+#'                      size = 0.2)
+#' dist_out_mcintosh2
+#'
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' # Diversity allocation & Proportional
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' ## Shannon-Weaver Diversity Index
+#' dist_prop_out_shannon1 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.prop",
+#'                      div.index = "shannon", metric = "pooled",
+#'                      size = 0.2)
+#' dist_prop_out_shannon1
+#'
+#' dist_prop_out_shannon2 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.prop",
+#'                      div.index = "shannon", metric = "mean",
+#'                      size = 0.2)
+#' dist_prop_out_shannon2
+#'
+#' ##  Gini-Simpson Index
+#' dist_prop_out_simpson1 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.prop",
+#'                      div.index = "simpson", metric = "pooled",
+#'                      size = 0.2)
+#' dist_prop_out_simpson1
+#'
+#' dist_prop_out_simpson2 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.prop",
+#'                      div.index = "simpson", metric = "mean",
+#'                      size = 0.2)
+#' dist_prop_out_simpson2
+#'
+#' ## McIntosh Diversity Index
+#' dist_prop_out_mcintosh1 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.prop",
+#'                      div.index = "mcintosh", metric = "pooled",
+#'                      size = 0.2)
+#' dist_prop_out_mcintosh1
+#'
+#' dist_prop_out_mcintosh2 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.prop",
+#'                      div.index = "mcintosh", metric = "mean",
+#'                      size = 0.2)
+#' dist_prop_out_mcintosh2
+#'
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' # Diversity allocation & Logarithmic
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' ## Shannon-Weaver Diversity Index
+#' dist_log_out_shannon1 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.log",
+#'                      div.index = "shannon", metric = "pooled",
+#'                      size = 0.2)
+#' dist_log_out_shannon1
+#'
+#' dist_log_out_shannon2 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.log",
+#'                      div.index = "shannon", metric = "mean",
+#'                      size = 0.2)
+#' dist_log_out_shannon2
+#'
+#' ##  Gini-Simpson Index
+#' dist_log_out_simpson1 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.log",
+#'                      div.index = "simpson", metric = "pooled",
+#'                      size = 0.2)
+#' dist_log_out_simpson1
+#'
+#' dist_log_out_simpson2 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.log",
+#'                      div.index = "simpson", metric = "mean",
+#'                      size = 0.2)
+#' dist_log_out_simpson2
+#'
+#' ## McIntosh Diversity Index
+#' dist_log_out_mcintosh1 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.log",
+#'                      div.index = "mcintosh", metric = "pooled",
+#'                      size = 0.2)
+#' dist_log_out_mcintosh1
+#'
+#' dist_log_out_mcintosh2 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.log",
+#'                      div.index = "mcintosh", metric = "mean",
+#'                      size = 0.2)
+#' dist_log_out_mcintosh2
+#'
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' # Diversity allocation & Square root
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' ## Shannon-Weaver Diversity Index
+#' dist_sqrt_out_shannon1 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.sqrt",
+#'                      div.index = "shannon", metric = "pooled",
+#'                      size = 0.2)
+#' dist_sqrt_out_shannon1
+#'
+#' dist_sqrt_out_shannon2 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.sqrt",
+#'                      div.index = "shannon", metric = "mean",
+#'                      size = 0.2)
+#' dist_sqrt_out_shannon2
+#'
+#' ##  Gini-Simpson Index
+#' dist_sqrt_out_simpson1 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.sqrt",
+#'                      div.index = "simpson", metric = "pooled",
+#'                      size = 0.2)
+#' dist_sqrt_out_simpson1
+#'
+#' dist_sqrt_out_simpson2 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.sqrt",
+#'                      div.index = "simpson", metric = "mean",
+#'                      size = 0.2)
+#' dist_sqrt_out_simpson2
+#'
+#' ## McIntosh Diversity Index
+#' dist_sqrt_out_mcintosh1 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.sqrt",
+#'                      div.index = "mcintosh", metric = "pooled",
+#'                      size = 0.2)
+#' dist_sqrt_out_mcintosh1
+#'
+#' dist_sqrt_out_mcintosh2 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = qual, quantitative = quant,
+#'                      method = "div.sqrt",
+#'                      div.index = "mcintosh", metric = "mean",
+#'                      size = 0.2)
+#' dist_sqrt_out_mcintosh2
 #'
 allocate.diversity <- function(data, names, group,
                                quantitative, qualitative,
@@ -81,9 +343,9 @@ allocate.diversity <- function(data, names, group,
 
   checks.sample.core(data = data, size = size,
                      names = names, group = group,
-                     dist.mat = dist.mat,
-                     quantitative = NULL,
-                     qualitative = NULL,
+                     dist.mat = NULL,
+                     quantitative = quantitative,
+                     qualitative = qualitative,
                      log.base = log.base,
                      mode = "alloc")
 
@@ -168,38 +430,40 @@ allocate.diversity <- function(data, names, group,
 
       ## Pooled diversity ----
       if (metric == "pooled") {
-        sum(trait_wise_div)
+        metric_out <- sum(trait_wise_div)
       }
 
       ## Mean/Average diversity ----
       if (metric == "mean") {
-        mean(trait_wise_div)
+        metric_out <- mean(trait_wise_div)
       }
+
+      return(metric_out)
 
     })
 
   # Freq estimation ----
 
-  ## "dist" ----
-  if (method == "dist") {
+  ## "div" ----
+  if (method == "div") {
     freq <- group_dist_metric / sum(group_dist_metric)
   }
 
-  ## "dist.prop" ----
-  if (method == "dist.prop") {
+  ## "div.prop" ----
+  if (method == "div.prop") {
     freq <- (group_dist_metric * gpsize) /
       sum(group_dist_metric * gpsize)
   }
 
-  ## "dist.log" ----
-  if (method == "dist.log") {
+  ## "div.log" ----
+  if (method == "div.log") {
     log_gpsize <- log(gpsize, base = log.base)
     freq <- (group_dist_metric * log_gpsize) /
       sum(group_dist_metric * log_gpsize)
   }
 
-  ## "dist.sqrt" ----
-  if (method == "dist.sqrt") {
+  ## "div.sqrt" ----
+  if (method == "div.sqrt") {
     freq <- (group_dist_metric * sqrt(gpsize)) /
       sum(group_dist_metric * sqrt(gpsize))
   }
