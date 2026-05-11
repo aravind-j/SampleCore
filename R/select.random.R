@@ -4,12 +4,12 @@
 #' sampling according to allocation specified.
 #'
 #' For each cluster/group entries are selected randomly according to the
-#' allocation provided \insertCite{brown_core_1989;
-#' van_hintum_core_2000}{SampleCore}. Entries listed as \code{always.selected}
-#' are mandatorily included in the selection. Warnings are issued if requested
-#' allocation is smaller than the number of always-selected entries in a
-#' cluster/group and/or when the cluster/group does not contain enough remaining
-#' entries to fulfill the allocation.
+#' allocation provided
+#' \insertCite{brown_core_1989,van_hintum_core_2000}{SampleCore}. Entries listed
+#' as \code{always.selected} are mandatorily included in the selection. Warnings
+#' are issued if requested allocation is smaller than the number of
+#' always-selected entries in a cluster/group and/or when the cluster/group does
+#' not contain enough remaining entries to fulfill the allocation.
 #'
 #' @template general-arg
 #' @template sel-arg
@@ -17,6 +17,10 @@
 #' @returns A named list where each element contains the selected entry
 #'   identifiers for a cluster/group.
 #' @export
+#'
+#' @references
+#'
+#' \insertAllCited
 #'
 #' @examples
 select.random <- function(data, names, group, alloc, always.selected) {
@@ -46,6 +50,7 @@ select.random <- function(data, names, group, alloc, always.selected) {
 
       n_rem <- requested_n - length(fixed_accns)
 
+      # Handle alloc smaller than fixed set
       if (n_rem < 0) {
 
         warning(
@@ -63,6 +68,7 @@ select.random <- function(data, names, group, alloc, always.selected) {
 
         avail_rem <- length(rem_accns)
 
+        # Handle insufficient remaining pool
         if (avail_rem < n_rem) {
 
           warning(
@@ -78,7 +84,16 @@ select.random <- function(data, names, group, alloc, always.selected) {
           n_rem <- avail_rem
         }
 
-        sampled_accns <- c(fixed_accns, sample(rem_accns, n_rem))
+        if (n_rem == 0) {
+
+          sampled_accns <- fixed_accns
+
+        } else {
+
+        sampled_accns <- c(fixed_accns,
+                           sample(rem_accns, n_rem, replace = FALSE))
+
+        }
 
       }
 
