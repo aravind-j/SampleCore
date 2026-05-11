@@ -110,3 +110,48 @@ Huaman Z, Aguilar C, Ortiz R (1999). “Selecting a Peruvian sweetpotato
 core collection on the basis of morphological, eco-geographical, and
 disease and pest reaction data:.” *Theoretical and Applied Genetics*,
 **98**(5), 840–844.
+
+## Examples
+
+``` r
+# Get data
+data("cassava_EC_gp")
+data <- cbind(genotypes = rownames(cassava_EC_gp), cassava_EC_gp)
+row.names(data) <- NULL
+
+# Constant allocation
+const_out <-
+  allocate.basic(data = data, names = "genotypes",
+                 group = "Cluster", method = "const",
+                 size = 0.2)
+const_out
+#>   I  II III  IV   V  VI 
+#>  56  56  56  56  56  56 
+
+# Proportional allocation
+prop_out <-
+  allocate.basic(data = data, names = "genotypes",
+                 group = "Cluster", method = "prop",
+                 size = 0.2)
+prop_out
+#>   I  II III  IV   V  VI 
+#>  61  41  37  81  80  37 
+
+# Logarithmic allocation
+log_out <-
+  allocate.basic(data = data, names = "genotypes",
+                 group = "Cluster", method = "log",
+                 size = 0.2)
+log_out
+#>   I  II III  IV   V  VI 
+#>  57  54  53  60  60  52 
+
+# Square root allocation
+sqrt_out <-
+  allocate.basic(data = data, names = "genotypes",
+                 group = "Cluster", method = "sqrt",
+                 size = 0.2)
+sqrt_out
+#>   I  II III  IV   V  VI 
+#>  59  49  46  69  68  46 
+```

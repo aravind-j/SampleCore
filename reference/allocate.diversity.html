@@ -283,6 +283,321 @@ John Wiley &amp; Sons, New York.
 ISBN 0-471-95545-0.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span><span class="co"># Prepare example data</span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Get data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"cassava_EC_gp"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>genotypes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">)</span>, <span class="va">cassava_EC_gp</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Column names of traits</span></span></span>
+<span class="r-in"><span><span class="va">quant</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NMSR"</span>, <span class="st">"TTRN"</span>, <span class="st">"TFWSR"</span>, <span class="st">"TTRW"</span>, <span class="st">"TFWSS"</span>, <span class="st">"TTSW"</span>, <span class="st">"TTPW"</span>,</span></span>
+<span class="r-in"><span>           <span class="st">"AVPW"</span>, <span class="st">"ARSR"</span>, <span class="st">"SRDM"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">qual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CUAL"</span>, <span class="st">"LNGS"</span>, <span class="st">"PTLC"</span>, <span class="st">"DSTA"</span>, <span class="st">"LFRT"</span>, <span class="st">"LBTEF"</span>, <span class="st">"CBTR"</span>, <span class="st">"NMLB"</span>,</span></span>
+<span class="r-in"><span>          <span class="st">"ANGB"</span>, <span class="st">"CUAL9M"</span>, <span class="st">"LVC9M"</span>, <span class="st">"TNPR9M"</span>, <span class="st">"PL9M"</span>, <span class="st">"STRP"</span>, <span class="st">"STRC"</span>,</span></span>
+<span class="r-in"><span>          <span class="st">"PSTR"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Convert qualitative data columns to factor</span></span></span>
+<span class="r-in"><span><span class="va">data</span><span class="op">[</span>, <span class="va">qual</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="va">qual</span><span class="op">]</span>, <span class="va">as.factor</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span><span class="co"># Diversity allocation</span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Shannon-Weaver Diversity Index</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_shannon1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                    qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                    method <span class="op">=</span> <span class="st">"div"</span>,</span></span>
+<span class="r-in"><span>                    div.index <span class="op">=</span> <span class="st">"shannon"</span>, metric <span class="op">=</span> <span class="st">"pooled"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_shannon1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  67  51  46  60  54  60 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">dist_out_shannon2</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"shannon"</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_shannon2</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  67  51  46  60  54  60 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">##  Gini-Simpson Index</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_simpson1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"simpson"</span>, metric <span class="op">=</span> <span class="st">"pooled"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_simpson1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  66  51  46  60  55  59 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">dist_out_simpson2</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"simpson"</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_simpson2</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  66  51  46  60  55  59 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## McIntosh Diversity Index</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_mcintosh1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"mcintosh"</span>, metric <span class="op">=</span> <span class="st">"pooled"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_mcintosh1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  66  52  47  60  53  59 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">dist_out_mcintosh2</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"mcintosh"</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_mcintosh2</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  66  52  47  60  53  59 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span><span class="co"># Diversity allocation &amp; Proportional</span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Shannon-Weaver Diversity Index</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_shannon1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.prop"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"shannon"</span>, metric <span class="op">=</span> <span class="st">"pooled"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_shannon1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  71  37  30  85  75  39 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_shannon2</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.prop"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"shannon"</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_shannon2</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  71  37  30  85  75  39 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">##  Gini-Simpson Index</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_simpson1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.prop"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"simpson"</span>, metric <span class="op">=</span> <span class="st">"pooled"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_simpson1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  70  37  30  86  77  38 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_simpson2</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.prop"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"simpson"</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_simpson2</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  70  37  30  86  77  38 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## McIntosh Diversity Index</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_mcintosh1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.prop"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"mcintosh"</span>, metric <span class="op">=</span> <span class="st">"pooled"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_mcintosh1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  71  38  30  86  74  38 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_mcintosh2</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.prop"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"mcintosh"</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_mcintosh2</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  71  38  30  86  74  38 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span><span class="co"># Diversity allocation &amp; Logarithmic</span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Shannon-Weaver Diversity Index</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_shannon1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.log"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"shannon"</span>, metric <span class="op">=</span> <span class="st">"pooled"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_shannon1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  68  49  42  64  58  56 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_shannon2</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.log"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"shannon"</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_shannon2</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  68  49  42  64  58  56 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">##  Gini-Simpson Index</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_simpson1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.log"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"simpson"</span>, metric <span class="op">=</span> <span class="st">"pooled"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_simpson1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  67  49  43  64  59  55 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_simpson2</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.log"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"simpson"</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_simpson2</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  67  49  43  64  59  55 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## McIntosh Diversity Index</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_mcintosh1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.log"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"mcintosh"</span>, metric <span class="op">=</span> <span class="st">"pooled"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_mcintosh1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  68  49  44  65  57  55 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_mcintosh2</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.log"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"mcintosh"</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_mcintosh2</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  68  49  44  65  57  55 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span><span class="co"># Diversity allocation &amp; Square root</span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Shannon-Weaver Diversity Index</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_shannon1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.sqrt"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"shannon"</span>, metric <span class="op">=</span> <span class="st">"pooled"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_shannon1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  70  44  37  72  65  49 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_shannon2</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.sqrt"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"shannon"</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_shannon2</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  70  44  37  72  65  49 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">##  Gini-Simpson Index</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_simpson1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.sqrt"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"simpson"</span>, metric <span class="op">=</span> <span class="st">"pooled"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_simpson1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  69  44  38  73  66  48 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_simpson2</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.sqrt"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"simpson"</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_simpson2</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  69  44  38  73  66  48 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## McIntosh Diversity Index</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_mcintosh1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.sqrt"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"mcintosh"</span>, metric <span class="op">=</span> <span class="st">"pooled"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_mcintosh1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  69  45  38  73  64  48 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_mcintosh2</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                     group <span class="op">=</span> <span class="st">"Cluster"</span>,</span></span>
+<span class="r-in"><span>                     qualitative <span class="op">=</span> <span class="va">qual</span>, quantitative <span class="op">=</span> <span class="va">quant</span>,</span></span>
+<span class="r-in"><span>                     method <span class="op">=</span> <span class="st">"div.sqrt"</span>,</span></span>
+<span class="r-in"><span>                     div.index <span class="op">=</span> <span class="st">"mcintosh"</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_mcintosh2</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  69  45  38  73  64  48 </span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

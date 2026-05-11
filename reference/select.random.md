@@ -46,8 +46,17 @@ for a cluster/group.
 ## Details
 
 For each cluster/group entries are selected randomly according to the
-allocation provided . Entries listed as `always.selected` are
-mandatorily included in the selection. Warnings are issued if requested
-allocation is smaller than the number of always-selected entries in a
-cluster/group and/or when the cluster/group does not contain enough
-remaining entries to fulfill the allocation.
+allocation provided (Brown 1989; Brown and van Hintum 2000) . Entries
+listed as `always.selected` are mandatorily included in the selection.
+Warnings are issued if requested allocation is smaller than the number
+of always-selected entries in a cluster/group and/or when the
+cluster/group does not contain enough remaining entries to fulfill the
+allocation.
+
+## References
+
+Brown AHD (1989). “Core collections: A practical approach to genetic
+resources management.” *Genome*, **31**(2), 818–824.  
+  
+Brown AHD, van Hintum TJL (2000). *Core Collections of Plant Genetic
+Resources*. Bioversity International. ISBN 92-9043-454-6.

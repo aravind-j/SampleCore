@@ -362,3 +362,72 @@ within-cluster distance:
 
 This combines the structured partitioning of hierarchical clustering
 with deterministic, centrality-based representative selection.
+
+## References
+
+Anderson MJ (2006). “Distance-based tests for homogeneity of
+multivariate dispersions.” *Biometrics*, **62**(1), 245–253.  
+  
+Anderson MJ, Ellingsen KE, McArdle BH (2006). “Multivariate dispersion
+as a measure of beta diversity.” *Ecology Letters*, **9**(6), 683–693.  
+  
+Cover T, Hart P (1967). “Nearest neighbor pattern classification.” *IEEE
+Transactions on Information Theory*, **13**(1), 21–27.  
+  
+Dyer ME, Frieze AM (1985). “A simple heuristic for the *p*-centre
+problem.” *Operations Research Letters*, **3**(6), 285–288.  
+  
+Fix E, Hodges JL (1989). “Discriminatory analysis - Nonparametric
+discrimination: Consistency properties.” *International Statistical
+Review / Revue Internationale de Statistique*, **57**(3), 238–247.  
+  
+Gonzalez TF (1985). “Clustering to minimize the maximum intercluster
+distance.” *Theoretical Computer Science*, **38**, 293–306.  
+  
+Hage P, Harary F (1995). “Eccentricity and centrality in networks.”
+*Social Networks*, **17**(1), 57–63.  
+  
+Hochbaum DS, Shmoys DB (1985). “A best possible heuristic for the
+*K*-center problem.” *Mathematics of Operations Research*, **10**(2),
+180–184.  
+  
+Honigs DE, Hieftje GM, Mark HL, Hirschfeld TB (1985). “Unique-sample
+selection via near-infrared spectral subtraction.” *Analytical
+Chemistry*, **57**(12), 2299–2303.  
+  
+Kaufman L, Rousseeuw PJ (1990). *Finding Groups in Data: An Introduction
+to Cluster Analysis*, Wiley Series in Probability and Statistics, 1
+edition. Wiley. ISBN 978-0-471-87876-6 978-0-470-31680-1.  
+  
+Kaufman P, Rousseeuw PJ (1987). “Clustering by means of medoids.” In
+Dodge Y (ed.), *Proceedings of the Statistical Data Analysis Based on
+the L1 Norm Conference, Neuchatel, Switzerland*, volume 31, 405–416.  
+  
+Kennard RW, Stone LA (1969). “Computer aided design of experiments.”
+*Technometrics*, **11**(1), 137–148.  
+  
+Li Z, Zhang H, Zeng Y, Yang Z, Shen S, Sun C, Wang X (2002). “Studies on
+sampling schemes for the establishment of core collection of rice
+landraces in Yunnan, China.” *Genetic Resources and Crop Evolution*,
+**49**(1), 67–74.  
+  
+Naes T (1987). “The design of calibration in near infra-red reflectance
+analysis by clustering.” *Journal of Chemometrics*, **1**(2), 121–134.  
+  
+Naes T, Isaksson T, Fearn T, Davies T (2017). *A User-Friendly Guide to
+Multivariate Calibration and Classification*, Second edition edition. IM
+Publications LLP, Chichester. ISBN 978-1-906715-25-0.  
+  
+O'Neill ME, Mathews K (2000). “A weighted least squares approach to
+levene's test of homogeneity of variance.” *Australian & New Zealand
+Journal of Statistics*, **42**(1), 81–100.  
+  
+Sabidussi G (1966). “The centrality index of a graph.” *Psychometrika*,
+**31**(4), 581–603.  
+  
+Snee RD (1977). “Validation of regression models: Methods and examples.”
+*Technometrics*, **19**(4), 415–428.  
+  
+Ward JH (1963). “Hierarchical grouping to optimize an objective
+function.” *Journal of the American Statistical Association*,
+**58**(301), 236–244.

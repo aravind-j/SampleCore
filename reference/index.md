@@ -16,6 +16,9 @@
 
 - [`select.random()`](https://aravind-j.github.io/SampleCore/reference/select.random.md)
   : Selection of Entries from Clusters/Groups by Random Sampling
+- [`select.diversity()`](https://aravind-j.github.io/SampleCore/reference/select.diversity.md)
+  : Selection of Entries from Clusters/Groups on the basis of Optimized
+  Diversity
 - [`select.distance()`](https://aravind-j.github.io/SampleCore/reference/select.distance.md)
   : Selection of Entries from Clusters/Groups on the basis of Genetic
   Distances
