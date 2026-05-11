@@ -201,7 +201,7 @@ allocate.distance <- function(data, names, group,
   # Compute group-wise distance metrics ----
 
   if (metric %in% c("mean", "median", "max",
-                    "range", "mnnd", "mstl") ) {
+                    "range", "mnnd", "mstl", "nclust") ) {
 
     group_dist_metric <- sapply(unique(gp_memb), function(g) {
       idx <- which(gp_memb == g)
@@ -213,22 +213,22 @@ allocate.distance <- function(data, names, group,
       if (metric == "mean") {
         # take only upper triangle
         # avoid duplicates + diagonal
-        mean(sub_d[upper.tri(sub_d)], na.rm = TRUE)
+        out <- mean(sub_d[upper.tri(sub_d)], na.rm = TRUE)
       }
 
       ## Median distance ----
       if (metric == "median") {
-        median(sub_d[upper.tri(sub_d)])
+        out <- median(sub_d[upper.tri(sub_d)])
       }
 
       ## Maximum distance ----
       if (metric == "max") {
-        max(sub_d[upper.tri(sub_d)])
+        out <- max(sub_d[upper.tri(sub_d)])
       }
 
       ## Range ----
       if (metric == "range") {
-        diff(range(sub_d[upper.tri(sub_d)]))
+        out <- diff(range(sub_d[upper.tri(sub_d)]))
       }
 
       ## Mean nearest-neighbour distance (MNND) ----
@@ -236,7 +236,7 @@ allocate.distance <- function(data, names, group,
       if (metric == "mnnd") {
         vals <- sub_d
         diag(vals) <- Inf # To exclude self-distances
-        mean(apply(vals, 1, min))
+        out <- mean(apply(vals, 1, min))
       }
 
       ## Minimum spanning tree (MSTL) length ----
@@ -253,8 +253,24 @@ allocate.distance <- function(data, names, group,
         )
 
         mst_g <- igraph::mst(g)
-        sum(igraph::E(mst_g)$weight)
+        out <- sum(igraph::E(mst_g)$weight)
       }
+
+      ## Diwan et al., 1994 (No. of clusters )----
+      if (metric == "nclust") {
+        # Handle groups with only 1 entry (cannot cluster)
+        if (length(idx) == 1) {
+          return(1)
+        }
+
+        # Return cluster membership
+        clusters <- clust.fun(as.dist(sub_d))
+
+        # count of unique clusters
+        out <- length(unique(clusters))
+      }
+
+      return(out)
 
     })
   }
@@ -276,20 +292,6 @@ allocate.distance <- function(data, names, group,
     bdout <- vegan::betadisper(d = dist.mat, group = data[, group],
                                type = "median")
     group_dist_metric <- bdout$group.distances
-  }
-
-  ## Diwan et al., 1994 (No. of clusters )----
-  if (metric == nclust) {
-    # Handle groups with only 1 entry (cannot cluster)
-    if (length(idx) == 1) {
-      return(1)
-    }
-
-    # Return cluster membership
-    clusters <- clust.fun(as.dist(sub_d))
-
-    # count of unique clusters
-    length(unique(clusters))
   }
 
   # Freq estimation ----
