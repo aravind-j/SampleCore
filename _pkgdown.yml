@@ -83,6 +83,7 @@ reference:
     - title: Selection Methods
       contents:
          - '`select.random`'
+         - '`select.diversity`'
          - '`select.distance`'
 
     - title: Datasets
