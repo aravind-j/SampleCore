@@ -41,6 +41,57 @@ are issued if requested allocation is smaller than the number of
 always-selected entries in a cluster/group and/or when the cluster/group does
 not contain enough remaining entries to fulfill the allocation.
 }
+\examples{
+\dontshow{if (requireNamespace("cluster", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+# Get data
+data(cassava_EC_gp)
+
+data <- cbind(genotypes = rownames(cassava_EC_gp), cassava_EC_gp)
+row.names(data) <- NULL
+
+# Prepare inputs
+counts <- c(I = 61, II = 41, III = 37, IV = 81, V = 80, VI = 37)
+
+mand_accns <-
+  c("TMe-34", "TMe-3423", "TMe-2018", "TMe-801", "TMe-551")
+
+# Specify the seed
+set.seed(123)
+
+# Fetch selected accessions
+sel_random_out <-
+  select.random(data = data, names = "genotypes",
+                group = "Cluster", alloc = counts,
+                always.selected = mand_accns)
+
+sel_random_out
+
+# Get distance matrix - Only for visualization
+quant <- c("NMSR", "TTRN", "TFWSR", "TTRW", "TFWSS", "TTSW", "TTPW",
+           "AVPW", "ARSR", "SRDM")
+qual <- c("CUAL", "LNGS", "PTLC", "DSTA", "LFRT", "LBTEF", "CBTR", "NMLB",
+          "ANGB", "CUAL9M", "LVC9M", "TNPR9M", "PL9M", "STRP", "STRC",
+          "PSTR")
+
+# Convert qualitative data columns to factor
+cassava_EC_gp[, qual] <- lapply(cassava_EC_gp[, qual], as.factor)
+
+# Standardise quantitative data column
+cassava_EC_gp[, quant] <- lapply(cassava_EC_gp[, quant], function(x) {
+  scale(x)[, 1]
+})
+
+gp_vec <- setNames(as.character(data[, "Cluster"]), data[, "genotypes"])
+
+# Get the Gower's distance matrix
+dist_matrix <- daisy(x = cassava_EC_gp[, c(qual, quant)],
+                     metric = "gower")
+
+plot_dist(d = dist_matrix, method = "isomds",
+          gp = gp_vec,
+          highlight =  unlist(sel_random_out, use.names = FALSE))
+\dontshow{\}) # examplesIf}
+}
 \references{
 \insertAllCited
 }
