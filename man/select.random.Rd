@@ -43,6 +43,9 @@ not contain enough remaining entries to fulfill the allocation.
 }
 \examples{
 \dontshow{if (requireNamespace("cluster", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+
+library(cluster)
+
 # Get data
 data(cassava_EC_gp)
 

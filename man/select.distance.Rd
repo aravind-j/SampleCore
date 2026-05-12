@@ -382,10 +382,13 @@ allocation.
 }
 
 \examples{
+\dontshow{if (requireNamespace("cluster", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Prepare example data
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+library(cluster)
 
 data(cassava_EC_gp)
 
@@ -841,7 +844,7 @@ plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
           highlight =  unlist(sel_hclust_medoid_out8, use.names = FALSE)) +
   labs(title = "hclust.medoid", subtitle = "ward.D2")
-
+\dontshow{\}) # examplesIf}
 }
 \references{
 \insertAllCited
