@@ -63,7 +63,7 @@
 #'   \code{"prop"} for proportional or \code{"log"} for logarithmic or
 #'   \code{"sqrt"} for square root allocation.
 #'
-#' @returns
+#' @template alloc-returns
 #'
 #' @import mathjaxr
 #' @importFrom Rdpack reprompt

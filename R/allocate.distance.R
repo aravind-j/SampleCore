@@ -123,7 +123,7 @@
 #' @param clust.fun A function to generate clusters from a distance matrix and
 #'   return the number of clusters.
 #'
-#' @returns
+#' @template alloc-returns
 #'
 #' @importFrom vegan betadisper
 #' @importFrom igraph E graph_from_adjacency_matrix mst

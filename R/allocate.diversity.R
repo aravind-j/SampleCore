@@ -1,10 +1,10 @@
 #' Allocation of Entries to be Selected from Clusters/Groups based on Diversity
 #' Index Estimates for Core Collection Development
 #'
-#' Estimate the number of entries to be allocated from each cluster/group in
-#' the entire collection to construct a core collection on the basis of
-#' different metrics computed from within cluster/group diversity index
-#' estimates. The following strategies are implemented. \loadmathjax
+#' Estimate the number of entries to be allocated from each cluster/group in the
+#' entire collection to construct a core collection on the basis of different
+#' metrics computed from within cluster/group diversity index estimates. The
+#' following strategies are implemented. \loadmathjax
 #' \itemize{
 #' \item{Diversity}
 #' \item{Diversity & Proportional}
@@ -55,7 +55,7 @@
 #'   \code{"div.sqrt"} for square root allocation.
 #' @template div-arg
 #'
-#' @returns
+#' @template alloc-returns
 #'
 #' @importFrom DiversityStats simpson shannon mcintosh_diversity
 #' @export

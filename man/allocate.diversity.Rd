@@ -57,11 +57,17 @@ sampling. Default is \code{exp(1)}.}
 
 \item{size}{The desired core set size proportion.}
 }
+\value{
+A named numeric vector specifying the number of entries to be
+  selected from each cluster/group. The vector names correspond to the levels
+  of the "\code{"group"} column, and values indicate the number of elements
+  to be selected from each level.
+}
 \description{
-Estimate the number of entries to be allocated from each cluster/group in
-the entire collection to construct a core collection on the basis of
-different metrics computed from within cluster/group diversity index
-estimates. The following strategies are implemented. \loadmathjax
+Estimate the number of entries to be allocated from each cluster/group in the
+entire collection to construct a core collection on the basis of different
+metrics computed from within cluster/group diversity index estimates. The
+following strategies are implemented. \loadmathjax
 \itemize{
 \item{Diversity}
 \item{Diversity & Proportional}
