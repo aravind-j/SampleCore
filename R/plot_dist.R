@@ -99,7 +99,7 @@ plot_dist <- function(d,
 
     # check if highlight is present in the entire set
     if (any(!(highlight %in% labels(d)))) {
-      alsel_miss <- highlight[!(highlight %in% label(d))]
+      alsel_miss <- highlight[!(highlight %in% labels(d))]
       stop(paste('The following entry/entries specified in "highlight" ',
                  'are not present in "data":\n',
                  paste(alsel_miss, collapse = ", "),
