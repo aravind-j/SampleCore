@@ -349,11 +349,13 @@
 #'
 #' \insertAllCited
 #'
-#' @examples
+#' @examplesIf requireNamespace("cluster", quietly = TRUE)
 #'
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' # Prepare example data
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' library(cluster)
 #'
 #' data(cassava_EC_gp)
 #'

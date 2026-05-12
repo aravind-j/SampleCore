@@ -23,6 +23,9 @@
 #' \insertAllCited
 #'
 #' @examplesIf requireNamespace("cluster", quietly = TRUE)
+#'
+#' library(cluster)
+#'
 #' # Get data
 #' data(cassava_EC_gp)
 #'
