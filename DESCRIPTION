@@ -32,11 +32,13 @@ Encoding: UTF-8
 BuildManual: TRUE
 Imports: cluster,
     DiversityStats,
+    ggplot2,
     igraph,
     MASS,
     mathjaxr,
     prospectr,
     Rdpack,
+    Rtsne,
     stats,
     vegan
 Suggests: biotools,
