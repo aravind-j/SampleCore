@@ -614,22 +614,25 @@ select.distance <- function(data, names, group, alloc,
         }
       }
 
-      if (SampleCore.debug) {
-        main_title <- paste("Cluster:", g)
-        if (n_rem < 0) {
-          plot(NULL, xlim=c(0, 1), ylim=c(0, 1), xlab="X", ylab="Y")
-          title(main = paste(main_title, "(skipped - alloc < fixed)"))
-        } else {
-          plot_dist(d = sub_d, method = "isomds", highlight = sampled_accns)
-          title(main = main_title)
-        }
-      }
-
       return(c(sampled_accns, fixed_accns))
 
     })
 
   names(out) <- names(alloc)
+
+  if (SampleCore.debug) {
+
+    out_vec <- setNames(rep(names(out), times = lengths(out)),
+                        unlist(out, use.names = FALSE))
+
+    gp_vec <- setNames(as.character(data[, group]), data[, names])
+
+    viz_out <-
+      plot_dist(d = dist.mat, method = "isomds", gp = gp_vec,
+              highlight = unlist(out, use.names = FALSE))
+    print(viz_out)
+
+  }
 
   return(out)
 }
@@ -657,46 +660,3 @@ farthest_sampling <- function(d, n_select,
 
   selected
 }
-
-
-plot_dist <- function(d, method = c("cmds", "isomds"),
-                      highlight) {
-
-  if (method == "isomds" && nrow(as.matrix(d)) < 3) {
-    method <- "cmds"  # fallback to classical MDS
-  }
-
-  # Classical MDS
-  if (method == "cmds") {
-    fit <- cmdscale(d, k = 2)
-  }
-
-  # Non-metric MDS
-  # when distances are non-Euclidean or rank information matters
-  if (method == "isomds") {
-    fit <- MASS::isoMDS(as.dist(d))
-    fit <- fit$points
-  }
-
-  # "tsne"
-  # # t-SNE
-  # if (method == "tsne") {
-  #   fit <- Rtsne::Rtsne(as.matrix(d), is_distance = TRUE)
-  #   fit <- fit$Y
-  #   rownames(fit) <- labels(d)[[1]]
-  # }
-
-  fit <- data.frame(fit)
-
-  cols <- rep("black", nrow(fit))
-  cols[which(row.names(fit) %in% highlight)] <- "red"
-
-  plot(fit[,1], fit[,2],
-       # xlab = "MDS1",
-       # ylab = "MDS2",
-       xlab = "X",
-       ylab = "Y",
-       col = cols,
-       pch = 19)
-}
-
