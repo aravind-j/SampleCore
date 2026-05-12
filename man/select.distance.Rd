@@ -382,13 +382,14 @@ allocation.
 }
 
 \examples{
-\dontshow{if (requireNamespace("cluster", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("cluster", quietly = TRUE) & requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Prepare example data
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 library(cluster)
+library(ggplot2)
 
 data(cassava_EC_gp)
 

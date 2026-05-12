@@ -349,13 +349,14 @@
 #'
 #' \insertAllCited
 #'
-#' @examplesIf requireNamespace("cluster", quietly = TRUE)
+#' @examplesIf requireNamespace("cluster", quietly = TRUE) & requireNamespace("ggplot2", quietly = TRUE)
 #'
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' # Prepare example data
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #'
 #' library(cluster)
+#' library(ggplot2)
 #'
 #' data(cassava_EC_gp)
 #'
