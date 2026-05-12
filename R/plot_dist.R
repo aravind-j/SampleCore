@@ -126,7 +126,7 @@ plot_dist <- function(d,
   }
 
   if (method == "isomds") {
-    fit <- MASS::isoMDS(as.dist(d))$points
+    fit <- MASS::isoMDS(as.dist(d), trace = F)$points
   }
 
   if (method == "tsne") {
