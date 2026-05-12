@@ -86,6 +86,10 @@ reference:
          - '`select.diversity`'
          - '`select.distance`'
 
+    - title: Helpers
+      contents:
+          - '`plot_dist`'
+
     - title: Datasets
       contents:
           - '`cassava_EC_gp`'
