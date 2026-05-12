@@ -182,8 +182,8 @@ select.diversity <- function(data, names, group, alloc,
 
           switch(
             metric,
-            mean = mean(trait_div, na.rm = FALSE),
-            sum = sum(trait_div, na.rm = FALSE)
+            mean = mean(trait_div, na.rm = TRUE),
+            pooled = sum(trait_div, na.rm = TRUE)
           )
 
         }, numeric(1))
