@@ -92,6 +92,13 @@ allocate.diversity(
 
   The desired core set size proportion.
 
+## Value
+
+A named numeric vector specifying the number of entries to be selected
+from each cluster/group. The vector names correspond to the levels of
+the "`"group"` column, and values indicate the number of elements to be
+selected from each level.
+
 ## Details
 
 The number of entries to be chosen from each cluster is estimated either

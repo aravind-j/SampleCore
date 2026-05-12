@@ -147,6 +147,13 @@ sampling. Default is <code>exp(1)</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>A named numeric vector specifying the number of entries to be
+  selected from each cluster/group. The vector names correspond to the levels
+  of the "<code>"group"</code> column, and values indicate the number of elements
+  to be selected from each level.</p>
+    </div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
 
 
@@ -335,546 +342,613 @@ W. H. Freeman, San Francisco.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'cluster'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span><span class="co"># Prepare example data</span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
-<span class="r-in"><span>  <span class="co"># Prepare example data</span></span></span>
-<span class="r-in"><span>  <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://svn.r-project.org/R-packages/trunk/cluster/" class="external-link">cluster</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://svn.r-project.org/R-packages/trunk/cluster/" class="external-link">cluster</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Get distance matrix</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"cassava_EC_gp"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">quant</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NMSR"</span>, <span class="st">"TTRN"</span>, <span class="st">"TFWSR"</span>, <span class="st">"TTRW"</span>, <span class="st">"TFWSS"</span>, <span class="st">"TTSW"</span>, <span class="st">"TTPW"</span>,</span></span>
+<span class="r-in"><span>           <span class="st">"AVPW"</span>, <span class="st">"ARSR"</span>, <span class="st">"SRDM"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">qual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CUAL"</span>, <span class="st">"LNGS"</span>, <span class="st">"PTLC"</span>, <span class="st">"DSTA"</span>, <span class="st">"LFRT"</span>, <span class="st">"LBTEF"</span>, <span class="st">"CBTR"</span>, <span class="st">"NMLB"</span>,</span></span>
+<span class="r-in"><span>          <span class="st">"ANGB"</span>, <span class="st">"CUAL9M"</span>, <span class="st">"LVC9M"</span>, <span class="st">"TNPR9M"</span>, <span class="st">"PL9M"</span>, <span class="st">"STRP"</span>, <span class="st">"STRC"</span>,</span></span>
+<span class="r-in"><span>          <span class="st">"PSTR"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Get distance matrix</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"cassava_EC_gp"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">quant</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NMSR"</span>, <span class="st">"TTRN"</span>, <span class="st">"TFWSR"</span>, <span class="st">"TTRW"</span>, <span class="st">"TFWSS"</span>, <span class="st">"TTSW"</span>, <span class="st">"TTPW"</span>,</span></span>
-<span class="r-in"><span>             <span class="st">"AVPW"</span>, <span class="st">"ARSR"</span>, <span class="st">"SRDM"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">qual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CUAL"</span>, <span class="st">"LNGS"</span>, <span class="st">"PTLC"</span>, <span class="st">"DSTA"</span>, <span class="st">"LFRT"</span>, <span class="st">"LBTEF"</span>, <span class="st">"CBTR"</span>, <span class="st">"NMLB"</span>,</span></span>
-<span class="r-in"><span>            <span class="st">"ANGB"</span>, <span class="st">"CUAL9M"</span>, <span class="st">"LVC9M"</span>, <span class="st">"TNPR9M"</span>, <span class="st">"PL9M"</span>, <span class="st">"STRP"</span>, <span class="st">"STRC"</span>,</span></span>
-<span class="r-in"><span>            <span class="st">"PSTR"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Convert qualitative data columns to factor</span></span></span>
+<span class="r-in"><span><span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="va">qual</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="va">qual</span><span class="op">]</span>, <span class="va">as.factor</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Convert qualitative data columns to factor</span></span></span>
-<span class="r-in"><span>  <span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="va">qual</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="va">qual</span><span class="op">]</span>, <span class="va">as.factor</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Standardise quantitative data column</span></span></span>
+<span class="r-in"><span><span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="va">quant</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="va">quant</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Standardise quantitative data column</span></span></span>
-<span class="r-in"><span>  <span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="va">quant</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="va">quant</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span></span>
-<span class="r-in"><span>  <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Get the Gower's distance matrix</span></span></span>
+<span class="r-in"><span><span class="va">dist_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/cluster/man/daisy.html" class="external-link">daisy</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">qual</span>, <span class="va">quant</span><span class="op">)</span><span class="op">]</span>,</span></span>
+<span class="r-in"><span>                     metric <span class="op">=</span> <span class="st">"gower"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Get the Gower's distance matrix</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/cluster/man/daisy.html" class="external-link">daisy</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">qual</span>, <span class="va">quant</span><span class="op">)</span><span class="op">]</span>,</span></span>
-<span class="r-in"><span>                       metric <span class="op">=</span> <span class="st">"gower"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Get data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"cassava_EC_gp"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>genotypes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">)</span>, <span class="va">cassava_EC_gp</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Get data</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"cassava_EC_gp"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>genotypes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">)</span>, <span class="va">cassava_EC_gp</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span><span class="co"># Custom clustering functions</span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
-<span class="r-in"><span>  <span class="co"># Custom clustering functions</span></span></span>
-<span class="r-in"><span>  <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span><span class="co"># UPGMA with hclust</span></span></span>
+<span class="r-in"><span><span class="va">clust_fun_upgma</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># Tree</span></span></span>
+<span class="r-in"><span>  <span class="va">tree_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html" class="external-link">hclust</a></span><span class="op">(</span><span class="va">x</span>, method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># Clusters</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/cutree.html" class="external-link">cutree</a></span><span class="op">(</span><span class="va">tree_out</span>, h <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># UPGMA with hclust</span></span></span>
-<span class="r-in"><span>  <span class="va">clust_fun_upgma</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'fastcluster'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># Ward's minimum variance with fastcluster</span></span></span>
+<span class="r-in"><span>  <span class="va">clust_fun_ward</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>    <span class="co"># Tree</span></span></span>
-<span class="r-in"><span>    <span class="va">tree_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html" class="external-link">hclust</a></span><span class="op">(</span><span class="va">x</span>, method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="va">tree_out</span> <span class="op">&lt;-</span> <span class="fu">fastcluster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/fastcluster/man/hclust.html" class="external-link">hclust</a></span><span class="op">(</span><span class="va">x</span>, method <span class="op">=</span> <span class="st">"ward.D2"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="co"># Clusters</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/stats/cutree.html" class="external-link">cutree</a></span><span class="op">(</span><span class="va">tree_out</span>, h <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'fastcluster'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>    <span class="co"># Ward's minimum variance with fastcluster</span></span></span>
-<span class="r-in"><span>    <span class="va">clust_fun_ward</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>      <span class="co"># Tree</span></span></span>
-<span class="r-in"><span>      <span class="va">tree_out</span> <span class="op">&lt;-</span> <span class="fu">fastcluster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/fastcluster/man/hclust.html" class="external-link">hclust</a></span><span class="op">(</span><span class="va">x</span>, method <span class="op">=</span> <span class="st">"ward.D2"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>      <span class="co"># Clusters</span></span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/r/stats/cutree.html" class="external-link">cutree</a></span><span class="op">(</span><span class="va">tree_out</span>, h <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="op">}</span></span></span>
-<span class="r-in"><span>  <span class="op">}</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'dbscan'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>    <span class="co"># Density-based clustering with dbscan</span></span></span>
-<span class="r-in"><span>    <span class="va">clust_fun_dbscan</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>      <span class="va">clust_out</span> <span class="op">&lt;-</span> <span class="fu">dbscan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dbscan/man/dbscan.html" class="external-link">dbscan</a></span><span class="op">(</span><span class="va">x</span>, eps <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span></span></span>
-<span class="r-in"><span>      <span class="co"># remove noise: TODO</span></span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="va">clust_out</span><span class="op">$</span><span class="va">cluster</span>, <span class="fu"><a href="https://rdrr.io/r/base/labels.html" class="external-link">labels</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="op">}</span></span></span>
-<span class="r-in"><span>  <span class="op">}</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'biotools'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>    <span class="co"># Tocher's sequential clustering</span></span></span>
-<span class="r-in"><span>    <span class="va">clust_fun_tocher</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>      <span class="va">clust_out</span> <span class="op">&lt;-</span> <span class="fu">biotools</span><span class="fu">::</span><span class="fu"><a href="https://arsilva87.github.io/biotools/reference/tocher.html" class="external-link">tocher</a></span><span class="op">(</span><span class="va">x</span>, algorithm <span class="op">=</span> <span class="st">"sequential"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="va">clust_out</span><span class="op">$</span><span class="va">class</span>, <span class="fu"><a href="https://rdrr.io/r/base/labels.html" class="external-link">labels</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="op">}</span></span></span>
-<span class="r-in"><span>  <span class="op">}</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
-<span class="r-in"><span>  <span class="co"># Diversity (Distance based) allocation</span></span></span>
-<span class="r-in"><span>  <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Mean</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_mean</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_mean</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Median</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_median</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"median"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_median</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Maximum</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_max</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"max"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_max</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Range</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_range</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"range"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_range</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Mean nearest-neighbour distance</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_mnnd</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mnnd"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_mnnd</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Minimum spanning tree length</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_mstl</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mstl"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_mstl</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>    <span class="co">## Mean distance to centroid</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_out_mdc</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>      <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                        group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
-<span class="r-in"><span>                        dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdc"</span>,</span></span>
-<span class="r-in"><span>                        size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_out_mdc</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>    <span class="co">## Mean distance to median</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_out_mdm</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>      <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                        group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
-<span class="r-in"><span>                        dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdm"</span>,</span></span>
-<span class="r-in"><span>                        size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_out_mdm</span></span></span>
-<span class="r-in"><span>  <span class="co"># }</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Number of clusters</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">### UPGMA with hclust</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_nclust1</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                      clust.fun <span class="op">=</span> <span class="va">clust_fun_upgma</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_nclust1</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Ward's minimum variance with fastcluster</span></span></span>
-<span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'fastcluster'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_out_nclust2</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>      <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                        group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
-<span class="r-in"><span>                        dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                        clust.fun <span class="op">=</span> <span class="va">clust_fun_ward</span>,</span></span>
-<span class="r-in"><span>                        size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_out_nclust2</span></span></span>
-<span class="r-in"><span>  <span class="op">}</span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'dbscan'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="co"># Density-based clustering with dbscan</span></span></span>
-<span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'dbscan'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_out_nclust3</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>      <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                        group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
-<span class="r-in"><span>                        dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                        clust.fun <span class="op">=</span> <span class="va">clust_fun_dbscan</span>,</span></span>
-<span class="r-in"><span>                        size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_out_nclust3</span></span></span>
+<span class="r-in"><span>  <span class="va">clust_fun_dbscan</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">clust_out</span> <span class="op">&lt;-</span> <span class="fu">dbscan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dbscan/man/dbscan.html" class="external-link">dbscan</a></span><span class="op">(</span><span class="va">x</span>, eps <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="co"># remove noise: TODO</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="va">clust_out</span><span class="op">$</span><span class="va">cluster</span>, <span class="fu"><a href="https://rdrr.io/r/base/labels.html" class="external-link">labels</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'biotools'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="co"># Tocher's sequential clustering</span></span></span>
-<span class="r-in"><span>  <span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'biotools'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>      <span class="va">dist_out_nclust4</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>        <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                          group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
-<span class="r-in"><span>                          dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                          clust.fun <span class="op">=</span> <span class="va">clust_fun_tocher</span>,</span></span>
-<span class="r-in"><span>                          size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>      <span class="va">dist_out_nclust4</span></span></span>
-<span class="r-in"><span>    <span class="op">}</span></span></span>
-<span class="r-in"><span>  <span class="co"># }</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
-<span class="r-in"><span>  <span class="co"># Diversity (Distance based) &amp; Proportional</span></span></span>
-<span class="r-in"><span>  <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Mean</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_mean</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_mean</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Median</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_median</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"median"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_median</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Maximum</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_max</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"max"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_max</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Range</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_range</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"range"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_range</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Mean nearest-neighbour distance</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_mnnd</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mnnd"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_mnnd</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Minimum spanning tree length</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_mstl</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mstl"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_mstl</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>    <span class="co">## Mean distance to centroid</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_prop_out_mdc</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>      <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                        group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
-<span class="r-in"><span>                        dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdc"</span>,</span></span>
-<span class="r-in"><span>                        size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_prop_out_mdc</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>    <span class="co">## Mean distance to median</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_prop_out_mdm</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>      <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                        group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
-<span class="r-in"><span>                        dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdm"</span>,</span></span>
-<span class="r-in"><span>                        size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_prop_out_mdm</span></span></span>
-<span class="r-in"><span>  <span class="co"># }</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Number of clusters</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">### UPGMA with hclust</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_nclust1</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                      clust.fun <span class="op">=</span> <span class="va">clust_fun_upgma</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_nclust1</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Ward's minimum variance with fastcluster</span></span></span>
-<span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'fastcluster'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_prop_out_nclust2</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>      <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                        group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
-<span class="r-in"><span>                        dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                        clust.fun <span class="op">=</span> <span class="va">clust_fun_ward</span>,</span></span>
-<span class="r-in"><span>                        size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_prop_out_nclust2</span></span></span>
+<span class="r-in"><span>  <span class="va">clust_fun_tocher</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">clust_out</span> <span class="op">&lt;-</span> <span class="fu">biotools</span><span class="fu">::</span><span class="fu"><a href="https://arsilva87.github.io/biotools/reference/tocher.html" class="external-link">tocher</a></span><span class="op">(</span><span class="va">x</span>, algorithm <span class="op">=</span> <span class="st">"sequential"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="va">clust_out</span><span class="op">$</span><span class="va">class</span>, <span class="fu"><a href="https://rdrr.io/r/base/labels.html" class="external-link">labels</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Density-based clustering with dbscan</span></span></span>
-<span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'dbscan'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_prop_out_nclust3</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>      <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                        group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
-<span class="r-in"><span>                        dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                        clust.fun <span class="op">=</span> <span class="va">clust_fun_dbscan</span>,</span></span>
-<span class="r-in"><span>                        size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_prop_out_nclust3</span></span></span>
-<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span><span class="co"># Diversity (Distance based) allocation</span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Tocher's sequential clustering</span></span></span>
-<span class="r-in"><span>  <span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'biotools'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>      <span class="va">dist_prop_out_nclust4</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>        <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                          group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
-<span class="r-in"><span>                          dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                          clust.fun <span class="op">=</span> <span class="va">clust_fun_tocher</span>,</span></span>
-<span class="r-in"><span>                          size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>      <span class="va">dist_prop_out_nclust4</span></span></span>
-<span class="r-in"><span>    <span class="op">}</span></span></span>
-<span class="r-in"><span>  <span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="co">## Mean</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_mean</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_mean</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  66  51  46  59  56  59 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
-<span class="r-in"><span>  <span class="co"># Diversity (Distance based) &amp; Logarithmic</span></span></span>
-<span class="r-in"><span>  <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span><span class="co">## Median</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_median</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"median"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_median</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  66  51  45  59  56  59 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Mean</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_mean</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span><span class="co">## Maximum</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_max</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"max"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_max</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  65  52  48  57  55  60 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Range</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_range</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"range"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_range</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  63  52  49  59  57  57 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Mean nearest-neighbour distance</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_mnnd</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mnnd"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_mnnd</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  67  50  44  59  52  64 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Minimum spanning tree length</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_mstl</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mstl"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_mstl</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  72  37  29  84  73  41 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span>  <span class="co">## Mean distance to centroid</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_out_mdc</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
+<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdc"</span>,</span></span>
 <span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_mean</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Median</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_median</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"median"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_median</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Maximum</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_max</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"max"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_max</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Range</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_range</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"range"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_range</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Mean nearest-neighbour distance</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_mnnd</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mnnd"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_mnnd</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Minimum spanning tree length</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_mstl</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mstl"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_mstl</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>    <span class="co">## Mean distance to centroid</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_log_out_mdc</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>      <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                        group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
-<span class="r-in"><span>                        dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdc"</span>,</span></span>
-<span class="r-in"><span>                        size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_log_out_mdc</span></span></span>
-<span class="r-in"><span>  <span class="co"># }</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_out_mdc</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  66  51  46  59  56  59 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co">## Mean distance to median</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_mdm</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_out_mdm</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
+<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
 <span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdm"</span>,</span></span>
 <span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_mdm</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_out_mdm</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  66  51  46  59  56  59 </span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Number of clusters</span></span></span>
+<span class="r-in"><span><span class="co">## Number of clusters</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">### UPGMA with hclust</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_nclust1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span><span class="co">### UPGMA with hclust</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_nclust1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                    clust.fun <span class="op">=</span> <span class="va">clust_fun_upgma</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_nclust1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  83  34  21  86  71  41 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Ward's minimum variance with fastcluster</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_nclust2</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                    clust.fun <span class="op">=</span> <span class="va">clust_fun_ward</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_nclust2</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  73  35  29  84  76  41 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Density-based clustering with dbscan</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_nclust3</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                    clust.fun <span class="op">=</span> <span class="va">clust_fun_dbscan</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_nclust3</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  75  37  37  37  75  75 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Tocher's sequential clustering</span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_out_nclust4</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
+<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                      clust.fun <span class="op">=</span> <span class="va">clust_fun_tocher</span>,</span></span>
+<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_out_nclust4</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  63  29  43  76  79  47 </span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span><span class="co"># Diversity (Distance based) &amp; Proportional</span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Mean</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_mean</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_mean</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  70  37  30  84  78  38 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Median</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_median</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"median"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_median</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  70  37  29  84  78  38 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Maximum</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_max</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"max"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_max</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  69  38  31  82  78  39 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Range</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_range</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"range"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_range</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  67  38  32  84  79  37 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Mean nearest-neighbour distance</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_mnnd</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mnnd"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_mnnd</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  71  37  29  84  74  42 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Minimum spanning tree length</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_mstl</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mstl"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_mstl</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  69  24  17 109  93  24 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span>  <span class="co">## Mean distance to centroid</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_prop_out_mdc</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
+<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdc"</span>,</span></span>
+<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_prop_out_mdc</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  70  37  30  84  78  38 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co">## Mean distance to median</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_prop_out_mdm</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
+<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdm"</span>,</span></span>
+<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_prop_out_mdm</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  70  37  30  84  78  38 </span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Number of clusters</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### UPGMA with hclust</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_nclust1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                    clust.fun <span class="op">=</span> <span class="va">clust_fun_upgma</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_nclust1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  79  22  12 110  89  24 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Ward's minimum variance with fastcluster</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_nclust2</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                    clust.fun <span class="op">=</span> <span class="va">clust_fun_ward</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_nclust2</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  70  23  17 108  96  23 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Density-based clustering with dbscan</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_nclust3</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                    clust.fun <span class="op">=</span> <span class="va">clust_fun_dbscan</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_nclust3</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  79  27  24  53 105  48 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Tocher's sequential clustering</span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_prop_out_nclust4</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
+<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                      clust.fun <span class="op">=</span> <span class="va">clust_fun_tocher</span>,</span></span>
+<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_prop_out_nclust4</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  62  20  26 101 102  28 </span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span><span class="co"># Diversity (Distance based) &amp; Logarithmic</span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Mean</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_mean</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_mean</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  67  49  43  63  60  55 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Median</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_median</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"median"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_median</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  67  49  42  64  60  55 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Maximum</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_max</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"max"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_max</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  66  49  45  61  59  56 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Range</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_range</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"range"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_range</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  65  50  45  63  61  53 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Mean nearest-neighbour distance</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_mnnd</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mnnd"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_mnnd</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  68  48  42  63  56  60 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Minimum spanning tree length</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_mstl</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mstl"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_mstl</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  72  34  27  89  77  38 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span>  <span class="co">## Mean distance to centroid</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_log_out_mdc</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
+<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdc"</span>,</span></span>
+<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_log_out_mdc</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  67  49  43  64  60  55 </span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Mean distance to median</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_mdm</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdm"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_mdm</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  67  49  43  64  59  55 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Number of clusters</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### UPGMA with hclust</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_nclust1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                    clust.fun <span class="op">=</span> <span class="va">clust_fun_upgma</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_nclust1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  83  32  19  91  74  37 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Ward's minimum variance with fastcluster</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_nclust2</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                    clust.fun <span class="op">=</span> <span class="va">clust_fun_ward</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_nclust2</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  73  33  26  88  79  37 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Density-based clustering with dbscan</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_nclust3</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                    clust.fun <span class="op">=</span> <span class="va">clust_fun_dbscan</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_nclust3</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  76  36  35  40  80  70 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Tocher's sequential clustering</span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_log_out_nclust4</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
 <span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
 <span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                      clust.fun <span class="op">=</span> <span class="va">clust_fun_upgma</span>,</span></span>
+<span class="r-in"><span>                      clust.fun <span class="op">=</span> <span class="va">clust_fun_tocher</span>,</span></span>
 <span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_nclust1</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_log_out_nclust4</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  63  27  39  81  83  43 </span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Ward's minimum variance with fastcluster</span></span></span>
-<span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'fastcluster'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_log_out_nclust2</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>      <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                        group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
-<span class="r-in"><span>                        dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                        clust.fun <span class="op">=</span> <span class="va">clust_fun_ward</span>,</span></span>
-<span class="r-in"><span>                        size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_log_out_nclust2</span></span></span>
-<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span><span class="co"># Diversity (Distance based) &amp; Square root</span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Density-based clustering with dbscan</span></span></span>
-<span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'dbscan'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_log_out_nclust3</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>      <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                        group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
-<span class="r-in"><span>                        dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                        clust.fun <span class="op">=</span> <span class="va">clust_fun_dbscan</span>,</span></span>
-<span class="r-in"><span>                        size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_log_out_nclust3</span></span></span>
-<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="co">## Mean</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_mean</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_mean</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  69  44  37  71  67  48 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Tocher's sequential clustering</span></span></span>
-<span class="r-in"><span>  <span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'biotools'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>      <span class="va">dist_log_out_nclust4</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>        <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                          group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
-<span class="r-in"><span>                          dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                          clust.fun <span class="op">=</span> <span class="va">clust_fun_tocher</span>,</span></span>
-<span class="r-in"><span>                          size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>      <span class="va">dist_log_out_nclust4</span></span></span>
-<span class="r-in"><span>    <span class="op">}</span></span></span>
-<span class="r-in"><span>  <span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="co">## Median</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_median</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"median"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_median</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  69  44  37  72  67  48 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
-<span class="r-in"><span>  <span class="co"># Diversity (Distance based) &amp; Square root</span></span></span>
-<span class="r-in"><span>  <span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
+<span class="r-in"><span><span class="co">## Maximum</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_max</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"max"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_max</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  68  45  39  69  67  49 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Mean</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_mean</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span><span class="co">## Range</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_range</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"range"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_range</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  66  45  40  71  68  46 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Mean nearest-neighbour distance</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_mnnd</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mnnd"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_mnnd</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  70  44  36  71  63  52 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Minimum spanning tree length</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_mstl</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mstl"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_mstl</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  72  30  23  97  84  32 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span>  <span class="co">## Mean distance to centroid</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_sqrt_out_mdc</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
 <span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdc"</span>,</span></span>
 <span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_mean</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_sqrt_out_mdc</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  69  44  37  72  67  48 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Median</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_median</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="co">## Mean distance to median</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_sqrt_out_mdm</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
 <span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"median"</span>,</span></span>
+<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdm"</span>,</span></span>
 <span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_median</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_sqrt_out_mdm</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  69  44  37  72  67  48 </span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Maximum</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_max</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"max"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_max</span></span></span>
+<span class="r-in"><span><span class="co">## Number of clusters</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Range</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_range</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"range"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_range</span></span></span>
+<span class="r-in"><span><span class="co">### UPGMA with hclust</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_nclust1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                    clust.fun <span class="op">=</span> <span class="va">clust_fun_upgma</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_nclust1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  82  28  16  99  80  31 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Mean nearest-neighbour distance</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_mnnd</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mnnd"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_mnnd</span></span></span>
+<span class="r-in"><span><span class="co"># Ward's minimum variance with fastcluster</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_nclust2</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                    clust.fun <span class="op">=</span> <span class="va">clust_fun_ward</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_nclust2</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  72  29  22  96  86  31 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Minimum spanning tree length</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_mstl</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mstl"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_mstl</span></span></span>
+<span class="r-in"><span><span class="co"># Density-based clustering with dbscan</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_nclust3</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                    clust.fun <span class="op">=</span> <span class="va">clust_fun_dbscan</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_nclust3</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  78  32  31  45  90  61 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>    <span class="co">## Mean distance to centroid</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_sqrt_out_mdc</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>      <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                        group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
-<span class="r-in"><span>                        dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdc"</span>,</span></span>
-<span class="r-in"><span>                        size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_sqrt_out_mdc</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>    <span class="co">## Mean distance to median</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_sqrt_out_mdm</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>      <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                        group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
-<span class="r-in"><span>                        dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdm"</span>,</span></span>
-<span class="r-in"><span>                        size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_sqrt_out_mdm</span></span></span>
-<span class="r-in"><span>  <span class="co"># }</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Number of clusters</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">### UPGMA with hclust</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_nclust1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span><span class="co"># Tocher's sequential clustering</span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_sqrt_out_nclust4</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
 <span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
 <span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                      clust.fun <span class="op">=</span> <span class="va">clust_fun_upgma</span>,</span></span>
+<span class="r-in"><span>                      clust.fun <span class="op">=</span> <span class="va">clust_fun_tocher</span>,</span></span>
 <span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_nclust1</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Ward's minimum variance with fastcluster</span></span></span>
-<span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'fastcluster'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_sqrt_out_nclust2</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>      <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                        group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
-<span class="r-in"><span>                        dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                        clust.fun <span class="op">=</span> <span class="va">clust_fun_ward</span>,</span></span>
-<span class="r-in"><span>                        size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_sqrt_out_nclust2</span></span></span>
-<span class="r-in"><span>  <span class="op">}</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Density-based clustering with dbscan</span></span></span>
-<span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'dbscan'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_sqrt_out_nclust3</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>      <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                        group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
-<span class="r-in"><span>                        dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                        clust.fun <span class="op">=</span> <span class="va">clust_fun_dbscan</span>,</span></span>
-<span class="r-in"><span>                        size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="va">dist_sqrt_out_nclust3</span></span></span>
-<span class="r-in"><span>  <span class="op">}</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Tocher's sequential clustering</span></span></span>
-<span class="r-in"><span>  <span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'biotools'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>      <span class="va">dist_sqrt_out_nclust4</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>        <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                          group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
-<span class="r-in"><span>                          dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                          clust.fun <span class="op">=</span> <span class="va">clust_fun_tocher</span>,</span></span>
-<span class="r-in"><span>                          size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>      <span class="va">dist_sqrt_out_nclust4</span></span></span>
-<span class="r-in"><span>    <span class="op">}</span></span></span>
-<span class="r-in"><span>  <span class="co"># }</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_sqrt_out_nclust4</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  63  24  33  89  90  37 </span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -121,6 +121,133 @@ Bioversity International.
 ISBN 92-9043-454-6.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://svn.r-project.org/R-packages/trunk/cluster/" class="external-link">cluster</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Get data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>genotypes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">)</span>, <span class="va">cassava_EC_gp</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Prepare inputs</span></span></span>
+<span class="r-in"><span><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>I <span class="op">=</span> <span class="fl">61</span>, II <span class="op">=</span> <span class="fl">41</span>, III <span class="op">=</span> <span class="fl">37</span>, IV <span class="op">=</span> <span class="fl">81</span>, V <span class="op">=</span> <span class="fl">80</span>, VI <span class="op">=</span> <span class="fl">37</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">mand_accns</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TMe-34"</span>, <span class="st">"TMe-3423"</span>, <span class="st">"TMe-2018"</span>, <span class="st">"TMe-801"</span>, <span class="st">"TMe-551"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Specify the seed</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Fetch selected accessions</span></span></span>
+<span class="r-in"><span><span class="va">sel_random_out</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">select.random</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                always.selected <span class="op">=</span> <span class="va">mand_accns</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">sel_random_out</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $I</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-3423" "TMe-2906" "TMe-489"  "TMe-2984" "TMe-3262" "TMe-3314"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "TMe-3418" "TMe-3667" "TMe-896"  "TMe-2237" "TMe-2253" "TMe-3471"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "TMe-2993" "TMe-3396" "TMe-486"  "TMe-815"  "TMe-299"  "TMe-3065"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "TMe-3460" "TMe-3149" "TMe-2027" "TMe-2066" "TMe-1344" "TMe-694" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "TMe-990"  "TMe-3110" "TMe-3514" "TMe-756"  "TMe-264"  "TMe-3266"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "TMe-1581" "TMe-3211" "TMe-1940" "TMe-1960" "TMe-2004" "TMe-1906"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [37] "TMe-670"  "TMe-3142" "TMe-3463" "TMe-1272" "TMe-3462" "TMe-3264"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [43] "TMe-501"  "TMe-3219" "TMe-2383" "TMe-3351" "TMe-2131" "TMe-3475"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [49] "TMe-1224" "TMe-1218" "TMe-3394" "TMe-3132" "TMe-3553" "TMe-1466"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [55] "TMe-3398" "TMe-1140" "TMe-117"  "TMe-469"  "TMe-3623" "TMe-3479"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [61] "TMe-3416"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $II</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-2414" "TMe-1732" "TMe-636"  "TMe-2862" "TMe-2952" "TMe-768" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "TMe-1184" "TMe-3187" "TMe-3557" "TMe-930"  "TMe-1459" "TMe-2903"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "TMe-86"   "TMe-3467" "TMe-2860" "TMe-2033" "TMe-1616" "TMe-2056"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "TMe-2352" "TMe-171"  "TMe-2258" "TMe-2765" "TMe-3101" "TMe-1251"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "TMe-1698" "TMe-2166" "TMe-3338" "TMe-3401" "TMe-3020" "TMe-3371"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "TMe-431"  "TMe-3237" "TMe-509"  "TMe-1474" "TMe-1795" "TMe-3066"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [37] "TMe-3612" "TMe-2978" "TMe-3530" "TMe-681"  "TMe-3605"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $III</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-3592" "TMe-1956" "TMe-3174" "TMe-3230" "TMe-3346" "TMe-3326"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "TMe-3721" "TMe-3274" "TMe-3556" "TMe-64"   "TMe-2502" "TMe-261" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "TMe-773"  "TMe-1200" "TMe-420"  "TMe-1993" "TMe-2751" "TMe-3383"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "TMe-3029" "TMe-1787" "TMe-1965" "TMe-2394" "TMe-1863" "TMe-2811"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "TMe-3445" "TMe-3731" "TMe-3407" "TMe-4"    "TMe-1176" "TMe-3118"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "TMe-3575" "TMe-3069" "TMe-3397" "TMe-405"  "TMe-3376" "TMe-3100"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [37] "TMe-1910"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $IV</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-34"   "TMe-801"  "TMe-3494" "TMe-352"  "TMe-3257" "TMe-519" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "TMe-2775" "TMe-1267" "TMe-170"  "TMe-1987" "TMe-15"   "TMe-2332"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "TMe-1297" "TMe-3511" "TMe-3779" "TMe-1700" "TMe-1151" "TMe-18"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "TMe-684"  "TMe-25"   "TMe-3089" "TMe-698"  "TMe-1579" "TMe-270" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "TMe-3660" "TMe-415"  "TMe-513"  "TMe-154"  "TMe-3760" "TMe-2039"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "TMe-1020" "TMe-1010" "TMe-3440" "TMe-812"  "TMe-708"  "TMe-3017"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [37] "TMe-2924" "TMe-656"  "TMe-383"  "TMe-286"  "TMe-1479" "TMe-3435"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [43] "TMe-714"  "TMe-1903" "TMe-3639" "TMe-2390" "TMe-3558" "TMe-54"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [49] "TMe-1078" "TMe-380"  "TMe-641"  "TMe-1330" "TMe-153"  "TMe-3276"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [55] "TMe-3757" "TMe-760"  "TMe-1553" "TMe-1278" "TMe-1129" "TMe-2764"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [61] "TMe-3278" "TMe-2210" "TMe-186"  "TMe-1577" "TMe-3591" "TMe-3225"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [67] "TMe-1397" "TMe-3541" "TMe-386"  "TMe-107"  "TMe-619"  "TMe-3054"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [73] "TMe-516"  "TMe-81"   "TMe-209"  "TMe-3084" "TMe-2971" "TMe-3340"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [79] "TMe-2981" "TMe-3161" "TMe-372" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-2018" "TMe-551"  "TMe-2032" "TMe-645"  "TMe-158"  "TMe-1299"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "TMe-323"  "TMe-3408" "TMe-1388" "TMe-390"  "TMe-1694" "TMe-547" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "TMe-245"  "TMe-929"  "TMe-472"  "TMe-1877" "TMe-2138" "TMe-1629"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "TMe-2855" "TMe-1762" "TMe-2307" "TMe-627"  "TMe-1098" "TMe-1268"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "TMe-2904" "TMe-1227" "TMe-2953" "TMe-194"  "TMe-1522" "TMe-892" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "TMe-723"  "TMe-2319" "TMe-1834" "TMe-385"  "TMe-1488" "TMe-2057"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [37] "TMe-2688" "TMe-795"  "TMe-771"  "TMe-2961" "TMe-2853" "TMe-370" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [43] "TMe-603"  "TMe-828"  "TMe-424"  "TMe-901"  "TMe-687"  "TMe-1446"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [49] "TMe-1269" "TMe-475"  "TMe-1367" "TMe-826"  "TMe-1199" "TMe-943" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [55] "TMe-287"  "TMe-870"  "TMe-1487" "TMe-755"  "TMe-924"  "TMe-326" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [61] "TMe-825"  "TMe-2192" "TMe-969"  "TMe-1012" "TMe-1427" "TMe-976" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [67] "TMe-439"  "TMe-432"  "TMe-1788" "TMe-1357" "TMe-418"  "TMe-884" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [73] "TMe-823"  "TMe-193"  "TMe-1778" "TMe-1037" "TMe-1556" "TMe-412" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [79] "TMe-3356" "TMe-2296"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $VI</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-856"  "TMe-1816" "TMe-846"  "TMe-907"  "TMe-2067" "TMe-236" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "TMe-620"  "TMe-2402" "TMe-1835" "TMe-3387" "TMe-893"  "TMe-836" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "TMe-1286" "TMe-1509" "TMe-2963" "TMe-213"  "TMe-1216" "TMe-2064"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "TMe-2983" "TMe-662"  "TMe-876"  "TMe-514"  "TMe-728"  "TMe-693" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "TMe-1076" "TMe-1506" "TMe-2510" "TMe-985"  "TMe-3177" "TMe-752" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "TMe-3095" "TMe-631"  "TMe-531"  "TMe-1809" "TMe-1416" "TMe-854" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [37] "TMe-1178"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Get distance matrix - Only for visualization</span></span></span>
+<span class="r-in"><span><span class="va">quant</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NMSR"</span>, <span class="st">"TTRN"</span>, <span class="st">"TFWSR"</span>, <span class="st">"TTRW"</span>, <span class="st">"TFWSS"</span>, <span class="st">"TTSW"</span>, <span class="st">"TTPW"</span>,</span></span>
+<span class="r-in"><span>           <span class="st">"AVPW"</span>, <span class="st">"ARSR"</span>, <span class="st">"SRDM"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">qual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CUAL"</span>, <span class="st">"LNGS"</span>, <span class="st">"PTLC"</span>, <span class="st">"DSTA"</span>, <span class="st">"LFRT"</span>, <span class="st">"LBTEF"</span>, <span class="st">"CBTR"</span>, <span class="st">"NMLB"</span>,</span></span>
+<span class="r-in"><span>          <span class="st">"ANGB"</span>, <span class="st">"CUAL9M"</span>, <span class="st">"LVC9M"</span>, <span class="st">"TNPR9M"</span>, <span class="st">"PL9M"</span>, <span class="st">"STRP"</span>, <span class="st">"STRC"</span>,</span></span>
+<span class="r-in"><span>          <span class="st">"PSTR"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Convert qualitative data columns to factor</span></span></span>
+<span class="r-in"><span><span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="va">qual</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="va">qual</span><span class="op">]</span>, <span class="va">as.factor</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Standardise quantitative data column</span></span></span>
+<span class="r-in"><span><span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="va">quant</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="va">quant</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">gp_vec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="st">"Cluster"</span><span class="op">]</span><span class="op">)</span>, <span class="va">data</span><span class="op">[</span>, <span class="st">"genotypes"</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Get the Gower's distance matrix</span></span></span>
+<span class="r-in"><span><span class="va">dist_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/cluster/man/daisy.html" class="external-link">daisy</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">qual</span>, <span class="va">quant</span><span class="op">)</span><span class="op">]</span>,</span></span>
+<span class="r-in"><span>                     metric <span class="op">=</span> <span class="st">"gower"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
+<span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_random_out</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="select.random-1.png" alt="" width="700" height="433"></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

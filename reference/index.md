@@ -23,6 +23,11 @@
   : Selection of Entries from Clusters/Groups on the basis of Genetic
   Distances
 
+## Helpers
+
+- [`plot_dist()`](https://aravind-j.github.io/SampleCore/reference/plot_dist.md)
+  : Plot a distance matrix as a 2D projection
+
 ## Datasets
 
 - [`cassava_EC_gp`](https://aravind-j.github.io/SampleCore/reference/cassava_EC_gp.md)
