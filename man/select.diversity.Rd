@@ -16,7 +16,9 @@ select.diversity(
   shannon.base = exp(1),
   div.fun = NULL,
   metric = c("mean", "pooled"),
-  n.iter = 1000
+  search = c("random", "greedy"),
+  n.iter = 1000,
+  max.iter = 30
 )
 }
 \arguments{
@@ -56,7 +58,11 @@ qualitative trait data.}
 \code{"pooled"} or \code{"mean"}.}
 
 \item{n.iter}{Integer specifying the number of random candidate subsets
-generated per group to optimze the diversity metric.}
+generated per group to optimze the diversity for random search
+(\code{search = "random"}).}
+
+\item{max.iter}{The maximum number of 1-opt passes for greedy search
+(\code{search = "greedy"}).}
 }
 \value{
 A named list where each element contains the selected entry
