@@ -10,7 +10,7 @@ select.distance(
   group,
   alloc,
   dist.mat,
-  always.selected,
+  always.selected = NULL,
   method = c("mean.medoid", "median.medoid", "nearest.centroid", "nearest.median",
     "mean.peripheral", "median.peripheral", "eccentricity", "farness.centrality",
     "kennard.stone", "duplex", "honigs", "farthest.point", "nearest.neighbour", "naes",

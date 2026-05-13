@@ -4,7 +4,7 @@
 \alias{select.random}
 \title{Selection of Entries from Clusters/Groups by Random Sampling}
 \usage{
-select.random(data, names, group, alloc, always.selected)
+select.random(data, names, group, alloc, always.selected = NULL)
 }
 \arguments{
 \item{data}{The data as a data frame object. The data frame should possess

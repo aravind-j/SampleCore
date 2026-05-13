@@ -11,7 +11,7 @@ select.diversity(
   alloc,
   quantitative,
   qualitative,
-  always.selected,
+  always.selected = NULL,
   div.index = c("shannon", "simpson", "mcintosh"),
   shannon.base = exp(1),
   div.fun = NULL,

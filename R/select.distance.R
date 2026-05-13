@@ -814,7 +814,7 @@
 #'   labs(title = "hclust.medoid", subtitle = "ward.D2")
 #'
 select.distance <- function(data, names, group, alloc,
-                            dist.mat, always.selected,
+                            dist.mat, always.selected = NULL,
                             method = c("mean.medoid", "median.medoid",
                                        "nearest.centroid", "nearest.median",
                                        "mean.peripheral", "median.peripheral",

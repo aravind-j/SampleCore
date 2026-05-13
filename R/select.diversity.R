@@ -39,7 +39,7 @@
 #' @examples
 select.diversity <- function(data, names, group, alloc,
                              quantitative, qualitative,
-                             always.selected,
+                             always.selected = NULL,
                              div.index = c("shannon", "simpson", "mcintosh"),
                              shannon.base = exp(1),
                              div.fun = NULL,
@@ -197,20 +197,19 @@ select.diversity <- function(data, names, group, alloc,
 
         # Ignores max.iter
 
-        selected <- fixed_accns # start from always-selected set
-        pool     <- rem_accns # remaining candidates
-
         # when fixed_accns is NULL
         if (length(fixed_accns) == 0L) {
           seed_acc <- sample(rem_accns, 1L)
-          selected <- seed_acc
-          pool     <- setdiff(rem_accns, seed_acc)
+          selected <- seed_acc # start from always-selected set
+          pool     <- setdiff(rem_accns, seed_acc) # remaining candidates
+          n_to_add <- max(0L, n_rem - 1L)
         } else {
           selected <- fixed_accns
           pool     <- rem_accns
+          n_to_add <- n_rem
         }
 
-        for (i in seq_len(n_rem)) {
+        for (i in seq_len(n_to_add)) {
           # Score each candidate added to the current selected set
           scores <- vapply(pool, function(cand) {
             idx <- match(c(selected, cand), group_accns)
@@ -251,7 +250,7 @@ select.diversity <- function(data, names, group, alloc,
 
           # swappable and candidate pools as integer indices
           swappable_idx  <- setdiff(current_idx, fixed_idx)
-          candidate_idx  <- setdiff(rem_idx, current_idx)   # hoisted — constant per pass
+          candidate_idx  <- setdiff(rem_idx, current_idx) # recomputed each pass — current_idx mutates
 
           if (length(swappable_idx) == 0L || length(candidate_idx) == 0L) break
 
@@ -273,7 +272,8 @@ select.diversity <- function(data, names, group, alloc,
 
           # apply best swap found in this pass
           current_idx[current_idx == pairs$out_i[best_k]] <- pairs$in_i[best_k]
-          current_score <- current_score + best_delta
+          # current_score <- current_score + best_delta
+          current_score <- trial_scores[best_k]
 
         }
 
@@ -290,7 +290,7 @@ select.diversity <- function(data, names, group, alloc,
 compute_score <- function(idx, traits_mat,
                           div_fun, metric) {
   trait_div <- vapply(seq_len(ncol(traits_mat)), function(t) {
-    div_fun(traits_mat[idx, t])
+    div_fun(traits_mat[idx, t, drop = TRUE])
   }, numeric(1))
   switch(metric,
          mean   = mean(trait_div,  na.rm = TRUE),

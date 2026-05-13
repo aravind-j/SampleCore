@@ -74,7 +74,8 @@
 #'           gp = gp_vec,
 #'           highlight =  unlist(sel_random_out, use.names = FALSE))
 #'
-select.random <- function(data, names, group, alloc, always.selected) {
+select.random <- function(data, names, group, alloc,
+                          always.selected = NULL) {
 
   checks.sample.core(data = data, size = NULL,
                      names = names, group = group,
