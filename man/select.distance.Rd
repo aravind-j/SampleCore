@@ -412,7 +412,7 @@ data <- cbind(genotypes = rownames(data), data)
 row.names(data) <- NULL
 
 # Prepare inputs
-counts <- c(I = 61, II = 41, III = 37, IV = 81, V = 80, VI = 37)
+counts <- c(I = 31, II = 31, III = 18, IV = 35, V = 40, VI = 17)
 
 mand_accns <-
   c("TMe-34", "TMe-3423", "TMe-2018", "TMe-801", "TMe-551")
