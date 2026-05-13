@@ -62,6 +62,7 @@ select.diversity <- function(data, names, group, alloc,
                      always.selected = always.selected,
                      mode = "sel")
 
+  SampleCore.debug <- getOption("SampleCore.debug", default = FALSE)
 
   # Prepare data ----
 
@@ -157,24 +158,36 @@ select.diversity <- function(data, names, group, alloc,
         return(fixed_accns)
       }
 
+      # sub_df -> traits_mat
+      traits_mat <- do.call(cbind, lapply(traits, function(tr) {
+        x <- sub_df[[tr]]
+        if (is.factor(x)) as.double(as.integer(x)) else as.double(x)
+      }))
+      colnames(traits_mat) <- traits
+
       ## Random search ----
       if (search ==  "random") {
 
         # Candidate subsets fetched randomly
         candidate_subsets <-
-          replicate( n.iter, c(fixed_accns,
+          replicate(n.iter, c(fixed_accns,
                                sample(rem_accns, n_rem, replace = FALSE)),
                      simplify = FALSE)
 
-        # Get candidate subset scores
+       # Get candidate subset scores
         candidate_scores <-
           vapply(candidate_subsets,
                  function(x) {
-                   compute_score(accns = x,
-                                 group_accns = group_accns, sub_df = sub_df,
-                                 traits = traits, div_fun = div_fun_internal,
+                   idx <- match(x, group_accns)
+                   compute_score(idx = idx,
+                                 traits_mat = traits_mat,
+                                 div_fun = div_fun_internal,
                                  metric = metric)
                  }, numeric(1))
+
+        if (SampleCore.debug) {
+          print(range(candidate_scores))
+        }
 
         best_subset <- candidate_subsets[[which.max(candidate_scores)]]
 
@@ -187,12 +200,22 @@ select.diversity <- function(data, names, group, alloc,
         selected <- fixed_accns # start from always-selected set
         pool     <- rem_accns # remaining candidates
 
+        # when fixed_accns is NULL
+        if (length(fixed_accns) == 0L) {
+          seed_acc <- sample(rem_accns, 1L)
+          selected <- seed_acc
+          pool     <- setdiff(rem_accns, seed_acc)
+        } else {
+          selected <- fixed_accns
+          pool     <- rem_accns
+        }
+
         for (i in seq_len(n_rem)) {
           # Score each candidate added to the current selected set
           scores <- vapply(pool, function(cand) {
-            compute_score(accns = c(selected, cand),
-                          group_accns = group_accns,
-                          sub_df = sub_df, traits = traits,
+            idx <- match(c(selected, cand), group_accns)
+            compute_score(idx = idx,
+                          traits_mat = traits_mat,
                           div_fun = div_fun_internal,
                           metric = metric)
           }, numeric(1))
@@ -202,19 +225,22 @@ select.diversity <- function(data, names, group, alloc,
           pool      <- setdiff(pool, best_cand)
         }
 
-
         ### 1-opt local search ----
 
         current_sel <- selected
-        current_score <- compute_score(accns = selected,
-                                       group_accns = group_accns,
-                                       sub_df = sub_df, traits = traits,
-                                       div_fun = div_fun_internal,
-                                       metric = metric)
+        # idx <- match(selected, group_accns)
 
-        # Accessions that are free to be swapped out
-        # (i.e. not always-selected)
-        swappable_sel <- setdiff(current_sel, fixed_accns)
+        # integer positions into traits_mat
+        idx_lookup    <- setNames(seq_len(nrow(sub_df)), group_accns)
+        current_idx   <- idx_lookup[current_sel]
+        fixed_idx     <- idx_lookup[fixed_accns]
+        rem_idx       <- idx_lookup[rem_accns]
+
+        current_score <-
+          compute_score(idx = idx_lookup[selected],
+                        traits_mat = traits_mat,
+                        div_fun = div_fun_internal,
+                        metric = metric)
 
         iter_1opt <- 0L
         repeat {
@@ -223,44 +249,35 @@ select.diversity <- function(data, names, group, alloc,
 
           iter_1opt <- iter_1opt + 1L
 
-          best_delta <- 0  #improvement over current score
-          best_swap  <- NULL # list(out_s = x, in_s = y)
+          # swappable and candidate pools as integer indices
+          swappable_idx  <- setdiff(current_idx, fixed_idx)
+          candidate_idx  <- setdiff(rem_idx, current_idx)   # hoisted — constant per pass
 
-          # Pool of candidates that could replace out_acc
-          candidate_pool <- setdiff(rem_accns, current_sel)
+          if (length(swappable_idx) == 0L || length(candidate_idx) == 0L) break
 
-          for (out_acc in swappable_sel) {
-            for (in_acc in candidate_pool) {
-              trial_sel <- c(setdiff(current_sel, out_acc), in_acc)
-              trial_score <-
-                compute_score(accns = trial_sel,
-                              group_accns = group_accns,
-                              sub_df = sub_df,
-                              traits = traits,
-                              div_fun = div_fun_internal,
-                              metric = metric)
-              delta <- trial_score - current_score
-              if (delta > best_delta) {
-                best_delta <- delta
-                best_swap  <- list(out_s = out_acc, in_s = in_acc)
-              }
-            }
-          }
+          # all (out, in) pairs — integer matrix, nrow = n_pairs
+          pairs <- expand.grid(out_i = swappable_idx,
+                               in_i  = candidate_idx)
 
-          # No improving swap found – local optimum reached
-          if (is.null(best_swap)) break # local optimum — natural exit
+          # score every pair in one vapply call
+          trial_scores <- vapply(seq_len(nrow(pairs)), function(k) {
+            trial_idx <- c(current_idx[current_idx != pairs$out_i[k]],
+                           pairs$in_i[k])
+            compute_score(trial_idx, traits_mat, div_fun_internal, metric)
+          }, numeric(1))
 
-          # Apply the best swap found in this pass
-          current_sel <- c(setdiff(current_sel, best_swap$out_s),
-                           best_swap$in_s)
+          best_k     <- which.max(trial_scores)
+          best_delta <- trial_scores[best_k] - current_score
+
+          if (is.na(best_delta) || best_delta <= 0) break   # local optimum - natural exit
+
+          # apply best swap found in this pass
+          current_idx[current_idx == pairs$out_i[best_k]] <- pairs$in_i[best_k]
           current_score <- current_score + best_delta
-
-          # Update swappable set after the swap
-          swappable_sel <- setdiff(current_sel, fixed_accns)
 
         }
 
-        best_subset <- current_sel
+        best_subset <- group_accns[current_idx]
 
       }
     })
@@ -270,18 +287,15 @@ select.diversity <- function(data, names, group, alloc,
 }
 
 
-compute_score <- function(accns, group_accns, sub_df,
-                          traits, div_fun, metric) {
-  idx <- match(accns, group_accns)
-  trait_div <- vapply(traits, function(trt) {
-    div_fun(sub_df[idx, trt])
+compute_score <- function(idx, traits_mat,
+                          div_fun, metric) {
+  trait_div <- vapply(seq_len(ncol(traits_mat)), function(t) {
+    div_fun(traits_mat[idx, t])
   }, numeric(1))
   switch(metric,
-         mean   = mean(trait_div, na.rm = TRUE),
-         pooled = sum(trait_div,  na.rm = TRUE)
+         mean   = mean(trait_div,  na.rm = TRUE),
+         pooled = sum(trait_div,   na.rm = TRUE)
   )
 }
-
-
 
 
