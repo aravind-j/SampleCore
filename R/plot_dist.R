@@ -1,13 +1,13 @@
 #' Plot a distance matrix as a 2D projection
 #'
-#' Reduces a distance matrix to two dimensions using
-#' Classical MDS, Isotonic MDS, or t-SNE, and returns a \code{ggplot2}
-#' scatter plot in which proximity reflects similarity. Points can
-#' optionally be highlighted or split into facet panels by group.
+#' Reduces a distance matrix to two dimensions using Classical MDS, Isotonic
+#' MDS, or t-SNE, and returns a \code{ggplot2} scatter plot in which proximity
+#' reflects similarity. Points can optionally be highlighted or split into facet
+#' panels by group.
 #'
-#' @param d A distance matrix of class \code{\link[stats]{dist}}. Labels must
-#'   be set (i.e. \code{labels(d)} must not be \code{NULL}). Duplicate labels
-#'   are not permitted.
+#' @param d A distance matrix of class \code{\link[stats]{dist}}. Labels must be
+#'   set (i.e. \code{labels(d)} must not be \code{NULL}). Duplicate labels are
+#'   not permitted.
 #' @param method Character string specifying the dimensionality-reduction
 #'   method. One of:
 #'   \describe{
@@ -20,27 +20,24 @@
 #'       \code{\link[Rtsne]{Rtsne}}. Perplexity is set automatically to
 #'       \code{min(30, floor((n - 1) / 3))}.}
 #'   }
-#' @param highlight Optional character vector of labels to highlight in the plot.
-#'   Matching identifiers are plotted in \strong{red}; all others in black.
-#'   \code{NULL} (default) disables highlighting. Every value must be present
-#'   in \code{labels(d)}.
-#' @param gp Optional named character vector mapping labels to group
-#'   names (\code{names(gp)} = labels, values = group names). When
-#'   supplied, the plot is split into one facet panel per group via
+#' @param highlight Optional character vector of labels to highlight in the
+#'   plot. Matching identifiers are plotted in \strong{red}; all others in
+#'   black. \code{NULL} (default) disables highlighting. Every value must be
+#'   present in \code{labels(d)}.
+#' @param gp Optional named character vector mapping labels to group names
+#'   (\code{names(gp)} = labels, values = group names). When supplied, the plot
+#'   is split into one facet panel per group via
 #'   \code{\link[ggplot2]{facet_wrap}}. The set of names must match
 #'   \code{labels(d)} exactly. \code{NULL} (default) produces a single panel.
 #' @param point.alpha Alpha transparency value for points.
 #'
 #' @return A \code{\link[ggplot2]{ggplot}} object. The plot can be further
-#'   customised with standard \pkg{ggplot2} additions before printing or
-#'   saving.
+#'   customised with standard \pkg{ggplot2} additions before printing or saving.
 #'
-#' @seealso
-#' \code{\link[stats]{cmdscale}}, \code{\link[MASS]{isoMDS}},
+#' @seealso \code{\link[stats]{cmdscale}}, \code{\link[MASS]{isoMDS}},
 #' \code{\link[Rtsne]{Rtsne}}, \code{\link[ggplot2]{ggplot}}
 #'
-#' @importFrom ggplot2 ggplot aes geom_point scale_color_manual labs
-#'   theme_bw theme element_rect facet_wrap
+#' @importFrom ggplot2 ggplot aes geom_point scale_color_manual labs theme_bw theme element_rect facet_wrap
 #' @importFrom MASS isoMDS
 #' @importFrom Rtsne Rtsne
 #' @export
@@ -54,21 +51,22 @@
 #'           highlight = c("Madrid", "Rome"))
 #'
 #' # Classical MDS split by a user-defined grouping
-#' regions <- c(
-#'   Athens = "South",  Barcelona = "South", Brussels = "North",
-#'   Calais = "North",  Cherbourg = "North", Cologne = "North",
-#'   Copenhagen = "North", Geneva = "South", Gibraltar = "South",
-#'   Hamburg = "North", `Hook of Holland` = "North", Lisbon = "South",
-#'   Lyons = "South",  Madrid = "South",  Marseilles = "South",
-#'   Milan = "South",  Munich = "North",  Paris = "North",
-#'   Rome = "South",   Stockholm = "North", Vienna = "North"
-#' )
-#' plot_dist(eurodist, method = "cmds", gp = regions)
+#' regions <-
+#'   c(Athens = "South",  Barcelona = "South", Brussels = "North",
+#'     Calais = "North",  Cherbourg = "North", Cologne = "North",
+#'     Copenhagen = "North", Geneva = "South", Gibraltar = "South",
+#'     Hamburg = "North", `Hook of Holland` = "North", Lisbon = "South",
+#'     Lyons = "South",  Madrid = "South",  Marseilles = "South",
+#'     Milan = "South",  Munich = "North",  Paris = "North",
+#'     Rome = "South",   Stockholm = "North", Vienna = "North")
+#'
+#' plot_dist(eurodist, method = "cmds", gp = regions,
+#'           highlight = c("Madrid", "North", "Rome", "Brussels"))
 #'
 plot_dist <- function(d,
                       method = c("cmds", "isomds", "tsne"),
                       highlight = NULL,
-                      gp = NULL, point.alpha = 0.8) {
+                      gp = NULL, point.alpha = 0.6) {
 
   # Checks ----
   method <- match.arg(method)

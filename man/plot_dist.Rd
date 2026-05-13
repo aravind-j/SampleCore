@@ -9,13 +9,13 @@ plot_dist(
   method = c("cmds", "isomds", "tsne"),
   highlight = NULL,
   gp = NULL,
-  point.alpha = 0.8
+  point.alpha = 0.6
 )
 }
 \arguments{
-\item{d}{A distance matrix of class \code{\link[stats]{dist}}. Labels must
-be set (i.e. \code{labels(d)} must not be \code{NULL}). Duplicate labels
-are not permitted.}
+\item{d}{A distance matrix of class \code{\link[stats]{dist}}. Labels must be
+set (i.e. \code{labels(d)} must not be \code{NULL}). Duplicate labels are
+not permitted.}
 
 \item{method}{Character string specifying the dimensionality-reduction
 method. One of:
@@ -30,14 +30,14 @@ method. One of:
     \code{min(30, floor((n - 1) / 3))}.}
 }}
 
-\item{highlight}{Optional character vector of labels to highlight in the plot.
-Matching identifiers are plotted in \strong{red}; all others in black.
-\code{NULL} (default) disables highlighting. Every value must be present
-in \code{labels(d)}.}
+\item{highlight}{Optional character vector of labels to highlight in the
+plot. Matching identifiers are plotted in \strong{red}; all others in
+black. \code{NULL} (default) disables highlighting. Every value must be
+present in \code{labels(d)}.}
 
-\item{gp}{Optional named character vector mapping labels to group
-names (\code{names(gp)} = labels, values = group names). When
-supplied, the plot is split into one facet panel per group via
+\item{gp}{Optional named character vector mapping labels to group names
+(\code{names(gp)} = labels, values = group names). When supplied, the plot
+is split into one facet panel per group via
 \code{\link[ggplot2]{facet_wrap}}. The set of names must match
 \code{labels(d)} exactly. \code{NULL} (default) produces a single panel.}
 
@@ -45,14 +45,13 @@ supplied, the plot is split into one facet panel per group via
 }
 \value{
 A \code{\link[ggplot2]{ggplot}} object. The plot can be further
-  customised with standard \pkg{ggplot2} additions before printing or
-  saving.
+  customised with standard \pkg{ggplot2} additions before printing or saving.
 }
 \description{
-Reduces a distance matrix to two dimensions using
-Classical MDS, Isotonic MDS, or t-SNE, and returns a \code{ggplot2}
-scatter plot in which proximity reflects similarity. Points can
-optionally be highlighted or split into facet panels by group.
+Reduces a distance matrix to two dimensions using Classical MDS, Isotonic
+MDS, or t-SNE, and returns a \code{ggplot2} scatter plot in which proximity
+reflects similarity. Points can optionally be highlighted or split into facet
+panels by group.
 }
 \examples{
 # Basic usage with the built-in eurodist dataset
@@ -63,16 +62,17 @@ plot_dist(eurodist, method = "isomds",
           highlight = c("Madrid", "Rome"))
 
 # Classical MDS split by a user-defined grouping
-regions <- c(
-  Athens = "South",  Barcelona = "South", Brussels = "North",
-  Calais = "North",  Cherbourg = "North", Cologne = "North",
-  Copenhagen = "North", Geneva = "South", Gibraltar = "South",
-  Hamburg = "North", `Hook of Holland` = "North", Lisbon = "South",
-  Lyons = "South",  Madrid = "South",  Marseilles = "South",
-  Milan = "South",  Munich = "North",  Paris = "North",
-  Rome = "South",   Stockholm = "North", Vienna = "North"
-)
-plot_dist(eurodist, method = "cmds", gp = regions)
+regions <-
+  c(Athens = "South",  Barcelona = "South", Brussels = "North",
+    Calais = "North",  Cherbourg = "North", Cologne = "North",
+    Copenhagen = "North", Geneva = "South", Gibraltar = "South",
+    Hamburg = "North", `Hook of Holland` = "North", Lisbon = "South",
+    Lyons = "South",  Madrid = "South",  Marseilles = "South",
+    Milan = "South",  Munich = "North",  Paris = "North",
+    Rome = "South",   Stockholm = "North", Vienna = "North")
+
+plot_dist(eurodist, method = "cmds", gp = regions,
+          highlight = c("Madrid", "North", "Rome", "Brussels"))
 
 }
 \seealso{
