@@ -194,7 +194,7 @@ Veschi, Roma, Italy.
 Greenberg JH (1956). “The measurement of linguistic diversity.”
 *Language*, **32**(1), 109.  
   
-Hurlbert SH (1971). “The nonconcept of species diversity: a critique and
+Hurlbert SH (1971). “The nonconcept of species diversity: A critique and
 alternative parameters.” *Ecology*, **52**(4), 577–586.  
   
 Mahajan RK, Bisht IS, Gautam PL (1999). “Sampling strategies for

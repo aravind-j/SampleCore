@@ -199,7 +199,7 @@ sessionInfo()
 
     ## R version 4.6.0 (2026-04-24)
     ## Platform: aarch64-apple-darwin23
-    ## Running under: macOS Sequoia 15.7.4
+    ## Running under: macOS Sequoia 15.7.5
     ## 
     ## Matrix products: default
     ## BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
@@ -228,7 +228,7 @@ sessionInfo()
     ##  [22] missMDA_1.21         purrr_1.2.2          xfun_0.57           
     ##  [25] glmnet_5.0           jomo_2.7-6           cachem_1.1.0        
     ##  [28] jsonlite_2.0.0       flashClust_1.1-4     SuppDists_1.1-9.9   
-    ##  [31] pan_1.9              psych_2.6.3          broom_1.0.12        
+    ##  [31] pan_1.9              psych_2.6.3          broom_1.0.13        
     ##  [34] parallel_4.6.0       R6_2.6.1             stringi_1.8.7       
     ##  [37] bslib_0.10.0         RColorBrewer_1.1-3   rpart_4.1.27        
     ##  [40] car_3.1-5            boot_1.3-32          jquerylib_0.1.4     
@@ -243,18 +243,18 @@ sessionInfo()
     ##  [67] carData_3.0-6        mice_3.19.0          DT_0.34.0           
     ##  [70] foreach_1.5.2        reformulas_0.4.4     generics_0.1.4      
     ##  [73] mathjaxr_2.0-0       ggplot2_4.0.3        scales_1.4.0        
-    ##  [76] minqa_1.2.8          xtable_1.8-8         leaps_3.2           
-    ##  [79] glue_1.8.1           emmeans_2.0.3        scatterplot3d_0.3-45
-    ##  [82] tools_4.6.0          lme4_2.0-1           fs_2.1.0            
-    ##  [85] mvtnorm_1.3-7        grid_4.6.0           tidyr_1.3.2         
-    ##  [88] rbibutils_2.4.1      nlme_3.1-169         agricolae_1.3-7     
-    ##  [91] Formula_1.2-5        cli_3.6.6            textshaping_1.0.5   
-    ##  [94] dplyr_1.2.1          gtable_0.3.6         ggcorrplot_0.1.4.1  
-    ##  [97] sass_0.4.10          digest_0.6.39        ggrepel_0.9.8       
-    ## [100] FactoMineR_2.14      htmlwidgets_1.6.4    farver_2.1.2        
-    ## [103] entropy_1.3.2        htmltools_0.5.9      pkgdown_2.2.0.9000  
-    ## [106] lifecycle_1.0.5      multcompView_0.1-11  mitml_0.4-5         
-    ## [109] gridtext_0.1.6       MASS_7.3-65
+    ##  [76] minqa_1.2.8          leaps_3.2            glue_1.8.1          
+    ##  [79] emmeans_2.0.3        scatterplot3d_0.3-45 tools_4.6.0         
+    ##  [82] lme4_2.0-1           fs_2.1.0             mvtnorm_1.3-7       
+    ##  [85] grid_4.6.0           tidyr_1.3.2          rbibutils_2.4.1     
+    ##  [88] nlme_3.1-169         agricolae_1.3-7      Formula_1.2-5       
+    ##  [91] cli_3.6.6            textshaping_1.0.5    dplyr_1.2.1         
+    ##  [94] gtable_0.3.6         ggcorrplot_0.1.4.1   sass_0.4.10         
+    ##  [97] digest_0.6.39        ggrepel_0.9.8        FactoMineR_2.14     
+    ## [100] htmlwidgets_1.6.4    farver_2.1.2         entropy_1.3.2       
+    ## [103] htmltools_0.5.9      pkgdown_2.2.0.9000   lifecycle_1.0.5     
+    ## [106] multcompView_0.1-11  mitml_0.4-5          gridtext_0.1.6      
+    ## [109] MASS_7.3-65
 
 ## References
 

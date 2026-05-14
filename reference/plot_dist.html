@@ -5,13 +5,13 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Sans-0.4.10/font.css" rel="stylesheet"><link href="../deps/Fira_Mono-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Plot a distance matrix as a 2D projection — plot_dist"><meta name="description" content="Reduces a distance matrix to two dimensions using
-Classical MDS, Isotonic MDS, or t-SNE, and returns a ggplot2
-scatter plot in which proximity reflects similarity. Points can
-optionally be highlighted or split into facet panels by group."><meta property="og:description" content="Reduces a distance matrix to two dimensions using
-Classical MDS, Isotonic MDS, or t-SNE, and returns a ggplot2
-scatter plot in which proximity reflects similarity. Points can
-optionally be highlighted or split into facet panels by group."><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-615WGTLM4G"></script><script>
+</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Sans-0.4.10/font.css" rel="stylesheet"><link href="../deps/Fira_Mono-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Plot a distance matrix as a 2D projection — plot_dist"><meta name="description" content="Reduces a distance matrix to two dimensions using Classical MDS, Isotonic
+MDS, or t-SNE, and returns a ggplot2 scatter plot in which proximity
+reflects similarity. Points can optionally be highlighted or split into facet
+panels by group."><meta property="og:description" content="Reduces a distance matrix to two dimensions using Classical MDS, Isotonic
+MDS, or t-SNE, and returns a ggplot2 scatter plot in which proximity
+reflects similarity. Points can optionally be highlighted or split into facet
+panels by group."><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-615WGTLM4G"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -59,10 +59,10 @@ optionally be highlighted or split into facet panels by group."><!-- Global site
     </div>
 
     <div class="ref-description section level2">
-    <p>Reduces a distance matrix to two dimensions using
-Classical MDS, Isotonic MDS, or t-SNE, and returns a <code>ggplot2</code>
-scatter plot in which proximity reflects similarity. Points can
-optionally be highlighted or split into facet panels by group.</p>
+    <p>Reduces a distance matrix to two dimensions using Classical MDS, Isotonic
+MDS, or t-SNE, and returns a <code>ggplot2</code> scatter plot in which proximity
+reflects similarity. Points can optionally be highlighted or split into facet
+panels by group.</p>
     </div>
 
     <div class="section level2">
@@ -72,7 +72,7 @@ optionally be highlighted or split into facet panels by group.</p>
 <span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cmds"</span>, <span class="st">"isomds"</span>, <span class="st">"tsne"</span><span class="op">)</span>,</span>
 <span>  highlight <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  gp <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  point.alpha <span class="op">=</span> <span class="fl">0.8</span></span>
+<span>  point.alpha <span class="op">=</span> <span class="fl">0.6</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -81,9 +81,9 @@ optionally be highlighted or split into facet panels by group.</p>
 
 
 <dl><dt id="arg-d">d<a class="anchor" aria-label="anchor" href="#arg-d"></a></dt>
-<dd><p>A distance matrix of class <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></code>. Labels must
-be set (i.e. <code>labels(d)</code> must not be <code>NULL</code>). Duplicate labels
-are not permitted.</p></dd>
+<dd><p>A distance matrix of class <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></code>. Labels must be
+set (i.e. <code>labels(d)</code> must not be <code>NULL</code>). Duplicate labels are
+not permitted.</p></dd>
 
 
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
@@ -107,16 +107,16 @@ method. One of:</p><dl><dt><code>"cmds"</code></dt>
 
 
 <dt id="arg-highlight">highlight<a class="anchor" aria-label="anchor" href="#arg-highlight"></a></dt>
-<dd><p>Optional character vector of labels to highlight in the plot.
-Matching identifiers are plotted in <strong>red</strong>; all others in black.
-<code>NULL</code> (default) disables highlighting. Every value must be present
-in <code>labels(d)</code>.</p></dd>
+<dd><p>Optional character vector of labels to highlight in the
+plot. Matching identifiers are plotted in <strong>red</strong>; all others in
+black. <code>NULL</code> (default) disables highlighting. Every value must be
+present in <code>labels(d)</code>.</p></dd>
 
 
 <dt id="arg-gp">gp<a class="anchor" aria-label="anchor" href="#arg-gp"></a></dt>
-<dd><p>Optional named character vector mapping labels to group
-names (<code>names(gp)</code> = labels, values = group names). When
-supplied, the plot is split into one facet panel per group via
+<dd><p>Optional named character vector mapping labels to group names
+(<code>names(gp)</code> = labels, values = group names). When supplied, the plot
+is split into one facet panel per group via
 <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></code>. The set of names must match
 <code>labels(d)</code> exactly. <code>NULL</code> (default) produces a single panel.</p></dd>
 
@@ -128,8 +128,7 @@ supplied, the plot is split into one facet panel per group via
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></code> object. The plot can be further
-  customised with standard <span class="pkg">ggplot2</span> additions before printing or
-  saving.</p>
+  customised with standard <span class="pkg">ggplot2</span> additions before printing or saving.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -149,17 +148,19 @@ supplied, the plot is split into one facet panel per group via
 <span class="r-plt img"><img src="plot_dist-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Classical MDS split by a user-defined grouping</span></span></span>
-<span class="r-in"><span><span class="va">regions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  Athens <span class="op">=</span> <span class="st">"South"</span>,  Barcelona <span class="op">=</span> <span class="st">"South"</span>, Brussels <span class="op">=</span> <span class="st">"North"</span>,</span></span>
-<span class="r-in"><span>  Calais <span class="op">=</span> <span class="st">"North"</span>,  Cherbourg <span class="op">=</span> <span class="st">"North"</span>, Cologne <span class="op">=</span> <span class="st">"North"</span>,</span></span>
-<span class="r-in"><span>  Copenhagen <span class="op">=</span> <span class="st">"North"</span>, Geneva <span class="op">=</span> <span class="st">"South"</span>, Gibraltar <span class="op">=</span> <span class="st">"South"</span>,</span></span>
-<span class="r-in"><span>  Hamburg <span class="op">=</span> <span class="st">"North"</span>, `Hook of Holland` <span class="op">=</span> <span class="st">"North"</span>, Lisbon <span class="op">=</span> <span class="st">"South"</span>,</span></span>
-<span class="r-in"><span>  Lyons <span class="op">=</span> <span class="st">"South"</span>,  Madrid <span class="op">=</span> <span class="st">"South"</span>,  Marseilles <span class="op">=</span> <span class="st">"South"</span>,</span></span>
-<span class="r-in"><span>  Milan <span class="op">=</span> <span class="st">"South"</span>,  Munich <span class="op">=</span> <span class="st">"North"</span>,  Paris <span class="op">=</span> <span class="st">"North"</span>,</span></span>
-<span class="r-in"><span>  Rome <span class="op">=</span> <span class="st">"South"</span>,   Stockholm <span class="op">=</span> <span class="st">"North"</span>, Vienna <span class="op">=</span> <span class="st">"North"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">plot_dist</span><span class="op">(</span><span class="va">eurodist</span>, method <span class="op">=</span> <span class="st">"cmds"</span>, gp <span class="op">=</span> <span class="va">regions</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="plot_dist-3.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="va">regions</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>Athens <span class="op">=</span> <span class="st">"South"</span>,  Barcelona <span class="op">=</span> <span class="st">"South"</span>, Brussels <span class="op">=</span> <span class="st">"North"</span>,</span></span>
+<span class="r-in"><span>    Calais <span class="op">=</span> <span class="st">"North"</span>,  Cherbourg <span class="op">=</span> <span class="st">"North"</span>, Cologne <span class="op">=</span> <span class="st">"North"</span>,</span></span>
+<span class="r-in"><span>    Copenhagen <span class="op">=</span> <span class="st">"North"</span>, Geneva <span class="op">=</span> <span class="st">"South"</span>, Gibraltar <span class="op">=</span> <span class="st">"South"</span>,</span></span>
+<span class="r-in"><span>    Hamburg <span class="op">=</span> <span class="st">"North"</span>, `Hook of Holland` <span class="op">=</span> <span class="st">"North"</span>, Lisbon <span class="op">=</span> <span class="st">"South"</span>,</span></span>
+<span class="r-in"><span>    Lyons <span class="op">=</span> <span class="st">"South"</span>,  Madrid <span class="op">=</span> <span class="st">"South"</span>,  Marseilles <span class="op">=</span> <span class="st">"South"</span>,</span></span>
+<span class="r-in"><span>    Milan <span class="op">=</span> <span class="st">"South"</span>,  Munich <span class="op">=</span> <span class="st">"North"</span>,  Paris <span class="op">=</span> <span class="st">"North"</span>,</span></span>
+<span class="r-in"><span>    Rome <span class="op">=</span> <span class="st">"South"</span>,   Stockholm <span class="op">=</span> <span class="st">"North"</span>, Vienna <span class="op">=</span> <span class="st">"North"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">plot_dist</span><span class="op">(</span><span class="va">eurodist</span>, method <span class="op">=</span> <span class="st">"cmds"</span>, gp <span class="op">=</span> <span class="va">regions</span>,</span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Madrid"</span>, <span class="st">"North"</span>, <span class="st">"Rome"</span>, <span class="st">"Brussels"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot_dist(eurodist, method = "cmds", gp = regions, highlight = c("Madrid",     "North", "Rome", "Brussels")):</span> The following entry/entries specified in "highlight" are not present in "data":</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> North</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

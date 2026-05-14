@@ -13,7 +13,7 @@ plot_dist(
   method = c("cmds", "isomds", "tsne"),
   highlight = NULL,
   gp = NULL,
-  point.alpha = 0.8
+  point.alpha = 0.6
 )
 ```
 
@@ -94,15 +94,17 @@ plot_dist(eurodist, method = "isomds",
 
 
 # Classical MDS split by a user-defined grouping
-regions <- c(
-  Athens = "South",  Barcelona = "South", Brussels = "North",
-  Calais = "North",  Cherbourg = "North", Cologne = "North",
-  Copenhagen = "North", Geneva = "South", Gibraltar = "South",
-  Hamburg = "North", `Hook of Holland` = "North", Lisbon = "South",
-  Lyons = "South",  Madrid = "South",  Marseilles = "South",
-  Milan = "South",  Munich = "North",  Paris = "North",
-  Rome = "South",   Stockholm = "North", Vienna = "North"
-)
-plot_dist(eurodist, method = "cmds", gp = regions)
+regions <-
+  c(Athens = "South",  Barcelona = "South", Brussels = "North",
+    Calais = "North",  Cherbourg = "North", Cologne = "North",
+    Copenhagen = "North", Geneva = "South", Gibraltar = "South",
+    Hamburg = "North", `Hook of Holland` = "North", Lisbon = "South",
+    Lyons = "South",  Madrid = "South",  Marseilles = "South",
+    Milan = "South",  Munich = "North",  Paris = "North",
+    Rome = "South",   Stockholm = "North", Vienna = "North")
 
+plot_dist(eurodist, method = "cmds", gp = regions,
+          highlight = c("Madrid", "North", "Rome", "Brussels"))
+#> Error in plot_dist(eurodist, method = "cmds", gp = regions, highlight = c("Madrid",     "North", "Rome", "Brussels")): The following entry/entries specified in "highlight" are not present in "data":
+#> North
 ```

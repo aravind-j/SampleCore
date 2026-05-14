@@ -6,7 +6,7 @@ sampling according to allocation specified.
 ## Usage
 
 ``` r
-select.random(data, names, group, alloc, always.selected)
+select.random(data, names, group, alloc, always.selected = NULL)
 ```
 
 ## Arguments
@@ -74,7 +74,7 @@ data <- cbind(genotypes = rownames(cassava_EC_gp), cassava_EC_gp)
 row.names(data) <- NULL
 
 # Prepare inputs
-counts <- c(I = 61, II = 41, III = 37, IV = 81, V = 80, VI = 37)
+counts <- c(I = 31, II = 31, III = 18, IV = 35, V = 40, VI = 17)
 
 mand_accns <-
   c("TMe-34", "TMe-3423", "TMe-2018", "TMe-801", "TMe-551")
@@ -95,71 +95,42 @@ sel_random_out
 #> [13] "TMe-2993" "TMe-3396" "TMe-486"  "TMe-815"  "TMe-299"  "TMe-3065"
 #> [19] "TMe-3460" "TMe-3149" "TMe-2027" "TMe-2066" "TMe-1344" "TMe-694" 
 #> [25] "TMe-990"  "TMe-3110" "TMe-3514" "TMe-756"  "TMe-264"  "TMe-3266"
-#> [31] "TMe-1581" "TMe-3211" "TMe-1940" "TMe-1960" "TMe-2004" "TMe-1906"
-#> [37] "TMe-670"  "TMe-3142" "TMe-3463" "TMe-1272" "TMe-3462" "TMe-3264"
-#> [43] "TMe-501"  "TMe-3219" "TMe-2383" "TMe-3351" "TMe-2131" "TMe-3475"
-#> [49] "TMe-1224" "TMe-1218" "TMe-3394" "TMe-3132" "TMe-3553" "TMe-1466"
-#> [55] "TMe-3398" "TMe-1140" "TMe-117"  "TMe-469"  "TMe-3623" "TMe-3479"
-#> [61] "TMe-3416"
+#> [31] "TMe-1581"
 #> 
 #> $II
-#>  [1] "TMe-2414" "TMe-1732" "TMe-636"  "TMe-2862" "TMe-2952" "TMe-768" 
-#>  [7] "TMe-1184" "TMe-3187" "TMe-3557" "TMe-930"  "TMe-1459" "TMe-2903"
-#> [13] "TMe-86"   "TMe-3467" "TMe-2860" "TMe-2033" "TMe-1616" "TMe-2056"
-#> [19] "TMe-2352" "TMe-171"  "TMe-2258" "TMe-2765" "TMe-3101" "TMe-1251"
-#> [25] "TMe-1698" "TMe-2166" "TMe-3338" "TMe-3401" "TMe-3020" "TMe-3371"
-#> [31] "TMe-431"  "TMe-3237" "TMe-509"  "TMe-1474" "TMe-1795" "TMe-3066"
-#> [37] "TMe-3612" "TMe-2978" "TMe-3530" "TMe-681"  "TMe-3605"
+#>  [1] "TMe-1172" "TMe-2077" "TMe-2127" "TMe-2204" "TMe-2021" "TMe-1461"
+#>  [7] "TMe-3009" "TMe-2891" "TMe-2414" "TMe-1242" "TMe-601"  "TMe-1323"
+#> [13] "TMe-3258" "TMe-2866" "TMe-1919" "TMe-477"  "TMe-40"   "TMe-2978"
+#> [19] "TMe-289"  "TMe-2797" "TMe-3531" "TMe-1250" "TMe-2903" "TMe-53"  
+#> [25] "TMe-1623" "TMe-960"  "TMe-85"   "TMe-433"  "TMe-3805" "TMe-431" 
+#> [31] "TMe-3800"
 #> 
 #> $III
-#>  [1] "TMe-3592" "TMe-1956" "TMe-3174" "TMe-3230" "TMe-3346" "TMe-3326"
-#>  [7] "TMe-3721" "TMe-3274" "TMe-3556" "TMe-64"   "TMe-2502" "TMe-261" 
-#> [13] "TMe-773"  "TMe-1200" "TMe-420"  "TMe-1993" "TMe-2751" "TMe-3383"
-#> [19] "TMe-3029" "TMe-1787" "TMe-1965" "TMe-2394" "TMe-1863" "TMe-2811"
-#> [25] "TMe-3445" "TMe-3731" "TMe-3407" "TMe-4"    "TMe-1176" "TMe-3118"
-#> [31] "TMe-3575" "TMe-3069" "TMe-3397" "TMe-405"  "TMe-3376" "TMe-3100"
-#> [37] "TMe-1910"
+#>  [1] "TMe-1910" "TMe-425"  "TMe-3071" "TMe-3326" "TMe-785"  "TMe-1443"
+#>  [7] "TMe-3544" "TMe-3750" "TMe-1176" "TMe-2901" "TMe-3324" "TMe-174" 
+#> [13] "TMe-3679" "TMe-3321" "TMe-2270" "TMe-2977" "TMe-2362" "TMe-3174"
 #> 
 #> $IV
-#>  [1] "TMe-34"   "TMe-801"  "TMe-3494" "TMe-352"  "TMe-3257" "TMe-519" 
-#>  [7] "TMe-2775" "TMe-1267" "TMe-170"  "TMe-1987" "TMe-15"   "TMe-2332"
-#> [13] "TMe-1297" "TMe-3511" "TMe-3779" "TMe-1700" "TMe-1151" "TMe-18"  
-#> [19] "TMe-684"  "TMe-25"   "TMe-3089" "TMe-698"  "TMe-1579" "TMe-270" 
-#> [25] "TMe-3660" "TMe-415"  "TMe-513"  "TMe-154"  "TMe-3760" "TMe-2039"
-#> [31] "TMe-1020" "TMe-1010" "TMe-3440" "TMe-812"  "TMe-708"  "TMe-3017"
-#> [37] "TMe-2924" "TMe-656"  "TMe-383"  "TMe-286"  "TMe-1479" "TMe-3435"
-#> [43] "TMe-714"  "TMe-1903" "TMe-3639" "TMe-2390" "TMe-3558" "TMe-54"  
-#> [49] "TMe-1078" "TMe-380"  "TMe-641"  "TMe-1330" "TMe-153"  "TMe-3276"
-#> [55] "TMe-3757" "TMe-760"  "TMe-1553" "TMe-1278" "TMe-1129" "TMe-2764"
-#> [61] "TMe-3278" "TMe-2210" "TMe-186"  "TMe-1577" "TMe-3591" "TMe-3225"
-#> [67] "TMe-1397" "TMe-3541" "TMe-386"  "TMe-107"  "TMe-619"  "TMe-3054"
-#> [73] "TMe-516"  "TMe-81"   "TMe-209"  "TMe-3084" "TMe-2971" "TMe-3340"
-#> [79] "TMe-2981" "TMe-3161" "TMe-372" 
+#>  [1] "TMe-34"   "TMe-801"  "TMe-3615" "TMe-3204" "TMe-1297" "TMe-3191"
+#>  [7] "TMe-2788" "TMe-594"  "TMe-1118" "TMe-3259" "TMe-3451" "TMe-317" 
+#> [13] "TMe-1430" "TMe-3108" "TMe-87"   "TMe-2059" "TMe-81"   "TMe-3248"
+#> [19] "TMe-1148" "TMe-2332" "TMe-2399" "TMe-279"  "TMe-3527" "TMe-608" 
+#> [25] "TMe-3312" "TMe-3542" "TMe-1325" "TMe-1867" "TMe-1700" "TMe-3004"
+#> [31] "TMe-3054" "TMe-1489" "TMe-735"  "TMe-3089" "TMe-3055"
 #> 
 #> $V
-#>  [1] "TMe-2018" "TMe-551"  "TMe-2032" "TMe-645"  "TMe-158"  "TMe-1299"
-#>  [7] "TMe-323"  "TMe-3408" "TMe-1388" "TMe-390"  "TMe-1694" "TMe-547" 
-#> [13] "TMe-245"  "TMe-929"  "TMe-472"  "TMe-1877" "TMe-2138" "TMe-1629"
-#> [19] "TMe-2855" "TMe-1762" "TMe-2307" "TMe-627"  "TMe-1098" "TMe-1268"
-#> [25] "TMe-2904" "TMe-1227" "TMe-2953" "TMe-194"  "TMe-1522" "TMe-892" 
-#> [31] "TMe-723"  "TMe-2319" "TMe-1834" "TMe-385"  "TMe-1488" "TMe-2057"
-#> [37] "TMe-2688" "TMe-795"  "TMe-771"  "TMe-2961" "TMe-2853" "TMe-370" 
-#> [43] "TMe-603"  "TMe-828"  "TMe-424"  "TMe-901"  "TMe-687"  "TMe-1446"
-#> [49] "TMe-1269" "TMe-475"  "TMe-1367" "TMe-826"  "TMe-1199" "TMe-943" 
-#> [55] "TMe-287"  "TMe-870"  "TMe-1487" "TMe-755"  "TMe-924"  "TMe-326" 
-#> [61] "TMe-825"  "TMe-2192" "TMe-969"  "TMe-1012" "TMe-1427" "TMe-976" 
-#> [67] "TMe-439"  "TMe-432"  "TMe-1788" "TMe-1357" "TMe-418"  "TMe-884" 
-#> [73] "TMe-823"  "TMe-193"  "TMe-1778" "TMe-1037" "TMe-1556" "TMe-412" 
-#> [79] "TMe-3356" "TMe-2296"
+#>  [1] "TMe-2018" "TMe-551"  "TMe-167"  "TMe-1285" "TMe-800"  "TMe-832" 
+#>  [7] "TMe-877"  "TMe-823"  "TMe-547"  "TMe-1300" "TMe-481"  "TMe-685" 
+#> [13] "TMe-1332" "TMe-439"  "TMe-1101" "TMe-1715" "TMe-326"  "TMe-475" 
+#> [19] "TMe-797"  "TMe-884"  "TMe-2530" "TMe-2139" "TMe-3332" "TMe-2820"
+#> [25] "TMe-712"  "TMe-2121" "TMe-866"  "TMe-1037" "TMe-977"  "TMe-1453"
+#> [31] "TMe-3311" "TMe-373"  "TMe-1733" "TMe-2790" "TMe-1522" "TMe-2055"
+#> [37] "TMe-510"  "TMe-378"  "TMe-2319" "TMe-456" 
 #> 
 #> $VI
-#>  [1] "TMe-856"  "TMe-1816" "TMe-846"  "TMe-907"  "TMe-2067" "TMe-236" 
-#>  [7] "TMe-620"  "TMe-2402" "TMe-1835" "TMe-3387" "TMe-893"  "TMe-836" 
-#> [13] "TMe-1286" "TMe-1509" "TMe-2963" "TMe-213"  "TMe-1216" "TMe-2064"
-#> [19] "TMe-2983" "TMe-662"  "TMe-876"  "TMe-514"  "TMe-728"  "TMe-693" 
-#> [25] "TMe-1076" "TMe-1506" "TMe-2510" "TMe-985"  "TMe-3177" "TMe-752" 
-#> [31] "TMe-3095" "TMe-631"  "TMe-531"  "TMe-1809" "TMe-1416" "TMe-854" 
-#> [37] "TMe-1178"
+#>  [1] "TMe-1539" "TMe-2196" "TMe-514"  "TMe-907"  "TMe-1216" "TMe-1392"
+#>  [7] "TMe-2389" "TMe-696"  "TMe-690"  "TMe-1995" "TMe-2535" "TMe-1676"
+#> [13] "TMe-1110" "TMe-1302" "TMe-631"  "TMe-1017" "TMe-1007"
 #> 
 
 # Get distance matrix - Only for visualization
