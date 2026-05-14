@@ -12,36 +12,40 @@
 #'  multiple candidate subsets are sampled randomly and the subset with the
 #'  highest trait diversity according to either pooled or mean diversity index
 #'  estimate is retained. The quality of the solution improves with increasing
-#'  \code{n.iter} but is not guaranteed to find the global optimum.
+#'  \code{n.iter} but is not guaranteed to find the global optimum
+#'  \insertCite{anatoly_zhigljavsky_stochastic_2008}{SampleCore}.
 #'  }
 #'
 #'  \subsection{Greedy search with 1-opt}{This method builds a solution
 #'  incrementally by adding the accession that maximises the diversity score at
 #'  each step, starting from the \code{always.selected} accessions (or a single
 #'  randomly drawn accession when there are no accessions specified in
-#'  \code{always.selected} present in the particular cluster/group ). The
-#'  'greedy' solution is then refined by a 1-opt local search controlled by
-#'   \code{local.search} and \code{max.iter}. Greedy search is deterministic
-#'   given a fixed \code{always.selected} set; when there are no accessions
-#'   specified in \code{always.selected} present in the particular cluster/group
-#'   results may vary across runs due to the random initialisation.
+#'  \code{always.selected} present in the particular cluster/group )
+#'  \insertCite{nemhauser_analysis_1978,fisher_analysis_1978,cormen_introduction_2022}{SampleCore}.
+#'  The 'greedy' solution is then refined by a 1-opt local search controlled by
+#'  \code{local.search} and \code{max.iter}
+#'  \insertCite{lin_computer_1965}{SampleCore}. Greedy search is deterministic
+#'  given a fixed \code{always.selected} set; when there are no accessions
+#'  specified in \code{always.selected} present in the particular cluster/group
+#'  results may vary across runs due to the random initialisation.
 #'
-#'   \code{local.search = "best.improvement"} scans all possible single swaps
-#'   in each pass and applies the one yielding the greatest improvement before
-#'   restarting. his guarantees the steepest ascent at each pass but requires
-#'   evaluating all \mjseqn{k \times (n - k)} swap pairs per pass, where
-#'   \mjseqn{k} is the number of swappable accessions and \mjseqn{n - k} is the
-#'   size of the candidate pool.
+#'  \code{local.search = "best.improvement"} scans all possible single swaps
+#'  in each pass and applies the one yielding the greatest improvement before
+#'  restarting. his guarantees the steepest ascent at each pass but requires
+#'  evaluating all \mjseqn{k \times (n - k)} swap pairs per pass, where
+#'  \mjseqn{k} is the number of swappable accessions and \mjseqn{n - k} is the
+#'  size of the candidate pool
+#'  \insertCite{papadimitriou_combinatorial_1998}{SampleCore}.
 #'
-#'   \code{local.search = "first.improvement"} applies the first swap that
-#'   improves the score and immediately restarts the search. This typically
-#'   requires fewer score evaluations per pass and converges faster, but may
-#'   find a different local optimum than \code{"best.improvement"}.
+#'  \code{local.search = "first.improvement"} applies the first swap that
+#'  improves the score and immediately restarts the search. This typically
+#'  requires fewer score evaluations per pass and converges faster, but may
+#'  find a different local optimum than \code{"best.improvement"}
+#'  \insertCite{papadimitriou_combinatorial_1998}{SampleCore}.
 #'
-#'   Both strategies terminate when no improving swap exists (local optimum)
-#'   or when \code{max.iter} passes have been completed.
-#'
-#'   }
+#'  Both strategies terminate when no improving swap exists (local optimum)
+#'  or when \code{max.iter} passes have been completed.
+#'  }
 #'
 #'
 #' Entries listed as \code{always.selected} are mandatorily included in the
