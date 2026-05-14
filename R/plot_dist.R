@@ -61,7 +61,7 @@
 #'     Rome = "South",   Stockholm = "North", Vienna = "North")
 #'
 #' plot_dist(eurodist, method = "cmds", gp = regions,
-#'           highlight = c("Madrid", "North", "Rome", "Brussels"))
+#'           highlight = c("Madrid", "Cherbourg", "Rome", "Brussels"))
 #'
 plot_dist <- function(d,
                       method = c("cmds", "isomds", "tsne"),
