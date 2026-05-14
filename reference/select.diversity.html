@@ -212,13 +212,13 @@ or M strategy of Schoen and Brown (1993)
  evaluating all <em></em>\(k \times (n - k)\) swap pairs per pass, where
  <em></em>\(k\) is the number of swappable accessions and <em></em>\(n - k\) is the
  size of the candidate pool
-
+ (Papadimitriou and Steiglitz 1998)
 .</p>
 <p><code>local.search = "first.improvement"</code> applies the first swap that
  improves the score and immediately restarts the search. This typically
  requires fewer score evaluations per pass and converges faster, but may
  find a different local optimum than <code>"best.improvement"</code>
-
+ (Papadimitriou and Steiglitz 1998)
 .</p>
 <p>Both strategies terminate when no improving swap exists (local optimum)
  or when <code>max.iter</code> passes have been completed.</p>
@@ -233,11 +233,7 @@ allocation.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>Adummy A (2026).
-“Some keys from package SampleCore are not avalable.”
-Failed to insert reference with keys:
-    schoen_conservation_1993, anatoly_zhigljavsky_stochastic_2008, nemhauser_analysis_1978, fisher_analysis_1978, cormen_introduction_2022, lin_computer_1965, papadimitriou_combinatorial_1
-from package = 'SampleCore'. Possible cause - missing REFERENCES.bib in package 'SampleCore' or 'SampleCore' not installed.<br><br> Anatoly Zhigljavsky, Antanas Zilinskas (2008).
+    <p>Anatoly Zhigljavsky, Antanas Zilinskas (2008).
 <em>Stochastic Global Optimization</em>, volume 9 of <em>Springer Optimization and Its Applications</em>.
 Springer US, Boston, MA.
 ISBN 978-0-387-74022-5.<br><br> Cormen TH, Leiserson CE, Rivest RL, Stein C (2022).
@@ -249,7 +245,10 @@ ISBN 978-0-262-04630-5.<br><br> Fisher ML, Nemhauser GL, Wolsey LA (1978).
 “Computer solutions of the traveling salesman problem.”
 <em>Bell System Technical Journal</em>, <b>44</b>(10), 2245–2269.<br><br> Nemhauser GL, Wolsey LA, Fisher ML (1978).
 “An analysis of approximations for maximizing submodular set functions-I.”
-<em>Mathematical Programming</em>, <b>14</b>(1), 265–294.<br><br> Schoen DJ, Brown AHD (1993).
+<em>Mathematical Programming</em>, <b>14</b>(1), 265–294.<br><br> Papadimitriou CH, Steiglitz K (1998).
+<em>Combinatorial optimization: Algorithms and complexity</em>.
+Dover Publications, Mineola, N.Y.
+ISBN 978-0-486-40258-1.<br><br> Schoen DJ, Brown AHD (1993).
 “Conservation of allelic richness in wild crop relatives is aided by assessment of genetic markers.”
 <em>Proceedings of the National Academy of Sciences</em>, <b>90</b>(22), 10623–10627.</p>
     </div>

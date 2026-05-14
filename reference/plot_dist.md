@@ -104,7 +104,6 @@ regions <-
     Rome = "South",   Stockholm = "North", Vienna = "North")
 
 plot_dist(eurodist, method = "cmds", gp = regions,
-          highlight = c("Madrid", "North", "Rome", "Brussels"))
-#> Error in plot_dist(eurodist, method = "cmds", gp = regions, highlight = c("Madrid",     "North", "Rome", "Brussels")): The following entry/entries specified in "highlight" are not present in "data":
-#> North
+          highlight = c("Madrid", "Cherbourg", "Rome", "Brussels"))
+
 ```

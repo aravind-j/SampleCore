@@ -145,12 +145,13 @@ each pass and applies the one yielding the greatest improvement before
 restarting. his guarantees the steepest ascent at each pass but requires
 evaluating all \\k \times (n - k)\\ swap pairs per pass, where \\k\\ is
 the number of swappable accessions and \\n - k\\ is the size of the
-candidate pool .
+candidate pool (Papadimitriou and Steiglitz 1998) .
 
 `local.search = "first.improvement"` applies the first swap that
 improves the score and immediately restarts the search. This typically
 requires fewer score evaluations per pass and converges faster, but may
-find a different local optimum than `"best.improvement"` .
+find a different local optimum than `"best.improvement"` (Papadimitriou
+and Steiglitz 1998) .
 
 Both strategies terminate when no improving swap exists (local optimum)
 or when `max.iter` passes have been completed.
@@ -163,14 +164,6 @@ allocation.
 
 ## References
 
-Adummy A (2026). “Some keys from package SampleCore are not avalable.”
-Failed to insert reference with keys: schoen_conservation_1993,
-anatoly_zhigljavsky_stochastic_2008, nemhauser_analysis_1978,
-fisher_analysis_1978, cormen_introduction_2022, lin_computer_1965,
-papadimitriou_combinatorial_1 from package = 'SampleCore'. Possible
-cause - missing REFERENCES.bib in package 'SampleCore' or 'SampleCore'
-not installed.  
-  
 Anatoly Zhigljavsky, Antanas Zilinskas (2008). *Stochastic Global
 Optimization*, volume 9 of *Springer Optimization and Its Applications*.
 Springer US, Boston, MA. ISBN 978-0-387-74022-5.  
@@ -189,6 +182,10 @@ Lin S (1965). “Computer solutions of the traveling salesman problem.”
 Nemhauser GL, Wolsey LA, Fisher ML (1978). “An analysis of
 approximations for maximizing submodular set functions-I.” *Mathematical
 Programming*, **14**(1), 265–294.  
+  
+Papadimitriou CH, Steiglitz K (1998). *Combinatorial optimization:
+Algorithms and complexity*. Dover Publications, Mineola, N.Y. ISBN
+978-0-486-40258-1.  
   
 Schoen DJ, Brown AHD (1993). “Conservation of allelic richness in wild
 crop relatives is aided by assessment of genetic markers.” *Proceedings
