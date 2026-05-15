@@ -1,6 +1,6 @@
 Package: SampleCore
 Title: Sampling Strategies for Constructing Core Collections
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: c(
     person(given = "J.", family = "Aravind",
            email = "j.aravind@icar.org.in",
