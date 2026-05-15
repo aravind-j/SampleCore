@@ -9,7 +9,6 @@ select.diversity(
   names,
   group,
   alloc,
-  quantitative,
   qualitative,
   always.selected = NULL,
   div.index = c("richness", "shannon", "simpson", "mcintosh"),
@@ -36,9 +35,6 @@ character string.}
 selected. Names should correspond to the levels of the "\code{"group"}
 column, and values indicate the number of elements to be selected from each
 level.}
-
-\item{quantitative}{Name of columns with the quantitative traits as a
-character vector.}
 
 \item{qualitative}{Name of columns with the qualitative traits as a character
 vector.}
@@ -152,7 +148,23 @@ qual <- c("CUAL", "LNGS", "PTLC", "DSTA", "LFRT", "LBTEF", "CBTR", "NMLB",
           "ANGB", "CUAL9M", "LVC9M", "TNPR9M", "PL9M", "STRP", "STRC",
           "PSTR")
 
+# Convert qualitative data columns to factor
 data[, qual] <- lapply(data[, qual], as.factor)
+
+# Convert quantitative data columns to qualitative scores
+quant_to_score5 <- function(x) {
+
+  brks <- unique( quantile(x,
+                           probs = seq(0, 1, 0.2),
+                           na.rm = TRUE))
+  cut(x, breaks = brks,
+      include.lowest = TRUE,
+      labels = seq_len(length(brks) - 1))
+}
+
+data[, quant] <- lapply(data[, quant], quant_to_score5)
+
+traits <- c(quant, qual)
 
 # Prepare inputs
 counts <- c(I = 31, II = 31, III = 18, IV = 35, V = 40, VI = 17)
@@ -192,7 +204,7 @@ div_fun_margalef <- function(x) {
 # Mean richness
 randomsel_mean_richness <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "richness",
                    metric = "mean", search = "random", local.search = NULL,
                    n.iter = 100)
@@ -201,7 +213,7 @@ randomsel_mean_richness
 # Pooled richness
 randomsel_sum_richness <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "richness",
                    metric = "pooled", search = "random", local.search = NULL,
                    n.iter = 100)
@@ -210,7 +222,7 @@ randomsel_sum_richness
 # Mean Shannon-Weaver diversity index
 randomsel_mean_shannon <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "shannon",
                    metric = "mean", search = "random", local.search = NULL,
                    n.iter = 100)
@@ -219,7 +231,7 @@ randomsel_mean_shannon
 # Pooled Shannon-Weaver diversity index
 randomsel_sum_shannon <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "shannon",
                    metric = "pooled", search = "random", local.search = NULL,
                    n.iter = 100)
@@ -228,7 +240,7 @@ randomsel_sum_shannon
 # Mean Gini-Simpson diversity index
 randomsel_mean_simpson <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "simpson",
                    metric = "mean", search = "random", local.search = NULL,
                    n.iter = 100)
@@ -237,7 +249,7 @@ randomsel_mean_simpson
 # Pooled Gini-Simpson diversity index
 randomsel_sum_simpson <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "simpson",
                    metric = "pooled", search = "random", local.search = NULL,
                    n.iter = 100)
@@ -246,7 +258,7 @@ randomsel_sum_simpson
 # Mean McIntosh diversity index
 randomsel_mean_mcintosh <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "mcintosh",
                    metric = "pooled", search = "random", local.search = NULL,
                    n.iter = 100)
@@ -255,7 +267,7 @@ randomsel_mean_mcintosh
 # Pooled McIntosh diversity index
 randomsel_sum_mcintosh <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "mcintosh",
                    metric = "pooled", search = "random", local.search = NULL,
                    n.iter = 100)
@@ -264,7 +276,7 @@ randomsel_sum_mcintosh
 # Mean Brillouin diversity index
 randomsel_mean_brillouin <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.fun = div_fun_brillouin,
                    metric = "mean", search = "random", local.search = NULL,
                    n.iter = 100)
@@ -273,7 +285,7 @@ randomsel_mean_brillouin
 # Pooled Brillouin diversity index
 randomsel_sum_brillouin <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.fun = div_fun_brillouin,
                    metric = "pooled", search = "random", local.search = NULL,
                    n.iter = 100)
@@ -282,7 +294,7 @@ randomsel_sum_brillouin
 # Mean Margalef's richness index
 randomsel_mean_margalef <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.fun = div_fun_margalef,
                    metric = "mean", search = "random", local.search = NULL,
                    n.iter = 100)
@@ -291,7 +303,7 @@ randomsel_mean_margalef
 # Pooled Margalef's richness index
 randomsel_sum_margalef <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.fun = div_fun_margalef,
                    metric = "pooled", search = "random", local.search = NULL,
                    n.iter = 100)
@@ -304,7 +316,7 @@ randomsel_sum_margalef
 # Mean richness
 greedysel_best_mean_richness <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "richness",
                    metric = "mean", search = "greedy",
                    local.search = "best.improvement",max.iter = 3)
@@ -313,7 +325,7 @@ greedysel_best_mean_richness
 # Pooled richness
 greedysel_best_sum_richness <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "richness",
                    metric = "pooled", search = "greedy",
                    local.search = "best.improvement",max.iter = 3)
@@ -322,7 +334,7 @@ greedysel_best_sum_richness
 # Mean Shannon-Weaver diversity index
 greedysel_best_mean_shannon <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "shannon",
                    metric = "mean", search = "greedy",
                    local.search = "best.improvement",max.iter = 3)
@@ -331,7 +343,7 @@ greedysel_best_mean_shannon
 # Pooled Shannon-Weaver diversity index
 greedysel_best_sum_shannon <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "shannon",
                    metric = "pooled", search = "greedy",
                    local.search = "best.improvement",max.iter = 3)
@@ -340,7 +352,7 @@ greedysel_best_sum_shannon
 # Mean Gini-Simpson diversity index
 greedysel_best_mean_simpson <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "simpson",
                    metric = "mean", search = "greedy",
                    local.search = "best.improvement",max.iter = 3)
@@ -349,7 +361,7 @@ greedysel_best_mean_simpson
 # Pooled Gini-Simpson diversity index
 greedysel_best_sum_simpson <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "simpson",
                    metric = "pooled", search = "greedy",
                    local.search = "best.improvement",max.iter = 3)
@@ -358,7 +370,7 @@ greedysel_best_sum_simpson
 # Mean McIntosh diversity index
 greedysel_best_mean_mcintosh <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "mcintosh",
                    metric = "pooled", search = "greedy",
                    local.search = "best.improvement",max.iter = 3)
@@ -367,7 +379,7 @@ greedysel_best_mean_mcintosh
 # Pooled McIntosh diversity index
 greedysel_best_sum_mcintosh <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "mcintosh",
                    metric = "pooled", search = "greedy",
                    local.search = "best.improvement",max.iter = 3)
@@ -376,7 +388,7 @@ greedysel_best_sum_mcintosh
 # Mean Brillouin diversity index
 greedysel_best_mean_brillouin <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.fun = div_fun_brillouin,
                    metric = "mean", search = "greedy",
                    local.search = "best.improvement",max.iter = 3)
@@ -385,7 +397,7 @@ greedysel_best_mean_brillouin
 # Pooled Brillouin diversity index
 greedysel_best_sum_brillouin <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.fun = div_fun_brillouin,
                    metric = "pooled", search = "greedy",
                    local.search = "best.improvement",max.iter = 3)
@@ -394,7 +406,7 @@ greedysel_best_sum_brillouin
 # Mean Margalef's richness index
 greedysel_best_mean_margalef <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.fun = div_fun_margalef,
                    metric = "mean", search = "greedy",
                    local.search = "best.improvement",max.iter = 3)
@@ -403,7 +415,7 @@ greedysel_best_mean_margalef
 # Pooled Margalef's richness index
 greedysel_best_sum_margalef <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.fun = div_fun_margalef,
                    metric = "pooled", search = "greedy",
                    local.search = "best.improvement",max.iter = 3)
@@ -416,7 +428,7 @@ greedysel_best_sum_margalef
 # Mean richness
 greedysel_first_mean_richness <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "richness",
                    metric = "mean", search = "greedy",
                    local.search = "first.improvement",max.iter = 3)
@@ -425,7 +437,7 @@ greedysel_first_mean_richness
 # Pooled richness
 greedysel_first_sum_richness <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "richness",
                    metric = "pooled", search = "greedy",
                    local.search = "first.improvement",max.iter = 3)
@@ -434,7 +446,7 @@ greedysel_first_sum_richness
 # Mean Shannon-Weaver diversity index
 greedysel_first_mean_shannon <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "shannon",
                    metric = "mean", search = "greedy",
                    local.search = "first.improvement",max.iter = 3)
@@ -443,7 +455,7 @@ greedysel_first_mean_shannon
 # Pooled Shannon-Weaver diversity index
 greedysel_first_sum_shannon <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "shannon",
                    metric = "pooled", search = "greedy",
                    local.search = "first.improvement",max.iter = 3)
@@ -452,7 +464,7 @@ greedysel_first_sum_shannon
 # Mean Gini-Simpson diversity index
 greedysel_first_mean_simpson <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "simpson",
                    metric = "mean", search = "greedy",
                    local.search = "first.improvement",max.iter = 3)
@@ -461,7 +473,7 @@ greedysel_first_mean_simpson
 # Pooled Gini-Simpson diversity index
 greedysel_first_sum_simpson <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "simpson",
                    metric = "pooled", search = "greedy",
                    local.search = "first.improvement",max.iter = 3)
@@ -470,7 +482,7 @@ greedysel_first_sum_simpson
 # Mean McIntosh diversity index
 greedysel_first_mean_mcintosh <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "mcintosh",
                    metric = "pooled", search = "greedy",
                    local.search = "first.improvement",max.iter = 3)
@@ -479,7 +491,7 @@ greedysel_first_mean_mcintosh
 # Pooled McIntosh diversity index
 greedysel_first_sum_mcintosh <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.index = "mcintosh",
                    metric = "pooled", search = "greedy",
                    local.search = "first.improvement",max.iter = 3)
@@ -488,7 +500,7 @@ greedysel_first_sum_mcintosh
 # Mean Brillouin diversity index
 greedysel_first_mean_brillouin <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.fun = div_fun_brillouin,
                    metric = "mean", search = "greedy",
                    local.search = "first.improvement",max.iter = 3)
@@ -497,7 +509,7 @@ greedysel_first_mean_brillouin
 # Pooled Brillouin diversity index
 greedysel_first_sum_brillouin <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.fun = div_fun_brillouin,
                    metric = "pooled", search = "greedy",
                    local.search = "first.improvement",max.iter = 3)
@@ -506,7 +518,7 @@ greedysel_first_sum_brillouin
 # Mean Margalef's richness index
 greedysel_first_mean_margalef <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.fun = div_fun_margalef,
                    metric = "mean", search = "greedy",
                    local.search = "first.improvement",max.iter = 3)
@@ -515,7 +527,7 @@ greedysel_first_mean_margalef
 # Pooled Margalef's richness index
 greedysel_first_sum_margalef <-
   select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, quantitative = quant, qualitative = qual,
+                   alloc = counts, qualitative = traits,
                    always.selected = mand_accns, div.fun = div_fun_margalef,
                    metric = "pooled", search = "greedy",
                    local.search = "first.improvement",max.iter = 3)

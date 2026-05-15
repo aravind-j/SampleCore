@@ -118,7 +118,6 @@ allocate.basic <- function(data,
   checks.sample.core(data = data, size = size,
                      names = names, group = group,
                      dist.mat = NULL,
-                     quantitative = NULL,
                      qualitative = NULL,
                      log.base = log.base,
                      mode = "alloc")

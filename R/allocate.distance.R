@@ -663,7 +663,6 @@ allocate.distance <- function(data, names, group,
   checks.sample.core(data = data, size = size,
                      names = names, group = group,
                      dist.mat = dist.mat,
-                     quantitative = NULL,
                      qualitative = NULL,
                      log.base = log.base,
                      mode = "alloc")

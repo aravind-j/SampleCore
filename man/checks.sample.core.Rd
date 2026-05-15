@@ -9,7 +9,6 @@ checks.sample.core(
   names,
   size,
   group,
-  quantitative = NULL,
   qualitative = NULL,
   dist.mat = NULL,
   log.base = NULL,
@@ -29,9 +28,6 @@ trait/character data.}
 
 \item{group}{Name of column with the accession group/cluster names as a
 character string.}
-
-\item{quantitative}{Name of columns with the quantitative traits as a
-character vector.}
 
 \item{qualitative}{Name of columns with the qualitative traits as a character
 vector.}

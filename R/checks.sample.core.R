@@ -8,7 +8,7 @@
 #' @keywords internal
 #'
 #' @template general-arg
-#' @template qualquant-arg
+#' @template qual-arg
 #' @template dist-arg
 #' @template log-arg
 #' @template sel-arg
@@ -16,7 +16,6 @@
 #
 checks.sample.core <- function(data, names,
                                size, group,
-                               quantitative = NULL,
                                qualitative = NULL,
                                dist.mat = NULL,
                                log.base = NULL,
@@ -26,10 +25,6 @@ checks.sample.core <- function(data, names,
 
   # Declare nulls ----
 
-  if (missing(quantitative)) {
-    quantitative <- NULL
-  }
-
   if (missing(qualitative)) {
     qualitative <- NULL
   }
@@ -38,7 +33,7 @@ checks.sample.core <- function(data, names,
     dist.mat <- NULL
   }
 
-  if (length(c(quantitative, qualitative)) == 1) {
+  if (length(qualitative) == 1) {
     stop("Only one trait specified.")
   }
 
@@ -64,13 +59,6 @@ checks.sample.core <- function(data, names,
   # check if 'group' argument is character vector of unit length
   if (!(is.character(group) && length(group) == 1)) {
     stop('"group" should be a character vector of unit length.')
-  }
-
-  # check if 'quantitative' argument is a character vector
-  if (!is.null(quantitative)) {
-    if (!is.character(quantitative)) {
-      stop('"quantitative" should be a character vector.')
-    }
   }
 
   # check if 'qualitative' argument is a character vector
@@ -101,34 +89,12 @@ checks.sample.core <- function(data, names,
                sep = ""))
   }
 
-  # check if 'quantitative' columns are present in 'data'
-  if (!is.null(quantitative)) {
-    if (FALSE %in% (quantitative %in% colnames(data)))  {
-      stop(paste('The following column(s) specified in "quantitative" ',
-                 'not present in "data":\n',
-                 paste(quantitative[!(quantitative %in% colnames(data))],
-                       collapse = ", "),
-                 sep = ""))
-    }
-  }
-
   # check if 'qualitative' columns are present in 'data'
   if (!is.null(qualitative)) {
     if (FALSE %in% (qualitative %in% colnames(data)))  {
       stop(paste('The following column(s) specified in "qualitative" ',
                  'not present in "data":\n',
                  paste(qualitative[!(qualitative %in% colnames(data))],
-                       collapse = ", "),
-                 sep = ""))
-    }
-  }
-
-  # check if overlap exists between 'quantitative' and 'qualitative'
-  if ((!is.null(quantitative)) && (!is.null(qualitative))) {
-    if (length(intersect(quantitative, qualitative)) != 0) {
-      stop(paste('The following column(s) is/are specified in both ',
-                 '"quantitative" and "qualitative":\n',
-                 paste(intersect(quantitative, qualitative),
                        collapse = ", "),
                  sep = ""))
     }
@@ -148,19 +114,6 @@ checks.sample.core <- function(data, names,
     stop('"names" column in "data" should be of type character.')
   }
 
-  # check if 'quantitative' columns are of type numeric/integer
-  if (!is.null(quantitative)) {
-    intquantcols <-
-      unlist(lapply(data[, quantitative],
-                    function(x) FALSE %in% (is.vector(x, mode = "integer") |
-                                              is.vector(x, mode = "numeric"))))
-    if (TRUE %in% intquantcols) {
-      stop(paste('The following "quantitative" column(s) in "data" are not ',
-                 'of type numeric:\n',
-                 paste(names(intquantcols[intquantcols]), collapse = ", ")))
-    }
-  }
-
   # check if 'qualitative' columns are of type factor
   if (!is.null(qualitative)) {
     intqualcols <- unlist(lapply(data[, qualitative],
@@ -175,7 +128,7 @@ checks.sample.core <- function(data, names,
   # Missing values ----
 
   # check for missing values
-  missvcols <- unlist(lapply(data[, quantitative],
+  missvcols <- unlist(lapply(data[, qualitative],
                              function(x) TRUE %in% is.na(x)))
   if (TRUE %in% missvcols) {
     warning(paste('The following column(s) in "data" have missing values:\n',
