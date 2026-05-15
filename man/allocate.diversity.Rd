@@ -154,9 +154,9 @@ following strategies are implemented. \loadmathjax
 }
 
 \examples{
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Prepare example data
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Get data
 data("cassava_EC_gp")
@@ -173,9 +173,34 @@ qual <- c("CUAL", "LNGS", "PTLC", "DSTA", "LFRT", "LBTEF", "CBTR", "NMLB",
 # Convert qualitative data columns to factor
 data[, qual] <- lapply(data[, qual], as.factor)
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Custom diversity index functions
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+div_fun_brillouin <- function(x) {
+  n <- tabulate(x)
+  n <- n[n > 0]
+  N <- sum(n)
+  if (N <= 1) {
+    return(0)
+  }
+  (lgamma(N + 1) - sum(lgamma(n + 1)))/N
+}
+
+div_fun_margalef <- function(x) {
+  tab <- tabulate(x)
+  tab <- tab[tab > 0]
+  S <- length(tab)
+  N <- length(x)
+  if (N <= 1) {
+    return(0)
+  }
+  (S - 1)/log(N)
+}
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Diversity allocation
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## Shannon-Weaver Diversity Index
 dist_out_shannon1 <-
@@ -234,9 +259,47 @@ dist_out_mcintosh2 <-
                      size = 0.2)
 dist_out_mcintosh2
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Brillouin Diversity Index
+dist_out_brillouin1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = qual, quantitative = quant,
+                     method = "div",
+                     div.fun = div_fun_brillouin, metric = "pooled",
+                     size = 0.2)
+dist_out_brillouin1
+
+dist_out_brillouin2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = qual, quantitative = quant,
+                     method = "div",
+                     div.fun = div_fun_brillouin, metric = "mean",
+                     size = 0.2)
+dist_out_brillouin2
+
+## Richness
+dist_out_richness1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = qual, quantitative = quant,
+                     method = "div",
+                     div.fun = richness, metric = "pooled",
+                     size = 0.2)
+dist_out_richness1
+
+dist_out_richness2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = qual, quantitative = quant,
+                     method = "div",
+                     div.fun = richness, metric = "mean",
+                     size = 0.2)
+dist_out_richness2
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Diversity allocation & Proportional
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## Shannon-Weaver Diversity Index
 dist_prop_out_shannon1 <-
@@ -295,9 +358,47 @@ dist_prop_out_mcintosh2 <-
                      size = 0.2)
 dist_prop_out_mcintosh2
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Brillouin Diversity Index
+dist_out_brillouin1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = qual, quantitative = quant,
+                     method = "div.prop",
+                     div.fun = div_fun_brillouin, metric = "pooled",
+                     size = 0.2)
+dist_out_brillouin1
+
+dist_out_brillouin2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = qual, quantitative = quant,
+                     method = "div.prop",
+                     div.fun = div_fun_brillouin, metric = "mean",
+                     size = 0.2)
+dist_out_brillouin2
+
+## Richness
+dist_out_richness1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = qual, quantitative = quant,
+                     method = "div.prop",
+                     div.fun = richness, metric = "pooled",
+                     size = 0.2)
+dist_out_richness1
+
+dist_out_richness2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = qual, quantitative = quant,
+                     method = "div.prop",
+                     div.fun = richness, metric = "mean",
+                     size = 0.2)
+dist_out_richness2
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Diversity allocation & Logarithmic
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## Shannon-Weaver Diversity Index
 dist_log_out_shannon1 <-
@@ -356,9 +457,47 @@ dist_log_out_mcintosh2 <-
                      size = 0.2)
 dist_log_out_mcintosh2
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Brillouin Diversity Index
+dist_out_brillouin1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = qual, quantitative = quant,
+                     method = "div.log",
+                     div.fun = div_fun_brillouin, metric = "pooled",
+                     size = 0.2)
+dist_out_brillouin1
+
+dist_out_brillouin2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = qual, quantitative = quant,
+                     method = "div.log",
+                     div.fun = div_fun_brillouin, metric = "mean",
+                     size = 0.2)
+dist_out_brillouin2
+
+## Richness
+dist_out_richness1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = qual, quantitative = quant,
+                     method = "div.log",
+                     div.fun = richness, metric = "pooled",
+                     size = 0.2)
+dist_out_richness1
+
+dist_out_richness2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = qual, quantitative = quant,
+                     method = "div.log",
+                     div.fun = richness, metric = "mean",
+                     size = 0.2)
+dist_out_richness2
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Diversity allocation & Square root
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## Shannon-Weaver Diversity Index
 dist_sqrt_out_shannon1 <-
@@ -416,6 +555,44 @@ dist_sqrt_out_mcintosh2 <-
                      div.index = "mcintosh", metric = "mean",
                      size = 0.2)
 dist_sqrt_out_mcintosh2
+
+## Brillouin Diversity Index
+dist_out_brillouin1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = qual, quantitative = quant,
+                     method = "div.sqrt",
+                     div.fun = div_fun_brillouin, metric = "pooled",
+                     size = 0.2)
+dist_out_brillouin1
+
+dist_out_brillouin2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = qual, quantitative = quant,
+                     method = "div.sqrt",
+                     div.fun = div_fun_brillouin, metric = "mean",
+                     size = 0.2)
+dist_out_brillouin2
+
+## Richness
+dist_out_richness1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = qual, quantitative = quant,
+                     method = "div.sqrt",
+                     div.fun = richness, metric = "pooled",
+                     size = 0.2)
+dist_out_richness1
+
+dist_out_richness2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = qual, quantitative = quant,
+                     method = "div.sqrt",
+                     div.fun = richness, metric = "mean",
+                     size = 0.2)
+dist_out_richness2
 
 }
 \references{
