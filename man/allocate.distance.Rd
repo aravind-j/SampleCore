@@ -338,23 +338,21 @@ dist_out_mstl <-
                     size = 0.2)
 dist_out_mstl
 
-\donttest{
-  ## Mean distance to centroid
-  dist_out_mdc <-
-    allocate.distance(data = data, names = "genotypes",
-                      group = "Cluster", method = "dist",
-                      dist.mat = dist_matrix, metric = "mdc",
-                      size = 0.2)
-  dist_out_mdc
+## Mean distance to centroid
+dist_out_mdc <-
+  allocate.distance(data = data, names = "genotypes",
+                    group = "Cluster", method = "dist",
+                    dist.mat = dist_matrix, metric = "mdc",
+                    size = 0.2)
+dist_out_mdc
 
-  ## Mean distance to median
-  dist_out_mdm <-
-    allocate.distance(data = data, names = "genotypes",
-                      group = "Cluster", method = "dist",
-                      dist.mat = dist_matrix, metric = "mdm",
-                      size = 0.2)
-  dist_out_mdm
-}
+## Mean distance to median
+dist_out_mdm <-
+  allocate.distance(data = data, names = "genotypes",
+                    group = "Cluster", method = "dist",
+                    dist.mat = dist_matrix, metric = "mdm",
+                    size = 0.2)
+dist_out_mdm
 
 ## Number of clusters
 
@@ -388,15 +386,13 @@ dist_out_nclust3
 
 
 # Tocher's sequential clustering
-\donttest{
-  dist_out_nclust4 <-
-    allocate.distance(data = data, names = "genotypes",
-                      group = "Cluster", method = "dist",
-                      dist.mat = dist_matrix, metric = "nclust",
-                      clust.fun = clust_fun_tocher,
-                      size = 0.2)
-  dist_out_nclust4
-}
+dist_out_nclust4 <-
+  allocate.distance(data = data, names = "genotypes",
+                    group = "Cluster", method = "dist",
+                    dist.mat = dist_matrix, metric = "nclust",
+                    clust.fun = clust_fun_tocher,
+                    size = 0.2)
+dist_out_nclust4
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Diversity (Distance based) & Proportional
@@ -450,23 +446,21 @@ dist_prop_out_mstl <-
                     size = 0.2)
 dist_prop_out_mstl
 
-\donttest{
-  ## Mean distance to centroid
-  dist_prop_out_mdc <-
-    allocate.distance(data = data, names = "genotypes",
-                      group = "Cluster", method = "dist.prop",
-                      dist.mat = dist_matrix, metric = "mdc",
-                      size = 0.2)
-  dist_prop_out_mdc
+## Mean distance to centroid
+dist_prop_out_mdc <-
+  allocate.distance(data = data, names = "genotypes",
+                    group = "Cluster", method = "dist.prop",
+                    dist.mat = dist_matrix, metric = "mdc",
+                    size = 0.2)
+dist_prop_out_mdc
 
-  ## Mean distance to median
-  dist_prop_out_mdm <-
-    allocate.distance(data = data, names = "genotypes",
-                      group = "Cluster", method = "dist.prop",
-                      dist.mat = dist_matrix, metric = "mdm",
-                      size = 0.2)
-  dist_prop_out_mdm
-}
+## Mean distance to median
+dist_prop_out_mdm <-
+  allocate.distance(data = data, names = "genotypes",
+                    group = "Cluster", method = "dist.prop",
+                    dist.mat = dist_matrix, metric = "mdm",
+                    size = 0.2)
+dist_prop_out_mdm
 
 ## Number of clusters
 
@@ -498,15 +492,13 @@ dist_prop_out_nclust3 <-
 dist_prop_out_nclust3
 
 # Tocher's sequential clustering
-\donttest{
-  dist_prop_out_nclust4 <-
-    allocate.distance(data = data, names = "genotypes",
-                      group = "Cluster", method = "dist.prop",
-                      dist.mat = dist_matrix, metric = "nclust",
-                      clust.fun = clust_fun_tocher,
-                      size = 0.2)
-  dist_prop_out_nclust4
-}
+dist_prop_out_nclust4 <-
+  allocate.distance(data = data, names = "genotypes",
+                    group = "Cluster", method = "dist.prop",
+                    dist.mat = dist_matrix, metric = "nclust",
+                    clust.fun = clust_fun_tocher,
+                    size = 0.2)
+dist_prop_out_nclust4
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Diversity (Distance based) & Logarithmic
@@ -560,15 +552,13 @@ dist_log_out_mstl <-
                     size = 0.2)
 dist_log_out_mstl
 
-\donttest{
-  ## Mean distance to centroid
-  dist_log_out_mdc <-
-    allocate.distance(data = data, names = "genotypes",
-                      group = "Cluster", method = "dist.log",
-                      dist.mat = dist_matrix, metric = "mdc",
-                      size = 0.2)
-  dist_log_out_mdc
-}
+## Mean distance to centroid
+dist_log_out_mdc <-
+  allocate.distance(data = data, names = "genotypes",
+                    group = "Cluster", method = "dist.log",
+                    dist.mat = dist_matrix, metric = "mdc",
+                    size = 0.2)
+dist_log_out_mdc
 
 ## Mean distance to median
 dist_log_out_mdm <-
@@ -608,15 +598,13 @@ dist_log_out_nclust3 <-
 dist_log_out_nclust3
 
 # Tocher's sequential clustering
-\donttest{
-  dist_log_out_nclust4 <-
-    allocate.distance(data = data, names = "genotypes",
-                      group = "Cluster", method = "dist.log",
-                      dist.mat = dist_matrix, metric = "nclust",
-                      clust.fun = clust_fun_tocher,
-                      size = 0.2)
-  dist_log_out_nclust4
-}
+dist_log_out_nclust4 <-
+  allocate.distance(data = data, names = "genotypes",
+                    group = "Cluster", method = "dist.log",
+                    dist.mat = dist_matrix, metric = "nclust",
+                    clust.fun = clust_fun_tocher,
+                    size = 0.2)
+dist_log_out_nclust4
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Diversity (Distance based) & Square root
@@ -670,23 +658,21 @@ dist_sqrt_out_mstl <-
                     size = 0.2)
 dist_sqrt_out_mstl
 
-\donttest{
-  ## Mean distance to centroid
-  dist_sqrt_out_mdc <-
-    allocate.distance(data = data, names = "genotypes",
-                      group = "Cluster", method = "dist.sqrt",
-                      dist.mat = dist_matrix, metric = "mdc",
-                      size = 0.2)
-  dist_sqrt_out_mdc
+## Mean distance to centroid
+dist_sqrt_out_mdc <-
+  allocate.distance(data = data, names = "genotypes",
+                    group = "Cluster", method = "dist.sqrt",
+                    dist.mat = dist_matrix, metric = "mdc",
+                    size = 0.2)
+dist_sqrt_out_mdc
 
-  ## Mean distance to median
-  dist_sqrt_out_mdm <-
-    allocate.distance(data = data, names = "genotypes",
-                      group = "Cluster", method = "dist.sqrt",
-                      dist.mat = dist_matrix, metric = "mdm",
-                      size = 0.2)
-  dist_sqrt_out_mdm
-}
+## Mean distance to median
+dist_sqrt_out_mdm <-
+  allocate.distance(data = data, names = "genotypes",
+                    group = "Cluster", method = "dist.sqrt",
+                    dist.mat = dist_matrix, metric = "mdm",
+                    size = 0.2)
+dist_sqrt_out_mdm
 
 ## Number of clusters
 
@@ -718,15 +704,13 @@ dist_sqrt_out_nclust3 <-
 dist_sqrt_out_nclust3
 
 # Tocher's sequential clustering
-\donttest{
-  dist_sqrt_out_nclust4 <-
-    allocate.distance(data = data, names = "genotypes",
-                      group = "Cluster", method = "dist.sqrt",
-                      dist.mat = dist_matrix, metric = "nclust",
-                      clust.fun = clust_fun_tocher,
-                      size = 0.2)
-  dist_sqrt_out_nclust4
-}
+dist_sqrt_out_nclust4 <-
+  allocate.distance(data = data, names = "genotypes",
+                    group = "Cluster", method = "dist.sqrt",
+                    dist.mat = dist_matrix, metric = "nclust",
+                    clust.fun = clust_fun_tocher,
+                    size = 0.2)
+dist_sqrt_out_nclust4
 \dontshow{\}) # examplesIf}
 }
 \references{
