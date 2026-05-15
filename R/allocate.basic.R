@@ -73,6 +73,9 @@
 #'
 #' \insertAllCited
 #'
+#' @seealso \code{\link[SampleCore]{allocate.distance}},
+#'   \code{\link[SampleCore]{allocate.diversity}}
+#'
 #' @examples
 #' # Get data
 #' data("cassava_EC_gp")

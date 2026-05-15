@@ -349,6 +349,9 @@
 #'
 #' \insertAllCited
 #'
+#' @seealso \code{\link[SampleCore]{select.random}},
+#'   \code{\link[SampleCore]{select.diversity}}
+#'
 #' @examplesIf requireNamespace("cluster", quietly = TRUE) & requireNamespace("ggplot2", quietly = TRUE)
 #'
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

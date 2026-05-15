@@ -80,6 +80,9 @@
 #'
 #' \insertAllCited
 #'
+#' @seealso \code{\link[SampleCore]{select.random}},
+#'   \code{\link[SampleCore]{select.distance}}
+#'
 #' @examples
 #'
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

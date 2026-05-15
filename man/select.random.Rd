@@ -98,3 +98,7 @@ plot_dist(d = dist_matrix, method = "isomds",
 \references{
 \insertAllCited
 }
+\seealso{
+\code{\link[SampleCore]{select.distance}},
+  \code{\link[SampleCore]{select.diversity}}
+}

@@ -22,6 +22,9 @@
 #'
 #' \insertAllCited
 #'
+#' @seealso \code{\link[SampleCore]{select.distance}},
+#'   \code{\link[SampleCore]{select.diversity}}
+#'
 #' @examplesIf requireNamespace("cluster", quietly = TRUE)
 #'
 #' library(cluster)

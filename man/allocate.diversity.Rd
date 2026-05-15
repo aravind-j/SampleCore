@@ -11,7 +11,7 @@ allocate.diversity(
   group,
   qualitative,
   method = c("div", "div.prop", "div.sqrt", "div.log"),
-  div.index = c("shannon", "simpson", "mcintosh"),
+  div.index = c("richness", "shannon", "simpson", "mcintosh"),
   shannon.base = exp(1),
   div.fun = NULL,
   log.base = exp(1),
@@ -685,4 +685,8 @@ dist_out_margalef2
 }
 \references{
 \insertAllCited
+}
+\seealso{
+\code{\link[SampleCore]{allocate.basic}},
+  \code{\link[SampleCore]{allocate.distance}}
 }

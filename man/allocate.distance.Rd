@@ -726,3 +726,7 @@ dist_sqrt_out_nclust3
 \references{
 \insertAllCited
 }
+\seealso{
+\code{\link[SampleCore]{allocate.basic}},
+  \code{\link[SampleCore]{allocate.diversity}}
+}

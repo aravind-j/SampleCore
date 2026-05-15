@@ -64,6 +64,9 @@
 #'
 #' \insertAllCited
 #'
+#' @seealso \code{\link[SampleCore]{allocate.basic}},
+#'   \code{\link[SampleCore]{allocate.distance}}
+#'
 #' @examples
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' # Prepare example data

@@ -134,6 +134,9 @@
 #'
 #' \insertAllCited
 #'
+#' @seealso \code{\link[SampleCore]{allocate.basic}},
+#'   \code{\link[SampleCore]{allocate.diversity}}
+#'
 #' @examplesIf requireNamespace("cluster", quietly = TRUE) & requireNamespace("fastcluster", quietly = TRUE) & requireNamespace("dbscan", quietly = TRUE) & requireNamespace("biotools", quietly = TRUE)
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' # Prepare example data

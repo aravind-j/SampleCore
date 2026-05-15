@@ -134,3 +134,7 @@ sqrt_out
 \references{
 \insertAllCited
 }
+\seealso{
+\code{\link[SampleCore]{allocate.distance}},
+  \code{\link[SampleCore]{allocate.diversity}}
+}
