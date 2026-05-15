@@ -7,7 +7,7 @@
 
 <img src="https://raw.githubusercontent.com/aravind-j/SampleCore/master/inst/extdata/SampleCore.png" align="right" alt="logo" width="173" height = "200" style = "border: none; float: right;">
 
-###### Version : [0.0.0.9000](https://aravind-j.github.io/SampleCore/); License: [GPL-2\|GPL-3](https://www.r-project.org/Licenses/)
+###### Version : [0.1.0](https://aravind-j.github.io/SampleCore/); License: [GPL-2\|GPL-3](https://www.r-project.org/Licenses/)
 
 ##### *Aravind, J., Roy, Suman and Singh, Anju M.*
 
@@ -38,7 +38,7 @@ Size](https://img.shields.io/github/languages/code-size/aravind-j/SampleCore.svg
 [![Project Status:
 WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2026--05--08-yellowgreen.svg)](https://github.com/aravind-j/SampleCore/)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2026--05--15-yellowgreen.svg)](https://github.com/aravind-j/SampleCore/)
 <!-- [![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.zenodo.14889174.svg)](https://doi.org/10.5281/zenodo.14889174) -->
 [![Website -
 pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github.io/SampleCore.svg)](https://aravind-j.github.io/SampleCore/)
@@ -52,13 +52,17 @@ pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github
 
 ## Description
 
-<!-- Implements several sampling strategies for construction of core      collections. These include 1) Stratified sampling based on group size 2)      Stratified sampling based on group diversity 3) Sampling based on genetic      distance between accessions. See the vignette for more, including full list      of citations for the methods implemented. -->
+<!-- Implements multiple allocation and selection strategies of      sampling to construct core collections primarily from clustered or grouped      germplasm collection data. Provides methods for allocating entries to      clusters/groups based on group sizes, group-wise distance-based diversity      metrics, and group-wise diversity index estimates. Includes procedures for      selecting entries within clusters/groups through random sampling, genetic      distance-based approaches, and optimized diversity metric–based selection      methods. See the package documentation for more, including full list of      references for the methods implemented. -->
 
-Implements several sampling strategies for construction of core
-collections. These include 1) Stratified sampling based on group size 2)
-Stratified sampling based on group diversity 3) Sampling based on
-genetic distance between accessions. See the vignette for more,
-including full list of citations for the methods implemented.
+Implements multiple allocation and selection strategies of sampling to
+construct core collections primarily from clustered or grouped germplasm
+collection data. Provides methods for allocating entries to
+clusters/groups based on group sizes, group-wise distance-based
+diversity metrics, and group-wise diversity index estimates. Includes
+procedures for selecting entries within clusters/groups through random
+sampling, genetic distance-based approaches, and optimized diversity
+metric–based selection methods. See the package documentation for more,
+including full list of references for the methods implemented.
 
 ## Installation
 
@@ -166,16 +170,16 @@ citation("SampleCore")
 
     To cite the R package 'SampleCore' in publications use:
 
-      Aravind, J., Roy, S., and Singh, A. M. ().  SampleCore: Sampling Strategies for Constructing Core
-      Collections. R package version 0.0.0.9000, https://aravind-j.github.io/SampleCore/.
+      Aravind, J., Roy, S., and Singh, A. M. ().  SampleCore: Sampling Strategies for Constructing Core Collections. R
+      package version 0.1.0, https://aravind-j.github.io/SampleCore/.
 
     A BibTeX entry for LaTeX users is
 
       @Manual{,
         title = {SampleCore: Sampling Strategies for Constructing Core Collections},
         author = {J. Aravind and Suman Roy and Anju Mahendru Singh},
-        note = {R package version 0.0.0.9000 https://aravind-j.github.io/SampleCore/},
+        note = {R package version 0.1.0 https://aravind-j.github.io/SampleCore/},
       }
 
-    This free and open-source software implements academic research by the authors and co-workers. If you use
-    it, please support the project by citing the package.
+    This free and open-source software implements academic research by the authors and co-workers. If you use it, please
+    support the project by citing the package.

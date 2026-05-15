@@ -9,3 +9,11 @@
 ^docs$
 ^_pkgdown\.yml$
 ^vignettes/additional$
+^\.positai$
+^\.claude$
+^README\.Rmd$
+^README\.html$
+^man-roxygen$
+^pkgdown$
+^cran-comments\.md$
+^cran-comments-archive\.md$
