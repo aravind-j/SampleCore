@@ -511,6 +511,11 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 “Hierarchical grouping to optimize an objective function.”
 <em>Journal of the American Statistical Association</em>, <b>58</b>(301), 236–244.</p>
     </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="select.random.html">select.random</a></code>,
+  <code><a href="select.diversity.html">select.diversity</a></code></p></div>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -557,7 +562,8 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span><span class="co"># Medoid-like Representative Sampling by Minimal Mean Distance</span></span></span>
 <span class="r-in"><span><span class="va">sel_mean_medoid_out</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
 <span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"mean.medoid"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_mean_medoid_out</span></span></span>
@@ -607,14 +613,16 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_mean_medoid_out</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_mean_medoid_out</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"mean.medoid"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Medoid-like Representative Sampling by Minimal Median Distance</span></span></span>
 <span class="r-in"><span><span class="va">sel_median_medoid_out</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
 <span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"median.medoid"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_median_medoid_out</span></span></span>
@@ -664,14 +672,16 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_median_medoid_out</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_median_medoid_out</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"median.medoid"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Representative Sampling by Proximity to Group Centroid</span></span></span>
 <span class="r-in"><span><span class="va">sel_group_centroid_out</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
 <span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"nearest.centroid"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_group_centroid_out</span></span></span>
@@ -721,14 +731,16 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_group_centroid_out</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_group_centroid_out</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"nearest.centroid"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Representative Sampling by Proximity to Group Spatial Median</span></span></span>
 <span class="r-in"><span><span class="va">sel_group_median_out</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
 <span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"nearest.median"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_group_median_out</span></span></span>
@@ -778,7 +790,8 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_group_median_out</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_group_median_out</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"nearest.median"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
@@ -789,7 +802,8 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span><span class="co"># Peripheral Sampling by Maximal Mean Distance</span></span></span>
 <span class="r-in"><span><span class="va">sel_mean_peripheral_out</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
 <span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"mean.peripheral"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_mean_peripheral_out</span></span></span>
@@ -839,14 +853,16 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_mean_peripheral_out</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_mean_peripheral_out</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"mean.peripheral"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-5.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Peripheral Sampling by Maximal Median Distance</span></span></span>
 <span class="r-in"><span><span class="va">sel_median_peripheral_out</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
 <span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"median.peripheral"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_median_peripheral_out</span></span></span>
@@ -896,14 +912,16 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_median_peripheral_out</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_median_peripheral_out</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"median.peripheral"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-6.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Peripheral Sampling by Maximal Eccentricity</span></span></span>
 <span class="r-in"><span><span class="va">sel_eccentricity_out</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
 <span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"eccentricity"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_eccentricity_out</span></span></span>
@@ -953,14 +971,16 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_eccentricity_out</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_eccentricity_out</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"eccentricity"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-7.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Peripheral Sampling by Maximal Farness Centrality</span></span></span>
 <span class="r-in"><span><span class="va">sel_far_cent_out</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
 <span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"farness.centrality"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_far_cent_out</span></span></span>
@@ -1010,7 +1030,8 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_far_cent_out</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_far_cent_out</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"farness.centrality"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-8.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
@@ -1021,7 +1042,8 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span><span class="co"># Space-Filling Sampling via the Kennard-Stone Algorithm</span></span></span>
 <span class="r-in"><span><span class="va">sel_ks_out</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
 <span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"kennard.stone"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_ks_out</span></span></span>
@@ -1071,14 +1093,16 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_ks_out</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_ks_out</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"kennard.stone"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-9.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Space-Filling Sampling via the DUPLEX Algorithm</span></span></span>
 <span class="r-in"><span><span class="va">sel_duplex_out</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
 <span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"duplex"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_duplex_out</span></span></span>
@@ -1128,14 +1152,16 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_duplex_out</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_duplex_out</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"duplex"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-10.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Space-Filling Sampling via the Honigs Algorithm</span></span></span>
 <span class="r-in"><span><span class="va">sel_honigs_out</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
 <span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"honigs"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_honigs_out</span></span></span>
@@ -1185,14 +1211,16 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_honigs_out</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_honigs_out</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"honigs"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-11.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Space-Filling Sampling via Farthest-Point (Max-Min) Algorithm</span></span></span>
 <span class="r-in"><span><span class="va">sel_far_pt_out</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
 <span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"farthest.point"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_far_pt_out</span></span></span>
@@ -1242,7 +1270,8 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_far_pt_out</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_far_pt_out</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"farthest.point"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-12.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
@@ -1253,7 +1282,8 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span><span class="co"># Density-Based Sampling by Minimal Nearest-Neighbour Distance</span></span></span>
 <span class="r-in"><span><span class="va">sel_nn_out</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
 <span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"nearest.neighbour"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_nn_out</span></span></span>
@@ -1303,7 +1333,8 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_nn_out</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_nn_out</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"nearest.neighbour"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-13.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
@@ -1314,7 +1345,8 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span><span class="co"># Globally Optimal Medoid Sampling via Partitioning Around Medoids (PAM)</span></span></span>
 <span class="r-in"><span><span class="va">sel_pam_out</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
 <span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"optim.medoid"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_pam_out</span></span></span>
@@ -1364,14 +1396,16 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_pam_out</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_pam_out</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"optim.medoid"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-14.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Cluster-Based Sampling via K-means (Naes Method)</span></span></span>
 <span class="r-in"><span><span class="va">sel_naes_out</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
 <span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"naes"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_naes_out</span></span></span>
@@ -1421,7 +1455,8 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_naes_out</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_naes_out</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"naes"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-15.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
@@ -1430,9 +1465,11 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span><span class="co">## UPGMA</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_random_out1</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
-<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.random"</span>, hclust.method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.random"</span>,</span></span>
+<span class="r-in"><span>                  hclust.method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_random_out1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $I</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-583"  "TMe-44"   "TMe-3002" "TMe-2785" "TMe-3424" "TMe-446" </span>
@@ -1480,16 +1517,19 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_random_out1</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_random_out1</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"hclust.random"</span>, subtitle <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-16.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Single-linkage</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_random_out2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
-<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.random"</span>, hclust.method <span class="op">=</span> <span class="st">"single"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.random"</span>,</span></span>
+<span class="r-in"><span>                  hclust.method <span class="op">=</span> <span class="st">"single"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_random_out2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $I</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-3488" "TMe-41"   "TMe-500"  "TMe-566"  "TMe-815"  "TMe-867" </span>
@@ -1537,16 +1577,19 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_random_out2</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_random_out2</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"hclust.random"</span>, subtitle <span class="op">=</span> <span class="st">"single"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-17.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Complete-linkage</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_random_out3</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
-<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.random"</span>, hclust.method <span class="op">=</span> <span class="st">"complete"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.random"</span>,</span></span>
+<span class="r-in"><span>                  hclust.method <span class="op">=</span> <span class="st">"complete"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_random_out3</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $I</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-1981" "TMe-264"  "TMe-3112" "TMe-2513" "TMe-1830" "TMe-1190"</span>
@@ -1594,16 +1637,19 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_random_out3</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_random_out3</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"hclust.random"</span>, subtitle <span class="op">=</span> <span class="st">"complete"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-18.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Ward's D</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_random_out4</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
-<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.random"</span>, hclust.method <span class="op">=</span> <span class="st">"ward.D"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.random"</span>,</span></span>
+<span class="r-in"><span>                  hclust.method <span class="op">=</span> <span class="st">"ward.D"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_random_out4</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $I</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-642"  "TMe-2773" "TMe-3325" "TMe-132"  "TMe-3424" "TMe-2513"</span>
@@ -1651,16 +1697,19 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_random_out4</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_random_out4</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"hclust.random"</span>, subtitle <span class="op">=</span> <span class="st">"ward.D"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-19.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## WPGMA</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_random_out5</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
-<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.random"</span>, hclust.method <span class="op">=</span> <span class="st">"mcquitty"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.random"</span>,</span></span>
+<span class="r-in"><span>                  hclust.method <span class="op">=</span> <span class="st">"mcquitty"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_random_out5</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $I</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-1915" "TMe-41"   "TMe-117"  "TMe-132"  "TMe-566"  "TMe-1935"</span>
@@ -1708,16 +1757,19 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_random_out5</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_random_out5</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"hclust.random"</span>, subtitle <span class="op">=</span> <span class="st">"mcquitty"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-20.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## WPGMC</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_random_out6</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
-<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.random"</span>, hclust.method <span class="op">=</span> <span class="st">"median"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.random"</span>,</span></span>
+<span class="r-in"><span>                  hclust.method <span class="op">=</span> <span class="st">"median"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_random_out6</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $I</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-3323" "TMe-41"   "TMe-44"   "TMe-500"  "TMe-566"  "TMe-569" </span>
@@ -1765,16 +1817,19 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_random_out6</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_random_out6</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"hclust.random"</span>, subtitle <span class="op">=</span> <span class="st">"median"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-21.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## UPGMC</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_random_out7</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
-<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.random"</span>, hclust.method <span class="op">=</span> <span class="st">"centroid"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.random"</span>,</span></span>
+<span class="r-in"><span>                  hclust.method <span class="op">=</span> <span class="st">"centroid"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_random_out7</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $I</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-3465" "TMe-41"   "TMe-410"  "TMe-500"  "TMe-566"  "TMe-569" </span>
@@ -1822,16 +1877,19 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_random_out7</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_random_out7</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"hclust.random"</span>, subtitle <span class="op">=</span> <span class="st">"centroid"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-22.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Ward's D2</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_random_out8</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
-<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.random"</span>, hclust.method <span class="op">=</span> <span class="st">"ward.D2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.random"</span>,</span></span>
+<span class="r-in"><span>                  hclust.method <span class="op">=</span> <span class="st">"ward.D2"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_random_out8</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $I</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-841"  "TMe-44"   "TMe-1922" "TMe-2785" "TMe-2914" "TMe-2040"</span>
@@ -1879,7 +1937,8 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_random_out8</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_random_out8</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"hclust.random"</span>, subtitle <span class="op">=</span> <span class="st">"ward.D2"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-23.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
@@ -1888,9 +1947,11 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span><span class="co">## UPGMA</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_medoid_out1</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
-<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.medoid"</span>, hclust.method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.medoid"</span>,</span></span>
+<span class="r-in"><span>                  hclust.method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_medoid_out1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $I</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-1981" "TMe-2810" "TMe-1696" "TMe-300"  "TMe-3424" "TMe-1823"</span>
@@ -1938,16 +1999,19 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_medoid_out1</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_medoid_out1</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"hclust.medoid"</span>, subtitle <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-24.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Single-linkage</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_medoid_out2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
-<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.medoid"</span>, hclust.method <span class="op">=</span> <span class="st">"single"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.medoid"</span>,</span></span>
+<span class="r-in"><span>                  hclust.method <span class="op">=</span> <span class="st">"single"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_medoid_out2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $I</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-1696" "TMe-41"   "TMe-500"  "TMe-566"  "TMe-815"  "TMe-867" </span>
@@ -1995,16 +2059,19 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_medoid_out2</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_medoid_out2</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"hclust.medoid"</span>, subtitle <span class="op">=</span> <span class="st">"single"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-25.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Complete-linkage</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_medoid_out3</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
-<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.medoid"</span>, hclust.method <span class="op">=</span> <span class="st">"complete"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.medoid"</span>,</span></span>
+<span class="r-in"><span>                  hclust.method <span class="op">=</span> <span class="st">"complete"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_medoid_out3</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $I</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-1981" "TMe-1621" "TMe-3490" "TMe-1696" "TMe-3480" "TMe-3424"</span>
@@ -2052,16 +2119,19 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_medoid_out3</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_medoid_out3</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"hclust.medoid"</span>, subtitle <span class="op">=</span> <span class="st">"complete"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-26.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Ward's D</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_medoid_out4</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
-<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.medoid"</span>, hclust.method <span class="op">=</span> <span class="st">"ward.D"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.medoid"</span>,</span></span>
+<span class="r-in"><span>                  hclust.method <span class="op">=</span> <span class="st">"ward.D"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_medoid_out4</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $I</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-2779" "TMe-2810" "TMe-1717" "TMe-300"  "TMe-3424" "TMe-1140"</span>
@@ -2109,16 +2179,19 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_medoid_out4</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_medoid_out4</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"hclust.medoid"</span>, subtitle <span class="op">=</span> <span class="st">"ward.D"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-27.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## WPGMA</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_medoid_out5</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
-<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.medoid"</span>, hclust.method <span class="op">=</span> <span class="st">"mcquitty"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.medoid"</span>,</span></span>
+<span class="r-in"><span>                  hclust.method <span class="op">=</span> <span class="st">"mcquitty"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_medoid_out5</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $I</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-1981" "TMe-2810" "TMe-117"  "TMe-300"  "TMe-3424" "TMe-1226"</span>
@@ -2166,16 +2239,19 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_medoid_out5</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_medoid_out5</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"hclust.medoid"</span>, subtitle <span class="op">=</span> <span class="st">"mcquitty"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-28.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## WPGMC</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_medoid_out6</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
-<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.medoid"</span>, hclust.method <span class="op">=</span> <span class="st">"median"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.medoid"</span>,</span></span>
+<span class="r-in"><span>                  hclust.method <span class="op">=</span> <span class="st">"median"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_medoid_out6</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $I</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-1696" "TMe-41"   "TMe-44"   "TMe-500"  "TMe-566"  "TMe-569" </span>
@@ -2223,16 +2299,19 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_medoid_out6</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_medoid_out6</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"hclust.medoid"</span>, subtitle <span class="op">=</span> <span class="st">"median"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-29.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## UPGMC</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_medoid_out7</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
-<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.medoid"</span>, hclust.method <span class="op">=</span> <span class="st">"centroid"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.medoid"</span>,</span></span>
+<span class="r-in"><span>                  hclust.method <span class="op">=</span> <span class="st">"centroid"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_medoid_out7</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $I</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-1696" "TMe-41"   "TMe-410"  "TMe-500"  "TMe-566"  "TMe-569" </span>
@@ -2280,16 +2359,19 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_medoid_out7</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_medoid_out7</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"hclust.medoid"</span>, subtitle <span class="op">=</span> <span class="st">"centroid"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-30.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Ward's D2</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_medoid_out8</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">select.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>, dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
+<span class="r-in"><span>                  group <span class="op">=</span> <span class="st">"Cluster"</span>, alloc <span class="op">=</span> <span class="va">counts</span>,</span></span>
+<span class="r-in"><span>                  dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>,</span></span>
 <span class="r-in"><span>                  always.selected <span class="op">=</span> <span class="va">mand_accns</span>,</span></span>
-<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.medoid"</span>, hclust.method <span class="op">=</span> <span class="st">"ward.D2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  method <span class="op">=</span> <span class="st">"hclust.medoid"</span>,</span></span>
+<span class="r-in"><span>                  hclust.method <span class="op">=</span> <span class="st">"ward.D2"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sel_hclust_medoid_out8</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $I</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "TMe-642"  "TMe-2810" "TMe-1717" "TMe-300"  "TMe-3424" "TMe-486" </span>
@@ -2337,7 +2419,8 @@ ISBN 978-1-906715-25-0.<br><br> O'Neill ME, Mathews K (2000).
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_dist.html">plot_dist</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">dist_matrix</span>, method <span class="op">=</span> <span class="st">"isomds"</span>,</span></span>
 <span class="r-in"><span>          gp <span class="op">=</span> <span class="va">gp_vec</span>,</span></span>
-<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_medoid_out8</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>          highlight <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">sel_hclust_medoid_out8</span>,</span></span>
+<span class="r-in"><span>          use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"hclust.medoid"</span>, subtitle <span class="op">=</span> <span class="st">"ward.D2"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="select.distance-31.png" alt="" width="700" height="433"></span>
 </code></pre></div>

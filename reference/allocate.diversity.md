@@ -20,10 +20,9 @@ allocate.diversity(
   data,
   names,
   group,
-  quantitative,
   qualitative,
   method = c("div", "div.prop", "div.sqrt", "div.log"),
-  div.index = c("shannon", "simpson", "mcintosh"),
+  div.index = c("richness", "shannon", "simpson", "mcintosh"),
   shannon.base = exp(1),
   div.fun = NULL,
   log.base = exp(1),
@@ -48,10 +47,6 @@ allocate.diversity(
 
   Name of column with the accession group/cluster names as a character
   string.
-
-- quantitative:
-
-  Name of columns with the quantitative traits as a character vector.
 
 - qualitative:
 
@@ -223,12 +218,17 @@ in stratified germplasm collections.” In Hodkin T, Brown ADH, van Hintum
 TJL, Morales EAV (eds.), *Core Collections of Plant Genetic Resources*,
 35–53. John Wiley & Sons, New York. ISBN 0-471-95545-0.
 
+## See also
+
+[`allocate.basic`](https://aravind-j.github.io/SampleCore/reference/allocate.basic.md),
+[`allocate.distance`](https://aravind-j.github.io/SampleCore/reference/allocate.distance.md)
+
 ## Examples
 
 ``` r
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Prepare example data
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Get data
 data("cassava_EC_gp")
@@ -245,295 +245,612 @@ qual <- c("CUAL", "LNGS", "PTLC", "DSTA", "LFRT", "LBTEF", "CBTR", "NMLB",
 # Convert qualitative data columns to factor
 data[, qual] <- lapply(data[, qual], as.factor)
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Convert quantitative data columns to qualitative scores
+quant_to_score5 <- function(x) {
+
+  brks <- unique( quantile(x,
+                           probs = seq(0, 1, 0.2),
+                           na.rm = TRUE))
+  cut(x, breaks = brks,
+      include.lowest = TRUE,
+      labels = seq_len(length(brks) - 1))
+}
+
+data[, quant] <- lapply(data[, quant], quant_to_score5)
+
+traits <- c(quant, qual)
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Custom diversity index functions
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+div_fun_brillouin <- function(x) {
+  n <- tabulate(x)
+  n <- n[n > 0]
+  N <- sum(n)
+  if (N <= 1) {
+    return(0)
+  }
+  (lgamma(N + 1) - sum(lgamma(n + 1)))/N
+}
+
+div_fun_margalef <- function(x) {
+  tab <- tabulate(x)
+  tab <- tab[tab > 0]
+  S <- length(tab)
+  N <- length(x)
+  if (N <= 1) {
+    return(0)
+  }
+  (S - 1)/log(N)
+}
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Diversity allocation
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## Shannon-Weaver Diversity Index
-dist_out_shannon1 <-
+div_out_shannon1 <-
   allocate.diversity(data = data, names = "genotypes",
                     group = "Cluster",
-                    qualitative = qual, quantitative = quant,
+                    qualitative = traits,
                     method = "div",
                     div.index = "shannon", metric = "pooled",
                     size = 0.2)
-dist_out_shannon1
+div_out_shannon1
 #>   I  II III  IV   V  VI 
-#>  67  51  46  60  54  60 
+#>  63  53  49  59  55  59 
 
-dist_out_shannon2 <-
+div_out_shannon2 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div",
                      div.index = "shannon", metric = "mean",
                      size = 0.2)
-dist_out_shannon2
+div_out_shannon2
 #>   I  II III  IV   V  VI 
-#>  67  51  46  60  54  60 
+#>  63  53  49  59  55  59 
 
 ##  Gini-Simpson Index
-dist_out_simpson1 <-
+div_out_simpson1 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div",
                      div.index = "simpson", metric = "pooled",
                      size = 0.2)
-dist_out_simpson1
+div_out_simpson1
 #>   I  II III  IV   V  VI 
-#>  66  51  46  60  55  59 
+#>  62  53  49  59  55  58 
 
-dist_out_simpson2 <-
+div_out_simpson2 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div",
                      div.index = "simpson", metric = "mean",
                      size = 0.2)
-dist_out_simpson2
+div_out_simpson2
 #>   I  II III  IV   V  VI 
-#>  66  51  46  60  55  59 
+#>  62  53  49  59  55  58 
 
 ## McIntosh Diversity Index
-dist_out_mcintosh1 <-
+div_out_mcintosh1 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div",
                      div.index = "mcintosh", metric = "pooled",
                      size = 0.2)
-dist_out_mcintosh1
+div_out_mcintosh1
 #>   I  II III  IV   V  VI 
-#>  66  52  47  60  53  59 
+#>  63  54  49  59  54  59 
 
-dist_out_mcintosh2 <-
+div_out_mcintosh2 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div",
                      div.index = "mcintosh", metric = "mean",
                      size = 0.2)
-dist_out_mcintosh2
+div_out_mcintosh2
 #>   I  II III  IV   V  VI 
-#>  66  52  47  60  53  59 
+#>  63  54  49  59  54  59 
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Richness
+div_out_richness1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div",
+                     div.index = "richness", metric = "pooled",
+                     size = 0.2)
+div_out_richness1
+#>   I  II III  IV   V  VI 
+#>  59  55  50  59  58  57 
+
+div_out_richness2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div",
+                     div.index = "richness", metric = "mean",
+                     size = 0.2)
+div_out_richness2
+#>   I  II III  IV   V  VI 
+#>  59  55  50  59  58  57 
+
+## Brillouin Diversity Index
+div_out_brillouin1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div",
+                     div.fun = div_fun_brillouin, metric = "pooled",
+                     size = 0.2)
+div_out_brillouin1
+#>   I  II III  IV   V  VI 
+#>  63  53  48  59  55  58 
+
+div_out_brillouin2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div",
+                     div.fun = div_fun_brillouin, metric = "mean",
+                     size = 0.2)
+div_out_brillouin2
+#>   I  II III  IV   V  VI 
+#>  63  53  48  59  55  58 
+
+## Margalef's richness Index
+div_out_margalef1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div",
+                     div.fun = div_fun_margalef, metric = "pooled",
+                     size = 0.2)
+div_out_margalef1
+#>   I  II III  IV   V  VI 
+#>  58  57  51  56  54  61 
+
+div_out_margalef2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div",
+                     div.fun = div_fun_margalef, metric = "mean",
+                     size = 0.2)
+div_out_margalef2
+#>   I  II III  IV   V  VI 
+#>  58  57  51  56  54  61 
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Diversity allocation & Proportional
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## Shannon-Weaver Diversity Index
 dist_prop_out_shannon1 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.prop",
                      div.index = "shannon", metric = "pooled",
                      size = 0.2)
 dist_prop_out_shannon1
 #>   I  II III  IV   V  VI 
-#>  71  37  30  85  75  39 
+#>  67  39  32  84  77  38 
 
 dist_prop_out_shannon2 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.prop",
                      div.index = "shannon", metric = "mean",
                      size = 0.2)
 dist_prop_out_shannon2
 #>   I  II III  IV   V  VI 
-#>  71  37  30  85  75  39 
+#>  67  39  32  84  77  38 
 
 ##  Gini-Simpson Index
 dist_prop_out_simpson1 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.prop",
                      div.index = "simpson", metric = "pooled",
                      size = 0.2)
 dist_prop_out_simpson1
 #>   I  II III  IV   V  VI 
-#>  70  37  30  86  77  38 
+#>  66  39  32  84  78  37 
 
 dist_prop_out_simpson2 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.prop",
                      div.index = "simpson", metric = "mean",
                      size = 0.2)
 dist_prop_out_simpson2
 #>   I  II III  IV   V  VI 
-#>  70  37  30  86  77  38 
+#>  66  39  32  84  78  37 
 
 ## McIntosh Diversity Index
 dist_prop_out_mcintosh1 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.prop",
                      div.index = "mcintosh", metric = "pooled",
                      size = 0.2)
 dist_prop_out_mcintosh1
 #>   I  II III  IV   V  VI 
-#>  71  38  30  86  74  38 
+#>  67  39  32  84  76  38 
 
 dist_prop_out_mcintosh2 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.prop",
                      div.index = "mcintosh", metric = "mean",
                      size = 0.2)
 dist_prop_out_mcintosh2
 #>   I  II III  IV   V  VI 
-#>  71  38  30  86  74  38 
+#>  67  39  32  84  76  38 
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Richness
+div_out_richness1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.log",
+                     div.index = "richness", metric = "pooled",
+                     size = 0.2)
+div_out_richness1
+#>   I  II III  IV   V  VI 
+#>  60  52  47  63  62  53 
+
+div_out_richness2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.log",
+                     div.index = "richness", metric = "mean",
+                     size = 0.2)
+div_out_richness2
+#>   I  II III  IV   V  VI 
+#>  60  52  47  63  62  53 
+
+## Brillouin Diversity Index
+div_out_brillouin1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.prop",
+                     div.fun = div_fun_brillouin, metric = "pooled",
+                     size = 0.2)
+div_out_brillouin1
+#>   I  II III  IV   V  VI 
+#>  67  39  31  85  78  37 
+
+div_out_brillouin2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.prop",
+                     div.fun = div_fun_brillouin, metric = "mean",
+                     size = 0.2)
+div_out_brillouin2
+#>   I  II III  IV   V  VI 
+#>  67  39  31  85  78  37 
+
+## Margalef's richness Index
+div_out_margalef1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.prop",
+                     div.fun = div_fun_margalef, metric = "pooled",
+                     size = 0.2)
+div_out_margalef1
+#>   I  II III  IV   V  VI 
+#>  63  42  34  81  77  40 
+
+div_out_margalef2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.prop",
+                     div.fun = div_fun_margalef, metric = "mean",
+                     size = 0.2)
+div_out_margalef2
+#>   I  II III  IV   V  VI 
+#>  63  42  34  81  77  40 
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Diversity allocation & Logarithmic
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## Shannon-Weaver Diversity Index
 dist_log_out_shannon1 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.log",
                      div.index = "shannon", metric = "pooled",
                      size = 0.2)
 dist_log_out_shannon1
 #>   I  II III  IV   V  VI 
-#>  68  49  42  64  58  56 
+#>  64  51  45  63  59  55 
 
 dist_log_out_shannon2 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.log",
                      div.index = "shannon", metric = "mean",
                      size = 0.2)
 dist_log_out_shannon2
 #>   I  II III  IV   V  VI 
-#>  68  49  42  64  58  56 
+#>  64  51  45  63  59  55 
 
 ##  Gini-Simpson Index
 dist_log_out_simpson1 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.log",
                      div.index = "simpson", metric = "pooled",
                      size = 0.2)
 dist_log_out_simpson1
 #>   I  II III  IV   V  VI 
-#>  67  49  43  64  59  55 
+#>  63  51  46  63  59  54 
 
 dist_log_out_simpson2 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.log",
                      div.index = "simpson", metric = "mean",
                      size = 0.2)
 dist_log_out_simpson2
 #>   I  II III  IV   V  VI 
-#>  67  49  43  64  59  55 
+#>  63  51  46  63  59  54 
 
 ## McIntosh Diversity Index
 dist_log_out_mcintosh1 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.log",
                      div.index = "mcintosh", metric = "pooled",
                      size = 0.2)
 dist_log_out_mcintosh1
 #>   I  II III  IV   V  VI 
-#>  68  49  44  65  57  55 
+#>  64  51  46  63  58  55 
 
 dist_log_out_mcintosh2 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.log",
                      div.index = "mcintosh", metric = "mean",
                      size = 0.2)
 dist_log_out_mcintosh2
 #>   I  II III  IV   V  VI 
-#>  68  49  44  65  57  55 
+#>  64  51  46  63  58  55 
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Richness
+div_out_richness1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.log",
+                     div.index = "richness", metric = "pooled",
+                     size = 0.2)
+div_out_richness1
+#>   I  II III  IV   V  VI 
+#>  60  52  47  63  62  53 
+
+div_out_richness2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.log",
+                     div.index = "richness", metric = "mean",
+                     size = 0.2)
+div_out_richness2
+#>   I  II III  IV   V  VI 
+#>  60  52  47  63  62  53 
+
+## Brillouin Diversity Index
+div_out_brillouin1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.log",
+                     div.fun = div_fun_brillouin, metric = "pooled",
+                     size = 0.2)
+div_out_brillouin1
+#>   I  II III  IV   V  VI 
+#>  64  51  45  64  59  54 
+
+div_out_brillouin2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.log",
+                     div.fun = div_fun_brillouin, metric = "mean",
+                     size = 0.2)
+div_out_brillouin2
+#>   I  II III  IV   V  VI 
+#>  64  51  45  64  59  54 
+
+## Margalef's richness Index
+div_out_margalef1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.log",
+                     div.fun = div_fun_margalef, metric = "pooled",
+                     size = 0.2)
+div_out_margalef1
+#>   I  II III  IV   V  VI 
+#>  59  54  48  60  58  57 
+
+div_out_margalef2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.log",
+                     div.fun = div_fun_margalef, metric = "mean",
+                     size = 0.2)
+div_out_margalef2
+#>   I  II III  IV   V  VI 
+#>  59  54  48  60  58  57 
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Diversity allocation & Square root
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## Shannon-Weaver Diversity Index
 dist_sqrt_out_shannon1 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.sqrt",
                      div.index = "shannon", metric = "pooled",
                      size = 0.2)
 dist_sqrt_out_shannon1
 #>   I  II III  IV   V  VI 
-#>  70  44  37  72  65  49 
+#>  66  46  40  71  66  48 
 
 dist_sqrt_out_shannon2 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.sqrt",
                      div.index = "shannon", metric = "mean",
                      size = 0.2)
 dist_sqrt_out_shannon2
 #>   I  II III  IV   V  VI 
-#>  70  44  37  72  65  49 
+#>  66  46  40  71  66  48 
 
 ##  Gini-Simpson Index
 dist_sqrt_out_simpson1 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.sqrt",
                      div.index = "simpson", metric = "pooled",
                      size = 0.2)
 dist_sqrt_out_simpson1
 #>   I  II III  IV   V  VI 
-#>  69  44  38  73  66  48 
+#>  65  46  40  71  67  47 
 
 dist_sqrt_out_simpson2 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.sqrt",
                      div.index = "simpson", metric = "mean",
                      size = 0.2)
 dist_sqrt_out_simpson2
 #>   I  II III  IV   V  VI 
-#>  69  44  38  73  66  48 
+#>  65  46  40  71  67  47 
 
 ## McIntosh Diversity Index
 dist_sqrt_out_mcintosh1 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.sqrt",
                      div.index = "mcintosh", metric = "pooled",
                      size = 0.2)
 dist_sqrt_out_mcintosh1
 #>   I  II III  IV   V  VI 
-#>  69  45  38  73  64  48 
+#>  66  47  40  71  65  48 
 
 dist_sqrt_out_mcintosh2 <-
   allocate.diversity(data = data, names = "genotypes",
                      group = "Cluster",
-                     qualitative = qual, quantitative = quant,
+                     qualitative = traits,
                      method = "div.sqrt",
                      div.index = "mcintosh", metric = "mean",
                      size = 0.2)
 dist_sqrt_out_mcintosh2
 #>   I  II III  IV   V  VI 
-#>  69  45  38  73  64  48 
+#>  66  47  40  71  65  48 
+
+## Richness
+div_out_richness1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.sqrt",
+                     div.index = "richness", metric = "pooled",
+                     size = 0.2)
+div_out_richness1
+#>   I  II III  IV   V  VI 
+#>  61  47  41  72  69  46 
+
+div_out_richness2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.sqrt",
+                     div.index = "richness", metric = "mean",
+                     size = 0.2)
+div_out_richness2
+#>   I  II III  IV   V  VI 
+#>  61  47  41  72  69  46 
+
+## Brillouin Diversity Index
+div_out_brillouin1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.sqrt",
+                     div.fun = div_fun_brillouin, metric = "pooled",
+                     size = 0.2)
+div_out_brillouin1
+#>   I  II III  IV   V  VI 
+#>  66  46  39  72  67  47 
+
+div_out_brillouin2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.sqrt",
+                     div.fun = div_fun_brillouin, metric = "mean",
+                     size = 0.2)
+div_out_brillouin2
+#>   I  II III  IV   V  VI 
+#>  66  46  39  72  67  47 
+
+## Margalef's richness Index
+div_out_margalef1 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.sqrt",
+                     div.fun = div_fun_margalef, metric = "pooled",
+                     size = 0.2)
+div_out_margalef1
+#>   I  II III  IV   V  VI 
+#>  61  49  42  68  65  50 
+
+div_out_margalef2 <-
+  allocate.diversity(data = data, names = "genotypes",
+                     group = "Cluster",
+                     qualitative = traits,
+                     method = "div.sqrt",
+                     div.fun = div_fun_margalef, metric = "mean",
+                     size = 0.2)
+div_out_margalef2
+#>   I  II III  IV   V  VI 
+#>  61  49  42  68  65  50 
 ```

@@ -257,6 +257,11 @@ H. Freeman, San Francisco. ISBN 978-0-7167-0697-7.
 Sokal RR, Sneath PHA (1963). *Principles of numerical taxonomy*, A
 Series of books in biology. W. H. Freeman, San Francisco.
 
+## See also
+
+[`allocate.basic`](https://aravind-j.github.io/SampleCore/reference/allocate.basic.md),
+[`allocate.diversity`](https://aravind-j.github.io/SampleCore/reference/allocate.diversity.md)
+
 ## Examples
 
 ``` r

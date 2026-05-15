@@ -10,7 +10,6 @@ checks.sample.core(
   names,
   size,
   group,
-  quantitative = NULL,
   qualitative = NULL,
   dist.mat = NULL,
   log.base = NULL,
@@ -40,10 +39,6 @@ checks.sample.core(
 
   Name of column with the accession group/cluster names as a character
   string.
-
-- quantitative:
-
-  Name of columns with the quantitative traits as a character vector.
 
 - qualitative:
 

@@ -432,6 +432,11 @@ Ward JH (1963). “Hierarchical grouping to optimize an objective
 function.” *Journal of the American Statistical Association*,
 **58**(301), 236–244.
 
+## See also
+
+[`select.random`](https://aravind-j.github.io/SampleCore/reference/select.random.md),
+[`select.diversity`](https://aravind-j.github.io/SampleCore/reference/select.diversity.md)
+
 ## Examples
 
 ``` r
@@ -478,7 +483,8 @@ gp_vec <- setNames(as.character(data[, "Cluster"]), data[, "genotypes"])
 # Medoid-like Representative Sampling by Minimal Mean Distance
 sel_mean_medoid_out <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
                   method = "mean.medoid")
 sel_mean_medoid_out
@@ -528,14 +534,16 @@ sel_mean_medoid_out
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_mean_medoid_out, use.names = FALSE)) +
+          highlight =  unlist(sel_mean_medoid_out,
+          use.names = FALSE)) +
   labs(title = "mean.medoid")
 
 
 # Medoid-like Representative Sampling by Minimal Median Distance
 sel_median_medoid_out <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
                   method = "median.medoid")
 sel_median_medoid_out
@@ -585,14 +593,16 @@ sel_median_medoid_out
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_median_medoid_out, use.names = FALSE)) +
+          highlight =  unlist(sel_median_medoid_out,
+          use.names = FALSE)) +
   labs(title = "median.medoid")
 
 
 # Representative Sampling by Proximity to Group Centroid
 sel_group_centroid_out <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
                   method = "nearest.centroid")
 sel_group_centroid_out
@@ -642,14 +652,16 @@ sel_group_centroid_out
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_group_centroid_out, use.names = FALSE)) +
+          highlight =  unlist(sel_group_centroid_out,
+          use.names = FALSE)) +
   labs(title = "nearest.centroid")
 
 
 # Representative Sampling by Proximity to Group Spatial Median
 sel_group_median_out <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
                   method = "nearest.median")
 sel_group_median_out
@@ -699,7 +711,8 @@ sel_group_median_out
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_group_median_out, use.names = FALSE)) +
+          highlight =  unlist(sel_group_median_out,
+          use.names = FALSE)) +
   labs(title = "nearest.median")
 
 
@@ -710,7 +723,8 @@ plot_dist(d = dist_matrix, method = "isomds",
 # Peripheral Sampling by Maximal Mean Distance
 sel_mean_peripheral_out <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
                   method = "mean.peripheral")
 sel_mean_peripheral_out
@@ -760,14 +774,16 @@ sel_mean_peripheral_out
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_mean_peripheral_out, use.names = FALSE)) +
+          highlight =  unlist(sel_mean_peripheral_out,
+          use.names = FALSE)) +
   labs(title = "mean.peripheral")
 
 
 # Peripheral Sampling by Maximal Median Distance
 sel_median_peripheral_out <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
                   method = "median.peripheral")
 sel_median_peripheral_out
@@ -817,14 +833,16 @@ sel_median_peripheral_out
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_median_peripheral_out, use.names = FALSE)) +
+          highlight =  unlist(sel_median_peripheral_out,
+          use.names = FALSE)) +
   labs(title = "median.peripheral")
 
 
 # Peripheral Sampling by Maximal Eccentricity
 sel_eccentricity_out <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
                   method = "eccentricity")
 sel_eccentricity_out
@@ -874,14 +892,16 @@ sel_eccentricity_out
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_eccentricity_out, use.names = FALSE)) +
+          highlight =  unlist(sel_eccentricity_out,
+          use.names = FALSE)) +
   labs(title = "eccentricity")
 
 
 # Peripheral Sampling by Maximal Farness Centrality
 sel_far_cent_out <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
                   method = "farness.centrality")
 sel_far_cent_out
@@ -931,7 +951,8 @@ sel_far_cent_out
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_far_cent_out, use.names = FALSE)) +
+          highlight =  unlist(sel_far_cent_out,
+          use.names = FALSE)) +
   labs(title = "farness.centrality")
 
 
@@ -942,7 +963,8 @@ plot_dist(d = dist_matrix, method = "isomds",
 # Space-Filling Sampling via the Kennard-Stone Algorithm
 sel_ks_out <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
                   method = "kennard.stone")
 sel_ks_out
@@ -992,14 +1014,16 @@ sel_ks_out
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_ks_out, use.names = FALSE)) +
+          highlight =  unlist(sel_ks_out,
+          use.names = FALSE)) +
   labs(title = "kennard.stone")
 
 
 # Space-Filling Sampling via the DUPLEX Algorithm
 sel_duplex_out <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
                   method = "duplex")
 sel_duplex_out
@@ -1049,14 +1073,16 @@ sel_duplex_out
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_duplex_out, use.names = FALSE)) +
+          highlight =  unlist(sel_duplex_out,
+          use.names = FALSE)) +
   labs(title = "duplex")
 
 
 # Space-Filling Sampling via the Honigs Algorithm
 sel_honigs_out <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
                   method = "honigs")
 sel_honigs_out
@@ -1106,14 +1132,16 @@ sel_honigs_out
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_honigs_out, use.names = FALSE)) +
+          highlight =  unlist(sel_honigs_out,
+          use.names = FALSE)) +
   labs(title = "honigs")
 
 
 # Space-Filling Sampling via Farthest-Point (Max-Min) Algorithm
 sel_far_pt_out <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
                   method = "farthest.point")
 sel_far_pt_out
@@ -1163,7 +1191,8 @@ sel_far_pt_out
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_far_pt_out, use.names = FALSE)) +
+          highlight =  unlist(sel_far_pt_out,
+          use.names = FALSE)) +
   labs(title = "farthest.point")
 
 
@@ -1174,7 +1203,8 @@ plot_dist(d = dist_matrix, method = "isomds",
 # Density-Based Sampling by Minimal Nearest-Neighbour Distance
 sel_nn_out <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
                   method = "nearest.neighbour")
 sel_nn_out
@@ -1224,7 +1254,8 @@ sel_nn_out
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_nn_out, use.names = FALSE)) +
+          highlight =  unlist(sel_nn_out,
+          use.names = FALSE)) +
   labs(title = "nearest.neighbour")
 
 
@@ -1235,7 +1266,8 @@ plot_dist(d = dist_matrix, method = "isomds",
 # Globally Optimal Medoid Sampling via Partitioning Around Medoids (PAM)
 sel_pam_out <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
                   method = "optim.medoid")
 sel_pam_out
@@ -1285,14 +1317,16 @@ sel_pam_out
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_pam_out, use.names = FALSE)) +
+          highlight =  unlist(sel_pam_out,
+          use.names = FALSE)) +
   labs(title = "optim.medoid")
 
 
 # Cluster-Based Sampling via K-means (Naes Method)
 sel_naes_out <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
                   method = "naes")
 sel_naes_out
@@ -1342,7 +1376,8 @@ sel_naes_out
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_naes_out, use.names = FALSE)) +
+          highlight =  unlist(sel_naes_out,
+          use.names = FALSE)) +
   labs(title = "naes")
 
 
@@ -1351,9 +1386,11 @@ plot_dist(d = dist_matrix, method = "isomds",
 ## UPGMA
 sel_hclust_random_out1 <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
-                  method = "hclust.random", hclust.method = "average")
+                  method = "hclust.random",
+                  hclust.method = "average")
 sel_hclust_random_out1
 #> $I
 #>  [1] "TMe-583"  "TMe-44"   "TMe-3002" "TMe-2785" "TMe-3424" "TMe-446" 
@@ -1401,16 +1438,19 @@ sel_hclust_random_out1
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_hclust_random_out1, use.names = FALSE)) +
+          highlight =  unlist(sel_hclust_random_out1,
+          use.names = FALSE)) +
   labs(title = "hclust.random", subtitle = "average")
 
 
 ## Single-linkage
 sel_hclust_random_out2 <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
-                  method = "hclust.random", hclust.method = "single")
+                  method = "hclust.random",
+                  hclust.method = "single")
 sel_hclust_random_out2
 #> $I
 #>  [1] "TMe-3488" "TMe-41"   "TMe-500"  "TMe-566"  "TMe-815"  "TMe-867" 
@@ -1458,16 +1498,19 @@ sel_hclust_random_out2
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_hclust_random_out2, use.names = FALSE)) +
+          highlight =  unlist(sel_hclust_random_out2,
+          use.names = FALSE)) +
   labs(title = "hclust.random", subtitle = "single")
 
 
 ## Complete-linkage
 sel_hclust_random_out3 <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
-                  method = "hclust.random", hclust.method = "complete")
+                  method = "hclust.random",
+                  hclust.method = "complete")
 sel_hclust_random_out3
 #> $I
 #>  [1] "TMe-1981" "TMe-264"  "TMe-3112" "TMe-2513" "TMe-1830" "TMe-1190"
@@ -1515,16 +1558,19 @@ sel_hclust_random_out3
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_hclust_random_out3, use.names = FALSE)) +
+          highlight =  unlist(sel_hclust_random_out3,
+          use.names = FALSE)) +
   labs(title = "hclust.random", subtitle = "complete")
 
 
 ## Ward's D
 sel_hclust_random_out4 <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
-                  method = "hclust.random", hclust.method = "ward.D")
+                  method = "hclust.random",
+                  hclust.method = "ward.D")
 sel_hclust_random_out4
 #> $I
 #>  [1] "TMe-642"  "TMe-2773" "TMe-3325" "TMe-132"  "TMe-3424" "TMe-2513"
@@ -1572,16 +1618,19 @@ sel_hclust_random_out4
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_hclust_random_out4, use.names = FALSE)) +
+          highlight =  unlist(sel_hclust_random_out4,
+          use.names = FALSE)) +
   labs(title = "hclust.random", subtitle = "ward.D")
 
 
 ## WPGMA
 sel_hclust_random_out5 <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
-                  method = "hclust.random", hclust.method = "mcquitty")
+                  method = "hclust.random",
+                  hclust.method = "mcquitty")
 sel_hclust_random_out5
 #> $I
 #>  [1] "TMe-1915" "TMe-41"   "TMe-117"  "TMe-132"  "TMe-566"  "TMe-1935"
@@ -1629,16 +1678,19 @@ sel_hclust_random_out5
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_hclust_random_out5, use.names = FALSE)) +
+          highlight =  unlist(sel_hclust_random_out5,
+          use.names = FALSE)) +
   labs(title = "hclust.random", subtitle = "mcquitty")
 
 
 ## WPGMC
 sel_hclust_random_out6 <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
-                  method = "hclust.random", hclust.method = "median")
+                  method = "hclust.random",
+                  hclust.method = "median")
 sel_hclust_random_out6
 #> $I
 #>  [1] "TMe-3323" "TMe-41"   "TMe-44"   "TMe-500"  "TMe-566"  "TMe-569" 
@@ -1686,16 +1738,19 @@ sel_hclust_random_out6
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_hclust_random_out6, use.names = FALSE)) +
+          highlight =  unlist(sel_hclust_random_out6,
+          use.names = FALSE)) +
   labs(title = "hclust.random", subtitle = "median")
 
 
 ## UPGMC
 sel_hclust_random_out7 <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
-                  method = "hclust.random", hclust.method = "centroid")
+                  method = "hclust.random",
+                  hclust.method = "centroid")
 sel_hclust_random_out7
 #> $I
 #>  [1] "TMe-3465" "TMe-41"   "TMe-410"  "TMe-500"  "TMe-566"  "TMe-569" 
@@ -1743,16 +1798,19 @@ sel_hclust_random_out7
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_hclust_random_out7, use.names = FALSE)) +
+          highlight =  unlist(sel_hclust_random_out7,
+          use.names = FALSE)) +
   labs(title = "hclust.random", subtitle = "centroid")
 
 
 ## Ward's D2
 sel_hclust_random_out8 <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
-                  method = "hclust.random", hclust.method = "ward.D2")
+                  method = "hclust.random",
+                  hclust.method = "ward.D2")
 sel_hclust_random_out8
 #> $I
 #>  [1] "TMe-841"  "TMe-44"   "TMe-1922" "TMe-2785" "TMe-2914" "TMe-2040"
@@ -1800,7 +1858,8 @@ sel_hclust_random_out8
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_hclust_random_out8, use.names = FALSE)) +
+          highlight =  unlist(sel_hclust_random_out8,
+          use.names = FALSE)) +
   labs(title = "hclust.random", subtitle = "ward.D2")
 
 
@@ -1809,9 +1868,11 @@ plot_dist(d = dist_matrix, method = "isomds",
 ## UPGMA
 sel_hclust_medoid_out1 <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
-                  method = "hclust.medoid", hclust.method = "average")
+                  method = "hclust.medoid",
+                  hclust.method = "average")
 sel_hclust_medoid_out1
 #> $I
 #>  [1] "TMe-1981" "TMe-2810" "TMe-1696" "TMe-300"  "TMe-3424" "TMe-1823"
@@ -1859,16 +1920,19 @@ sel_hclust_medoid_out1
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_hclust_medoid_out1, use.names = FALSE)) +
+          highlight =  unlist(sel_hclust_medoid_out1,
+          use.names = FALSE)) +
   labs(title = "hclust.medoid", subtitle = "average")
 
 
 ## Single-linkage
 sel_hclust_medoid_out2 <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
-                  method = "hclust.medoid", hclust.method = "single")
+                  method = "hclust.medoid",
+                  hclust.method = "single")
 sel_hclust_medoid_out2
 #> $I
 #>  [1] "TMe-1696" "TMe-41"   "TMe-500"  "TMe-566"  "TMe-815"  "TMe-867" 
@@ -1916,16 +1980,19 @@ sel_hclust_medoid_out2
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_hclust_medoid_out2, use.names = FALSE)) +
+          highlight =  unlist(sel_hclust_medoid_out2,
+          use.names = FALSE)) +
   labs(title = "hclust.medoid", subtitle = "single")
 
 
 ## Complete-linkage
 sel_hclust_medoid_out3 <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
-                  method = "hclust.medoid", hclust.method = "complete")
+                  method = "hclust.medoid",
+                  hclust.method = "complete")
 sel_hclust_medoid_out3
 #> $I
 #>  [1] "TMe-1981" "TMe-1621" "TMe-3490" "TMe-1696" "TMe-3480" "TMe-3424"
@@ -1973,16 +2040,19 @@ sel_hclust_medoid_out3
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_hclust_medoid_out3, use.names = FALSE)) +
+          highlight =  unlist(sel_hclust_medoid_out3,
+          use.names = FALSE)) +
   labs(title = "hclust.medoid", subtitle = "complete")
 
 
 ## Ward's D
 sel_hclust_medoid_out4 <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
-                  method = "hclust.medoid", hclust.method = "ward.D")
+                  method = "hclust.medoid",
+                  hclust.method = "ward.D")
 sel_hclust_medoid_out4
 #> $I
 #>  [1] "TMe-2779" "TMe-2810" "TMe-1717" "TMe-300"  "TMe-3424" "TMe-1140"
@@ -2030,16 +2100,19 @@ sel_hclust_medoid_out4
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_hclust_medoid_out4, use.names = FALSE)) +
+          highlight =  unlist(sel_hclust_medoid_out4,
+          use.names = FALSE)) +
   labs(title = "hclust.medoid", subtitle = "ward.D")
 
 
 ## WPGMA
 sel_hclust_medoid_out5 <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
-                  method = "hclust.medoid", hclust.method = "mcquitty")
+                  method = "hclust.medoid",
+                  hclust.method = "mcquitty")
 sel_hclust_medoid_out5
 #> $I
 #>  [1] "TMe-1981" "TMe-2810" "TMe-117"  "TMe-300"  "TMe-3424" "TMe-1226"
@@ -2087,16 +2160,19 @@ sel_hclust_medoid_out5
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_hclust_medoid_out5, use.names = FALSE)) +
+          highlight =  unlist(sel_hclust_medoid_out5,
+          use.names = FALSE)) +
   labs(title = "hclust.medoid", subtitle = "mcquitty")
 
 
 ## WPGMC
 sel_hclust_medoid_out6 <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
-                  method = "hclust.medoid", hclust.method = "median")
+                  method = "hclust.medoid",
+                  hclust.method = "median")
 sel_hclust_medoid_out6
 #> $I
 #>  [1] "TMe-1696" "TMe-41"   "TMe-44"   "TMe-500"  "TMe-566"  "TMe-569" 
@@ -2144,16 +2220,19 @@ sel_hclust_medoid_out6
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_hclust_medoid_out6, use.names = FALSE)) +
+          highlight =  unlist(sel_hclust_medoid_out6,
+          use.names = FALSE)) +
   labs(title = "hclust.medoid", subtitle = "median")
 
 
 ## UPGMC
 sel_hclust_medoid_out7 <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
-                  method = "hclust.medoid", hclust.method = "centroid")
+                  method = "hclust.medoid",
+                  hclust.method = "centroid")
 sel_hclust_medoid_out7
 #> $I
 #>  [1] "TMe-1696" "TMe-41"   "TMe-410"  "TMe-500"  "TMe-566"  "TMe-569" 
@@ -2201,16 +2280,19 @@ sel_hclust_medoid_out7
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_hclust_medoid_out7, use.names = FALSE)) +
+          highlight =  unlist(sel_hclust_medoid_out7,
+          use.names = FALSE)) +
   labs(title = "hclust.medoid", subtitle = "centroid")
 
 
 ## Ward's D2
 sel_hclust_medoid_out8 <-
   select.distance(data = data, names = "genotypes",
-                  group = "Cluster", alloc = counts, dist.mat = dist_matrix,
+                  group = "Cluster", alloc = counts,
+                  dist.mat = dist_matrix,
                   always.selected = mand_accns,
-                  method = "hclust.medoid", hclust.method = "ward.D2")
+                  method = "hclust.medoid",
+                  hclust.method = "ward.D2")
 sel_hclust_medoid_out8
 #> $I
 #>  [1] "TMe-642"  "TMe-2810" "TMe-1717" "TMe-300"  "TMe-3424" "TMe-486" 
@@ -2258,6 +2340,7 @@ sel_hclust_medoid_out8
 
 plot_dist(d = dist_matrix, method = "isomds",
           gp = gp_vec,
-          highlight =  unlist(sel_hclust_medoid_out8, use.names = FALSE)) +
+          highlight =  unlist(sel_hclust_medoid_out8,
+          use.names = FALSE)) +
   labs(title = "hclust.medoid", subtitle = "ward.D2")
 ```

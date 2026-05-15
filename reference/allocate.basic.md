@@ -118,6 +118,11 @@ core collection on the basis of morphological, eco-geographical, and
 disease and pest reaction data:.” *Theoretical and Applied Genetics*,
 **98**(5), 840–844.
 
+## See also
+
+[`allocate.distance`](https://aravind-j.github.io/SampleCore/reference/allocate.distance.md),
+[`allocate.diversity`](https://aravind-j.github.io/SampleCore/reference/allocate.diversity.md)
+
 ## Examples
 
 ``` r

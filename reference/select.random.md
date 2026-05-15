@@ -61,6 +61,11 @@ resources management.” *Genome*, **31**(2), 818–824.
 Brown AHD, van Hintum TJL (2000). *Core Collections of Plant Genetic
 Resources*. Bioversity International. ISBN 92-9043-454-6.
 
+## See also
+
+[`select.distance`](https://aravind-j.github.io/SampleCore/reference/select.distance.md),
+[`select.diversity`](https://aravind-j.github.io/SampleCore/reference/select.diversity.md)
+
 ## Examples
 
 ``` r
