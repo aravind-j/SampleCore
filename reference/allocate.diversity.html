@@ -37,7 +37,7 @@ Diversity &amp;amp; Square root
 
     <a class="navbar-brand me-2" href="../index.html">SampleCore</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -297,6 +297,10 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get data</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"cassava_EC_gp"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">cassava_EC_gp</span> <span class="op">&lt;-</span> <span class="va">cassava_EC_gp</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">)</span>, <span class="fl">500</span><span class="op">)</span>, <span class="op">]</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>genotypes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">)</span>, <span class="va">cassava_EC_gp</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span></span>
 <span class="r-in"><span></span></span>
@@ -364,7 +368,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_shannon1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  63  53  49  59  55  59 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  14  16  18  16  19 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">div_out_shannon2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -375,7 +379,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_shannon2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  63  53  49  59  55  59 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  14  16  18  16  19 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">##  Gini-Simpson Index</span></span></span>
 <span class="r-in"><span><span class="va">div_out_simpson1</span> <span class="op">&lt;-</span></span></span>
@@ -387,7 +391,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_simpson1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  62  53  49  59  55  58 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  14  16  18  16  18 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">div_out_simpson2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -398,7 +402,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_simpson2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  62  53  49  59  55  58 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  14  16  18  16  18 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## McIntosh Diversity Index</span></span></span>
 <span class="r-in"><span><span class="va">div_out_mcintosh1</span> <span class="op">&lt;-</span></span></span>
@@ -410,7 +414,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_mcintosh1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  63  54  49  59  54  59 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  15  16  17  17  19 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">div_out_mcintosh2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -421,7 +425,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_mcintosh2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  63  54  49  59  54  59 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  15  16  17  17  19 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Richness</span></span></span>
 <span class="r-in"><span><span class="va">div_out_richness1</span> <span class="op">&lt;-</span></span></span>
@@ -433,7 +437,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_richness1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  59  55  50  59  58  57 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  15  17  18  16  18 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">div_out_richness2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -444,7 +448,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_richness2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  59  55  50  59  58  57 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  15  17  18  16  18 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Brillouin Diversity Index</span></span></span>
 <span class="r-in"><span><span class="va">div_out_brillouin1</span> <span class="op">&lt;-</span></span></span>
@@ -456,7 +460,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_brillouin1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  63  53  48  59  55  58 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  14  16  18  16  19 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">div_out_brillouin2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -467,7 +471,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_brillouin2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  63  53  48  59  55  58 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  14  16  18  16  19 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Margalef's richness Index</span></span></span>
 <span class="r-in"><span><span class="va">div_out_margalef1</span> <span class="op">&lt;-</span></span></span>
@@ -479,7 +483,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_margalef1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  58  57  51  56  54  61 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  19  15  16  16  16  18 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">div_out_margalef2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -490,7 +494,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_margalef2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  58  57  51  56  54  61 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  19  15  16  16  16  18 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
@@ -507,7 +511,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_shannon1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  67  39  32  84  77  38 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  10  11  29  23  10 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_shannon2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -518,7 +522,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_shannon2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  67  39  32  84  77  38 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  10  11  29  23  10 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">##  Gini-Simpson Index</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_simpson1</span> <span class="op">&lt;-</span></span></span>
@@ -530,7 +534,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_simpson1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  66  39  32  84  78  37 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  10  11  29  23  10 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_simpson2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -541,7 +545,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_simpson2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  66  39  32  84  78  37 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  10  11  29  23  10 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## McIntosh Diversity Index</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_mcintosh1</span> <span class="op">&lt;-</span></span></span>
@@ -553,7 +557,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_mcintosh1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  67  39  32  84  76  38 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  10  10  28  23  10 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_mcintosh2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -564,7 +568,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_mcintosh2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  67  39  32  84  76  38 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  10  10  28  23  10 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Richness</span></span></span>
 <span class="r-in"><span><span class="va">div_out_richness1</span> <span class="op">&lt;-</span></span></span>
@@ -576,7 +580,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_richness1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  60  52  47  63  62  53 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  14  16  21  17  16 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">div_out_richness2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -587,7 +591,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_richness2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  60  52  47  63  62  53 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  14  16  21  17  16 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Brillouin Diversity Index</span></span></span>
 <span class="r-in"><span><span class="va">div_out_brillouin1</span> <span class="op">&lt;-</span></span></span>
@@ -599,7 +603,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_brillouin1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  67  39  31  85  78  37 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17   9  11  30  22  11 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">div_out_brillouin2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -610,7 +614,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_brillouin2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  67  39  31  85  78  37 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17   9  11  30  22  11 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Margalef's richness Index</span></span></span>
 <span class="r-in"><span><span class="va">div_out_margalef1</span> <span class="op">&lt;-</span></span></span>
@@ -622,7 +626,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_margalef1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  63  42  34  81  77  40 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  19  10  10  27  23  10 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">div_out_margalef2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -633,7 +637,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_margalef2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  63  42  34  81  77  40 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  19  10  10  27  23  10 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
 <span class="r-in"><span><span class="co"># Diversity allocation &amp; Logarithmic</span></span></span>
@@ -649,7 +653,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_shannon1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  64  51  45  63  59  55 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  13  15  20  18  17 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_shannon2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -660,7 +664,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_shannon2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  64  51  45  63  59  55 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  13  15  20  18  17 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">##  Gini-Simpson Index</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_simpson1</span> <span class="op">&lt;-</span></span></span>
@@ -672,7 +676,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_simpson1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  63  51  46  63  59  54 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  13  15  20  18  16 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_simpson2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -683,7 +687,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_simpson2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  63  51  46  63  59  54 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  13  15  20  18  16 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## McIntosh Diversity Index</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_mcintosh1</span> <span class="op">&lt;-</span></span></span>
@@ -695,7 +699,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_mcintosh1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  64  51  46  63  58  55 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  13  14  19  18  16 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_mcintosh2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -706,7 +710,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_mcintosh2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  64  51  46  63  58  55 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  13  14  19  18  16 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Richness</span></span></span>
 <span class="r-in"><span><span class="va">div_out_richness1</span> <span class="op">&lt;-</span></span></span>
@@ -718,7 +722,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_richness1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  60  52  47  63  62  53 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  14  16  21  17  16 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">div_out_richness2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -729,7 +733,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_richness2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  60  52  47  63  62  53 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  14  16  21  17  16 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Brillouin Diversity Index</span></span></span>
 <span class="r-in"><span><span class="va">div_out_brillouin1</span> <span class="op">&lt;-</span></span></span>
@@ -741,7 +745,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_brillouin1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  64  51  45  64  59  54 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  13  15  21  17  17 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">div_out_brillouin2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -752,7 +756,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_brillouin2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  64  51  45  64  59  54 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  13  15  21  17  17 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Margalef's richness Index</span></span></span>
 <span class="r-in"><span><span class="va">div_out_margalef1</span> <span class="op">&lt;-</span></span></span>
@@ -764,7 +768,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_margalef1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  59  54  48  60  58  57 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  19  14  14  19  18  16 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">div_out_margalef2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -775,7 +779,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_margalef2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  59  54  48  60  58  57 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  19  14  14  19  18  16 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
 <span class="r-in"><span><span class="co"># Diversity allocation &amp; Square root</span></span></span>
@@ -791,7 +795,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_shannon1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  66  46  40  71  66  48 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  12  13  23  20  14 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_shannon2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -802,7 +806,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_shannon2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  66  46  40  71  66  48 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  12  13  23  20  14 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">##  Gini-Simpson Index</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_simpson1</span> <span class="op">&lt;-</span></span></span>
@@ -814,7 +818,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_simpson1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  65  46  40  71  67  47 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  12  14  23  20  14 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_simpson2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -825,7 +829,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_simpson2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  65  46  40  71  67  47 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  12  14  23  20  14 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## McIntosh Diversity Index</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_mcintosh1</span> <span class="op">&lt;-</span></span></span>
@@ -837,7 +841,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_mcintosh1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  66  47  40  71  65  48 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  12  13  22  20  14 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_mcintosh2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -848,7 +852,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_mcintosh2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  66  47  40  71  65  48 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  12  13  22  20  14 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Richness</span></span></span>
 <span class="r-in"><span><span class="va">div_out_richness1</span> <span class="op">&lt;-</span></span></span>
@@ -860,7 +864,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_richness1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  61  47  41  72  69  46 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  12  14  24  19  14 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">div_out_richness2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -871,7 +875,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_richness2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  61  47  41  72  69  46 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  12  14  24  19  14 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Brillouin Diversity Index</span></span></span>
 <span class="r-in"><span><span class="va">div_out_brillouin1</span> <span class="op">&lt;-</span></span></span>
@@ -883,7 +887,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_brillouin1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  66  46  39  72  67  47 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  12  14  24  19  14 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">div_out_brillouin2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -894,7 +898,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_brillouin2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  66  46  39  72  67  47 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  12  14  24  19  14 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Margalef's richness Index</span></span></span>
 <span class="r-in"><span><span class="va">div_out_margalef1</span> <span class="op">&lt;-</span></span></span>
@@ -906,7 +910,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_margalef1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  61  49  42  68  65  50 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  19  13  13  21  20  14 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">div_out_margalef2</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">allocate.diversity</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
@@ -917,7 +921,7 @@ ISBN 0-471-95545-0.</p>
 <span class="r-in"><span>                     size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">div_out_margalef2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  61  49  42  68  65  50 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  19  13  13  21  20  14 </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

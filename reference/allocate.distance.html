@@ -37,7 +37,7 @@ Diversity (Distance based) &amp;amp; Square root
 
     <a class="navbar-brand me-2" href="../index.html">SampleCore</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -355,26 +355,32 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get distance matrix</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"cassava_EC_gp"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">cassava_EC_gp</span> <span class="op">&lt;-</span> <span class="va">cassava_EC_gp</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">)</span>, <span class="fl">500</span><span class="op">)</span>, <span class="op">]</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">quant</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NMSR"</span>, <span class="st">"TTRN"</span>, <span class="st">"TFWSR"</span>, <span class="st">"TTRW"</span>, <span class="st">"TFWSS"</span>, <span class="st">"TTSW"</span>, <span class="st">"TTPW"</span>,</span></span>
 <span class="r-in"><span>           <span class="st">"AVPW"</span>, <span class="st">"ARSR"</span>, <span class="st">"SRDM"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">qual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CUAL"</span>, <span class="st">"LNGS"</span>, <span class="st">"PTLC"</span>, <span class="st">"DSTA"</span>, <span class="st">"LFRT"</span>, <span class="st">"LBTEF"</span>, <span class="st">"CBTR"</span>, <span class="st">"NMLB"</span>,</span></span>
 <span class="r-in"><span>          <span class="st">"ANGB"</span>, <span class="st">"CUAL9M"</span>, <span class="st">"LVC9M"</span>, <span class="st">"TNPR9M"</span>, <span class="st">"PL9M"</span>, <span class="st">"STRP"</span>, <span class="st">"STRC"</span>,</span></span>
 <span class="r-in"><span>          <span class="st">"PSTR"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">cassava_EC_gp</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Convert qualitative data columns to factor</span></span></span>
-<span class="r-in"><span><span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="va">qual</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="va">qual</span><span class="op">]</span>, <span class="va">as.factor</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">data</span><span class="op">[</span>, <span class="va">qual</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="va">qual</span><span class="op">]</span>, <span class="va">as.factor</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Standardise quantitative data column</span></span></span>
-<span class="r-in"><span><span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="va">quant</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="va">quant</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">data</span><span class="op">[</span>, <span class="va">quant</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="va">quant</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get the Gower's distance matrix</span></span></span>
-<span class="r-in"><span><span class="va">dist_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/cluster/man/daisy.html" class="external-link">daisy</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cassava_EC_gp</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">qual</span>, <span class="va">quant</span><span class="op">)</span><span class="op">]</span>,</span></span>
+<span class="r-in"><span><span class="va">dist_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/cluster/man/daisy.html" class="external-link">daisy</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">qual</span>, <span class="va">quant</span><span class="op">)</span><span class="op">]</span>,</span></span>
 <span class="r-in"><span>                     metric <span class="op">=</span> <span class="st">"gower"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get data</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"cassava_EC_gp"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">cassava_EC_gp</span></span></span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>genotypes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">)</span>, <span class="va">cassava_EC_gp</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span></span>
 <span class="r-in"><span></span></span>
@@ -429,7 +435,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_out_mean</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  66  51  46  59  56  59 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  13  16  18  15  20 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Median</span></span></span>
 <span class="r-in"><span><span class="va">dist_out_median</span> <span class="op">&lt;-</span></span></span>
@@ -439,7 +445,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_out_median</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  66  51  45  59  56  59 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  13  16  18  15  20 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Maximum</span></span></span>
 <span class="r-in"><span><span class="va">dist_out_max</span> <span class="op">&lt;-</span></span></span>
@@ -449,7 +455,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_out_max</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  65  52  48  57  55  60 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  12  18  17  15  20 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Range</span></span></span>
 <span class="r-in"><span><span class="va">dist_out_range</span> <span class="op">&lt;-</span></span></span>
@@ -459,7 +465,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_out_range</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  63  52  49  59  57  57 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  12  18  19  15  20 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Mean nearest-neighbour distance</span></span></span>
 <span class="r-in"><span><span class="va">dist_out_mnnd</span> <span class="op">&lt;-</span></span></span>
@@ -469,7 +475,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_out_mnnd</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  67  50  44  59  52  64 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  20  14  15  17  15  20 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Minimum spanning tree length</span></span></span>
 <span class="r-in"><span><span class="va">dist_out_mstl</span> <span class="op">&lt;-</span></span></span>
@@ -479,29 +485,27 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_out_mstl</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  72  37  29  84  73  41 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  11   9  21  28  10  21 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>  <span class="co">## Mean distance to centroid</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_mdc</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdc"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_mdc</span></span></span>
+<span class="r-in"><span><span class="co">## Mean distance to centroid</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_mdc</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdc"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_mdc</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  66  51  46  59  56  59 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  20  15  13  18  16  18 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Mean distance to median</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_mdm</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdm"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_mdm</span></span></span>
+<span class="r-in"><span><span class="co">## Mean distance to median</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_mdm</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdm"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_mdm</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  66  51  46  59  56  59 </span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  20  15  13  18  16  18 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Number of clusters</span></span></span>
 <span class="r-in"><span></span></span>
@@ -514,7 +518,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_out_nclust1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  83  34  21  86  71  41 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  12   7  20  28  11  22 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Ward's minimum variance with fastcluster</span></span></span>
 <span class="r-in"><span><span class="va">dist_out_nclust2</span> <span class="op">&lt;-</span></span></span>
@@ -525,7 +529,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_out_nclust2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  73  35  29  84  76  41 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  12   8  21  27  11  21 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Density-based clustering with dbscan</span></span></span>
@@ -537,21 +541,19 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_out_nclust3</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  75  37  37  37  75  75 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18   9  18  18   9  27 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Tocher's sequential clustering</span></span></span>
-<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_nclust4</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                      clust.fun <span class="op">=</span> <span class="va">clust_fun_tocher</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_out_nclust4</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_nclust4</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                    clust.fun <span class="op">=</span> <span class="va">clust_fun_tocher</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_out_nclust4</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  63  29  43  76  79  47 </span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  13  20  17  22  13  15 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
 <span class="r-in"><span><span class="co"># Diversity (Distance based) &amp; Proportional</span></span></span>
@@ -565,7 +567,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_mean</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  70  37  30  84  78  38 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18   9  11  29  22  11 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Median</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_median</span> <span class="op">&lt;-</span></span></span>
@@ -575,7 +577,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_median</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  70  37  29  84  78  38 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18   9  11  29  22  11 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Maximum</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_max</span> <span class="op">&lt;-</span></span></span>
@@ -585,7 +587,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_max</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  69  38  31  82  78  39 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  19   8  12  29  21  11 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Range</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_range</span> <span class="op">&lt;-</span></span></span>
@@ -595,7 +597,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_range</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  67  38  32  84  79  37 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17   8  12  31  21  11 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Mean nearest-neighbour distance</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_mnnd</span> <span class="op">&lt;-</span></span></span>
@@ -605,7 +607,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_mnnd</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  71  37  29  84  74  42 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  20   9  10  28  21  12 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Minimum spanning tree length</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_mstl</span> <span class="op">&lt;-</span></span></span>
@@ -615,29 +617,27 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_mstl</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  69  24  17 109  93  24 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  11   6  14  44  14  12 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>  <span class="co">## Mean distance to centroid</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_mdc</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdc"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_mdc</span></span></span>
+<span class="r-in"><span><span class="co">## Mean distance to centroid</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_mdc</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdc"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_mdc</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  70  37  30  84  78  38 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  20  10   9  29  22  10 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Mean distance to median</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_mdm</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdm"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_mdm</span></span></span>
+<span class="r-in"><span><span class="co">## Mean distance to median</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_mdm</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdm"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_mdm</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  70  37  30  84  78  38 </span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  20  10   9  29  22  10 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Number of clusters</span></span></span>
 <span class="r-in"><span></span></span>
@@ -650,7 +650,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_nclust1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  79  22  12 110  89  24 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  12   5  13  44  14  12 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Ward's minimum variance with fastcluster</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_nclust2</span> <span class="op">&lt;-</span></span></span>
@@ -661,7 +661,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_nclust2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  70  23  17 108  96  23 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  12   6  14  43  15  11 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Density-based clustering with dbscan</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_nclust3</span> <span class="op">&lt;-</span></span></span>
@@ -672,20 +672,18 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_prop_out_nclust3</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  79  27  24  53 105  48 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  20   7  13  31  13  16 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Tocher's sequential clustering</span></span></span>
-<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_nclust4</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                      clust.fun <span class="op">=</span> <span class="va">clust_fun_tocher</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_prop_out_nclust4</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_nclust4</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.prop"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                    clust.fun <span class="op">=</span> <span class="va">clust_fun_tocher</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_prop_out_nclust4</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  62  20  26 101 102  28 </span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  14  13  11  35  18   8 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
 <span class="r-in"><span><span class="co"># Diversity (Distance based) &amp; Logarithmic</span></span></span>
@@ -699,7 +697,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_mean</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  67  49  43  63  60  55 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  12  15  20  17  18 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Median</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_median</span> <span class="op">&lt;-</span></span></span>
@@ -709,7 +707,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_median</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  67  49  42  64  60  55 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  12  15  20  17  18 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Maximum</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_max</span> <span class="op">&lt;-</span></span></span>
@@ -719,7 +717,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_max</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  66  49  45  61  59  56 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  11  16  20  16  18 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Range</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_range</span> <span class="op">&lt;-</span></span></span>
@@ -729,7 +727,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_range</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  65  50  45  63  61  53 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  11  16  21  17  18 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Mean nearest-neighbour distance</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_mnnd</span> <span class="op">&lt;-</span></span></span>
@@ -739,7 +737,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_mnnd</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  68  48  42  63  56  60 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  20  13  14  19  16  18 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Minimum spanning tree length</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_mstl</span> <span class="op">&lt;-</span></span></span>
@@ -749,19 +747,17 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_mstl</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  72  34  27  89  77  38 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  11   8  19  31  11  19 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>  <span class="co">## Mean distance to centroid</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_mdc</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdc"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_mdc</span></span></span>
+<span class="r-in"><span><span class="co">## Mean distance to centroid</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_mdc</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdc"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_mdc</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  67  49  43  64  60  55 </span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  20  14  12  20  18  15 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Mean distance to median</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_mdm</span> <span class="op">&lt;-</span></span></span>
@@ -771,7 +767,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_mdm</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  67  49  43  64  59  55 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  20  14  12  20  18  15 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Number of clusters</span></span></span>
 <span class="r-in"><span></span></span>
@@ -784,7 +780,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_nclust1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  83  32  19  91  74  37 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  13   7  18  31  12  20 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Ward's minimum variance with fastcluster</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_nclust2</span> <span class="op">&lt;-</span></span></span>
@@ -795,7 +791,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_nclust2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  73  33  26  88  79  37 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  12   8  20  30  12  18 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Density-based clustering with dbscan</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_nclust3</span> <span class="op">&lt;-</span></span></span>
@@ -806,20 +802,18 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_log_out_nclust3</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  76  36  35  40  80  70 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  19   9  17  21  10  24 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Tocher's sequential clustering</span></span></span>
-<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_nclust4</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                      clust.fun <span class="op">=</span> <span class="va">clust_fun_tocher</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_log_out_nclust4</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_nclust4</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.log"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                    clust.fun <span class="op">=</span> <span class="va">clust_fun_tocher</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_log_out_nclust4</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  63  27  39  81  83  43 </span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  14  19  15  24  15  13 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
 <span class="r-in"><span><span class="co"># Diversity (Distance based) &amp; Square root</span></span></span>
@@ -833,7 +827,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_mean</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  69  44  37  71  67  48 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  11  13  23  19  15 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Median</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_median</span> <span class="op">&lt;-</span></span></span>
@@ -843,7 +837,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_median</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  69  44  37  72  67  48 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  18  11  14  23  19  15 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Maximum</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_max</span> <span class="op">&lt;-</span></span></span>
@@ -853,7 +847,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_max</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  68  45  39  69  67  49 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  19  10  15  23  18  15 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Range</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_range</span> <span class="op">&lt;-</span></span></span>
@@ -863,7 +857,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_range</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  66  45  40  71  68  46 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  10  15  24  19  15 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Mean nearest-neighbour distance</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_mnnd</span> <span class="op">&lt;-</span></span></span>
@@ -873,7 +867,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_mnnd</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  70  44  36  71  63  52 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  20  11  13  22  18  16 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Minimum spanning tree length</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_mstl</span> <span class="op">&lt;-</span></span></span>
@@ -883,29 +877,27 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_mstl</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  72  30  23  97  84  32 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  11   8  17  36  12  16 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>  <span class="co">## Mean distance to centroid</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_mdc</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdc"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_mdc</span></span></span>
+<span class="r-in"><span><span class="co">## Mean distance to centroid</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_mdc</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdc"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_mdc</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  69  44  37  72  67  48 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  20  13  11  23  19  13 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co">## Mean distance to median</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_mdm</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdm"</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_mdm</span></span></span>
+<span class="r-in"><span><span class="co">## Mean distance to median</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_mdm</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"mdm"</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_mdm</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  69  44  37  72  67  48 </span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  20  13  11  23  19  13 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Number of clusters</span></span></span>
 <span class="r-in"><span></span></span>
@@ -918,7 +910,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_nclust1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  82  28  16  99  80  31 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  13   6  16  36  13  17 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Ward's minimum variance with fastcluster</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_nclust2</span> <span class="op">&lt;-</span></span></span>
@@ -929,7 +921,7 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_nclust2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  72  29  22  96  86  31 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  12   7  18  35  13  16 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Density-based clustering with dbscan</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_nclust3</span> <span class="op">&lt;-</span></span></span>
@@ -940,20 +932,18 @@ W. H. Freeman, San Francisco.</p>
 <span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dist_sqrt_out_nclust3</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  78  32  31  45  90  61 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  19   8  16  24  11  21 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Tocher's sequential clustering</span></span></span>
-<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_nclust4</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>    <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
-<span class="r-in"><span>                      group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
-<span class="r-in"><span>                      dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
-<span class="r-in"><span>                      clust.fun <span class="op">=</span> <span class="va">clust_fun_tocher</span>,</span></span>
-<span class="r-in"><span>                      size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">dist_sqrt_out_nclust4</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_nclust4</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">allocate.distance</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, names <span class="op">=</span> <span class="st">"genotypes"</span>,</span></span>
+<span class="r-in"><span>                    group <span class="op">=</span> <span class="st">"Cluster"</span>, method <span class="op">=</span> <span class="st">"dist.sqrt"</span>,</span></span>
+<span class="r-in"><span>                    dist.mat <span class="op">=</span> <span class="va">dist_matrix</span>, metric <span class="op">=</span> <span class="st">"nclust"</span>,</span></span>
+<span class="r-in"><span>                    clust.fun <span class="op">=</span> <span class="va">clust_fun_tocher</span>,</span></span>
+<span class="r-in"><span>                    size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_sqrt_out_nclust4</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  63  24  33  89  90  37 </span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  14  17  14  28  16  11 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

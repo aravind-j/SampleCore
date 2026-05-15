@@ -128,6 +128,12 @@ disease and pest reaction data:.” *Theoretical and Applied Genetics*,
 ``` r
 # Get data
 data("cassava_EC_gp")
+
+set.seed(123)
+cassava_EC_gp <- cassava_EC_gp[sample(1:nrow(cassava_EC_gp), 500), ]
+
+data <- cassava_EC_gp
+
 data <- cbind(genotypes = rownames(cassava_EC_gp), cassava_EC_gp)
 row.names(data) <- NULL
 
@@ -138,7 +144,7 @@ const_out <-
                  size = 0.2)
 const_out
 #>   I  II III  IV   V  VI 
-#>  56  56  56  56  56  56 
+#>  17  17  17  17  17  17 
 
 # Proportional allocation
 prop_out <-
@@ -147,7 +153,7 @@ prop_out <-
                  size = 0.2)
 prop_out
 #>   I  II III  IV   V  VI 
-#>  61  41  37  81  80  37 
+#>  17  11  11  27  23   9 
 
 # Logarithmic allocation
 log_out <-
@@ -156,7 +162,7 @@ log_out <-
                  size = 0.2)
 log_out
 #>   I  II III  IV   V  VI 
-#>  57  54  53  60  60  52 
+#>  17  16  15  19  18  15 
 
 # Square root allocation
 sqrt_out <-
@@ -165,5 +171,5 @@ sqrt_out <-
                  size = 0.2)
 sqrt_out
 #>   I  II III  IV   V  VI 
-#>  59  49  46  69  68  46 
+#>  17  14  14  22  20  13 
 ```

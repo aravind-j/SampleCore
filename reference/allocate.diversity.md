@@ -232,6 +232,10 @@ TJL, Morales EAV (eds.), *Core Collections of Plant Genetic Resources*,
 
 # Get data
 data("cassava_EC_gp")
+
+set.seed(123)
+cassava_EC_gp <- cassava_EC_gp[sample(1:nrow(cassava_EC_gp), 500), ]
+
 data <- cbind(genotypes = rownames(cassava_EC_gp), cassava_EC_gp)
 row.names(data) <- NULL
 
@@ -299,7 +303,7 @@ div_out_shannon1 <-
                     size = 0.2)
 div_out_shannon1
 #>   I  II III  IV   V  VI 
-#>  63  53  49  59  55  59 
+#>  17  14  16  18  16  19 
 
 div_out_shannon2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -310,7 +314,7 @@ div_out_shannon2 <-
                      size = 0.2)
 div_out_shannon2
 #>   I  II III  IV   V  VI 
-#>  63  53  49  59  55  59 
+#>  17  14  16  18  16  19 
 
 ##  Gini-Simpson Index
 div_out_simpson1 <-
@@ -322,7 +326,7 @@ div_out_simpson1 <-
                      size = 0.2)
 div_out_simpson1
 #>   I  II III  IV   V  VI 
-#>  62  53  49  59  55  58 
+#>  17  14  16  18  16  18 
 
 div_out_simpson2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -333,7 +337,7 @@ div_out_simpson2 <-
                      size = 0.2)
 div_out_simpson2
 #>   I  II III  IV   V  VI 
-#>  62  53  49  59  55  58 
+#>  17  14  16  18  16  18 
 
 ## McIntosh Diversity Index
 div_out_mcintosh1 <-
@@ -345,7 +349,7 @@ div_out_mcintosh1 <-
                      size = 0.2)
 div_out_mcintosh1
 #>   I  II III  IV   V  VI 
-#>  63  54  49  59  54  59 
+#>  18  15  16  17  17  19 
 
 div_out_mcintosh2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -356,7 +360,7 @@ div_out_mcintosh2 <-
                      size = 0.2)
 div_out_mcintosh2
 #>   I  II III  IV   V  VI 
-#>  63  54  49  59  54  59 
+#>  18  15  16  17  17  19 
 
 ## Richness
 div_out_richness1 <-
@@ -368,7 +372,7 @@ div_out_richness1 <-
                      size = 0.2)
 div_out_richness1
 #>   I  II III  IV   V  VI 
-#>  59  55  50  59  58  57 
+#>  17  15  17  18  16  18 
 
 div_out_richness2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -379,7 +383,7 @@ div_out_richness2 <-
                      size = 0.2)
 div_out_richness2
 #>   I  II III  IV   V  VI 
-#>  59  55  50  59  58  57 
+#>  17  15  17  18  16  18 
 
 ## Brillouin Diversity Index
 div_out_brillouin1 <-
@@ -391,7 +395,7 @@ div_out_brillouin1 <-
                      size = 0.2)
 div_out_brillouin1
 #>   I  II III  IV   V  VI 
-#>  63  53  48  59  55  58 
+#>  17  14  16  18  16  19 
 
 div_out_brillouin2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -402,7 +406,7 @@ div_out_brillouin2 <-
                      size = 0.2)
 div_out_brillouin2
 #>   I  II III  IV   V  VI 
-#>  63  53  48  59  55  58 
+#>  17  14  16  18  16  19 
 
 ## Margalef's richness Index
 div_out_margalef1 <-
@@ -414,7 +418,7 @@ div_out_margalef1 <-
                      size = 0.2)
 div_out_margalef1
 #>   I  II III  IV   V  VI 
-#>  58  57  51  56  54  61 
+#>  19  15  16  16  16  18 
 
 div_out_margalef2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -425,7 +429,7 @@ div_out_margalef2 <-
                      size = 0.2)
 div_out_margalef2
 #>   I  II III  IV   V  VI 
-#>  58  57  51  56  54  61 
+#>  19  15  16  16  16  18 
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -442,7 +446,7 @@ dist_prop_out_shannon1 <-
                      size = 0.2)
 dist_prop_out_shannon1
 #>   I  II III  IV   V  VI 
-#>  67  39  32  84  77  38 
+#>  18  10  11  29  23  10 
 
 dist_prop_out_shannon2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -453,7 +457,7 @@ dist_prop_out_shannon2 <-
                      size = 0.2)
 dist_prop_out_shannon2
 #>   I  II III  IV   V  VI 
-#>  67  39  32  84  77  38 
+#>  18  10  11  29  23  10 
 
 ##  Gini-Simpson Index
 dist_prop_out_simpson1 <-
@@ -465,7 +469,7 @@ dist_prop_out_simpson1 <-
                      size = 0.2)
 dist_prop_out_simpson1
 #>   I  II III  IV   V  VI 
-#>  66  39  32  84  78  37 
+#>  18  10  11  29  23  10 
 
 dist_prop_out_simpson2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -476,7 +480,7 @@ dist_prop_out_simpson2 <-
                      size = 0.2)
 dist_prop_out_simpson2
 #>   I  II III  IV   V  VI 
-#>  66  39  32  84  78  37 
+#>  18  10  11  29  23  10 
 
 ## McIntosh Diversity Index
 dist_prop_out_mcintosh1 <-
@@ -488,7 +492,7 @@ dist_prop_out_mcintosh1 <-
                      size = 0.2)
 dist_prop_out_mcintosh1
 #>   I  II III  IV   V  VI 
-#>  67  39  32  84  76  38 
+#>  18  10  10  28  23  10 
 
 dist_prop_out_mcintosh2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -499,7 +503,7 @@ dist_prop_out_mcintosh2 <-
                      size = 0.2)
 dist_prop_out_mcintosh2
 #>   I  II III  IV   V  VI 
-#>  67  39  32  84  76  38 
+#>  18  10  10  28  23  10 
 
 ## Richness
 div_out_richness1 <-
@@ -511,7 +515,7 @@ div_out_richness1 <-
                      size = 0.2)
 div_out_richness1
 #>   I  II III  IV   V  VI 
-#>  60  52  47  63  62  53 
+#>  17  14  16  21  17  16 
 
 div_out_richness2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -522,7 +526,7 @@ div_out_richness2 <-
                      size = 0.2)
 div_out_richness2
 #>   I  II III  IV   V  VI 
-#>  60  52  47  63  62  53 
+#>  17  14  16  21  17  16 
 
 ## Brillouin Diversity Index
 div_out_brillouin1 <-
@@ -534,7 +538,7 @@ div_out_brillouin1 <-
                      size = 0.2)
 div_out_brillouin1
 #>   I  II III  IV   V  VI 
-#>  67  39  31  85  78  37 
+#>  17   9  11  30  22  11 
 
 div_out_brillouin2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -545,7 +549,7 @@ div_out_brillouin2 <-
                      size = 0.2)
 div_out_brillouin2
 #>   I  II III  IV   V  VI 
-#>  67  39  31  85  78  37 
+#>  17   9  11  30  22  11 
 
 ## Margalef's richness Index
 div_out_margalef1 <-
@@ -557,7 +561,7 @@ div_out_margalef1 <-
                      size = 0.2)
 div_out_margalef1
 #>   I  II III  IV   V  VI 
-#>  63  42  34  81  77  40 
+#>  19  10  10  27  23  10 
 
 div_out_margalef2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -568,7 +572,7 @@ div_out_margalef2 <-
                      size = 0.2)
 div_out_margalef2
 #>   I  II III  IV   V  VI 
-#>  63  42  34  81  77  40 
+#>  19  10  10  27  23  10 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Diversity allocation & Logarithmic
@@ -584,7 +588,7 @@ dist_log_out_shannon1 <-
                      size = 0.2)
 dist_log_out_shannon1
 #>   I  II III  IV   V  VI 
-#>  64  51  45  63  59  55 
+#>  18  13  15  20  18  17 
 
 dist_log_out_shannon2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -595,7 +599,7 @@ dist_log_out_shannon2 <-
                      size = 0.2)
 dist_log_out_shannon2
 #>   I  II III  IV   V  VI 
-#>  64  51  45  63  59  55 
+#>  18  13  15  20  18  17 
 
 ##  Gini-Simpson Index
 dist_log_out_simpson1 <-
@@ -607,7 +611,7 @@ dist_log_out_simpson1 <-
                      size = 0.2)
 dist_log_out_simpson1
 #>   I  II III  IV   V  VI 
-#>  63  51  46  63  59  54 
+#>  18  13  15  20  18  16 
 
 dist_log_out_simpson2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -618,7 +622,7 @@ dist_log_out_simpson2 <-
                      size = 0.2)
 dist_log_out_simpson2
 #>   I  II III  IV   V  VI 
-#>  63  51  46  63  59  54 
+#>  18  13  15  20  18  16 
 
 ## McIntosh Diversity Index
 dist_log_out_mcintosh1 <-
@@ -630,7 +634,7 @@ dist_log_out_mcintosh1 <-
                      size = 0.2)
 dist_log_out_mcintosh1
 #>   I  II III  IV   V  VI 
-#>  64  51  46  63  58  55 
+#>  18  13  14  19  18  16 
 
 dist_log_out_mcintosh2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -641,7 +645,7 @@ dist_log_out_mcintosh2 <-
                      size = 0.2)
 dist_log_out_mcintosh2
 #>   I  II III  IV   V  VI 
-#>  64  51  46  63  58  55 
+#>  18  13  14  19  18  16 
 
 ## Richness
 div_out_richness1 <-
@@ -653,7 +657,7 @@ div_out_richness1 <-
                      size = 0.2)
 div_out_richness1
 #>   I  II III  IV   V  VI 
-#>  60  52  47  63  62  53 
+#>  17  14  16  21  17  16 
 
 div_out_richness2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -664,7 +668,7 @@ div_out_richness2 <-
                      size = 0.2)
 div_out_richness2
 #>   I  II III  IV   V  VI 
-#>  60  52  47  63  62  53 
+#>  17  14  16  21  17  16 
 
 ## Brillouin Diversity Index
 div_out_brillouin1 <-
@@ -676,7 +680,7 @@ div_out_brillouin1 <-
                      size = 0.2)
 div_out_brillouin1
 #>   I  II III  IV   V  VI 
-#>  64  51  45  64  59  54 
+#>  17  13  15  21  17  17 
 
 div_out_brillouin2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -687,7 +691,7 @@ div_out_brillouin2 <-
                      size = 0.2)
 div_out_brillouin2
 #>   I  II III  IV   V  VI 
-#>  64  51  45  64  59  54 
+#>  17  13  15  21  17  17 
 
 ## Margalef's richness Index
 div_out_margalef1 <-
@@ -699,7 +703,7 @@ div_out_margalef1 <-
                      size = 0.2)
 div_out_margalef1
 #>   I  II III  IV   V  VI 
-#>  59  54  48  60  58  57 
+#>  19  14  14  19  18  16 
 
 div_out_margalef2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -710,7 +714,7 @@ div_out_margalef2 <-
                      size = 0.2)
 div_out_margalef2
 #>   I  II III  IV   V  VI 
-#>  59  54  48  60  58  57 
+#>  19  14  14  19  18  16 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Diversity allocation & Square root
@@ -726,7 +730,7 @@ dist_sqrt_out_shannon1 <-
                      size = 0.2)
 dist_sqrt_out_shannon1
 #>   I  II III  IV   V  VI 
-#>  66  46  40  71  66  48 
+#>  18  12  13  23  20  14 
 
 dist_sqrt_out_shannon2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -737,7 +741,7 @@ dist_sqrt_out_shannon2 <-
                      size = 0.2)
 dist_sqrt_out_shannon2
 #>   I  II III  IV   V  VI 
-#>  66  46  40  71  66  48 
+#>  18  12  13  23  20  14 
 
 ##  Gini-Simpson Index
 dist_sqrt_out_simpson1 <-
@@ -749,7 +753,7 @@ dist_sqrt_out_simpson1 <-
                      size = 0.2)
 dist_sqrt_out_simpson1
 #>   I  II III  IV   V  VI 
-#>  65  46  40  71  67  47 
+#>  18  12  14  23  20  14 
 
 dist_sqrt_out_simpson2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -760,7 +764,7 @@ dist_sqrt_out_simpson2 <-
                      size = 0.2)
 dist_sqrt_out_simpson2
 #>   I  II III  IV   V  VI 
-#>  65  46  40  71  67  47 
+#>  18  12  14  23  20  14 
 
 ## McIntosh Diversity Index
 dist_sqrt_out_mcintosh1 <-
@@ -772,7 +776,7 @@ dist_sqrt_out_mcintosh1 <-
                      size = 0.2)
 dist_sqrt_out_mcintosh1
 #>   I  II III  IV   V  VI 
-#>  66  47  40  71  65  48 
+#>  18  12  13  22  20  14 
 
 dist_sqrt_out_mcintosh2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -783,7 +787,7 @@ dist_sqrt_out_mcintosh2 <-
                      size = 0.2)
 dist_sqrt_out_mcintosh2
 #>   I  II III  IV   V  VI 
-#>  66  47  40  71  65  48 
+#>  18  12  13  22  20  14 
 
 ## Richness
 div_out_richness1 <-
@@ -795,7 +799,7 @@ div_out_richness1 <-
                      size = 0.2)
 div_out_richness1
 #>   I  II III  IV   V  VI 
-#>  61  47  41  72  69  46 
+#>  17  12  14  24  19  14 
 
 div_out_richness2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -806,7 +810,7 @@ div_out_richness2 <-
                      size = 0.2)
 div_out_richness2
 #>   I  II III  IV   V  VI 
-#>  61  47  41  72  69  46 
+#>  17  12  14  24  19  14 
 
 ## Brillouin Diversity Index
 div_out_brillouin1 <-
@@ -818,7 +822,7 @@ div_out_brillouin1 <-
                      size = 0.2)
 div_out_brillouin1
 #>   I  II III  IV   V  VI 
-#>  66  46  39  72  67  47 
+#>  17  12  14  24  19  14 
 
 div_out_brillouin2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -829,7 +833,7 @@ div_out_brillouin2 <-
                      size = 0.2)
 div_out_brillouin2
 #>   I  II III  IV   V  VI 
-#>  66  46  39  72  67  47 
+#>  17  12  14  24  19  14 
 
 ## Margalef's richness Index
 div_out_margalef1 <-
@@ -841,7 +845,7 @@ div_out_margalef1 <-
                      size = 0.2)
 div_out_margalef1
 #>   I  II III  IV   V  VI 
-#>  61  49  42  68  65  50 
+#>  19  13  13  21  20  14 
 
 div_out_margalef2 <-
   allocate.diversity(data = data, names = "genotypes",
@@ -852,5 +856,5 @@ div_out_margalef2 <-
                      size = 0.2)
 div_out_margalef2
 #>   I  II III  IV   V  VI 
-#>  61  49  42  68  65  50 
+#>  19  13  13  21  20  14 
 ```

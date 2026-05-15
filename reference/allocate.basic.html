@@ -35,7 +35,7 @@ clusters implemented in allocate.basic are as follows.'><!-- Global site tag (gt
 
     <a class="navbar-brand me-2" href="../index.html">SampleCore</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -200,6 +200,12 @@ Huaman et al. (1999)
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Get data</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"cassava_EC_gp"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">cassava_EC_gp</span> <span class="op">&lt;-</span> <span class="va">cassava_EC_gp</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">)</span>, <span class="fl">500</span><span class="op">)</span>, <span class="op">]</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">cassava_EC_gp</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>genotypes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">cassava_EC_gp</span><span class="op">)</span>, <span class="va">cassava_EC_gp</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span></span>
 <span class="r-in"><span></span></span>
@@ -210,7 +216,7 @@ Huaman et al. (1999)
 <span class="r-in"><span>                 size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">const_out</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  56  56  56  56  56  56 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  17  17  17  17  17 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Proportional allocation</span></span></span>
 <span class="r-in"><span><span class="va">prop_out</span> <span class="op">&lt;-</span></span></span>
@@ -219,7 +225,7 @@ Huaman et al. (1999)
 <span class="r-in"><span>                 size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">prop_out</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  61  41  37  81  80  37 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  11  11  27  23   9 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Logarithmic allocation</span></span></span>
 <span class="r-in"><span><span class="va">log_out</span> <span class="op">&lt;-</span></span></span>
@@ -228,7 +234,7 @@ Huaman et al. (1999)
 <span class="r-in"><span>                 size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">log_out</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  57  54  53  60  60  52 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  16  15  19  18  15 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Square root allocation</span></span></span>
 <span class="r-in"><span><span class="va">sqrt_out</span> <span class="op">&lt;-</span></span></span>
@@ -237,7 +243,7 @@ Huaman et al. (1999)
 <span class="r-in"><span>                 size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sqrt_out</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   I  II III  IV   V  VI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  59  49  46  69  68  46 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  17  14  14  22  20  13 </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

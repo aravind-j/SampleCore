@@ -2,7 +2,7 @@
 
 ![logo](https://raw.githubusercontent.com/aravind-j/SampleCore/master/inst/extdata/SampleCore.png)
 
-###### Version : [0.0.0.9000](https://aravind-j.github.io/SampleCore/); License: [GPL-2\|GPL-3](https://www.r-project.org/Licenses/)
+###### Version : [0.1.0](https://aravind-j.github.io/SampleCore/); License: [GPL-2\|GPL-3](https://www.r-project.org/Licenses/)
 
 ##### *Aravind, J., Roy, Suman and Singh, Anju M.*
 
@@ -78,19 +78,17 @@ citation("SampleCore")
 ``` R
 To cite the R package 'SampleCore' in publications use:
 
-  Aravind, J., Roy, S., and Singh, A. M. ().  SampleCore: Sampling
-  Strategies for Constructing Core Collections. R package version
-  0.0.0.9000, https://aravind-j.github.io/SampleCore/.
+  Aravind, J., Roy, S., and Singh, A. M. ().  SampleCore: Sampling Strategies for Constructing Core Collections. R
+  package version 0.1.0, https://aravind-j.github.io/SampleCore/.
 
 A BibTeX entry for LaTeX users is
 
   @Manual{,
     title = {SampleCore: Sampling Strategies for Constructing Core Collections},
     author = {J. Aravind and Suman Roy and Anju Mahendru Singh},
-    note = {R package version 0.0.0.9000 https://aravind-j.github.io/SampleCore/},
+    note = {R package version 0.1.0 https://aravind-j.github.io/SampleCore/},
   }
 
-This free and open-source software implements academic research by the
-authors and co-workers. If you use it, please support the project by
-citing the package.
+This free and open-source software implements academic research by the authors and co-workers. If you use it, please
+support the project by citing the package.
 ```

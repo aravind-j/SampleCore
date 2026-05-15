@@ -20,11 +20,11 @@ Source:
 [`inst/CITATION`](https://github.com/aravind-j/SampleCore/blob/master/inst/CITATION)
 
 Aravind, J., Roy, S., and Singh, A. M. (). SampleCore: Sampling
-Strategies for Constructing Core Collections. R package version
-0.0.0.9000, https://aravind-j.github.io/SampleCore/.
+Strategies for Constructing Core Collections. R package version 0.1.0,
+https://aravind-j.github.io/SampleCore/.
 
     @Manual{,
       title = {SampleCore: Sampling Strategies for Constructing Core Collections},
       author = {J. Aravind and Suman Roy and Anju Mahendru Singh},
-      note = {R package version 0.0.0.9000 https://aravind-j.github.io/SampleCore/},
+      note = {R package version 0.1.0 https://aravind-j.github.io/SampleCore/},
     }
