@@ -66,13 +66,15 @@
 plot_dist <- function(d,
                       method = c("cmds", "isomds", "tsne"),
                       highlight = NULL,
-                      gp = NULL, point.alpha = 0.6) {
+                      gp = NULL, point.alpha = 0.8) {
 
   # Checks ----
   method <- match.arg(method)
 
+  d_labs <- attr(d, "Labels")
+
   if (!is.null(gp)) {
-    missing <- setdiff(labels(d), names(gp))
+    missing <- setdiff(d_labs, names(gp))
     if (length(missing) > 0) {
       warning('Some objects in distance matrix "d" have no group assignment: ',
               paste(missing, collapse = ", "))
@@ -83,7 +85,7 @@ plot_dist <- function(d,
   if (!inherits(d, "dist")) {
     stop('"d" should be a distance matrix of class "dist".')
   }
-  dist_labels <- labels(d) # No dups as it is a distance matrix
+  dist_labels <- d_labs # No dups as it is a distance matrix
 
   if (is.null(dist_labels)) {
     stop('Labels are missing in distance matrix "d".')
@@ -96,8 +98,8 @@ plot_dist <- function(d,
     }
 
     # check if highlight is present in the entire set
-    if (any(!(highlight %in% labels(d)))) {
-      alsel_miss <- highlight[!(highlight %in% labels(d))]
+    if (any(!(highlight %in% d_labs))) {
+      alsel_miss <- highlight[!(highlight %in% d_labs)]
       stop(paste('The following entry/entries specified in "highlight" ',
                  'are not present in "data":\n',
                  paste(alsel_miss, collapse = ", "),
@@ -110,11 +112,16 @@ plot_dist <- function(d,
     stop('"point.alpha" should be a numeric vector of unit length.')
   }
 
-  n <- nrow(as.matrix(d))
+  n <- attr(d, "Size")
 
   # fallback for small matrices
   if (method == "isomds" && n < 3) {
     message("isoMDS requires n >= 3; falling back to cmds.")
+    method <- "cmds"
+  }
+
+  if (method == "tsne" && n < 4) {
+    message("tsne requires n >= 4; falling back to cmds.")
     method <- "cmds"
   }
 
@@ -124,21 +131,21 @@ plot_dist <- function(d,
   }
 
   if (method == "isomds") {
-    fit <- MASS::isoMDS(as.dist(d), trace = F)$points
+    fit <- MASS::isoMDS(d, trace = FALSE)$points
   }
 
   if (method == "tsne") {
 
-    prplx <- min(30, floor((n - 1) / 3))
+    prplx <- max(1, min(30, floor((n - 1) / 3)))
 
     fit <- Rtsne::Rtsne(as.matrix(d),
       is_distance = TRUE, perplexity = prplx)$Y
 
-    rownames(fit) <- labels(d)
+    rownames(fit) <- d_labs
   }
 
   # Labels ----
-  labs <- labels(d)
+  labs <- d_labs
 
   # Plotting dataframe ----
   df <- data.frame(sample = labs,
@@ -152,6 +159,12 @@ plot_dist <- function(d,
   } else {
     "other"
   }
+
+  # Ensure highlighted points are plotted last
+  df$highlight <- factor(df$highlight,
+                         levels = c("other", "highlight"))
+
+  df <- df[order(df$highlight), ]
 
   # Groups ----
   if (!is.null(gp)) {

@@ -9,7 +9,7 @@ plot_dist(
   method = c("cmds", "isomds", "tsne"),
   highlight = NULL,
   gp = NULL,
-  point.alpha = 0.6
+  point.alpha = 0.8
 )
 }
 \arguments{
