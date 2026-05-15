@@ -185,6 +185,25 @@
 #'                      size = 0.2)
 #' dist_out_mcintosh2
 #'
+#' ## Richness
+#' dist_out_richness1 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = traits,
+#'                      method = "div",
+#'                      div.index = richness, metric = "pooled",
+#'                      size = 0.2)
+#' dist_out_richness1
+#'
+#' dist_out_richness2 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = traits,
+#'                      method = "div",
+#'                      div.fun = richness, metric = "mean",
+#'                      size = 0.2)
+#' dist_out_richness2
+#'
 #' ## Brillouin Diversity Index
 #' dist_out_brillouin1 <-
 #'   allocate.diversity(data = data, names = "genotypes",
@@ -204,24 +223,25 @@
 #'                      size = 0.2)
 #' dist_out_brillouin2
 #'
-#' ## Richness
-#' dist_out_richness1 <-
+#' ## Margalef's richness Index
+#' dist_out_margalef1 <-
 #'   allocate.diversity(data = data, names = "genotypes",
 #'                      group = "Cluster",
 #'                      qualitative = traits,
 #'                      method = "div",
-#'                      div.fun = richness, metric = "pooled",
+#'                      div.fun = div_fun_margalef, metric = "pooled",
 #'                      size = 0.2)
-#' dist_out_richness1
+#' dist_out_margalef1
 #'
-#' dist_out_richness2 <-
+#' dist_out_margalef2 <-
 #'   allocate.diversity(data = data, names = "genotypes",
 #'                      group = "Cluster",
 #'                      qualitative = traits,
 #'                      method = "div",
-#'                      div.fun = richness, metric = "mean",
+#'                      div.fun = div_fun_margalef, metric = "mean",
 #'                      size = 0.2)
-#' dist_out_richness2
+#' dist_out_margalef2
+#'
 #'
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' # Diversity allocation & Proportional
@@ -284,6 +304,25 @@
 #'                      size = 0.2)
 #' dist_prop_out_mcintosh2
 #'
+#' ## Richness
+#' dist_out_richness1 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = traits,
+#'                      method = "div.log",
+#'                      div.index = richness, metric = "pooled",
+#'                      size = 0.2)
+#' dist_out_richness1
+#'
+#' dist_out_richness2 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = traits,
+#'                      method = "div.log",
+#'                      div.fun = richness, metric = "mean",
+#'                      size = 0.2)
+#' dist_out_richness2
+#'
 #' ## Brillouin Diversity Index
 #' dist_out_brillouin1 <-
 #'   allocate.diversity(data = data, names = "genotypes",
@@ -303,24 +342,24 @@
 #'                      size = 0.2)
 #' dist_out_brillouin2
 #'
-#' ## Richness
-#' dist_out_richness1 <-
+#' ## Margalef's richness Index
+#' dist_out_margalef1 <-
 #'   allocate.diversity(data = data, names = "genotypes",
 #'                      group = "Cluster",
 #'                      qualitative = traits,
 #'                      method = "div.prop",
-#'                      div.fun = richness, metric = "pooled",
+#'                      div.fun = div_fun_margalef, metric = "pooled",
 #'                      size = 0.2)
-#' dist_out_richness1
+#' dist_out_margalef1
 #'
-#' dist_out_richness2 <-
+#' dist_out_margalef2 <-
 #'   allocate.diversity(data = data, names = "genotypes",
 #'                      group = "Cluster",
 #'                      qualitative = traits,
 #'                      method = "div.prop",
-#'                      div.fun = richness, metric = "mean",
+#'                      div.fun = div_fun_margalef, metric = "mean",
 #'                      size = 0.2)
-#' dist_out_richness2
+#' dist_out_margalef2
 #'
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' # Diversity allocation & Logarithmic
@@ -383,6 +422,25 @@
 #'                      size = 0.2)
 #' dist_log_out_mcintosh2
 #'
+#' ## Richness
+#' dist_out_richness1 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = traits,
+#'                      method = "div.log",
+#'                      div.index = richness, metric = "pooled",
+#'                      size = 0.2)
+#' dist_out_richness1
+#'
+#' dist_out_richness2 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = traits,
+#'                      method = "div.log",
+#'                      div.fun = richness, metric = "mean",
+#'                      size = 0.2)
+#' dist_out_richness2
+#'
 #' ## Brillouin Diversity Index
 #' dist_out_brillouin1 <-
 #'   allocate.diversity(data = data, names = "genotypes",
@@ -402,24 +460,24 @@
 #'                      size = 0.2)
 #' dist_out_brillouin2
 #'
-#' ## Richness
-#' dist_out_richness1 <-
+#' ## Margalef's richness Index
+#' dist_out_margalef1 <-
 #'   allocate.diversity(data = data, names = "genotypes",
 #'                      group = "Cluster",
 #'                      qualitative = traits,
 #'                      method = "div.log",
-#'                      div.fun = richness, metric = "pooled",
+#'                      div.fun = div_fun_margalef, metric = "pooled",
 #'                      size = 0.2)
-#' dist_out_richness1
+#' dist_out_margalef1
 #'
-#' dist_out_richness2 <-
+#' dist_out_margalef2 <-
 #'   allocate.diversity(data = data, names = "genotypes",
 #'                      group = "Cluster",
 #'                      qualitative = traits,
 #'                      method = "div.log",
-#'                      div.fun = richness, metric = "mean",
+#'                      div.fun = div_fun_margalef, metric = "mean",
 #'                      size = 0.2)
-#' dist_out_richness2
+#' dist_out_margalef2
 #'
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' # Diversity allocation & Square root
@@ -482,6 +540,25 @@
 #'                      size = 0.2)
 #' dist_sqrt_out_mcintosh2
 #'
+#' ## Richness
+#' dist_out_richness1 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = traits,
+#'                      method = "div.sqrt",
+#'                      div.index = richness, metric = "pooled",
+#'                      size = 0.2)
+#' dist_out_richness1
+#'
+#' dist_out_richness2 <-
+#'   allocate.diversity(data = data, names = "genotypes",
+#'                      group = "Cluster",
+#'                      qualitative = traits,
+#'                      method = "div.sqrt",
+#'                      div.fun = richness, metric = "mean",
+#'                      size = 0.2)
+#' dist_out_richness2
+#'
 #' ## Brillouin Diversity Index
 #' dist_out_brillouin1 <-
 #'   allocate.diversity(data = data, names = "genotypes",
@@ -501,30 +578,31 @@
 #'                      size = 0.2)
 #' dist_out_brillouin2
 #'
-#' ## Richness
-#' dist_out_richness1 <-
+#' ## Margalef's richness Index
+#' dist_out_margalef1 <-
 #'   allocate.diversity(data = data, names = "genotypes",
 #'                      group = "Cluster",
 #'                      qualitative = traits,
 #'                      method = "div.sqrt",
-#'                      div.fun = richness, metric = "pooled",
+#'                      div.fun = div_fun_margalef, metric = "pooled",
 #'                      size = 0.2)
-#' dist_out_richness1
+#' dist_out_margalef1
 #'
-#' dist_out_richness2 <-
+#' dist_out_margalef2 <-
 #'   allocate.diversity(data = data, names = "genotypes",
 #'                      group = "Cluster",
 #'                      qualitative = traits,
 #'                      method = "div.sqrt",
-#'                      div.fun = richness, metric = "mean",
+#'                      div.fun = div_fun_margalef, metric = "mean",
 #'                      size = 0.2)
-#' dist_out_richness2
+#' dist_out_margalef2
 #'
 allocate.diversity <- function(data, names, group,
                                qualitative,
                                method = c("div", "div.prop",
                                           "div.sqrt", "div.log"),
-                               div.index = c("shannon", "simpson", "mcintosh"),
+                               div.index = c("richness", "shannon",
+                                             "simpson", "mcintosh"),
                                shannon.base = exp(1),
                                div.fun = NULL,
                                log.base = exp(1),
@@ -536,7 +614,6 @@ allocate.diversity <- function(data, names, group,
   checks.sample.core(data = data, size = size,
                      names = names, group = group,
                      dist.mat = NULL,
-                     quantitative = quantitative,
                      qualitative = qualitative,
                      log.base = log.base,
                      mode = "alloc")
@@ -597,6 +674,11 @@ allocate.diversity <- function(data, names, group,
         trt_x <- droplevels(data[idx, trt])
 
         if (is.null(div.fun)) {
+          ## Richness ----
+          if (div.index == "richness") {
+            out <- length(unique(trt_x))
+          }
+
           ## Shannon ----
           if (div.index == "shannon") {
             out <- DiversityStats::shannon(trt_x, base = shannon.base)
