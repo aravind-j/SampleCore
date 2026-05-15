@@ -7,30 +7,58 @@ cff-version: 1.2.0
 message: 'To cite package "SampleCore" in publications use:'
 type: software
 license: GPL-2.0-or-later
-title: 'SampleCore: Sampling Strategies for Constructing Core COllections'
-version: 0.0.0.9000
-abstract: Implements several sampling strategies for construction of core collections.
-  These include 1) Stratified sampling based on group size 2) Stratified sampling
-  based on group diversity 3) Sampling based on genetic distance between accessions.
-  See the vignette for more, including full list of citations for the methods implemented.
+title: 'SampleCore: Sampling Strategies for Constructing Core Collections'
+version: 0.1.0
+abstract: Implements multiple allocation and selection strategies of sampling to construct
+  core collections primarily from clustered or grouped germplasm collection data.
+  Provides methods for allocating entries to clusters/groups based on group sizes,
+  group-wise distance-based diversity metrics, and group-wise diversity index estimates.
+  Includes procedures for selecting entries within clusters/groups through random
+  sampling, genetic distance-based approaches, and optimized diversity metric–based
+  selection methods. See the package documentation for more, including full list of
+  references for the methods implemented.
 authors:
 - family-names: Aravind
   given-names: J.
-  email: j.aravind@icar.gov.in
+  email: j.aravind@icar.org.in
   orcid: https://orcid.org/0000-0002-4791-442X
 - family-names: Roy
   given-names: Suman
-  email: suman.roy@icar.gov.in
+  email: suman.roy@icar.org.in
   orcid: https://orcid.org/0000-0001-5612-8415
+- family-names: Singh
+  given-names: Anju Mahendru
+  email: anju.singh@icar.org.in
+  orcid: https://orcid.org/0000-0001-6958-1630
+preferred-citation:
+  type: manual
+  title: 'SampleCore: Sampling Strategies for Constructing Core Collections'
+  authors:
+  - family-names: Aravind
+    given-names: J.
+    email: j.aravind@icar.org.in
+    orcid: https://orcid.org/0000-0002-4791-442X
+  - family-names: Roy
+    given-names: Suman
+    email: suman.roy@icar.org.in
+    orcid: https://orcid.org/0000-0001-5612-8415
+  - family-names: Singh
+    given-names: Anju Mahendru
+    email: anju.singh@icar.org.in
+    orcid: https://orcid.org/0000-0001-6958-1630
+  notes: R package version 0.1.0 https://aravind-j.github.io/SampleCore/
 repository-code: https://github.com/aravind-j/SampleCore
 url: https://aravind-j.github.io/SampleCore/
 contact:
 - family-names: Aravind
   given-names: J.
-  email: j.aravind@icar.gov.in
+  email: j.aravind@icar.org.in
   orcid: https://orcid.org/0000-0002-4791-442X
-- family-names: Roy
-  given-names: Suman
-  email: suman.roy@icar.gov.in
-  orcid: https://orcid.org/0000-0001-5612-8415
+keywords:
+- core-collections
+- genebank
+- germplasm
+- pgr
+- plant-genetic-resources
+- r
 

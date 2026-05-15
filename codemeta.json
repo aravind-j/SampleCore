@@ -2,33 +2,40 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "SampleCore",
-  "description": "Implements several sampling strategies for construction of core collections. These include 1) Stratified sampling based on group size 2) Stratified sampling based on group diversity 3) Sampling based on genetic distance between accessions. See the vignette for more, including full list of citations for the methods implemented.",
-  "name": "SampleCore: Sampling Strategies for Constructing Core COllections",
+  "description": "Implements multiple allocation and selection strategies of sampling to construct core collections primarily from clustered or grouped germplasm collection data. Provides methods for allocating entries to clusters/groups based on group sizes, group-wise distance-based diversity metrics, and group-wise diversity index estimates. Includes procedures for selecting entries within clusters/groups through random sampling, genetic distance-based approaches, and optimized diversity metric–based selection methods. See the package documentation for more, including full list of references for the methods implemented.",
+  "name": "SampleCore: Sampling Strategies for Constructing Core Collections",
   "relatedLink": "https://aravind-j.github.io/SampleCore/",
   "codeRepository": "https://github.com/aravind-j/SampleCore",
   "issueTracker": "https://github.com/aravind-j/SampleCore/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
-  "version": "0.0.0.9000",
+  "version": "0.1.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R Under development (unstable) (2025-02-03 r87683 ucrt)",
+  "runtimePlatform": "R Under development (unstable) (2026-04-26 r89963 ucrt)",
   "author": [
     {
       "@type": "Person",
       "givenName": "J.",
       "familyName": "Aravind",
-      "email": "j.aravind@icar.gov.in",
+      "email": "j.aravind@icar.org.in",
       "@id": "https://orcid.org/0000-0002-4791-442X"
     },
     {
       "@type": "Person",
       "givenName": "Suman",
       "familyName": "Roy",
-      "email": "suman.roy@icar.gov.in",
+      "email": "suman.roy@icar.org.in",
       "@id": "https://orcid.org/0000-0001-5612-8415"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Anju Mahendru",
+      "familyName": "Singh",
+      "email": "anju.singh@icar.org.in",
+      "@id": "https://orcid.org/0000-0001-6958-1630"
     }
   ],
   "copyrightHolder": [
@@ -42,29 +49,34 @@
       "@type": "Person",
       "givenName": "J.",
       "familyName": "Aravind",
-      "email": "j.aravind@icar.gov.in",
+      "email": "j.aravind@icar.org.in",
       "@id": "https://orcid.org/0000-0002-4791-442X"
-    },
-    {
-      "@type": "Person",
-      "givenName": "Suman",
-      "familyName": "Roy",
-      "email": "suman.roy@icar.gov.in",
-      "@id": "https://orcid.org/0000-0001-5612-8415"
     }
   ],
   "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
-      "identifier": "cluster",
-      "name": "cluster",
+      "identifier": "biotools",
+      "name": "biotools",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=cluster"
+      "sameAs": "https://CRAN.R-project.org/package=biotools"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "dbscan",
+      "name": "dbscan",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=dbscan"
     },
     {
       "@type": "SoftwareApplication",
@@ -77,6 +89,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=EvaluateCore"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "fastcluster",
+      "name": "fastcluster",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=fastcluster"
     },
     {
       "@type": "SoftwareApplication",
@@ -118,15 +142,130 @@
   "softwareRequirements": {
     "1": {
       "@type": "SoftwareApplication",
-      "identifier": "stats",
-      "name": "stats"
+      "identifier": "cluster",
+      "name": "cluster",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=cluster"
     },
     "2": {
       "@type": "SoftwareApplication",
-      "identifier": "utils",
-      "name": "utils"
+      "identifier": "DiversityStats",
+      "name": "DiversityStats",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=DiversityStats"
     },
     "3": {
+      "@type": "SoftwareApplication",
+      "identifier": "ggplot2",
+      "name": "ggplot2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
+    },
+    "4": {
+      "@type": "SoftwareApplication",
+      "identifier": "igraph",
+      "name": "igraph",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=igraph"
+    },
+    "5": {
+      "@type": "SoftwareApplication",
+      "identifier": "MASS",
+      "name": "MASS",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=MASS"
+    },
+    "6": {
+      "@type": "SoftwareApplication",
+      "identifier": "mathjaxr",
+      "name": "mathjaxr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=mathjaxr"
+    },
+    "7": {
+      "@type": "SoftwareApplication",
+      "identifier": "prospectr",
+      "name": "prospectr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=prospectr"
+    },
+    "8": {
+      "@type": "SoftwareApplication",
+      "identifier": "Rdpack",
+      "name": "Rdpack",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=Rdpack"
+    },
+    "9": {
+      "@type": "SoftwareApplication",
+      "identifier": "Rtsne",
+      "name": "Rtsne",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=Rtsne"
+    },
+    "10": {
+      "@type": "SoftwareApplication",
+      "identifier": "stats",
+      "name": "stats"
+    },
+    "11": {
+      "@type": "SoftwareApplication",
+      "identifier": "vegan",
+      "name": "vegan",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=vegan"
+    },
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
@@ -134,5 +273,36 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "87.35KB"
+  "fileSize": "776.59KB",
+  "citation": [
+    {
+      "@type": "SoftwareSourceCode",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": "J.",
+          "familyName": "Aravind",
+          "email": "j.aravind@icar.org.in"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Suman",
+          "familyName": "Roy",
+          "email": "suman.roy@icar.org.in"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Anju Mahendru",
+          "familyName": "Singh",
+          "email": "anju.singh@icar.org.in"
+        }
+      ],
+      "name": "SampleCore: Sampling Strategies for Constructing Core Collections",
+      "description": "R package version 0.1.0 https://aravind-j.github.io/SampleCore/"
+    }
+  ],
+  "releaseNotes": "https://github.com/aravind-j/SampleCore/blob/main/NEWS.md",
+  "readme": "https://github.com/aravind-j/SampleCore/blob/master/README.md",
+  "developmentStatus": ["https://www.repostatus.org/#wip", "https://lifecycle.r-lib.org/articles/stages.html#maturing"],
+  "keywords": ["core-collections", "genebank", "germplasm", "pgr", "plant-genetic-resources", "r"]
 }
