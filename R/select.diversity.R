@@ -94,6 +94,9 @@
 #'
 #' data(cassava_EC_gp)
 #'
+#' set.seed(123)
+#' cassava_EC_gp <- cassava_EC_gp[sample(1:nrow(cassava_EC_gp), 500), ]
+#'
 #' data <- cbind(genotypes = rownames(cassava_EC_gp), cassava_EC_gp)
 #'
 #' quant <- c("NMSR", "TTRN", "TFWSR", "TTRW", "TFWSS", "TTSW", "TTPW", "AVPW",
@@ -124,7 +127,7 @@
 #' counts <- c(I = 31, II = 31, III = 18, IV = 35, V = 40, VI = 17)
 #'
 #' mand_accns <-
-#'   c("TMe-34", "TMe-3423", "TMe-2018", "TMe-801", "TMe-551")
+#'   c("TMe-2018", "TMe-801", "TMe-3191", "TMe-1830", "TMe-1790")
 #'
 #' # Get distance matrix - Only for visualization
 #'
@@ -197,7 +200,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(randomsel_sum_richness,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Random search", subtitle = "Pooled richness")
 #'
@@ -212,7 +215,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(randomsel_mean_shannon,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Random search",
 #'        subtitle = "Mean Shannon-Weaver diversity index")
@@ -228,7 +231,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(randomsel_sum_shannon,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Random search",
 #'        subtitle = "Pooled Shannon-Weaver diversity index")
@@ -244,7 +247,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(randomsel_mean_simpson,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Random search",
 #'        subtitle = "Mean Gini-Simpson diversity index")
@@ -260,7 +263,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(randomsel_sum_simpson,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Random search",
 #'        subtitle = "Pooled Gini-Simpson diversity index")
@@ -276,7 +279,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(randomsel_mean_mcintosh,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Random search",
 #'        subtitle = "Mean McIntosh diversity index")
@@ -292,7 +295,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(randomsel_sum_mcintosh,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Random search",
 #'        subtitle = "Pooled McIntosh diversity index")
@@ -308,7 +311,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(randomsel_mean_brillouin,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Random search",
 #'        subtitle = "Mean Brillouin diversity index")
@@ -324,7 +327,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(randomsel_sum_brillouin,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Random search",
 #'        subtitle = "Pooled Brillouin diversity index")
@@ -341,7 +344,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(randomsel_mean_margalef,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Random search",
 #'        subtitle = "Mean Margalef's diversity index")
@@ -357,7 +360,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(randomsel_sum_margalef,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Random search",
 #'        subtitle = "Pooled Margalef's diversity index")
@@ -377,7 +380,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_best_mean_richness,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt best improvement",
 #'        subtitle = "Mean richness")
@@ -393,7 +396,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_best_sum_richness,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt best improvement",
 #'        subtitle = "Pooled richness")
@@ -409,7 +412,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_best_mean_shannon,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt best improvement",
 #'        subtitle = "Mean Shannon-Weaver diversity index")
@@ -425,7 +428,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_best_sum_shannon,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt best improvement",
 #'        subtitle = "Pooled Shannon-Weaver diversity index")
@@ -441,7 +444,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_best_mean_simpson,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt best improvement",
 #'        subtitle = "Mean Gini-Simpson diversity index")
@@ -457,7 +460,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_best_sum_simpson,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt best improvement",
 #'        subtitle = "Pooled Gini-Simpson diversity index")
@@ -473,7 +476,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_best_mean_mcintosh,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt best improvement",
 #'        subtitle = "Mean McIntosh diversity index")
@@ -489,7 +492,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_best_sum_mcintosh,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt best improvement",
 #'        subtitle = "Pooled McIntosh diversity index")
@@ -505,7 +508,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_best_mean_brillouin,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt best improvement",
 #'        subtitle = "Mean Brillouin diversity index")
@@ -521,7 +524,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_best_sum_brillouin,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt best improvement",
 #'        subtitle = "Pooled Brillouin diversity index")
@@ -537,7 +540,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_best_mean_margalef,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt best improvement",
 #'        subtitle = "Mean Margalef's diversity index")
@@ -553,7 +556,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_best_sum_margalef,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt best improvement",
 #'        subtitle = "Pooled Margalef's diversity index")
@@ -573,7 +576,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_first_mean_richness,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt first improvement",
 #'        subtitle = "Mean richness")
@@ -589,7 +592,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_first_sum_richness,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt first improvement",
 #'        subtitle = "Pooled richness")
@@ -605,7 +608,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_first_mean_shannon,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt first improvement",
 #'        subtitle = "Mean Shannon-Weaver diversity index")
@@ -621,7 +624,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_first_sum_shannon,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt first improvement",
 #'        subtitle = "Pooled Shannon-Weaver diversity index")
@@ -637,7 +640,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_first_mean_simpson,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt first improvement",
 #'        subtitle = "Mean Gini-Simpson diversity index")
@@ -653,7 +656,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_first_sum_simpson,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt first improvement",
 #'        subtitle = "Pooled Gini-Simpson diversity index")
@@ -669,7 +672,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_first_mean_mcintosh,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt first improvement",
 #'        subtitle = "Mean McIntosh diversity index")
@@ -685,7 +688,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_first_sum_mcintosh,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt first improvement",
 #'        subtitle = "Pooled McIntosh diversity index")
@@ -701,7 +704,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_first_mean_brillouin,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt first improvement",
 #'        subtitle = "Mean Brillouin diversity index")
@@ -717,7 +720,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_first_sum_brillouin,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt first improvement",
 #'        subtitle = "Pooled Brillouin diversity index")
@@ -733,7 +736,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_first_mean_margalef,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt first improvement",
 #'        subtitle = "Mean Margalef's richness index")
@@ -749,7 +752,7 @@
 #'
 #' plot_dist(d = dist_matrix, method = "isomds",
 #'           gp = gp_vec,
-#'           highlight =  unlist(randomsel_mean_richness,
+#'           highlight =  unlist(greedysel_first_sum_margalef,
 #'                               use.names = FALSE)) +
 #'   labs(title = "Greed search | 1-opt first improvement",
 #'        subtitle = "Pooled Margalef's richness index")

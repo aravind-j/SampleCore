@@ -146,26 +146,32 @@
 #'
 #' # Get distance matrix
 #' data("cassava_EC_gp")
+#'
+#' set.seed(123)
+#' cassava_EC_gp <- cassava_EC_gp[sample(1:nrow(cassava_EC_gp), 500), ]
+#'
 #' quant <- c("NMSR", "TTRN", "TFWSR", "TTRW", "TFWSS", "TTSW", "TTPW",
 #'            "AVPW", "ARSR", "SRDM")
 #' qual <- c("CUAL", "LNGS", "PTLC", "DSTA", "LFRT", "LBTEF", "CBTR", "NMLB",
 #'           "ANGB", "CUAL9M", "LVC9M", "TNPR9M", "PL9M", "STRP", "STRC",
 #'           "PSTR")
 #'
+#' data <- cassava_EC_gp
+#'
 #' # Convert qualitative data columns to factor
-#' cassava_EC_gp[, qual] <- lapply(cassava_EC_gp[, qual], as.factor)
+#' data[, qual] <- lapply(data[, qual], as.factor)
 #'
 #' # Standardise quantitative data column
-#' cassava_EC_gp[, quant] <- lapply(cassava_EC_gp[, quant], function(x) {
+#' data[, quant] <- lapply(data[, quant], function(x) {
 #'   scale(x)[, 1]
 #' })
 #'
 #' # Get the Gower's distance matrix
-#' dist_matrix <- daisy(x = cassava_EC_gp[, c(qual, quant)],
+#' dist_matrix <- daisy(x = data[, c(qual, quant)],
 #'                      metric = "gower")
 #'
 #' # Get data
-#' data("cassava_EC_gp")
+#' data <- cassava_EC_gp
 #' data <- cbind(genotypes = rownames(cassava_EC_gp), cassava_EC_gp)
 #' row.names(data) <- NULL
 #'

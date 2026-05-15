@@ -49,6 +49,9 @@ library(cluster)
 # Get data
 data(cassava_EC_gp)
 
+set.seed(123)
+cassava_EC_gp <- cassava_EC_gp[sample(1:nrow(cassava_EC_gp), 500), ]
+
 data <- cbind(genotypes = rownames(cassava_EC_gp), cassava_EC_gp)
 row.names(data) <- NULL
 
@@ -56,7 +59,7 @@ row.names(data) <- NULL
 counts <- c(I = 31, II = 31, III = 18, IV = 35, V = 40, VI = 17)
 
 mand_accns <-
-  c("TMe-34", "TMe-3423", "TMe-2018", "TMe-801", "TMe-551")
+  c("TMe-2018", "TMe-801", "TMe-3191", "TMe-1830", "TMe-1790")
 
 # Specify the seed
 set.seed(123)

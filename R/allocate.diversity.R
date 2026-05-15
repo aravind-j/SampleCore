@@ -74,6 +74,10 @@
 #'
 #' # Get data
 #' data("cassava_EC_gp")
+#'
+#' set.seed(123)
+#' cassava_EC_gp <- cassava_EC_gp[sample(1:nrow(cassava_EC_gp), 500), ]
+#'
 #' data <- cbind(genotypes = rownames(cassava_EC_gp), cassava_EC_gp)
 #' row.names(data) <- NULL
 #'

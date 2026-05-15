@@ -388,12 +388,14 @@ allocation.
 # Prepare example data
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
 library(cluster)
 library(ggplot2)
 
 data(cassava_EC_gp)
 
-data <- cassava_EC_gp
+set.seed(123)
+data <- cassava_EC_gp[sample(1:nrow(cassava_EC_gp), 500), ]
 
 quant <- c("NMSR", "TTRN", "TFWSR", "TTRW", "TFWSS", "TTSW", "TTPW", "AVPW",
            "ARSR", "SRDM")
@@ -412,12 +414,13 @@ data <- cbind(genotypes = rownames(data), data)
 row.names(data) <- NULL
 
 # Prepare inputs
-counts <- c(I = 31, II = 31, III = 18, IV = 35, V = 40, VI = 17)
+counts <- c(I = 16, II = 15, III = 9, IV = 18, V = 20, VI = 8)
 
 mand_accns <-
-  c("TMe-34", "TMe-3423", "TMe-2018", "TMe-801", "TMe-551")
+  c("TMe-2018", "TMe-801", "TMe-3191", "TMe-1830", "TMe-1790")
 
 gp_vec <- setNames(as.character(data[, "Cluster"]), data[, "genotypes"])
+
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Fetch selected accessions by centrality based methods
