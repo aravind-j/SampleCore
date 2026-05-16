@@ -405,25 +405,27 @@ dist_out_mstl
 #>   I  II III  IV   V  VI 
 #>  11   9  21  28  10  21 
 
-## Mean distance to centroid
-dist_out_mdc <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist",
-                    dist.mat = dist_matrix, metric = "mdc",
-                    size = 0.2)
-dist_out_mdc
+# \donttest{
+  ## Mean distance to centroid
+  dist_out_mdc <-
+    allocate.distance(data = data, names = "genotypes",
+                      group = "Cluster", method = "dist",
+                      dist.mat = dist_matrix, metric = "mdc",
+                      size = 0.2)
+  dist_out_mdc
 #>   I  II III  IV   V  VI 
 #>  20  15  13  18  16  18 
 
-## Mean distance to median
-dist_out_mdm <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist",
-                    dist.mat = dist_matrix, metric = "mdm",
-                    size = 0.2)
-dist_out_mdm
+  ## Mean distance to median
+  dist_out_mdm <-
+    allocate.distance(data = data, names = "genotypes",
+                      group = "Cluster", method = "dist",
+                      dist.mat = dist_matrix, metric = "mdm",
+                      size = 0.2)
+  dist_out_mdm
 #>   I  II III  IV   V  VI 
 #>  20  15  13  18  16  18 
+# }
 
 ## Number of clusters
 
@@ -439,39 +441,46 @@ dist_out_nclust1
 #>  12   7  20  28  11  22 
 
 # Ward's minimum variance with fastcluster
-dist_out_nclust2 <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist",
-                    dist.mat = dist_matrix, metric = "nclust",
-                    clust.fun = clust_fun_ward,
-                    size = 0.2)
-dist_out_nclust2
+if (requireNamespace('fastcluster', quietly = TRUE)) {
+  dist_out_nclust2 <-
+    allocate.distance(data = data, names = "genotypes",
+                      group = "Cluster", method = "dist",
+                      dist.mat = dist_matrix, metric = "nclust",
+                      clust.fun = clust_fun_ward,
+                      size = 0.2)
+  dist_out_nclust2
+}
 #>   I  II III  IV   V  VI 
 #>  12   8  21  27  11  21 
 
 
 # Density-based clustering with dbscan
-dist_out_nclust3 <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist",
-                    dist.mat = dist_matrix, metric = "nclust",
-                    clust.fun = clust_fun_dbscan,
-                    size = 0.2)
-dist_out_nclust3
+if (requireNamespace('dbscan', quietly = TRUE)) {
+  dist_out_nclust3 <-
+    allocate.distance(data = data, names = "genotypes",
+                      group = "Cluster", method = "dist",
+                      dist.mat = dist_matrix, metric = "nclust",
+                      clust.fun = clust_fun_dbscan,
+                      size = 0.2)
+  dist_out_nclust3
+}
 #>   I  II III  IV   V  VI 
 #>  18   9  18  18   9  27 
 
-
-# Tocher's sequential clustering
-dist_out_nclust4 <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist",
-                    dist.mat = dist_matrix, metric = "nclust",
-                    clust.fun = clust_fun_tocher,
-                    size = 0.2)
-dist_out_nclust4
+# \donttest{
+  if (requireNamespace('biotools', quietly = TRUE)) {
+    # Tocher's sequential clustering
+    dist_out_nclust4 <-
+      allocate.distance(data = data, names = "genotypes",
+                        group = "Cluster", method = "dist",
+                        dist.mat = dist_matrix, metric = "nclust",
+                        clust.fun = clust_fun_tocher,
+                        size = 0.2)
+    dist_out_nclust4
+  }
 #>   I  II III  IV   V  VI 
 #>  13  20  17  22  13  15 
+# }
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Diversity (Distance based) & Proportional
@@ -537,25 +546,27 @@ dist_prop_out_mstl
 #>   I  II III  IV   V  VI 
 #>  11   6  14  44  14  12 
 
-## Mean distance to centroid
-dist_prop_out_mdc <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist.prop",
-                    dist.mat = dist_matrix, metric = "mdc",
-                    size = 0.2)
-dist_prop_out_mdc
+# \donttest{
+  ## Mean distance to centroid
+  dist_prop_out_mdc <-
+    allocate.distance(data = data, names = "genotypes",
+                      group = "Cluster", method = "dist.prop",
+                      dist.mat = dist_matrix, metric = "mdc",
+                      size = 0.2)
+  dist_prop_out_mdc
 #>   I  II III  IV   V  VI 
 #>  20  10   9  29  22  10 
 
-## Mean distance to median
-dist_prop_out_mdm <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist.prop",
-                    dist.mat = dist_matrix, metric = "mdm",
-                    size = 0.2)
-dist_prop_out_mdm
+  ## Mean distance to median
+  dist_prop_out_mdm <-
+    allocate.distance(data = data, names = "genotypes",
+                      group = "Cluster", method = "dist.prop",
+                      dist.mat = dist_matrix, metric = "mdm",
+                      size = 0.2)
+  dist_prop_out_mdm
 #>   I  II III  IV   V  VI 
 #>  20  10   9  29  22  10 
+# }
 
 ## Number of clusters
 
@@ -571,37 +582,45 @@ dist_prop_out_nclust1
 #>  12   5  13  44  14  12 
 
 # Ward's minimum variance with fastcluster
-dist_prop_out_nclust2 <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist.prop",
-                    dist.mat = dist_matrix, metric = "nclust",
-                    clust.fun = clust_fun_ward,
-                    size = 0.2)
-dist_prop_out_nclust2
+if (requireNamespace('fastcluster', quietly = TRUE)) {
+  dist_prop_out_nclust2 <-
+    allocate.distance(data = data, names = "genotypes",
+                      group = "Cluster", method = "dist.prop",
+                      dist.mat = dist_matrix, metric = "nclust",
+                      clust.fun = clust_fun_ward,
+                      size = 0.2)
+  dist_prop_out_nclust2
+}
 #>   I  II III  IV   V  VI 
 #>  12   6  14  43  15  11 
 
 # Density-based clustering with dbscan
-dist_prop_out_nclust3 <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist.prop",
-                    dist.mat = dist_matrix, metric = "nclust",
-                    clust.fun = clust_fun_dbscan,
-                    size = 0.2)
-dist_prop_out_nclust3
+if (requireNamespace('dbscan', quietly = TRUE)) {
+  dist_prop_out_nclust3 <-
+    allocate.distance(data = data, names = "genotypes",
+                      group = "Cluster", method = "dist.prop",
+                      dist.mat = dist_matrix, metric = "nclust",
+                      clust.fun = clust_fun_dbscan,
+                      size = 0.2)
+  dist_prop_out_nclust3
+}
 #>   I  II III  IV   V  VI 
 #>  20   7  13  31  13  16 
 
-# Tocher's sequential clustering
-dist_prop_out_nclust4 <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist.prop",
-                    dist.mat = dist_matrix, metric = "nclust",
-                    clust.fun = clust_fun_tocher,
-                    size = 0.2)
-dist_prop_out_nclust4
+# \donttest{
+  if (requireNamespace('biotools', quietly = TRUE)) {
+    # Tocher's sequential clustering
+    dist_prop_out_nclust4 <-
+      allocate.distance(data = data, names = "genotypes",
+                        group = "Cluster", method = "dist.prop",
+                        dist.mat = dist_matrix, metric = "nclust",
+                        clust.fun = clust_fun_tocher,
+                        size = 0.2)
+    dist_prop_out_nclust4
+  }
 #>   I  II III  IV   V  VI 
 #>  14  13  11  35  18   8 
+# }
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Diversity (Distance based) & Logarithmic
@@ -667,25 +686,27 @@ dist_log_out_mstl
 #>   I  II III  IV   V  VI 
 #>  11   8  19  31  11  19 
 
-## Mean distance to centroid
-dist_log_out_mdc <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist.log",
-                    dist.mat = dist_matrix, metric = "mdc",
-                    size = 0.2)
-dist_log_out_mdc
+# \donttest{
+  ## Mean distance to centroid
+  dist_log_out_mdc <-
+    allocate.distance(data = data, names = "genotypes",
+                      group = "Cluster", method = "dist.log",
+                      dist.mat = dist_matrix, metric = "mdc",
+                      size = 0.2)
+  dist_log_out_mdc
 #>   I  II III  IV   V  VI 
 #>  20  14  12  20  18  15 
 
-## Mean distance to median
-dist_log_out_mdm <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist.log",
-                    dist.mat = dist_matrix, metric = "mdm",
-                    size = 0.2)
-dist_log_out_mdm
+  ## Mean distance to median
+  dist_log_out_mdm <-
+    allocate.distance(data = data, names = "genotypes",
+                      group = "Cluster", method = "dist.log",
+                      dist.mat = dist_matrix, metric = "mdm",
+                      size = 0.2)
+  dist_log_out_mdm
 #>   I  II III  IV   V  VI 
 #>  20  14  12  20  18  15 
+# }
 
 ## Number of clusters
 
@@ -701,37 +722,45 @@ dist_log_out_nclust1
 #>  13   7  18  31  12  20 
 
 # Ward's minimum variance with fastcluster
-dist_log_out_nclust2 <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist.log",
-                    dist.mat = dist_matrix, metric = "nclust",
-                    clust.fun = clust_fun_ward,
-                    size = 0.2)
-dist_log_out_nclust2
+if (requireNamespace('fastcluster', quietly = TRUE)) {
+  dist_log_out_nclust2 <-
+    allocate.distance(data = data, names = "genotypes",
+                      group = "Cluster", method = "dist.log",
+                      dist.mat = dist_matrix, metric = "nclust",
+                      clust.fun = clust_fun_ward,
+                      size = 0.2)
+  dist_log_out_nclust2
+}
 #>   I  II III  IV   V  VI 
 #>  12   8  20  30  12  18 
 
-# Density-based clustering with dbscan
-dist_log_out_nclust3 <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist.log",
-                    dist.mat = dist_matrix, metric = "nclust",
-                    clust.fun = clust_fun_dbscan,
-                    size = 0.2)
-dist_log_out_nclust3
+if (requireNamespace('dbscan', quietly = TRUE)) {
+  # Density-based clustering with dbscan
+  dist_log_out_nclust3 <-
+    allocate.distance(data = data, names = "genotypes",
+                      group = "Cluster", method = "dist.log",
+                      dist.mat = dist_matrix, metric = "nclust",
+                      clust.fun = clust_fun_dbscan,
+                      size = 0.2)
+  dist_log_out_nclust3
+}
 #>   I  II III  IV   V  VI 
 #>  19   9  17  21  10  24 
 
-# Tocher's sequential clustering
-dist_log_out_nclust4 <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist.log",
-                    dist.mat = dist_matrix, metric = "nclust",
-                    clust.fun = clust_fun_tocher,
-                    size = 0.2)
-dist_log_out_nclust4
+# \donttest{
+  if (requireNamespace('biotools', quietly = TRUE)) {
+    # Tocher's sequential clustering
+    dist_log_out_nclust4 <-
+      allocate.distance(data = data, names = "genotypes",
+                        group = "Cluster", method = "dist.log",
+                        dist.mat = dist_matrix, metric = "nclust",
+                        clust.fun = clust_fun_tocher,
+                        size = 0.2)
+    dist_log_out_nclust4
+  }
 #>   I  II III  IV   V  VI 
 #>  14  19  15  24  15  13 
+# }
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Diversity (Distance based) & Square root
@@ -797,25 +826,27 @@ dist_sqrt_out_mstl
 #>   I  II III  IV   V  VI 
 #>  11   8  17  36  12  16 
 
-## Mean distance to centroid
-dist_sqrt_out_mdc <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist.sqrt",
-                    dist.mat = dist_matrix, metric = "mdc",
-                    size = 0.2)
-dist_sqrt_out_mdc
+# \donttest{
+  ## Mean distance to centroid
+  dist_sqrt_out_mdc <-
+    allocate.distance(data = data, names = "genotypes",
+                      group = "Cluster", method = "dist.sqrt",
+                      dist.mat = dist_matrix, metric = "mdc",
+                      size = 0.2)
+  dist_sqrt_out_mdc
 #>   I  II III  IV   V  VI 
 #>  20  13  11  23  19  13 
 
-## Mean distance to median
-dist_sqrt_out_mdm <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist.sqrt",
-                    dist.mat = dist_matrix, metric = "mdm",
-                    size = 0.2)
-dist_sqrt_out_mdm
+  ## Mean distance to median
+  dist_sqrt_out_mdm <-
+    allocate.distance(data = data, names = "genotypes",
+                      group = "Cluster", method = "dist.sqrt",
+                      dist.mat = dist_matrix, metric = "mdm",
+                      size = 0.2)
+  dist_sqrt_out_mdm
 #>   I  II III  IV   V  VI 
 #>  20  13  11  23  19  13 
+# }
 
 ## Number of clusters
 
@@ -831,35 +862,43 @@ dist_sqrt_out_nclust1
 #>  13   6  16  36  13  17 
 
 # Ward's minimum variance with fastcluster
-dist_sqrt_out_nclust2 <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist.sqrt",
-                    dist.mat = dist_matrix, metric = "nclust",
-                    clust.fun = clust_fun_ward,
-                    size = 0.2)
-dist_sqrt_out_nclust2
+if (requireNamespace('fastcluster', quietly = TRUE)) {
+  dist_sqrt_out_nclust2 <-
+    allocate.distance(data = data, names = "genotypes",
+                      group = "Cluster", method = "dist.sqrt",
+                      dist.mat = dist_matrix, metric = "nclust",
+                      clust.fun = clust_fun_ward,
+                      size = 0.2)
+  dist_sqrt_out_nclust2
+}
 #>   I  II III  IV   V  VI 
 #>  12   7  18  35  13  16 
 
-# Density-based clustering with dbscan
-dist_sqrt_out_nclust3 <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist.sqrt",
-                    dist.mat = dist_matrix, metric = "nclust",
-                    clust.fun = clust_fun_dbscan,
-                    size = 0.2)
-dist_sqrt_out_nclust3
+if (requireNamespace('dbscan', quietly = TRUE)) {
+  # Density-based clustering with dbscan
+  dist_sqrt_out_nclust3 <-
+    allocate.distance(data = data, names = "genotypes",
+                      group = "Cluster", method = "dist.sqrt",
+                      dist.mat = dist_matrix, metric = "nclust",
+                      clust.fun = clust_fun_dbscan,
+                      size = 0.2)
+  dist_sqrt_out_nclust3
+}
 #>   I  II III  IV   V  VI 
 #>  19   8  16  24  11  21 
 
-# Tocher's sequential clustering
-dist_sqrt_out_nclust4 <-
-  allocate.distance(data = data, names = "genotypes",
-                    group = "Cluster", method = "dist.sqrt",
-                    dist.mat = dist_matrix, metric = "nclust",
-                    clust.fun = clust_fun_tocher,
-                    size = 0.2)
-dist_sqrt_out_nclust4
+# \donttest{
+  if (requireNamespace('biotools', quietly = TRUE)) {
+    # Tocher's sequential clustering
+    dist_sqrt_out_nclust4 <-
+      allocate.distance(data = data, names = "genotypes",
+                        group = "Cluster", method = "dist.sqrt",
+                        dist.mat = dist_matrix, metric = "nclust",
+                        clust.fun = clust_fun_tocher,
+                        size = 0.2)
+    dist_sqrt_out_nclust4
+  }
 #>   I  II III  IV   V  VI 
 #>  14  17  14  28  16  11 
+# }
 ```

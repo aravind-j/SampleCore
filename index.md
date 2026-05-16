@@ -22,7 +22,7 @@ Size](https://img.shields.io/github/languages/code-size/aravind-j/SampleCore.svg
 [![Project Status:
 WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2026--05--15-yellowgreen.svg)](https://github.com/aravind-j/SampleCore/)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2026--05--16-yellowgreen.svg)](https://github.com/aravind-j/SampleCore/)
 [![Website -
 pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github.io/SampleCore.svg)](https://aravind-j.github.io/SampleCore/)
 [![GoatCounter](https://samplecore-gh.goatcounter.com/count?p=/test)](https://samplecore-gh.goatcounter.com/)
@@ -78,8 +78,9 @@ citation("SampleCore")
 ``` R
 To cite the R package 'SampleCore' in publications use:
 
-  Aravind, J., Roy, S., and Singh, A. M. ().  SampleCore: Sampling Strategies for Constructing Core Collections. R
-  package version 0.1.0, https://aravind-j.github.io/SampleCore/.
+  Aravind, J., Roy, S., and Singh, A. M. ().  SampleCore: Sampling
+  Strategies for Constructing Core Collections. R package version
+  0.1.0, https://aravind-j.github.io/SampleCore/.
 
 A BibTeX entry for LaTeX users is
 
@@ -89,6 +90,7 @@ A BibTeX entry for LaTeX users is
     note = {R package version 0.1.0 https://aravind-j.github.io/SampleCore/},
   }
 
-This free and open-source software implements academic research by the authors and co-workers. If you use it, please
-support the project by citing the package.
+This free and open-source software implements academic research by the
+authors and co-workers. If you use it, please support the project by
+citing the package.
 ```
