@@ -216,592 +216,602 @@ div_fun_margalef <- function(x) {
   (S - 1)/log(N)
 }
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Random search
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-# Mean richness
-randomsel_mean_richness <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "richness",
-                   metric = "mean", search = "random", local.search = NULL,
-                   n.iter = 100)
-randomsel_mean_richness
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(randomsel_mean_richness,
-                              use.names = FALSE)) +
-  labs(title = "Random search", subtitle = "Mean richness")
-
-# Pooled richness
-randomsel_sum_richness <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "richness",
-                   metric = "pooled", search = "random", local.search = NULL,
-                   n.iter = 100)
-randomsel_sum_richness
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(randomsel_sum_richness,
-                              use.names = FALSE)) +
-  labs(title = "Random search", subtitle = "Pooled richness")
-
-# Mean Shannon-Weaver diversity index
-randomsel_mean_shannon <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "shannon",
-                   metric = "mean", search = "random", local.search = NULL,
-                   n.iter = 100)
-randomsel_mean_shannon
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(randomsel_mean_shannon,
-                              use.names = FALSE)) +
-  labs(title = "Random search",
-       subtitle = "Mean Shannon-Weaver diversity index")
-
-# Pooled Shannon-Weaver diversity index
-randomsel_sum_shannon <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "shannon",
-                   metric = "pooled", search = "random", local.search = NULL,
-                   n.iter = 100)
-randomsel_sum_shannon
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(randomsel_sum_shannon,
-                              use.names = FALSE)) +
-  labs(title = "Random search",
-       subtitle = "Pooled Shannon-Weaver diversity index")
-
-# Mean Gini-Simpson diversity index
-randomsel_mean_simpson <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "simpson",
-                   metric = "mean", search = "random", local.search = NULL,
-                   n.iter = 100)
-randomsel_mean_simpson
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(randomsel_mean_simpson,
-                              use.names = FALSE)) +
-  labs(title = "Random search",
-       subtitle = "Mean Gini-Simpson diversity index")
-
-# Pooled Gini-Simpson diversity index
-randomsel_sum_simpson <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "simpson",
-                   metric = "pooled", search = "random", local.search = NULL,
-                   n.iter = 100)
-randomsel_sum_simpson
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(randomsel_sum_simpson,
-                              use.names = FALSE)) +
-  labs(title = "Random search",
-       subtitle = "Pooled Gini-Simpson diversity index")
-
-# Mean McIntosh diversity index
-randomsel_mean_mcintosh <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "mcintosh",
-                   metric = "pooled", search = "random", local.search = NULL,
-                   n.iter = 100)
-randomsel_mean_mcintosh
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(randomsel_mean_mcintosh,
-                              use.names = FALSE)) +
-  labs(title = "Random search",
-       subtitle = "Mean McIntosh diversity index")
-
-# Pooled McIntosh diversity index
-randomsel_sum_mcintosh <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "mcintosh",
-                   metric = "pooled", search = "random", local.search = NULL,
-                   n.iter = 100)
-randomsel_sum_mcintosh
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(randomsel_sum_mcintosh,
-                              use.names = FALSE)) +
-  labs(title = "Random search",
-       subtitle = "Pooled McIntosh diversity index")
-
-# Mean Brillouin diversity index
-randomsel_mean_brillouin <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.fun = div_fun_brillouin,
-                   metric = "mean", search = "random", local.search = NULL,
-                   n.iter = 100)
-randomsel_mean_brillouin
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(randomsel_mean_brillouin,
-                              use.names = FALSE)) +
-  labs(title = "Random search",
-       subtitle = "Mean Brillouin diversity index")
-
-# Pooled Brillouin diversity index
-randomsel_sum_brillouin <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.fun = div_fun_brillouin,
-                   metric = "pooled", search = "random", local.search = NULL,
-                   n.iter = 100)
-randomsel_sum_brillouin
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(randomsel_sum_brillouin,
-                              use.names = FALSE)) +
-  labs(title = "Random search",
-       subtitle = "Pooled Brillouin diversity index")
-
-
-# Mean Margalef's richness index
-randomsel_mean_margalef <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.fun = div_fun_margalef,
-                   metric = "mean", search = "random", local.search = NULL,
-                   n.iter = 100)
-randomsel_mean_margalef
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(randomsel_mean_margalef,
-                              use.names = FALSE)) +
-  labs(title = "Random search",
-       subtitle = "Mean Margalef's diversity index")
-
-# Pooled Margalef's richness index
-randomsel_sum_margalef <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.fun = div_fun_margalef,
-                   metric = "pooled", search = "random", local.search = NULL,
-                   n.iter = 100)
-randomsel_sum_margalef
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(randomsel_sum_margalef,
-                              use.names = FALSE)) +
-  labs(title = "Random search",
-       subtitle = "Pooled Margalef's diversity index")
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Greedy search with 1-opt best improvement
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-# Mean richness
-greedysel_best_mean_richness <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "richness",
-                   metric = "mean", search = "greedy",
-                   local.search = "best.improvement",max.iter = 3)
-greedysel_best_mean_richness
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_best_mean_richness,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt best improvement",
-       subtitle = "Mean richness")
-
-# Pooled richness
-greedysel_best_sum_richness <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "richness",
-                   metric = "pooled", search = "greedy",
-                   local.search = "best.improvement",max.iter = 3)
-greedysel_best_sum_richness
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_best_sum_richness,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt best improvement",
-       subtitle = "Pooled richness")
-
-# Mean Shannon-Weaver diversity index
-greedysel_best_mean_shannon <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "shannon",
-                   metric = "mean", search = "greedy",
-                   local.search = "best.improvement",max.iter = 3)
-greedysel_best_mean_shannon
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_best_mean_shannon,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt best improvement",
-       subtitle = "Mean Shannon-Weaver diversity index")
-
-# Pooled Shannon-Weaver diversity index
-greedysel_best_sum_shannon <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "shannon",
-                   metric = "pooled", search = "greedy",
-                   local.search = "best.improvement",max.iter = 3)
-greedysel_best_sum_shannon
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_best_sum_shannon,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt best improvement",
-       subtitle = "Pooled Shannon-Weaver diversity index")
-
-# Mean Gini-Simpson diversity index
-greedysel_best_mean_simpson <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "simpson",
-                   metric = "mean", search = "greedy",
-                   local.search = "best.improvement",max.iter = 3)
-greedysel_best_mean_simpson
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_best_mean_simpson,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt best improvement",
-       subtitle = "Mean Gini-Simpson diversity index")
-
-# Pooled Gini-Simpson diversity index
-greedysel_best_sum_simpson <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "simpson",
-                   metric = "pooled", search = "greedy",
-                   local.search = "best.improvement",max.iter = 3)
-greedysel_best_sum_simpson
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_best_sum_simpson,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt best improvement",
-       subtitle = "Pooled Gini-Simpson diversity index")
-
-# Mean McIntosh diversity index
-greedysel_best_mean_mcintosh <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "mcintosh",
-                   metric = "pooled", search = "greedy",
-                   local.search = "best.improvement",max.iter = 3)
-greedysel_best_mean_mcintosh
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_best_mean_mcintosh,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt best improvement",
-       subtitle = "Mean McIntosh diversity index")
-
-# Pooled McIntosh diversity index
-greedysel_best_sum_mcintosh <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "mcintosh",
-                   metric = "pooled", search = "greedy",
-                   local.search = "best.improvement",max.iter = 3)
-greedysel_best_sum_mcintosh
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_best_sum_mcintosh,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt best improvement",
-       subtitle = "Pooled McIntosh diversity index")
-
-# Mean Brillouin diversity index
-greedysel_best_mean_brillouin <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.fun = div_fun_brillouin,
-                   metric = "mean", search = "greedy",
-                   local.search = "best.improvement",max.iter = 3)
-greedysel_best_mean_brillouin
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_best_mean_brillouin,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt best improvement",
-       subtitle = "Mean Brillouin diversity index")
-
-# Pooled Brillouin diversity index
-greedysel_best_sum_brillouin <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.fun = div_fun_brillouin,
-                   metric = "pooled", search = "greedy",
-                   local.search = "best.improvement",max.iter = 3)
-greedysel_best_sum_brillouin
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_best_sum_brillouin,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt best improvement",
-       subtitle = "Pooled Brillouin diversity index")
-
-# Mean Margalef's richness index
-greedysel_best_mean_margalef <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.fun = div_fun_margalef,
-                   metric = "mean", search = "greedy",
-                   local.search = "best.improvement",max.iter = 3)
-greedysel_best_mean_margalef
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_best_mean_margalef,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt best improvement",
-       subtitle = "Mean Margalef's diversity index")
-
-# Pooled Margalef's richness index
-greedysel_best_sum_margalef <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.fun = div_fun_margalef,
-                   metric = "pooled", search = "greedy",
-                   local.search = "best.improvement",max.iter = 3)
-greedysel_best_sum_margalef
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_best_sum_margalef,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt best improvement",
-       subtitle = "Pooled Margalef's diversity index")
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Greedy search with 1-opt first improvement
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-# Mean richness
-greedysel_first_mean_richness <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "richness",
-                   metric = "mean", search = "greedy",
-                   local.search = "first.improvement",max.iter = 3)
-greedysel_first_mean_richness
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_first_mean_richness,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt first improvement",
-       subtitle = "Mean richness")
-
-# Pooled richness
-greedysel_first_sum_richness <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "richness",
-                   metric = "pooled", search = "greedy",
-                   local.search = "first.improvement",max.iter = 3)
-greedysel_first_sum_richness
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_first_sum_richness,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt first improvement",
-       subtitle = "Pooled richness")
-
-# Mean Shannon-Weaver diversity index
-greedysel_first_mean_shannon <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "shannon",
-                   metric = "mean", search = "greedy",
-                   local.search = "first.improvement",max.iter = 3)
-greedysel_first_mean_shannon
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_first_mean_shannon,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt first improvement",
-       subtitle = "Mean Shannon-Weaver diversity index")
-
-# Pooled Shannon-Weaver diversity index
-greedysel_first_sum_shannon <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "shannon",
-                   metric = "pooled", search = "greedy",
-                   local.search = "first.improvement",max.iter = 3)
-greedysel_first_sum_shannon
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_first_sum_shannon,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt first improvement",
-       subtitle = "Pooled Shannon-Weaver diversity index")
-
-# Mean Gini-Simpson diversity index
-greedysel_first_mean_simpson <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "simpson",
-                   metric = "mean", search = "greedy",
-                   local.search = "first.improvement",max.iter = 3)
-greedysel_first_mean_simpson
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_first_mean_simpson,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt first improvement",
-       subtitle = "Mean Gini-Simpson diversity index")
-
-# Pooled Gini-Simpson diversity index
-greedysel_first_sum_simpson <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "simpson",
-                   metric = "pooled", search = "greedy",
-                   local.search = "first.improvement",max.iter = 3)
-greedysel_first_sum_simpson
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_first_sum_simpson,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt first improvement",
-       subtitle = "Pooled Gini-Simpson diversity index")
-
-# Mean McIntosh diversity index
-greedysel_first_mean_mcintosh <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "mcintosh",
-                   metric = "pooled", search = "greedy",
-                   local.search = "first.improvement",max.iter = 3)
-greedysel_first_mean_mcintosh
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_first_mean_mcintosh,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt first improvement",
-       subtitle = "Mean McIntosh diversity index")
-
-# Pooled McIntosh diversity index
-greedysel_first_sum_mcintosh <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.index = "mcintosh",
-                   metric = "pooled", search = "greedy",
-                   local.search = "first.improvement",max.iter = 3)
-greedysel_first_sum_mcintosh
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_first_sum_mcintosh,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt first improvement",
-       subtitle = "Pooled McIntosh diversity index")
-
-# Mean Brillouin diversity index
-greedysel_first_mean_brillouin <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.fun = div_fun_brillouin,
-                   metric = "mean", search = "greedy",
-                   local.search = "first.improvement",max.iter = 3)
-greedysel_first_mean_brillouin
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_first_mean_brillouin,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt first improvement",
-       subtitle = "Mean Brillouin diversity index")
-
-# Pooled Brillouin diversity index
-greedysel_first_sum_brillouin <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.fun = div_fun_brillouin,
-                   metric = "pooled", search = "greedy",
-                   local.search = "first.improvement",max.iter = 3)
-greedysel_first_sum_brillouin
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_first_sum_brillouin,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt first improvement",
-       subtitle = "Pooled Brillouin diversity index")
-
-# Mean Margalef's richness index
-greedysel_first_mean_margalef <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.fun = div_fun_margalef,
-                   metric = "mean", search = "greedy",
-                   local.search = "first.improvement",max.iter = 3)
-greedysel_first_mean_margalef
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_first_mean_margalef,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt first improvement",
-       subtitle = "Mean Margalef's richness index")
-
-# Pooled Margalef's richness index
-greedysel_first_sum_margalef <-
-  select.diversity(data = data, names = "genotypes", group = "Cluster",
-                   alloc = counts, qualitative = traits,
-                   always.selected = mand_accns, div.fun = div_fun_margalef,
-                   metric = "pooled", search = "greedy",
-                   local.search = "first.improvement",max.iter = 3)
-greedysel_first_sum_margalef
-
-plot_dist(d = dist_matrix, method = "isomds",
-          gp = gp_vec,
-          highlight =  unlist(greedysel_first_sum_margalef,
-                              use.names = FALSE)) +
-  labs(title = "Greed search | 1-opt first improvement",
-       subtitle = "Pooled Margalef's richness index")
+\donttest{
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Random search
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  # Mean richness
+  randomsel_mean_richness <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "richness",
+                     metric = "mean", search = "random", local.search = NULL,
+                     n.iter = 50)
+  randomsel_mean_richness
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(randomsel_mean_richness,
+                                use.names = FALSE)) +
+    labs(title = "Random search", subtitle = "Mean richness")
+
+  # Pooled richness
+  randomsel_sum_richness <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "richness",
+                     metric = "pooled", search = "random", local.search = NULL,
+                     n.iter = 50)
+  randomsel_sum_richness
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(randomsel_sum_richness,
+                                use.names = FALSE)) +
+    labs(title = "Random search", subtitle = "Pooled richness")
+
+  # Mean Shannon-Weaver diversity index
+  randomsel_mean_shannon <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "shannon",
+                     metric = "mean", search = "random", local.search = NULL,
+                     n.iter = 50)
+  randomsel_mean_shannon
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(randomsel_mean_shannon,
+                                use.names = FALSE)) +
+    labs(title = "Random search",
+         subtitle = "Mean Shannon-Weaver diversity index")
+
+  # Pooled Shannon-Weaver diversity index
+  randomsel_sum_shannon <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "shannon",
+                     metric = "pooled", search = "random", local.search = NULL,
+                     n.iter = 50)
+  randomsel_sum_shannon
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(randomsel_sum_shannon,
+                                use.names = FALSE)) +
+    labs(title = "Random search",
+         subtitle = "Pooled Shannon-Weaver diversity index")
+
+  # Mean Gini-Simpson diversity index
+  randomsel_mean_simpson <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "simpson",
+                     metric = "mean", search = "random", local.search = NULL,
+                     n.iter = 50)
+  randomsel_mean_simpson
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(randomsel_mean_simpson,
+                                use.names = FALSE)) +
+    labs(title = "Random search",
+         subtitle = "Mean Gini-Simpson diversity index")
+
+  # Pooled Gini-Simpson diversity index
+  randomsel_sum_simpson <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "simpson",
+                     metric = "pooled", search = "random", local.search = NULL,
+                     n.iter = 50)
+  randomsel_sum_simpson
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(randomsel_sum_simpson,
+                                use.names = FALSE)) +
+    labs(title = "Random search",
+         subtitle = "Pooled Gini-Simpson diversity index")
+
+  # Mean McIntosh diversity index
+  randomsel_mean_mcintosh <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "mcintosh",
+                     metric = "pooled", search = "random", local.search = NULL,
+                     n.iter = 50)
+  randomsel_mean_mcintosh
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(randomsel_mean_mcintosh,
+                                use.names = FALSE)) +
+    labs(title = "Random search",
+         subtitle = "Mean McIntosh diversity index")
+
+  # Pooled McIntosh diversity index
+  randomsel_sum_mcintosh <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "mcintosh",
+                     metric = "pooled", search = "random", local.search = NULL,
+                     n.iter = 50)
+  randomsel_sum_mcintosh
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(randomsel_sum_mcintosh,
+                                use.names = FALSE)) +
+    labs(title = "Random search",
+         subtitle = "Pooled McIntosh diversity index")
+
+  # Mean Brillouin diversity index
+  randomsel_mean_brillouin <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.fun = div_fun_brillouin,
+                     metric = "mean", search = "random", local.search = NULL,
+                     n.iter = 50)
+  randomsel_mean_brillouin
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(randomsel_mean_brillouin,
+                                use.names = FALSE)) +
+    labs(title = "Random search",
+         subtitle = "Mean Brillouin diversity index")
+
+  # Pooled Brillouin diversity index
+  randomsel_sum_brillouin <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.fun = div_fun_brillouin,
+                     metric = "pooled", search = "random", local.search = NULL,
+                     n.iter = 50)
+  randomsel_sum_brillouin
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(randomsel_sum_brillouin,
+                                use.names = FALSE)) +
+    labs(title = "Random search",
+         subtitle = "Pooled Brillouin diversity index")
+
+
+  # Mean Margalef's richness index
+  randomsel_mean_margalef <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.fun = div_fun_margalef,
+                     metric = "mean", search = "random", local.search = NULL,
+                     n.iter = 50)
+  randomsel_mean_margalef
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(randomsel_mean_margalef,
+                                use.names = FALSE)) +
+    labs(title = "Random search",
+         subtitle = "Mean Margalef's diversity index")
+
+  # Pooled Margalef's richness index
+  randomsel_sum_margalef <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.fun = div_fun_margalef,
+                     metric = "pooled", search = "random", local.search = NULL,
+                     n.iter = 50)
+  randomsel_sum_margalef
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(randomsel_sum_margalef,
+                                use.names = FALSE)) +
+    labs(title = "Random search",
+         subtitle = "Pooled Margalef's diversity index")
+
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Greedy search with 1-opt best improvement
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  # Mean richness
+  greedysel_best_mean_richness <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "richness",
+                     metric = "mean", search = "greedy",
+                     local.search = "best.improvement",max.iter = 3)
+  greedysel_best_mean_richness
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_best_mean_richness,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt best improvement",
+         subtitle = "Mean richness")
+
+  # Pooled richness
+  greedysel_best_sum_richness <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "richness",
+                     metric = "pooled", search = "greedy",
+                     local.search = "best.improvement",max.iter = 3)
+  greedysel_best_sum_richness
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_best_sum_richness,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt best improvement",
+         subtitle = "Pooled richness")
+
+  # Mean Shannon-Weaver diversity index
+  greedysel_best_mean_shannon <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "shannon",
+                     metric = "mean", search = "greedy",
+                     local.search = "best.improvement",max.iter = 3)
+  greedysel_best_mean_shannon
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_best_mean_shannon,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt best improvement",
+         subtitle = "Mean Shannon-Weaver diversity index")
+
+  # Pooled Shannon-Weaver diversity index
+  greedysel_best_sum_shannon <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "shannon",
+                     metric = "pooled", search = "greedy",
+                     local.search = "best.improvement",max.iter = 3)
+  greedysel_best_sum_shannon
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_best_sum_shannon,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt best improvement",
+         subtitle = "Pooled Shannon-Weaver diversity index")
+
+  # Mean Gini-Simpson diversity index
+  greedysel_best_mean_simpson <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "simpson",
+                     metric = "mean", search = "greedy",
+                     local.search = "best.improvement",max.iter = 3)
+  greedysel_best_mean_simpson
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_best_mean_simpson,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt best improvement",
+         subtitle = "Mean Gini-Simpson diversity index")
+
+  # Pooled Gini-Simpson diversity index
+  greedysel_best_sum_simpson <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "simpson",
+                     metric = "pooled", search = "greedy",
+                     local.search = "best.improvement",max.iter = 3)
+  greedysel_best_sum_simpson
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_best_sum_simpson,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt best improvement",
+         subtitle = "Pooled Gini-Simpson diversity index")
+
+  # Mean McIntosh diversity index
+  greedysel_best_mean_mcintosh <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "mcintosh",
+                     metric = "pooled", search = "greedy",
+                     local.search = "best.improvement",max.iter = 3)
+  greedysel_best_mean_mcintosh
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_best_mean_mcintosh,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt best improvement",
+         subtitle = "Mean McIntosh diversity index")
+
+  # Pooled McIntosh diversity index
+  greedysel_best_sum_mcintosh <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "mcintosh",
+                     metric = "pooled", search = "greedy",
+                     local.search = "best.improvement",max.iter = 3)
+  greedysel_best_sum_mcintosh
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_best_sum_mcintosh,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt best improvement",
+         subtitle = "Pooled McIntosh diversity index")
+
+  # Mean Brillouin diversity index
+  greedysel_best_mean_brillouin <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns,
+                     div.fun = div_fun_brillouin,
+                     metric = "mean", search = "greedy",
+                     local.search = "best.improvement",max.iter = 3)
+  greedysel_best_mean_brillouin
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_best_mean_brillouin,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt best improvement",
+         subtitle = "Mean Brillouin diversity index")
+
+  # Pooled Brillouin diversity index
+  greedysel_best_sum_brillouin <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns,
+                     div.fun = div_fun_brillouin,
+                     metric = "pooled", search = "greedy",
+                     local.search = "best.improvement",max.iter = 3)
+  greedysel_best_sum_brillouin
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_best_sum_brillouin,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt best improvement",
+         subtitle = "Pooled Brillouin diversity index")
+
+  # Mean Margalef's richness index
+  greedysel_best_mean_margalef <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns,
+                     div.fun = div_fun_margalef,
+                     metric = "mean", search = "greedy",
+                     local.search = "best.improvement",max.iter = 3)
+  greedysel_best_mean_margalef
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_best_mean_margalef,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt best improvement",
+         subtitle = "Mean Margalef's diversity index")
+
+  # Pooled Margalef's richness index
+  greedysel_best_sum_margalef <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns,
+                     div.fun = div_fun_margalef,
+                     metric = "pooled", search = "greedy",
+                     local.search = "best.improvement",max.iter = 3)
+  greedysel_best_sum_margalef
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_best_sum_margalef,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt best improvement",
+         subtitle = "Pooled Margalef's diversity index")
+
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Greedy search with 1-opt first improvement
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  # Mean richness
+  greedysel_first_mean_richness <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "richness",
+                     metric = "mean", search = "greedy",
+                     local.search = "first.improvement",max.iter = 3)
+  greedysel_first_mean_richness
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_first_mean_richness,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt first improvement",
+         subtitle = "Mean richness")
+
+  # Pooled richness
+  greedysel_first_sum_richness <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "richness",
+                     metric = "pooled", search = "greedy",
+                     local.search = "first.improvement",max.iter = 3)
+  greedysel_first_sum_richness
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_first_sum_richness,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt first improvement",
+         subtitle = "Pooled richness")
+
+  # Mean Shannon-Weaver diversity index
+  greedysel_first_mean_shannon <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "shannon",
+                     metric = "mean", search = "greedy",
+                     local.search = "first.improvement",max.iter = 3)
+  greedysel_first_mean_shannon
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_first_mean_shannon,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt first improvement",
+         subtitle = "Mean Shannon-Weaver diversity index")
+
+  # Pooled Shannon-Weaver diversity index
+  greedysel_first_sum_shannon <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "shannon",
+                     metric = "pooled", search = "greedy",
+                     local.search = "first.improvement",max.iter = 3)
+  greedysel_first_sum_shannon
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_first_sum_shannon,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt first improvement",
+         subtitle = "Pooled Shannon-Weaver diversity index")
+
+  # Mean Gini-Simpson diversity index
+  greedysel_first_mean_simpson <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "simpson",
+                     metric = "mean", search = "greedy",
+                     local.search = "first.improvement",max.iter = 3)
+  greedysel_first_mean_simpson
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_first_mean_simpson,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt first improvement",
+         subtitle = "Mean Gini-Simpson diversity index")
+
+  # Pooled Gini-Simpson diversity index
+  greedysel_first_sum_simpson <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "simpson",
+                     metric = "pooled", search = "greedy",
+                     local.search = "first.improvement",max.iter = 3)
+  greedysel_first_sum_simpson
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_first_sum_simpson,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt first improvement",
+         subtitle = "Pooled Gini-Simpson diversity index")
+
+  # Mean McIntosh diversity index
+  greedysel_first_mean_mcintosh <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "mcintosh",
+                     metric = "pooled", search = "greedy",
+                     local.search = "first.improvement",max.iter = 3)
+  greedysel_first_mean_mcintosh
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_first_mean_mcintosh,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt first improvement",
+         subtitle = "Mean McIntosh diversity index")
+
+  # Pooled McIntosh diversity index
+  greedysel_first_sum_mcintosh <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns, div.index = "mcintosh",
+                     metric = "pooled", search = "greedy",
+                     local.search = "first.improvement",max.iter = 3)
+  greedysel_first_sum_mcintosh
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_first_sum_mcintosh,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt first improvement",
+         subtitle = "Pooled McIntosh diversity index")
+
+  # Mean Brillouin diversity index
+  greedysel_first_mean_brillouin <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns,
+                     div.fun = div_fun_brillouin,
+                     metric = "mean", search = "greedy",
+                     local.search = "first.improvement",max.iter = 3)
+  greedysel_first_mean_brillouin
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_first_mean_brillouin,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt first improvement",
+         subtitle = "Mean Brillouin diversity index")
+
+  # Pooled Brillouin diversity index
+  greedysel_first_sum_brillouin <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns,
+                     div.fun = div_fun_brillouin,
+                     metric = "pooled", search = "greedy",
+                     local.search = "first.improvement",max.iter = 3)
+  greedysel_first_sum_brillouin
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_first_sum_brillouin,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt first improvement",
+         subtitle = "Pooled Brillouin diversity index")
+
+  # Mean Margalef's richness index
+  greedysel_first_mean_margalef <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns,
+                     div.fun = div_fun_margalef,
+                     metric = "mean", search = "greedy",
+                     local.search = "first.improvement",max.iter = 3)
+  greedysel_first_mean_margalef
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_first_mean_margalef,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt first improvement",
+         subtitle = "Mean Margalef's richness index")
+
+  # Pooled Margalef's richness index
+  greedysel_first_sum_margalef <-
+    select.diversity(data = data, names = "genotypes", group = "Cluster",
+                     alloc = counts, qualitative = traits,
+                     always.selected = mand_accns,
+                     div.fun = div_fun_margalef,
+                     metric = "pooled", search = "greedy",
+                     local.search = "first.improvement",max.iter = 3)
+  greedysel_first_sum_margalef
+
+  plot_dist(d = dist_matrix, method = "isomds",
+            gp = gp_vec,
+            highlight =  unlist(greedysel_first_sum_margalef,
+                                use.names = FALSE)) +
+    labs(title = "Greed search | 1-opt first improvement",
+         subtitle = "Pooled Margalef's richness index")
+}
 
 }
 \references{
