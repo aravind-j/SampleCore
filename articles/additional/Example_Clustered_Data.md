@@ -230,7 +230,7 @@ sessionInfo()
     ##  [28] jsonlite_2.0.0       flashClust_1.1-4     SuppDists_1.1-9.9   
     ##  [31] pan_1.9              psych_2.6.5          broom_1.0.13        
     ##  [34] parallel_4.6.0       R6_2.6.1             stringi_1.8.7       
-    ##  [37] bslib_0.10.0         RColorBrewer_1.1-3   rpart_4.1.27        
+    ##  [37] bslib_0.11.0         RColorBrewer_1.1-3   rpart_4.1.27        
     ##  [40] car_3.1-5            boot_1.3-32          jquerylib_0.1.4     
     ##  [43] estimability_1.5.1   Rcpp_1.1.1-1.1       iterators_1.0.14    
     ##  [46] knitr_1.51           nnet_7.3-20          Matrix_1.7-5        
