@@ -27,7 +27,7 @@ v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org
 <!-- [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/SampleCore?color=green)](https://CRAN.R-project.org/package=SampleCore) -->
 
 <!-- 
-[![develVersion](https://img.shields.io/badge/devel%20version-0.0.0.9000-orange.svg)](https://github.com/aravind-j/SampleCore)
+[![develVersion](https://img.shields.io/badge/devel%20version-0.1.0-orange.svg)](https://github.com/aravind-j/SampleCore)
 -->
 
 [![Github Code
@@ -38,7 +38,7 @@ Size](https://img.shields.io/github/languages/code-size/aravind-j/SampleCore.svg
 [![Project Status:
 WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2026--05--15-yellowgreen.svg)](https://github.com/aravind-j/SampleCore/)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2026--05--21-yellowgreen.svg)](https://github.com/aravind-j/SampleCore/)
 <!-- [![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.zenodo.14889174.svg)](https://doi.org/10.5281/zenodo.14889174) -->
 [![Website -
 pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github.io/SampleCore.svg)](https://aravind-j.github.io/SampleCore/)
@@ -170,8 +170,9 @@ citation("SampleCore")
 
     To cite the R package 'SampleCore' in publications use:
 
-      Aravind, J., Roy, S., and Singh, A. M. ().  SampleCore: Sampling Strategies for Constructing Core Collections. R
-      package version 0.1.0, https://aravind-j.github.io/SampleCore/.
+      Aravind, J., Roy, S., and Singh, A. M. ().  SampleCore: Sampling
+      Strategies for Constructing Core Collections. R package version
+      0.1.0, https://aravind-j.github.io/SampleCore/.
 
     A BibTeX entry for LaTeX users is
 
@@ -181,5 +182,6 @@ citation("SampleCore")
         note = {R package version 0.1.0 https://aravind-j.github.io/SampleCore/},
       }
 
-    This free and open-source software implements academic research by the authors and co-workers. If you use it, please
-    support the project by citing the package.
+    This free and open-source software implements academic research by the
+    authors and co-workers. If you use it, please support the project by
+    citing the package.
