@@ -967,10 +967,6 @@ select.distance <- function(data, names, group, alloc,
     dist_to_median <- split(bdout$distances, bdout$group)
   }
 
-  if (SampleCore.debug) {
-    par(mfrow = n2mfrow(length(alloc)))
-  }
-
   out <-
     lapply(names(alloc), function(g) {
 

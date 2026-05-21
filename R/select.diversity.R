@@ -944,7 +944,7 @@ select.diversity <- function(data, names, group, alloc,
                  }, numeric(1))
 
         if (SampleCore.debug) {
-          print(range(candidate_scores))
+          message(paste(range(candidate_scores)))
         }
 
         best_subset <- candidate_subsets[[which.max(candidate_scores)]]
