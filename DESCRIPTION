@@ -1,6 +1,6 @@
 Package: SampleCore
 Title: Sampling Strategies for Constructing Core Collections
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R: c(
     person(given = "J.", family = "Aravind",
            email = "j.aravind@icar.org.in",
@@ -51,7 +51,9 @@ Suggests: biotools,
 RdMacros: mathjaxr,
     Rdpack
 Copyright: 2024-2026, ICAR-NBPGR
-URL: https://github.com/aravind-j/SampleCore
+URL: https://cran.r-project.org/package=SampleCore,
+   https://github.com/aravind-j/SampleCore,
+   https://doi.org/10.5281/zenodo.20449499,
    https://aravind-j.github.io/SampleCore/
 BugReports: https://github.com/aravind-j/SampleCore/issues
 Depends: 
