@@ -199,7 +199,7 @@ sessionInfo()
 
     ## R version 4.6.0 (2026-04-24)
     ## Platform: aarch64-apple-darwin23
-    ## Running under: macOS Sequoia 15.7.4
+    ## Running under: macOS Sequoia 15.7.7
     ## 
     ## Matrix products: default
     ## BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
@@ -235,7 +235,7 @@ sessionInfo()
     ##  [43] estimability_1.5.1   Rcpp_1.1.1-1.1       iterators_1.0.14    
     ##  [46] knitr_1.51           nnet_7.3-20          Matrix_1.7-5        
     ##  [49] splines_4.6.0        tidyselect_1.2.1     abind_1.4-8         
-    ##  [52] yaml_2.3.12          vegan_2.7-3          AlgDesign_1.2.1.2   
+    ##  [52] yaml_2.3.12          vegan_2.7-5          AlgDesign_1.2.1.2   
     ##  [55] doParallel_1.0.17    ggtext_0.1.2         codetools_0.2-20    
     ##  [58] plyr_1.8.9           lattice_0.22-9       tibble_3.3.1        
     ##  [61] S7_0.2.2             evaluate_1.0.5       desc_1.4.3          
